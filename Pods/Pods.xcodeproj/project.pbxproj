@@ -1,0 +1,660 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1996FFB56EA6910F400F45A6FAE4FA26 /* Pods-LuluTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A6A0C4C40CCDDC48B17353A23AB2223 /* Pods-LuluTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32D9F52BE9327CF13A6807F639F08488 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		5F31D41B208B30F0E6A845861F0AD987 /* Pods-LuluTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEDCD5F09CE8FDF050F114036279315 /* Pods-LuluTests-dummy.m */; };
+		78965122EED6F02AFE5D73960C343FBD /* Pods-LuluUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ECB1D13C690291BBDCF9E7AA85D2BA4 /* Pods-LuluUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		833658C65FC20246FFD0B242B2319F18 /* Pods-LuluUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FF9B83EAFAC6220AE92D34A9ED1FA /* Pods-LuluUITests-dummy.m */; };
+		8EA8F5D098224108170870D694C804B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		99ACE83BD26942E1A9E0D70B593FDB91 /* Pods-Lulu-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C414FD04A331CBC9EA74D8E2F896432 /* Pods-Lulu-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3FBEFC689925ABD8FEDFB3E9BF183C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		FCA512D0CEA2A51F6570B71B2FF144AC /* Pods-Lulu-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46CFE3BE5B0617DDA825382ED48AD37C /* Pods-Lulu-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0140F4E3BD126072D3AE06F9F1C50D72 /* Pods-Lulu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lulu.debug.xcconfig"; sourceTree = "<group>"; };
+		0366E2C92BDD89E165C6B6A0613169B2 /* Pods-LuluUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuluUITests-resources.sh"; sourceTree = "<group>"; };
+		0479463C774B8153DEA2DCB992C1283D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A6A0C4C40CCDDC48B17353A23AB2223 /* Pods-LuluTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LuluTests-umbrella.h"; sourceTree = "<group>"; };
+		0F52DD01C4805B7CC4CCF5FFCE9CD93C /* Pods-LuluTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LuluTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		188243C1E2AE619F9C833F996A049F93 /* Pods-LuluUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-LuluUITests.modulemap"; sourceTree = "<group>"; };
+		192FC92AD6DDBB05B35D4501936DAAD2 /* Pods-LuluUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LuluUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		253BF2546DE5FAA0A6D9F60ECD1FE789 /* Pods-LuluTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuluTests.release.xcconfig"; sourceTree = "<group>"; };
+		264454F37B82C96BFC20FD28472E0954 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C414FD04A331CBC9EA74D8E2F896432 /* Pods-Lulu-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Lulu-umbrella.h"; sourceTree = "<group>"; };
+		2C49E612AF6081BDD4C7C1FA0F7E9A73 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EB8CEF6E4027A0A1708D804F769DDB5 /* Pods-Lulu-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Lulu-acknowledgements.plist"; sourceTree = "<group>"; };
+		3ECB1D13C690291BBDCF9E7AA85D2BA4 /* Pods-LuluUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LuluUITests-umbrella.h"; sourceTree = "<group>"; };
+		3EFC0E30871621C2FA417145DD3023A4 /* Pods-Lulu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Lulu.release.xcconfig"; sourceTree = "<group>"; };
+		3F4C7C0456CEB765EB4D1726888B0325 /* Pods-LuluUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuluUITests-frameworks.sh"; sourceTree = "<group>"; };
+		44E4562BC78EB82ED870F60A09D0D98B /* Pods-LuluTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuluTests-resources.sh"; sourceTree = "<group>"; };
+		46CFE3BE5B0617DDA825382ED48AD37C /* Pods-Lulu-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Lulu-dummy.m"; sourceTree = "<group>"; };
+		531D0D4079619B3AE2512BE779FF4CB9 /* Pods-LuluTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-LuluTests.modulemap"; sourceTree = "<group>"; };
+		54C8412E529930A7B504ED12FAF6BF6D /* Pods-LuluTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuluTests.debug.xcconfig"; sourceTree = "<group>"; };
+		60E83B3B80FFCB6A32500E06BC269E37 /* Pods-LuluUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuluUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6CEDCD5F09CE8FDF050F114036279315 /* Pods-LuluTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LuluTests-dummy.m"; sourceTree = "<group>"; };
+		78192B5ED67D37355B0D6F3E946564A8 /* Pods-LuluUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LuluUITests.release.xcconfig"; sourceTree = "<group>"; };
+		793FF9B83EAFAC6220AE92D34A9ED1FA /* Pods-LuluUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LuluUITests-dummy.m"; sourceTree = "<group>"; };
+		8C469695DBEFC33C7E41C8BAC654F060 /* Pods-LuluTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LuluTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		8E6BF6AB7A244164A95DCCE1A6051477 /* Pods-Lulu-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lulu-frameworks.sh"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CE6354479C55B0A7446145494B6A3C15 /* Pods-LuluUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LuluUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		D258F6B52EF832C7A762479479007257 /* Pods-Lulu-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Lulu-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E063F4913970E80AD663EC46D65E291C /* Pods-LuluTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LuluTests-frameworks.sh"; sourceTree = "<group>"; };
+		E4D2A47367F2E1A8264FD6A84C76E629 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA0BA9876CDD01BF32E316EA5B7F7C38 /* Pods_LuluTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEC7983A5CFD08FA14A0F4E12A92C643 /* Pods-Lulu-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Lulu-resources.sh"; sourceTree = "<group>"; };
+		EF58E8489CD55FE566AB2406C7B34921 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7E6687B6EBB75C9DF1E399E2517431A /* Pods-Lulu.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Lulu.modulemap"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1199B8B7AA09A2E1E6E761D5983635AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32D9F52BE9327CF13A6807F639F08488 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A78C1680732EE99CBA57B0ABE09AC26C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8EA8F5D098224108170870D694C804B4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFB0CDCD24C53E07DB18DAE92D1C8183 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3FBEFC689925ABD8FEDFB3E9BF183C1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07A7F594DF6772F1D1F10718F64B0CF5 /* Pods-LuluTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C49E612AF6081BDD4C7C1FA0F7E9A73 /* Info.plist */,
+				531D0D4079619B3AE2512BE779FF4CB9 /* Pods-LuluTests.modulemap */,
+				0F52DD01C4805B7CC4CCF5FFCE9CD93C /* Pods-LuluTests-acknowledgements.markdown */,
+				8C469695DBEFC33C7E41C8BAC654F060 /* Pods-LuluTests-acknowledgements.plist */,
+				6CEDCD5F09CE8FDF050F114036279315 /* Pods-LuluTests-dummy.m */,
+				E063F4913970E80AD663EC46D65E291C /* Pods-LuluTests-frameworks.sh */,
+				44E4562BC78EB82ED870F60A09D0D98B /* Pods-LuluTests-resources.sh */,
+				0A6A0C4C40CCDDC48B17353A23AB2223 /* Pods-LuluTests-umbrella.h */,
+				54C8412E529930A7B504ED12FAF6BF6D /* Pods-LuluTests.debug.xcconfig */,
+				253BF2546DE5FAA0A6D9F60ECD1FE789 /* Pods-LuluTests.release.xcconfig */,
+			);
+			name = "Pods-LuluTests";
+			path = "Target Support Files/Pods-LuluTests";
+			sourceTree = "<group>";
+		};
+		51F3A340AA31A2F9B10BDDB0AC8CBCD7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E4D2A47367F2E1A8264FD6A84C76E629 /* Pods_Lulu.framework */,
+				EA0BA9876CDD01BF32E316EA5B7F7C38 /* Pods_LuluTests.framework */,
+				264454F37B82C96BFC20FD28472E0954 /* Pods_LuluUITests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74B6E4417D358B3CAA9148663E3763DF /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD8DB1ECC2808C7C9D730306B1557B70 /* Pods-Lulu */,
+				07A7F594DF6772F1D1F10718F64B0CF5 /* Pods-LuluTests */,
+				DCCF916DFD6F167D4911D692759F8289 /* Pods-LuluUITests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				51F3A340AA31A2F9B10BDDB0AC8CBCD7 /* Products */,
+				74B6E4417D358B3CAA9148663E3763DF /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCCF916DFD6F167D4911D692759F8289 /* Pods-LuluUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0479463C774B8153DEA2DCB992C1283D /* Info.plist */,
+				188243C1E2AE619F9C833F996A049F93 /* Pods-LuluUITests.modulemap */,
+				CE6354479C55B0A7446145494B6A3C15 /* Pods-LuluUITests-acknowledgements.markdown */,
+				192FC92AD6DDBB05B35D4501936DAAD2 /* Pods-LuluUITests-acknowledgements.plist */,
+				793FF9B83EAFAC6220AE92D34A9ED1FA /* Pods-LuluUITests-dummy.m */,
+				3F4C7C0456CEB765EB4D1726888B0325 /* Pods-LuluUITests-frameworks.sh */,
+				0366E2C92BDD89E165C6B6A0613169B2 /* Pods-LuluUITests-resources.sh */,
+				3ECB1D13C690291BBDCF9E7AA85D2BA4 /* Pods-LuluUITests-umbrella.h */,
+				60E83B3B80FFCB6A32500E06BC269E37 /* Pods-LuluUITests.debug.xcconfig */,
+				78192B5ED67D37355B0D6F3E946564A8 /* Pods-LuluUITests.release.xcconfig */,
+			);
+			name = "Pods-LuluUITests";
+			path = "Target Support Files/Pods-LuluUITests";
+			sourceTree = "<group>";
+		};
+		DD8DB1ECC2808C7C9D730306B1557B70 /* Pods-Lulu */ = {
+			isa = PBXGroup;
+			children = (
+				EF58E8489CD55FE566AB2406C7B34921 /* Info.plist */,
+				F7E6687B6EBB75C9DF1E399E2517431A /* Pods-Lulu.modulemap */,
+				D258F6B52EF832C7A762479479007257 /* Pods-Lulu-acknowledgements.markdown */,
+				3EB8CEF6E4027A0A1708D804F769DDB5 /* Pods-Lulu-acknowledgements.plist */,
+				46CFE3BE5B0617DDA825382ED48AD37C /* Pods-Lulu-dummy.m */,
+				8E6BF6AB7A244164A95DCCE1A6051477 /* Pods-Lulu-frameworks.sh */,
+				EEC7983A5CFD08FA14A0F4E12A92C643 /* Pods-Lulu-resources.sh */,
+				2C414FD04A331CBC9EA74D8E2F896432 /* Pods-Lulu-umbrella.h */,
+				0140F4E3BD126072D3AE06F9F1C50D72 /* Pods-Lulu.debug.xcconfig */,
+				3EFC0E30871621C2FA417145DD3023A4 /* Pods-Lulu.release.xcconfig */,
+			);
+			name = "Pods-Lulu";
+			path = "Target Support Files/Pods-Lulu";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1A211EDB6DF93274862C127ACE227F64 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1996FFB56EA6910F400F45A6FAE4FA26 /* Pods-LuluTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		450549C02B3ED3797B77D05BAEDFCDA9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99ACE83BD26942E1A9E0D70B593FDB91 /* Pods-Lulu-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B1CC4120F1B040EACD87D7D94F4A8F2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78965122EED6F02AFE5D73960C343FBD /* Pods-LuluUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		34603CDFAFDAB6739F59BEAFB640E379 /* Pods-LuluUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5480700E33D651702808B3377A82A2BC /* Build configuration list for PBXNativeTarget "Pods-LuluUITests" */;
+			buildPhases = (
+				06632C5FCFC7E8DB5204D6CF99032128 /* Sources */,
+				A78C1680732EE99CBA57B0ABE09AC26C /* Frameworks */,
+				4B1CC4120F1B040EACD87D7D94F4A8F2 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-LuluUITests";
+			productName = "Pods-LuluUITests";
+			productReference = 264454F37B82C96BFC20FD28472E0954 /* Pods_LuluUITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BA95928B1E98E56425FBBE6799F14123 /* Pods-Lulu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A7D313B37F10481E9C8725050C2D091 /* Build configuration list for PBXNativeTarget "Pods-Lulu" */;
+			buildPhases = (
+				99D7DFB209BBAACDB681BF52CD9103B1 /* Sources */,
+				DFB0CDCD24C53E07DB18DAE92D1C8183 /* Frameworks */,
+				450549C02B3ED3797B77D05BAEDFCDA9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Lulu";
+			productName = "Pods-Lulu";
+			productReference = E4D2A47367F2E1A8264FD6A84C76E629 /* Pods_Lulu.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DE8B0C2FDF04AD3207960923CEC31F50 /* Pods-LuluTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9DF9336FEB2F45F10A5827FC5710BC82 /* Build configuration list for PBXNativeTarget "Pods-LuluTests" */;
+			buildPhases = (
+				E2F61F334AAEEC03CF8AABCA836D6BB0 /* Sources */,
+				1199B8B7AA09A2E1E6E761D5983635AE /* Frameworks */,
+				1A211EDB6DF93274862C127ACE227F64 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-LuluTests";
+			productName = "Pods-LuluTests";
+			productReference = EA0BA9876CDD01BF32E316EA5B7F7C38 /* Pods_LuluTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 51F3A340AA31A2F9B10BDDB0AC8CBCD7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BA95928B1E98E56425FBBE6799F14123 /* Pods-Lulu */,
+				DE8B0C2FDF04AD3207960923CEC31F50 /* Pods-LuluTests */,
+				34603CDFAFDAB6739F59BEAFB640E379 /* Pods-LuluUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		06632C5FCFC7E8DB5204D6CF99032128 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				833658C65FC20246FFD0B242B2319F18 /* Pods-LuluUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99D7DFB209BBAACDB681BF52CD9103B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCA512D0CEA2A51F6570B71B2FF144AC /* Pods-Lulu-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2F61F334AAEEC03CF8AABCA836D6BB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F31D41B208B30F0E6A845861F0AD987 /* Pods-LuluTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		12914D756594D15C6F2CA12FE5F89F1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		3F0D69DE5A4CFCDE6723B5A0462B3468 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54C8412E529930A7B504ED12FAF6BF6D /* Pods-LuluTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LuluTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LuluTests/Pods-LuluTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_LuluTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		452B6B33888FB46F36A1174A645EFC24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EFC0E30871621C2FA417145DD3023A4 /* Pods-Lulu.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Lulu/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Lulu/Pods-Lulu.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Lulu;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8C1FE7898AA10DE3B335DDED4577DF80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 253BF2546DE5FAA0A6D9F60ECD1FE789 /* Pods-LuluTests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LuluTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LuluTests/Pods-LuluTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_LuluTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9F44C7EEC46A8261B28F65E595AFCDD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78192B5ED67D37355B0D6F3E946564A8 /* Pods-LuluUITests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LuluUITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LuluUITests/Pods-LuluUITests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_LuluUITests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C76F59343C5FCF212DE69F62EF68D5B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0140F4E3BD126072D3AE06F9F1C50D72 /* Pods-Lulu.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Lulu/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Lulu/Pods-Lulu.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Lulu;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D36EF1F5380E9C696C8EEA4879A12B3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60E83B3B80FFCB6A32500E06BC269E37 /* Pods-LuluUITests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LuluUITests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LuluUITests/Pods-LuluUITests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_LuluUITests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E72E7977875C2D251FC62736BBDDC389 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12914D756594D15C6F2CA12FE5F89F1B /* Debug */,
+				E72E7977875C2D251FC62736BBDDC389 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5480700E33D651702808B3377A82A2BC /* Build configuration list for PBXNativeTarget "Pods-LuluUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D36EF1F5380E9C696C8EEA4879A12B3C /* Debug */,
+				9F44C7EEC46A8261B28F65E595AFCDD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A7D313B37F10481E9C8725050C2D091 /* Build configuration list for PBXNativeTarget "Pods-Lulu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C76F59343C5FCF212DE69F62EF68D5B7 /* Debug */,
+				452B6B33888FB46F36A1174A645EFC24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9DF9336FEB2F45F10A5827FC5710BC82 /* Build configuration list for PBXNativeTarget "Pods-LuluTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F0D69DE5A4CFCDE6723B5A0462B3468 /* Debug */,
+				8C1FE7898AA10DE3B335DDED4577DF80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

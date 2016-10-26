@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		037594D8F826E509A7BA30D4 /* Pods_Lulu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */; };
 		3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */; };
 		3DC986FF1DB5DCD20022A2ED /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC986FE1DB5DCD20022A2ED /* FirstViewController.swift */; };
 		3DC987011DB5DCD20022A2ED /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC987001DB5DCD20022A2ED /* SecondViewController.swift */; };
@@ -15,6 +16,8 @@
 		3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */; };
 		3DC987141DB5DCD30022A2ED /* LuluTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC987131DB5DCD30022A2ED /* LuluTests.swift */; };
 		3DC9871F1DB5DCD30022A2ED /* LuluUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */; };
+		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
+		BCC2090D8C5F294469753619 /* Pods_LuluUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 776591287087069E1588D125 /* Pods_LuluUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17BA0F083ACB4BF20E51B9B5 /* Pods-LuluTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests.debug.xcconfig"; sourceTree = "<group>"; };
+		20EB9E2CDD15CB5157BECCEE /* Pods-Lulu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lulu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lulu/Pods-Lulu.debug.xcconfig"; sourceTree = "<group>"; };
+		334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC986F91DB5DCD20022A2ED /* Lulu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lulu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DC986FE1DB5DCD20022A2ED /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +55,12 @@
 		3DC9871A1DB5DCD30022A2ED /* LuluUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuluUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuluUITests.swift; sourceTree = "<group>"; };
 		3DC987201DB5DCD30022A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B23BC5FAFA25FE2B9CCAAF71 /* Pods-LuluUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B6FF26F7DD977EF76C058AD4 /* Pods-LuluUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C5710CCB540D2710E2E873AF /* Pods-Lulu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lulu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lulu/Pods-Lulu.release.xcconfig"; sourceTree = "<group>"; };
+		F3146664803A1C5188FE4B2A /* Pods-LuluTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				037594D8F826E509A7BA30D4 /* Pods_Lulu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +84,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCC2090D8C5F294469753619 /* Pods_LuluUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		199DC2786E3C637F48AB3746 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */,
+				334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */,
+				776591287087069E1588D125 /* Pods_LuluUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B09F8B566A8DCA522B403DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20EB9E2CDD15CB5157BECCEE /* Pods-Lulu.debug.xcconfig */,
+				C5710CCB540D2710E2E873AF /* Pods-Lulu.release.xcconfig */,
+				17BA0F083ACB4BF20E51B9B5 /* Pods-LuluTests.debug.xcconfig */,
+				F3146664803A1C5188FE4B2A /* Pods-LuluTests.release.xcconfig */,
+				B6FF26F7DD977EF76C058AD4 /* Pods-LuluUITests.debug.xcconfig */,
+				B23BC5FAFA25FE2B9CCAAF71 /* Pods-LuluUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3DC986F01DB5DCD20022A2ED = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +121,8 @@
 				3DC987121DB5DCD30022A2ED /* LuluTests */,
 				3DC9871D1DB5DCD30022A2ED /* LuluUITests */,
 				3DC986FA1DB5DCD20022A2ED /* Products */,
+				3B09F8B566A8DCA522B403DA /* Pods */,
+				199DC2786E3C637F48AB3746 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,9 +175,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DC987231DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "Lulu" */;
 			buildPhases = (
+				DA60185F20F4B01D5879B520 /* [CP] Check Pods Manifest.lock */,
 				3DC986F51DB5DCD20022A2ED /* Sources */,
 				3DC986F61DB5DCD20022A2ED /* Frameworks */,
 				3DC986F71DB5DCD20022A2ED /* Resources */,
+				8DF6AB2BD38A8AD2074E50DE /* [CP] Embed Pods Frameworks */,
+				723380639370331C762541FA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +195,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DC987261DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "LuluTests" */;
 			buildPhases = (
+				71CB125D874B52022AF25E30 /* [CP] Check Pods Manifest.lock */,
 				3DC9870B1DB5DCD30022A2ED /* Sources */,
 				3DC9870C1DB5DCD30022A2ED /* Frameworks */,
 				3DC9870D1DB5DCD30022A2ED /* Resources */,
+				423B8EB8E3F5B0C8F2CFC013 /* [CP] Embed Pods Frameworks */,
+				E1898D0AA1EAA58C8264B698 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +216,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DC987291DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "LuluUITests" */;
 			buildPhases = (
+				0C5B71AB41FF2353246F2BCC /* [CP] Check Pods Manifest.lock */,
 				3DC987161DB5DCD30022A2ED /* Sources */,
 				3DC987171DB5DCD30022A2ED /* Frameworks */,
 				3DC987181DB5DCD30022A2ED /* Resources */,
+				E55186170B52633E20322E43 /* [CP] Embed Pods Frameworks */,
+				E3406E37A70C0BA22515CD12 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -257,6 +306,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C5B71AB41FF2353246F2BCC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		423B8EB8E3F5B0C8F2CFC013 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		71CB125D874B52022AF25E30 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		723380639370331C762541FA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lulu/Pods-Lulu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DF6AB2BD38A8AD2074E50DE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lulu/Pods-Lulu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA60185F20F4B01D5879B520 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1898D0AA1EAA58C8264B698 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3406E37A70C0BA22515CD12 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E55186170B52633E20322E43 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3DC986F51DB5DCD20022A2ED /* Sources */ = {
@@ -415,6 +602,7 @@
 		};
 		3DC987241DB5DCD30022A2ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20EB9E2CDD15CB5157BECCEE /* Pods-Lulu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -429,6 +617,7 @@
 		};
 		3DC987251DB5DCD30022A2ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5710CCB540D2710E2E873AF /* Pods-Lulu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -443,6 +632,7 @@
 		};
 		3DC987271DB5DCD30022A2ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17BA0F083ACB4BF20E51B9B5 /* Pods-LuluTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -457,6 +647,7 @@
 		};
 		3DC987281DB5DCD30022A2ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3146664803A1C5188FE4B2A /* Pods-LuluTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -471,6 +662,7 @@
 		};
 		3DC9872A1DB5DCD30022A2ED /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6FF26F7DD977EF76C058AD4 /* Pods-LuluUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = LuluUITests/Info.plist;
@@ -484,6 +676,7 @@
 		};
 		3DC9872B1DB5DCD30022A2ED /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B23BC5FAFA25FE2B9CCAAF71 /* Pods-LuluUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = LuluUITests/Info.plist;
@@ -514,6 +707,7 @@
 				3DC987251DB5DCD30022A2ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3DC987261DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "LuluTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +716,7 @@
 				3DC987281DB5DCD30022A2ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3DC987291DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "LuluUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +725,7 @@
 				3DC9872B1DB5DCD30022A2ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
