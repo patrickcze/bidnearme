@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="jK6-vi-fSN">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="0Ar-wb-jJa">
+            <objects>
+                <viewController id="kUI-MC-bf4" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fa4-GE-VNl"/>
+                        <viewControllerLayoutGuide type="bottom" id="mds-d7-lig"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fdJ-ZP-gUz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="emT-0S-5yn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xo0-Lm-EVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3392.8000000000002" y="1248.1259370314845"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nWh-ck-QzD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jK6-vi-fSN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Chat" id="LwI-jb-3rn">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DRB-Zf-YPU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kUI-MC-bf4" kind="relationship" relationship="rootViewController" id="PqE-bt-ztK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eEd-To-jse" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2453.5999999999999" y="1248.1259370314845"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Chat" width="25" height="25"/>
+    </resources>
+</document>
