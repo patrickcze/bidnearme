@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		037594D8F826E509A7BA30D4 /* Pods_Lulu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */; };
+		358605481DC8590E0003FF96 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358605471DC8590D0003FF96 /* CameraViewController.swift */; };
 		3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */; };
 		3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987021DB5DCD20022A2ED /* Main.storyboard */; };
 		3DC987061DB5DCD20022A2ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987051DB5DCD20022A2ED /* Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		17BA0F083ACB4BF20E51B9B5 /* Pods-LuluTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests.debug.xcconfig"; sourceTree = "<group>"; };
 		20EB9E2CDD15CB5157BECCEE /* Pods-Lulu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lulu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lulu/Pods-Lulu.debug.xcconfig"; sourceTree = "<group>"; };
 		334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		358605471DC8590D0003FF96 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		3DC986F91DB5DCD20022A2ED /* Lulu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lulu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DC987031DB5DCD20022A2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,6 +113,14 @@
 				776591287087069E1588D125 /* Pods_LuluUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		358605491DC859480003FF96 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				358605471DC8590D0003FF96 /* CameraViewController.swift */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 		3B09F8B566A8DCA522B403DA /* Pods */ = {
@@ -205,6 +215,7 @@
 		BC60E8EA1DC6944D004D7FB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				358605491DC859480003FF96 /* Camera */,
 				BC60E8EC1DC69468004D7FB8 /* Home */,
 			);
 			name = Views;
@@ -517,6 +528,7 @@
 				BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
+				358605481DC8590E0003FF96 /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

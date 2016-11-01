@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Camera View Controller-->
         <scene sceneID="MRl-4q-trz">
             <objects>
-                <viewController id="hVk-e1-SdS" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Camera" id="hVk-e1-SdS" customClass="CameraViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="azm-Ly-zvT"/>
                         <viewControllerLayoutGuide type="bottom" id="Pc0-8N-UUQ"/>
@@ -37,14 +37,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$ Starting Price..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KEV-b6-wrI">
-                                <frame key="frameInset" minX="16" minY="466" width="163" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="End Date..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uMJ-Wt-M77">
-                                <frame key="frameInset" minX="195" minY="466" width="164" height="30"/>
+                                <frame key="frameInset" minX="16" minY="466" width="132" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -54,7 +47,7 @@
                                 <frame key="frameInset" minX="16" minY="527" width="109" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name L" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUq-GG-Gt3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name L." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUq-GG-Gt3">
                                 <frame key="frameInset" minX="133" minY="534" width="76" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -96,10 +89,40 @@
                                 <color key="textColor" red="0.33190981217616577" green="0.33190981217616577" blue="0.33190981217616577" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="End Date..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uMJ-Wt-M77">
+                                <frame key="frameInset" minX="156" minY="466" width="132" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="His-zp-aoO">
+                                <frame key="frameInset" minX="296" minY="465" width="63" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.77232431994818651" green="0.74159451771849327" blue="0.71332443948129176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="POST">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="LkT-GY-3bj"/>
+                    <connections>
+                        <outlet property="addPhotosImage" destination="LWo-sg-SVb" id="D30-Hh-gk5"/>
+                        <outlet property="descriptionTextField" destination="nY0-y5-URe" id="5kJ-HA-L0d"/>
+                        <outlet property="endDateTextField" destination="uMJ-Wt-M77" id="0FQ-Rv-FgL"/>
+                        <outlet property="memberSinceLabel" destination="s1X-GH-8MU" id="Nd0-JM-PD0"/>
+                        <outlet property="postButton" destination="His-zp-aoO" id="xtk-YM-VYe"/>
+                        <outlet property="ratingLabel" destination="4xe-It-aVz" id="KqJ-rc-5uT"/>
+                        <outlet property="repliesInLabel" destination="5mm-00-lup" id="sQc-O5-fRb"/>
+                        <outlet property="starLabel" destination="drC-nI-nKc" id="r3v-IY-WZL"/>
+                        <outlet property="startingPriceTextField" destination="KEV-b6-wrI" id="t3y-0Y-jps"/>
+                        <outlet property="titleTextField" destination="xn9-UY-RR1" id="8jp-Ae-W38"/>
+                        <outlet property="userImage" destination="Cip-pu-OKE" id="KrI-Hf-Kfa"/>
+                        <outlet property="usersNameLabel" destination="vUq-GG-Gt3" id="8N5-Fw-ZVX"/>
+                        <outlet property="yearLabel" destination="tEj-jU-BVg" id="Epz-lI-JQX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2n-ce-Ce0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
