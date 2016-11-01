@@ -17,12 +17,11 @@
 		5B4982A41DC6F98100C839CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982A31DC6F98100C839CF /* ProfileViewController.swift */; };
 		5B4982AA1DC7BDBB00C839CF /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982A91DC7BDBB00C839CF /* MainTableViewCell.swift */; };
 		5B4982AC1DC7BDCF00C839CF /* SubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982AB1DC7BDCF00C839CF /* SubTableViewCell.swift */; };
-		5B4982B21DC7C2AF00C839CF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982B11DC7C2AF00C839CF /* Item.swift */; };
+		5BDB41C21DC81D63005D2F7F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BDB41C11DC81D63005D2F7F /* Profile.storyboard */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
 		BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */; };
 		BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */; };
-		BC60E8E11DC688DE004D7FB8 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8E01DC688DE004D7FB8 /* Profile.storyboard */; };
 		BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */; };
 		BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */; };
 		BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8ED1DC694A7004D7FB8 /* Listing.swift */; };
@@ -66,7 +65,7 @@
 		5B4982A31DC6F98100C839CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5B4982A91DC7BDBB00C839CF /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		5B4982AB1DC7BDCF00C839CF /* SubTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTableViewCell.swift; sourceTree = "<group>"; };
-		5B4982B11DC7C2AF00C839CF /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		5BDB41C11DC81D63005D2F7F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B23BC5FAFA25FE2B9CCAAF71 /* Pods-LuluUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -74,7 +73,6 @@
 		BC60E8D91DC688AB004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Groups.storyboard; sourceTree = "<group>"; };
 		BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		BC60E8DE1DC688CE004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Camera.storyboard; sourceTree = "<group>"; };
-		BC60E8E01DC688DE004D7FB8 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		BC60E8ED1DC694A7004D7FB8 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
@@ -164,7 +162,7 @@
 				BC60E8E81DC6942E004D7FB8 /* Controllers */,
 				3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */,
 				3DC987021DB5DCD20022A2ED /* Main.storyboard */,
-				BC60E8E01DC688DE004D7FB8 /* Profile.storyboard */,
+				5BDB41C11DC81D63005D2F7F /* Profile.storyboard */,
 				BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */,
 				BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */,
 				BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */,
@@ -224,7 +222,6 @@
 			children = (
 				BC60E8ED1DC694A7004D7FB8 /* Listing.swift */,
 				BC60E8EF1DC694AE004D7FB8 /* User.swift */,
-				5B4982B11DC7C2AF00C839CF /* Item.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -376,7 +373,7 @@
 				3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */,
 				3DC987061DB5DCD20022A2ED /* Assets.xcassets in Resources */,
 				BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */,
-				BC60E8E11DC688DE004D7FB8 /* Profile.storyboard in Resources */,
+				5BDB41C21DC81D63005D2F7F /* Profile.storyboard in Resources */,
 				3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,7 +543,6 @@
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
-				5B4982B21DC7C2AF00C839CF /* Item.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
 				5B4982AC1DC7BDCF00C839CF /* SubTableViewCell.swift in Sources */,
 			);

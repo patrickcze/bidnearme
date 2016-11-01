@@ -10,11 +10,14 @@ import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let tempUser = User(UIImage(named: "duck")!, "Scott", "Campbell")
+    var tempUser : User!
     
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var mainTable: UITableView!
     
+    let MainCellHeight : CGFloat = 212
+
+
     var mainTableCells = ["Buying", "Selling"]
     
     override func viewDidLoad() {
@@ -22,15 +25,30 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         mainTable.delegate = self
         mainTable.dataSource = self
+      //  mainTable.estimatedRowHeight = MainCellHeight
+      //  mainTable.rowHeight = MainCellHeight//UITableViewAutomaticDimension
+         print(mainTable.estimatedRowHeight)
+        print(mainTable.rowHeight)
         
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
         profilePicture?.clipsToBounds = true
+
         
-        profilePicture.image = tempUser.profileImage
-        tempUser.buyingListings = [
-            Listing([UIImage(named: "duck")!], "Duck for sale", "This is a duck i'm selling. Dope condition.", 10, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-            Listing([UIImage(named: "duck")!], "Selling a duck", "This is a duck i'm selling. Dope condition.", 12, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        ]
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        if let temp = appDelegate?.dummyUser
+        {
+            tempUser = temp
+            profilePicture.image = tempUser.profileImage
+        }
+        else
+        {
+            print("ProfileViewController: user null")
+        }
+
+        
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -47,45 +65,52 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return mainTableCells.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return mainTableCells.count
+     
+        return 1
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableCell", for: indexPath) as! MainTableViewCell
         
-        cell.tempUser = tempUser // temp
-        
+        //cell.showMoreButton.tag = (indexPath as NSIndexPath).row
         // Configure the cell...
-        let tableCell = mainTableCells[(indexPath as NSIndexPath).row]
-        cell.nameLabel.text = tableCell
+        let index = indexPath as NSIndexPath
         
+        print("section- " +  String(index.section) + "      row - " + String(index.row))
+        
+        if index.section == 0
+        {
+            let tableCell = mainTableCells[0]
+            cell.nameLabel.text = tableCell
+        }
+        else if index.section == 1
+        {
+            let tableCell = mainTableCells[1]
+            cell.nameLabel.text = tableCell
+
+        }
         return cell
     }
     
-    
-    // MARK: UITableViewDelegate Method
-/*    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        print("mainTableRowHeight set at 225  -> (ProfileViewController)")
+        return 225
         
     }
-*/
     
-    
-    
-    
-    
-    
-    
+ 
 
     /*
     // MARK: - Navigation
-
+     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.

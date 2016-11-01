@@ -13,9 +13,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    // ronny - TEMPORAL
+    var dummyUser : User!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // ronny - TEMPORAL
+        dummyUser = User(UIImage(named: "duck")!, "Mr. Duck", "Duckin")
+        dummyUser.buyingListings = [Listing([UIImage(named: "duck")!], "Duck for sale", "This is a duck i'm selling. Dope condition.", 10, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
+            Listing([UIImage(named: "duck")!], "Selling a duck", "This is a duck i'm selling. Dope condition.", 12, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
+             Listing([UIImage(named: "duck")!], "Selling a duck", "This is a duck i'm selling. Dope condition.", 12, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
+             Listing([UIImage(named: "duck")!], "Selling a duck", "This is a duck i'm selling. Dope condition.", 12, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
+             Listing([UIImage(named: "duck")!], "Duckss", "This is a duck i'm selling. Dope condition.", 13, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell"))]
+        // -----
+        
         return true
     }
 
