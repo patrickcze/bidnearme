@@ -6,6 +6,7 @@ target 'Lulu' do
   use_frameworks!
 
   # Pods for Lulu
+  pod 'Firebase/Core'
 
   target 'LuluTests' do
     inherit! :search_paths
