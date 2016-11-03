@@ -7,6 +7,7 @@ target 'Lulu' do
 
   # Pods for Lulu
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
 
   target 'LuluTests' do
     inherit! :search_paths
