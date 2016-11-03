@@ -37,27 +37,31 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Get a reference to the firebase db
         ref = FIRDatabase.database().reference()
         
+        //Get a snapshot of listings
         let listingRef = self.ref.child("listings")
         
+        //Watch for changes to listings
         listingRef.observe(FIRDataEventType.value){(snap: FIRDataSnapshot) in
             let enumerator = snap.children
-            
             var tempListing: Listing
             
+            //Iterate over listings
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                 let data = rest.value as? NSDictionary
-
-                var count = 0
+                var index = 0
                 
+                //Check for existing listings
                 for listing in self.tempData {
                     if listing.listingID == rest.key {
-                        self.tempData.remove(at: count)
+                        self.tempData.remove(at: index)
                     }
-                    count+=1
+                    index+=1
                 }
                 
+                //Create a listing for the data within the snapshot
                 tempListing = Listing(rest.key,
                                      [UIImage(named: "duck")!],
                                       data?["title"] as! String,
@@ -70,6 +74,7 @@ class HomeViewController: UIViewController {
                 
                 self.tempData.append(tempListing)
             }
+            //Refresh listing view
             self.listingsCollectionView.reloadData()
         }
         
