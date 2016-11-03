@@ -21,6 +21,11 @@ class User {
     var favoritedListings: [Listing]!
     var buyingListings: [Listing]!
     
+    
+    var allListings : [[Listing]]!
+    
+    
+    
     // User initialization.
     init(_ profileImage: UIImage, _ firstName: String, _ lastName: String) {
         self.profileImage = profileImage

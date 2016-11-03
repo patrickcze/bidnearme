@@ -8,51 +8,132 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProfileViewController: UIViewController {
 
     var tempUser : User!
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var mainTable: UITableView!
+ 
+    @IBOutlet weak var ratingLabel: UILabel!
     
-    let MainCellHeight : CGFloat = 212
-
-
-    var mainTableCells = ["Buying", "Selling"]
+    @IBOutlet weak var memberLabel: UILabel!
     
+    @IBOutlet weak var specialLabel: UILabel!
+    
+    @IBOutlet weak var buySellFavorite_Segment: UISegmentedControl!
+    
+    var currentTabItem = 0
+    let mainTableCellNames = [["Buying", "Bought"],["Selling","Sold"],["Favorites"]]
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mainTable.delegate = self
-        mainTable.dataSource = self
-      //  mainTable.estimatedRowHeight = MainCellHeight
-      //  mainTable.rowHeight = MainCellHeight//UITableViewAutomaticDimension
-         print(mainTable.estimatedRowHeight)
-        print(mainTable.rowHeight)
+       
         
+        
+        
+        
+       // buySellFavorite_Segment.didChangeValue(forKey: "Buy")
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
         profilePicture?.clipsToBounds = true
 
-        
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         if let temp = appDelegate?.dummyUser
         {
             tempUser = temp
             profilePicture.image = tempUser.profileImage
+            buySellFavorite_Segment.selectedSegmentIndex = 0
+            buySellFavorite_Segment.sendActions(for: UIControlEvents.valueChanged)
+            
         }
         else
         {
             print("ProfileViewController: user null")
         }
-
         
-        
-        
-        
+    
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
+      
+        print("segment control Value Changed")
+        print(" TAG = " + String(sender.tag))
+        
+        switch (sender.selectedSegmentIndex)
+        {
+        case 0: // Buy
+            
+            print("setting up viewController for BUY segemntControl")
+            
+            let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
+            
+            containerView.addSubview(tableV.view)
+            addChildViewController(tableV)
+            tableV.didMove(toParentViewController: self)
+            
+            tableV.bottomTableLabel.text = "Bought"
+            tableV.topTableLabel.text = "Buying"
+            
+            tableV.topListing = tempUser.buyingListings
+            tableV.bottomListing = tempUser.buyingListings
+            
+            tableV.view.frame = containerView.bounds
+            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            
+            
+            break
+        case 1: // Sell
+            print("setting up viewController for SELL segemntControl")
+            
+            let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
+            
+            containerView.addSubview(tableV.view)
+            addChildViewController(tableV)
+            tableV.didMove(toParentViewController: self)
+            
+            tableV.bottomTableLabel.text = "Selling"
+            tableV.topTableLabel.text = "Sold"
+            
+            tableV.topListing = tempUser.postedListings
+            tableV.bottomListing = tempUser.postedListings
+            
+            tableV.view.frame = containerView.bounds
+            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            break
+        case 2: // Favorite
+            print("setting up viewController for FAVORITE segemntControl")
+            
+            let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
+            
+            containerView.addSubview(tableV.view)
+            addChildViewController(tableV)
+            tableV.didMove(toParentViewController: self)
+            
+            tableV.topTableLabel.text = "Watching"
+            
+            tableV.topListing = tempUser.favoritedListings
+            tableV.bottomListing = tempUser.postedListings
+            
+            
+            tableV.bottomTableLabel.isHidden = true
+            tableV.bottomTableView.isHidden = true
+            
+            
+            tableV.view.frame = containerView.bounds
+            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            break
+        default:
+            print("Default - segmentValueChanged - Profile.storyboard")
+        }
+        
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -61,50 +142,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
-    // MARK: - Table view data source
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return mainTableCells.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-     
-        return 1
-    }
     
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableCell", for: indexPath) as! MainTableViewCell
-        
-        //cell.showMoreButton.tag = (indexPath as NSIndexPath).row
-        // Configure the cell...
-        let index = indexPath as NSIndexPath
-        
-        print("section- " +  String(index.section) + "      row - " + String(index.row))
-        
-        if index.section == 0
-        {
-            let tableCell = mainTableCells[0]
-            cell.nameLabel.text = tableCell
-        }
-        else if index.section == 1
-        {
-            let tableCell = mainTableCells[1]
-            cell.nameLabel.text = tableCell
+    
+    
 
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        print("mainTableRowHeight set at 225  -> (ProfileViewController)")
-        return 225
-        
-    }
     
  
 

@@ -14,9 +14,10 @@
 		3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */; };
 		3DC987141DB5DCD30022A2ED /* LuluTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC987131DB5DCD30022A2ED /* LuluTests.swift */; };
 		3DC9871F1DB5DCD30022A2ED /* LuluUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */; };
+		5B005A1B1DCAA5EF002C7482 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B005A1A1DCAA5EF002C7482 /* ProfileTableViewCell.xib */; };
+		5B1584CD1DCAA4440073F77C /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1584CC1DCAA4440073F77C /* ProfileTableViewCell.swift */; };
+		5B28E12A1DCA8BC0007C7704 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B28E1291DCA8BC0007C7704 /* ProfileTableViewController.swift */; };
 		5B4982A41DC6F98100C839CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982A31DC6F98100C839CF /* ProfileViewController.swift */; };
-		5B4982AA1DC7BDBB00C839CF /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982A91DC7BDBB00C839CF /* MainTableViewCell.swift */; };
-		5B4982AC1DC7BDCF00C839CF /* SubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982AB1DC7BDCF00C839CF /* SubTableViewCell.swift */; };
 		5BDB41C21DC81D63005D2F7F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BDB41C11DC81D63005D2F7F /* Profile.storyboard */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
@@ -62,9 +63,10 @@
 		3DC9871A1DB5DCD30022A2ED /* LuluUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuluUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuluUITests.swift; sourceTree = "<group>"; };
 		3DC987201DB5DCD30022A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B005A1A1DCAA5EF002C7482 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		5B1584CC1DCAA4440073F77C /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		5B28E1291DCA8BC0007C7704 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		5B4982A31DC6F98100C839CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		5B4982A91DC7BDBB00C839CF /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		5B4982AB1DC7BDCF00C839CF /* SubTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubTableViewCell.swift; sourceTree = "<group>"; };
 		5BDB41C11DC81D63005D2F7F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,8 +196,8 @@
 		5B4982A21DC6F96000C839CF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				5B4982A91DC7BDBB00C839CF /* MainTableViewCell.swift */,
-				5B4982AB1DC7BDCF00C839CF /* SubTableViewCell.swift */,
+				5B1584CC1DCAA4440073F77C /* ProfileTableViewCell.swift */,
+				5B005A1A1DCAA5EF002C7482 /* ProfileTableViewCell.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				5B4982A31DC6F98100C839CF /* ProfileViewController.swift */,
+				5B28E1291DCA8BC0007C7704 /* ProfileTableViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */,
 				3DC987061DB5DCD20022A2ED /* Assets.xcassets in Resources */,
 				BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */,
+				5B005A1B1DCAA5EF002C7482 /* ProfileTableViewCell.xib in Resources */,
 				5BDB41C21DC81D63005D2F7F /* Profile.storyboard in Resources */,
 				3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */,
 			);
@@ -539,12 +543,12 @@
 			files = (
 				5B4982A41DC6F98100C839CF /* ProfileViewController.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
-				5B4982AA1DC7BDBB00C839CF /* MainTableViewCell.swift in Sources */,
+				5B1584CD1DCAA4440073F77C /* ProfileTableViewCell.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */,
+				5B28E12A1DCA8BC0007C7704 /* ProfileTableViewController.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
-				5B4982AC1DC7BDCF00C839CF /* SubTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
