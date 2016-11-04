@@ -2,7 +2,7 @@
 //  ProfileTableViewCell.swift
 //  Lulu
 //
-//  Created by Martin on 2016-11-02.
+//  Created by Ronny on 2016-11-02.
 //  Copyright © 2016 Team Lulu. All rights reserved.
 //
 

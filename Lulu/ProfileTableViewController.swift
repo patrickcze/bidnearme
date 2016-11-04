@@ -2,16 +2,13 @@
 //  ProfileTableViewController.swift
 //  Lulu
 //
-//  Created by Martin on 2016-11-02.
+//  Created by Ronny on 2016-11-02.
 //  Copyright © 2016 Team Lulu. All rights reserved.
 //
 
 import UIKit
 
 class ProfileTableViewController: UIViewController {
-
-    let SHOW_MORE = "Show More"
-    let SHOW_LESS = "Show Less"
     
     var buttonPressedLESS = false
     var buttonPressedMORE = false
@@ -35,20 +32,24 @@ class ProfileTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
 
         buttonPressedMORE = false
         buttonPressedLESS = false
         topRows = 3
         bottomRows = 3
-
+        
+        // registering the dtableViewCell I made so it can be used
         let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
+        
         topTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileCell")
         topTableView.register(nib,forCellReuseIdentifier: "ProfileCell")
         
         bottomTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileCell")
         bottomTableView.register(nib, forCellReuseIdentifier: "ProfileCell")
         
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,7 +95,7 @@ class ProfileTableViewController: UIViewController {
             
                 break
             default:
-                print("Default ProfileTableViewController - button pressed - TAG  \(sender.tag)  -- NAME \(sender.titleLabel?.text)")
+                print("Default ProfileTableViewController - button pressed - TAG:  \(sender.tag)  -- NAME: \(sender.titleLabel?.text)")
             }
         }
         
@@ -121,7 +122,6 @@ extension ProfileTableViewController: UITableViewDataSource {
        override func awakeFromNib() {
             super.awakeFromNib()
             // Initialization code
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -129,6 +129,13 @@ extension ProfileTableViewController: UITableViewDataSource {
        return 1
     }
     
+    
+    // default number of rows in a table is 3 rows. If tableViewListing is less thatn oe equal to 3,
+    // then no "Show More/button" will show up. Otherwiswe a button will show up.
+    //
+    //      When user clicks on Show More, totalRows = list.count and button title gets changed
+    //      When User clicks on Show less, totalRows = 3 and button title gets changed
+    //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch (tableView.tag)
@@ -138,7 +145,7 @@ extension ProfileTableViewController: UITableViewDataSource {
             if (topListing != nil)
             {
 
-                if (buttonPressedMORE)
+                if (buttonPressedMORE) // change button title to Show Less
                 {
                     topRows = topListing.count
                     topTableViewButton.setTitle("Show Less", for: .normal)
@@ -169,11 +176,11 @@ extension ProfileTableViewController: UITableViewDataSource {
             return topRows
     
             
-        case 1:
+        case 1: // bottom table view
             
             if (bottomListing != nil)
             {
-                if (buttonPressedMORE)
+                if (buttonPressedMORE) // change button title to Show Less
                 {
                     bottomRows = bottomListing.count
                     bottomTableViewButton.setTitle("Show Less", for: .normal)
@@ -181,7 +188,7 @@ extension ProfileTableViewController: UITableViewDataSource {
                     buttonPressedMORE = false
                     
                 }
-                else if (buttonPressedLESS)
+                else if (buttonPressedLESS) // change button title to Show More
                 {
                     bottomRows = 3
                     bottomTableViewButton.setTitle("Show More", for: .normal)
@@ -204,14 +211,21 @@ extension ProfileTableViewController: UITableViewDataSource {
             return bottomRows
         
         default:
-                print("Profiletableview - default")
+                print("Profiletableview #ofSections - default - TableView Tag \(tableView.tag)")
                 return 0
         }
     }
     
+    
+    // Sets up the cell according to what tableView is. There are 2 tables views: Top and Bottom
+    // 0 -> Top tableView
+    //      If topTableView, it will use topListing
+    // 1 -> Bottom tableView
+    //      if bottomTableView, it will use bottomListing
+    //
+    // "ProfileViewController" set the lists above (ex. user favoritesListings, buyingListings, etc.)
+    //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-       // let cell = ProfileTableViewCell.init(style: .default, reuseIdentifier: "ProfileTableViewCell")
         
        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath) as! ProfileTableViewCell
         
@@ -246,13 +260,12 @@ extension ProfileTableViewController: UITableViewDataSource {
             
             return cell
         default:
-            print("Default - profileTableView")
+            print("ProfileTableView cellForRowAt - Default - TableView Tag: \(tableView.tag) ")
             return ProfileTableViewCell.init(style: .default, reuseIdentifier: "ProfileCell")
         }
     }
 }
 
 // MARK: - UITableViewDelegate protocol
-extension ProfileTableViewController: UITableViewDelegate {
-}
+extension ProfileTableViewController: UITableViewDelegate { }
 

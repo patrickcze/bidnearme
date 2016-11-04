@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        
         // ronny - TEMPORAL
         dummyUser = User(UIImage(named: "duck")!, "Mr. Duck", "Duckin")
         
@@ -29,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Listing([UIImage(named: "duck")!], "Selling a duck", "This is a duck i'm selling. Dope condition.", 12, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
                 Listing([UIImage(named: "duck")!], "Duckss", "This is a duck i'm selling. Dope condition.", 13,    25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell"))
                                     ]
-        
         dummyUser.postedListings = [
                                     Listing([UIImage(named: "eggs")!], "Duck eggs for sale!", "I stole my friends eggs so I am taking advantage and selling them for cheap!", 10, 25, "Oct 30", "Nov 9", User(UIImage(named: "eggs")!, "Scott", "Campbell")),
                                     Listing([UIImage(named: "eggs")!], "Duck eggs for sale!", "I stole my friends eggs so I am taking advantage and selling them for cheap!", 10, 25, "Oct 30", "Nov 9", User(UIImage(named: "eggs")!, "Scott", "Campbell")),
@@ -41,9 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Listing([UIImage(named: "duckCar")!], "Duck car for sale!", "I am selling this because I am getting too old", 10, 25, "Oct 30", "Nov 9", User(UIImage(named: "eggs")!, "Scott", "Campbell"))
         ]
         
+        dummyUser.soldListings = []
+        
         dummyUser.allListings = [dummyUser.buyingListings,dummyUser.buyingListings,dummyUser.postedListings,dummyUser.postedListings, dummyUser.favoritedListings]
         
         // -----
+        
         
         return true
     }

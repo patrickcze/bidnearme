@@ -31,108 +31,90 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
        
-        
-        
-        
-        
-       // buySellFavorite_Segment.didChangeValue(forKey: "Buy")
+        // Making the imageView Circular
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
         profilePicture?.clipsToBounds = true
 
-        
+        // accessing data stored in the appDelegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         if let temp = appDelegate?.dummyUser
         {
             tempUser = temp
             profilePicture.image = tempUser.profileImage
+            
+            tempUser.buyingListings.removeAll()
+            tempUser.favoritedListings.removeAll()
+            tempUser.postedListings.removeAll()
+            tempUser.soldListings.removeAll()
+            
             buySellFavorite_Segment.selectedSegmentIndex = 0
             buySellFavorite_Segment.sendActions(for: UIControlEvents.valueChanged)
             
         }
-        else
+        else // handle this more properly with exceptions later
         {
-            print("ProfileViewController: user null")
+            print("*** ProfileViewController: user NULL ***")
         }
         
-    
+        
         // Do any additional setup after loading the view.
     }
     
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
       
-        print("segment control Value Changed")
-        print(" TAG = " + String(sender.tag))
-        
-        switch (sender.selectedSegmentIndex)
+        // print("segment control Value Changed")
+        // print(" TAG = " + String(sender.tag))
+  
+        if (tempUser != nil)
         {
-        case 0: // Buy
-            
-            print("setting up viewController for BUY segemntControl")
-            
             let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
             
             containerView.addSubview(tableV.view)
             addChildViewController(tableV)
             tableV.didMove(toParentViewController: self)
             
-            tableV.bottomTableLabel.text = "Bought"
-            tableV.topTableLabel.text = "Buying"
-            
-            tableV.topListing = tempUser.buyingListings
-            tableV.bottomListing = tempUser.buyingListings
-            
-            tableV.view.frame = containerView.bounds
-            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            
-            
-            break
-        case 1: // Sell
-            print("setting up viewController for SELL segemntControl")
-            
-            let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
-            
-            containerView.addSubview(tableV.view)
-            addChildViewController(tableV)
-            tableV.didMove(toParentViewController: self)
-            
-            tableV.bottomTableLabel.text = "Selling"
-            tableV.topTableLabel.text = "Sold"
-            
-            tableV.topListing = tempUser.postedListings
-            tableV.bottomListing = tempUser.postedListings
-            
-            tableV.view.frame = containerView.bounds
-            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            break
-        case 2: // Favorite
-            print("setting up viewController for FAVORITE segemntControl")
-            
-            let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
-            
-            containerView.addSubview(tableV.view)
-            addChildViewController(tableV)
-            tableV.didMove(toParentViewController: self)
-            
-            tableV.topTableLabel.text = "Watching"
-            
-            tableV.topListing = tempUser.favoritedListings
-            tableV.bottomListing = tempUser.postedListings
-            
-            
-            tableV.bottomTableLabel.isHidden = true
-            tableV.bottomTableView.isHidden = true
-            
+            switch (sender.selectedSegmentIndex)
+            {
+            case 0: // Buy
+                
+                //print("setting up viewController for BUY segementedControl")
+                
+                tableV.topTableLabel.text = "Buying"
+                tableV.bottomTableLabel.text = "Bought"
+                
+                tableV.topListing = tempUser.buyingListings
+                tableV.bottomListing = tempUser.buyingListings
+                
+                break
+            case 1: // Sell
+                //print("setting up viewController for SELL segementedControl")
+                
+                tableV.topTableLabel.text = "Selling"
+                tableV.bottomTableLabel.text = "Sold"
+                
+                tableV.topListing = tempUser.postedListings
+                tableV.bottomListing = tempUser.soldListings
+                
+                break
+            case 2: // Favorite
+                //print("setting up viewController for FAVORITE segementedControl")
+                
+                tableV.topTableLabel.text = "Watching"
+                
+                tableV.topListing = tempUser.favoritedListings
+                tableV.bottomListing = tempUser.postedListings
+                
+                tableV.bottomTableLabel.isHidden = true
+                tableV.bottomTableView.isHidden = true
+                
+                break
+            default:
+                print("Default - segmentValueChanged - Profile.storyboard")
+            }
             
             tableV.view.frame = containerView.bounds
             tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            break
-        default:
-            print("Default - segmentValueChanged - Profile.storyboard")
         }
-        
     }
     
     
@@ -142,13 +124,7 @@ class ProfileViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
 
-    
- 
 
     /*
     // MARK: - Navigation
