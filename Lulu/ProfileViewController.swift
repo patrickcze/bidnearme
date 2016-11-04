@@ -42,10 +42,10 @@ class ProfileViewController: UIViewController {
             tempUser = temp
             profilePicture.image = tempUser.profileImage
             
-            tempUser.buyingListings.removeAll()
-            tempUser.favoritedListings.removeAll()
-            tempUser.postedListings.removeAll()
-            tempUser.soldListings.removeAll()
+//            tempUser.buyingListings.removeAll()
+//            tempUser.favoritedListings.removeAll()
+//            tempUser.postedListings.removeAll()
+//            tempUser.soldListings.removeAll()
             
             buySellFavorite_Segment.selectedSegmentIndex = 0
             buySellFavorite_Segment.sendActions(for: UIControlEvents.valueChanged)

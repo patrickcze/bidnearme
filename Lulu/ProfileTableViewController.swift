@@ -40,7 +40,7 @@ class ProfileTableViewController: UIViewController {
         topRows = 3
         bottomRows = 3
         
-        // registering the dtableViewCell I made so it can be used
+        // registering the tableViewCell I made, so it can be used
         let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
         
         topTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileCell")
@@ -233,7 +233,7 @@ extension ProfileTableViewController: UITableViewDataSource {
         {
             
         case 0:
-            print("Top Table")
+            //print("Top Table")
             
             let index = indexPath as NSIndexPath
             if (topListing != nil && indexPath.row <= topListing.count)
@@ -247,7 +247,7 @@ extension ProfileTableViewController: UITableViewDataSource {
             return cell
             
         case 1:
-            print("Bottom Table")
+            //print("Bottom Table")
 
             let index = indexPath as NSIndexPath
             if (bottomListing != nil && indexPath.row <= bottomListing.count)
