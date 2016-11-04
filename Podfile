@@ -8,6 +8,8 @@ target 'Lulu' do
   # Pods for Lulu
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'AlamofireImage', '~> 3.1'
 
   target 'LuluTests' do
     inherit! :search_paths

@@ -12,7 +12,7 @@ class Listing {
 
     // MARK: - Properties
     var listingID: String!
-    var photos: [UIImage]!
+    var photos: [URL]!
     var title: String!
     var description: String!
     
@@ -28,7 +28,7 @@ class Listing {
     var favorited: [User]!
     
     // Listing initialization.
-    init(_ id:String, _ photos: [UIImage], _ title: String, _ description: String, _ startPrice: Int, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
+    init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Int, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
         self.listingID = id
         self.photos = photos
         self.title = title

@@ -20,7 +20,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     var listing: Listing? {
         didSet {
             if let list = listing {
-                listingImageView.image = list.photos[0]
+                listingImageView.af_setImage(withURL: list.photos[0])
                 listingTitleLabel.text = list.title
                 listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
                 listingPriceLabel.text = "$" + String(list.startPrice)
