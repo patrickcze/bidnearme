@@ -42,12 +42,26 @@ class HomeViewController: UIViewController {
             let enumerator = snap.children
             var tempListing: Listing
             
-            var images:[URL] = []
-            
             //Iterate over listings
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {
-                let listingdata = rest.value as? NSDictionary
+                //Get basic info about the listing
+                let title = rest.childSnapshot(forPath: "title").value as? String
+                let currentPrice = rest.childSnapshot(forPath: "currentPrice").value as? Int
+                let desc = rest.childSnapshot(forPath: "desc").value as? String
+                let imageURLS = rest.childSnapshot(forPath: "imageURL")
+                
+                var imageURLArray:[URL] = []
                 var index = 0
+                
+                for item in 0...imageURLS.childrenCount-1 {
+                    let varNum = String(item)
+                    let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
+                    
+                    print("url")
+                    print(URL(string:urlString))
+                    
+                    imageURLArray.append(URL(string:urlString)!)
+                }
                 
                 //Check for existing listings
                 for listing in self.tempData {
@@ -57,18 +71,8 @@ class HomeViewController: UIViewController {
                     index+=1
                 }
                 
-                images.append(URL(string: listingdata?["imageURL"] as! String)!)
-                
-                //Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key,
-                                     images,
-                                      listingdata?["title"] as! String,
-                                      listingdata?["desc"] as! String,
-                                      listingdata?["currentPrice"] as! Int,
-                                      25,
-                                      "Oct 30",
-                                      "Nov 9",
-                                      User(UIImage(named: "duck")!,"Scott","Campbell"))
+                // Create a listing for the data within the snapshot
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice!, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }
