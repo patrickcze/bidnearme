@@ -27,6 +27,7 @@ class CameraViewController: UIViewController {
     
     //MARK properties
     
+    
     //let tempUserData: User = User(UIImage(named: "duck")!, "Shreya", "Chopra")
     
     var user: User? {
