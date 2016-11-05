@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     //MARK Outlets
     @IBOutlet weak var addPhotosImage: UIImageView!
@@ -24,6 +24,8 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var memberSinceLabel: UILabel!//static
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var repliesInLabel: UILabel!
+    @IBOutlet weak var takePicButton: UIButton!
+    @IBOutlet weak var uploadPicButton: UIButton!
     
     //MARK properties
     
@@ -36,8 +38,8 @@ class CameraViewController: UIViewController {
                 usersNameLabel.text = user.firstName + " " + user.lastName
                 userImage.image = user.profileImage
                 ratingLabel.text = String(user.rating) + " Stars"
-                //yearLabel.text = "Member Since " + String(user.memberSince)
-                //repliesInLabel.text = "Replies " + user.replyingHabit
+                yearLabel.text = "Member Since " + String(user.memberSince)
+                repliesInLabel.text = "Replies " + user.replyingHabit
             }
         }
     }
@@ -59,8 +61,68 @@ class CameraViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func importImageButtonClicked(_ sender: AnyObject) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        
+        image.allowsEditing = false
+        self.present(image, animated: true)
+        {
+            //After it is complete
+        }
+    }
     
+    @IBAction func takePhotoButtonClicked(_ sender: AnyObject)
+    {
+        let image = UIImagePickerController()
+        image.delegate = self
+        image.sourceType = UIImagePickerControllerSourceType.camera
+        
+        image.allowsEditing = false
+        self.present(image, animated: true)
+        {
+            //after it is complete
+        }
+    }
+ 
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        {
+            addPhotosImage.image = image
+        }
+        else
+        {
+            //Error message
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 
+    /*@IBAction func takePhotoButtonClicked(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    
+    @IBAction func uploadImageButtonClicked(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary){
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+*/
+    
+    
     /*
     // MARK: - Navigation
 
