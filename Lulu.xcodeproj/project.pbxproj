@@ -236,12 +236,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DC987231DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "Lulu" */;
 			buildPhases = (
+				FD34E5D43C6963B6CC59BE45 /* [CP] Check Pods Manifest.lock */,
 				DA60185F20F4B01D5879B520 /* [CP] Check Pods Manifest.lock */,
 				3DC986F51DB5DCD20022A2ED /* Sources */,
 				3DC986F61DB5DCD20022A2ED /* Frameworks */,
 				3DC986F71DB5DCD20022A2ED /* Resources */,
 				8DF6AB2BD38A8AD2074E50DE /* [CP] Embed Pods Frameworks */,
 				723380639370331C762541FA /* [CP] Copy Pods Resources */,
+				D0E903FAF49EA137926ABB79 /* 📦 Embed Pods Frameworks */,
+				DA9BCC916AB334F7D5C7143F /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,12 +259,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DC987261DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "LuluTests" */;
 			buildPhases = (
+				B977095664ADDD7BBFFE773A /* [CP] Check Pods Manifest.lock */,
 				71CB125D874B52022AF25E30 /* [CP] Check Pods Manifest.lock */,
 				3DC9870B1DB5DCD30022A2ED /* Sources */,
 				3DC9870C1DB5DCD30022A2ED /* Frameworks */,
 				3DC9870D1DB5DCD30022A2ED /* Resources */,
 				423B8EB8E3F5B0C8F2CFC013 /* [CP] Embed Pods Frameworks */,
 				E1898D0AA1EAA58C8264B698 /* [CP] Copy Pods Resources */,
+				DEEB6791C4179A6669D909B4 /* 📦 Embed Pods Frameworks */,
+				B409E7B3EF3E340F9B7E3A35 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -277,12 +283,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DC987291DB5DCD30022A2ED /* Build configuration list for PBXNativeTarget "LuluUITests" */;
 			buildPhases = (
+				50FEFB6B1EF9A07EA3F5AC08 /* [CP] Check Pods Manifest.lock */,
 				0C5B71AB41FF2353246F2BCC /* [CP] Check Pods Manifest.lock */,
 				3DC987161DB5DCD30022A2ED /* Sources */,
 				3DC987171DB5DCD30022A2ED /* Frameworks */,
 				3DC987181DB5DCD30022A2ED /* Resources */,
 				E55186170B52633E20322E43 /* [CP] Embed Pods Frameworks */,
 				E3406E37A70C0BA22515CD12 /* [CP] Copy Pods Resources */,
+				384AF3D6B92232C236BC3FC8 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -389,6 +397,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		384AF3D6B92232C236BC3FC8 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		423B8EB8E3F5B0C8F2CFC013 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -402,6 +425,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50FEFB6B1EF9A07EA3F5AC08 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		71CB125D874B52022AF25E30 /* [CP] Check Pods Manifest.lock */ = {
@@ -449,6 +487,51 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lulu/Pods-Lulu-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B409E7B3EF3E340F9B7E3A35 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B977095664ADDD7BBFFE773A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D0E903FAF49EA137926ABB79 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lulu/Pods-Lulu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DA60185F20F4B01D5879B520 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,6 +545,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DA9BCC916AB334F7D5C7143F /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lulu/Pods-Lulu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEEB6791C4179A6669D909B4 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E1898D0AA1EAA58C8264B698 /* [CP] Copy Pods Resources */ = {
@@ -507,6 +620,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD34E5D43C6963B6CC59BE45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
