@@ -11,6 +11,9 @@ target 'Lulu' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'AlamofireImage', '~> 3.1'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit'
+  pod 'FBSDKLoginKit'
 
   target 'LuluTests' do
     inherit! :search_paths
