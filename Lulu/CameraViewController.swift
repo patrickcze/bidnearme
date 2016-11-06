@@ -26,11 +26,13 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var repliesInLabel: UILabel!
     @IBOutlet weak var takePicButton: UIButton!
     @IBOutlet weak var uploadPicButton: UIButton!
+    @IBOutlet weak var dataTesterLabel: UILabel!
+   
     
     //MARK properties
     
     
-    //let tempUserData: User = User(UIImage(named: "duck")!, "Shreya", "Chopra")
+    var tempUserData: User!
     
     var user: User? {
         didSet {
@@ -46,15 +48,33 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //make user photo circular
+        userImage?.layer.cornerRadius = userImage.frame.height/2
+        userImage?.clipsToBounds = true
+        
+        // accessing data stored in the appDelegate
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        if let temp = appDelegate?.temporaryUser
+        {
+            tempUserData = temp
+            userImage.image = tempUserData.profileImage
+    
+            
+    
+            
+        }
+        else // exception
+        {
+            print("CameraViewController: user NULL")
+        }
+
+        
 
         // Do any additional setup after loading the view.
     }
     
     
-    /*func loadUserProfile() {
-        
-
-    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -98,30 +118,24 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         self.dismiss(animated: true, completion: nil)
     }
-
-    /*@IBAction func takePhotoButtonClicked(_ sender: UIButton) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-            imagePicker.allowsEditing = false
-            self.present(imagePicker, animated: true, completion: nil)
-        }
+    
+    
+    //Save data entered
+    @IBAction func postButtonClicked(_ sender: AnyObject) {
+        /*
+        let defaults = UserDefaults.standard
+        
+        defaults.set(addPhotosImage.image, forKey: "itemPhoto")
+        defaults.set(titleTextField.text, forKey: "title")
+        defaults.set(descriptionTextField.text, forKey: "description")
+        defaults.set(startingPriceTextField.text, forKey: "price")
+        defaults.set(endDateTextField.text, forKey: "endDate")
+        
+        defaults.synchronize()*/
         
     }
     
-    @IBAction func uploadImageButtonClicked(_ sender: UIButton) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary){
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
-            imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        
-    }
-*/
-    
+ 
     
     /*
     // MARK: - Navigation
