@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,11 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var temporaryUser : User!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
+
         //***TEMP USER added by shreya
         temporaryUser = User(UIImage(named: "duck")!, "DummyDuck", "Duck")
         
+        // Initialize Firebase.
+        FIRApp.configure()
+
         return true
     }
     

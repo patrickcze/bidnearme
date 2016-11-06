@@ -11,7 +11,8 @@ import UIKit
 class Listing {
 
     // MARK: - Properties
-    var photos: [UIImage]!
+    var listingID: String!
+    var photos: [URL]!
     var title: String!
     var description: String!
     
@@ -27,7 +28,8 @@ class Listing {
     var favorited: [User]!
     
     // Listing initialization.
-    init(_ photos: [UIImage], _ title: String, _ description: String, _ startPrice: Int, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
+    init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Int, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
+        self.listingID = id
         self.photos = photos
         self.title = title
         self.description = description
