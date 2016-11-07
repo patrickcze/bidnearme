@@ -161,7 +161,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let startPrice = Int(startingPriceTextField.text!)
         let endDate = endDateTextField.text
         let desc = descTextArea.text
-        let imageURLs:NSArray = ["https://firebasestorage.googleapis.com/v0/b/lulu-c1315.appspot.com/o/listingImages%2FbluePlaceholder.png?alt=media&token=f95aa419-b766-4f3f-bad3-9a86cc9e7028"]
+        let imageURLs:NSMutableArray = ["https://firebasestorage.googleapis.com/v0/b/lulu-c1315.appspot.com/o/listingImages%2Fplaceholder.png?alt=media&token=55dd306e-946a-43ce-96d9-86c35ff2f5f5"]
+        
+        if let image = (addPhotosImage.image)! as? UIImage,
+            let imageData = UIImageJPEGRepresentation(image, 0.8) {
+
+            uploadImageToFirebase(data: imageData as NSData)
+            
+//            imageURLs.add(imageURLString)
+//            print("URLLLL: \(imageURLString)")
+        }
         
         let listingDetails:NSDictionary = [
             "title": listingTitle ?? "Test",
@@ -175,7 +184,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             "currentPrice": startPrice ?? -1
         ]
 
-        
         ref.child("listings").childByAutoId().setValue(listingDetails) { (error, ref) -> Void in
             if (error != nil) {
                 print("ERROR")
@@ -185,6 +193,36 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    
+    func uploadImageToFirebase(data: NSData)   {
+        let storageRef = FIRStorage.storage().reference(withPath: "listingImages/test4.jpg")
+        let uploadMetadata = FIRStorageMetadata()
+        uploadMetadata.contentType = "image/jpeg"
+        
+        var downloadURL:String? = nil
+        
+        storageRef.put(data as Data, metadata: uploadMetadata) { metadata, error in
+            if (error != nil) {
+                // Uh-oh, an error occurred!
+            } else {
+                // Metadata contains file metadata such as size, content-type, and download URL.
+                downloadURL = (metadata!.downloadURL()?.absoluteString)!
+            }
+        }
+        
+        storageRef.put(data as Data, metadata: uploadMetadata) { metadata, error in
+            if (error != nil) {
+                
+            }
+            else
+            {
+                print(metadata?.downloadURL())
+            }
+        }
+    }
+    
+   
+
     /*
     // MARK: - Navigation
 
