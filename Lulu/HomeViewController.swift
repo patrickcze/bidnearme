@@ -80,10 +80,10 @@ class HomeViewController: UIViewController {
             
             //Copying some listings for the profile page - TEMPORAL - RONNY
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            if appDelegate != nil
+            if appDelegate != nil && self.tempData.count >= 7
             {
                 appDelegate?.dummyUser.soldListings = []
-                appDelegate?.dummyUser.buyingListings = [self.tempData[0]]
+                appDelegate?.dummyUser.buyingListings = [self.tempData[0],self.tempData[4],self.tempData[5],self.tempData[6]]
                 appDelegate?.dummyUser.favoritedListings = [self.tempData[1]]
                 appDelegate?.dummyUser.soldListings = [self.tempData[2]]
                 appDelegate?.dummyUser.postedListings = [self.tempData[3]]

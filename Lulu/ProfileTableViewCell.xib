@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-IM-w2A">
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -26,7 +26,7 @@
                             <constraint firstAttribute="height" constant="21" id="8rL-ek-fjL"/>
                             <constraint firstAttribute="width" constant="182" id="qgs-bQ-xIj"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,10 +45,10 @@
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="leading" secondItem="tiu-Qc-7A1" secondAttribute="leading" constant="8" id="2sR-Oi-uwX"/>
                     <constraint firstItem="28w-VV-XhF" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="3" id="3u2-V9-k29"/>
                     <constraint firstItem="OBN-IM-w2A" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="11:14" id="6ui-UX-BO2"/>
-                    <constraint firstAttribute="bottom" secondItem="iLL-bN-dDM" secondAttribute="bottom" id="Gm1-4H-pDe"/>
+                    <constraint firstAttribute="bottom" secondItem="iLL-bN-dDM" secondAttribute="bottom" constant="3.5" id="Gm1-4H-pDe"/>
                     <constraint firstAttribute="trailing" secondItem="iLL-bN-dDM" secondAttribute="trailing" constant="8" id="JJq-uk-pig"/>
                     <constraint firstItem="28w-VV-XhF" firstAttribute="leading" secondItem="PBF-rP-NsA" secondAttribute="trailing" constant="8" id="Ju1-bd-0eb"/>
-                    <constraint firstItem="PBF-rP-NsA" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" id="KzX-iE-MK5"/>
+                    <constraint firstItem="PBF-rP-NsA" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="2" id="KzX-iE-MK5"/>
                     <constraint firstItem="iLL-bN-dDM" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="20:21" id="SGh-pc-7tK"/>
                     <constraint firstItem="28w-VV-XhF" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="13:3" id="e0r-zK-HKu"/>
                     <constraint firstItem="OBN-IM-w2A" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="3" id="kk0-Bl-hDe"/>
