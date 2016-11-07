@@ -178,7 +178,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="51" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f77-1L-h1b">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Fq-Di-V1c">
-                                    <rect key="frame" x="0.0" y="79" width="414" height="37"/>
+                                    <rect key="frame" x="0.0" y="79" width="414" height="36"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Show More"/>
                                     <connections>
@@ -188,7 +188,7 @@
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TopTableCell" rowHeight="51" id="u4b-hO-Vlp">
                                         <rect key="frame" x="0.0" y="28" width="414" height="51"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u4b-hO-Vlp" id="0ef-na-gLr">
                                             <frame key="frameInset" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -221,7 +221,7 @@
                             <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="51" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c77-b2-09W">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <button key="tableFooterView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sDX-0g-KkW">
-                                    <rect key="frame" x="0.0" y="79" width="414" height="37"/>
+                                    <rect key="frame" x="0.0" y="79" width="414" height="36"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Show More"/>
                                     <connections>
@@ -252,9 +252,9 @@
                             <constraint firstAttribute="trailing" secondItem="f77-1L-h1b" secondAttribute="trailing" id="OkU-5P-6GB"/>
                             <constraint firstItem="c77-b2-09W" firstAttribute="leading" secondItem="0ch-oj-6yX" secondAttribute="leading" id="Q4k-Ja-kce"/>
                             <constraint firstItem="pBi-7u-Xfw" firstAttribute="leading" secondItem="0ch-oj-6yX" secondAttribute="leading" constant="14" id="TeM-bh-tW5"/>
-                            <constraint firstItem="f77-1L-h1b" firstAttribute="top" secondItem="7gv-ZB-EaR" secondAttribute="bottom" constant="-3" id="Z5b-hX-hXm"/>
                             <constraint firstAttribute="bottom" secondItem="c77-b2-09W" secondAttribute="bottom" id="cnS-T3-Otu"/>
                             <constraint firstItem="7gv-ZB-EaR" firstAttribute="width" secondItem="0ch-oj-6yX" secondAttribute="height" multiplier="150:491" id="fMH-cW-UGQ"/>
+                            <constraint firstItem="f77-1L-h1b" firstAttribute="top" secondItem="UDL-HC-P0E" secondAttribute="bottom" constant="20" id="fgW-V9-pN2"/>
                             <constraint firstItem="pBi-7u-Xfw" firstAttribute="top" secondItem="f77-1L-h1b" secondAttribute="bottom" constant="-3" id="hNd-fv-olj"/>
                             <constraint firstItem="g1c-Sl-7tc" firstAttribute="top" secondItem="pBi-7u-Xfw" secondAttribute="bottom" constant="201" id="mCh-n4-TFZ"/>
                             <constraint firstItem="7gv-ZB-EaR" firstAttribute="top" secondItem="0ch-oj-6yX" secondAttribute="top" constant="9" id="p9D-gg-P1B"/>

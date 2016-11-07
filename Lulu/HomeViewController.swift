@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseDatabase
+import Alamofire
+import AlamofireImage
 
 class HomeViewController: UIViewController {
 
@@ -15,25 +19,82 @@ class HomeViewController: UIViewController {
     
     // MARK: - Properties
     let reuseIdentifier = "ListingCollectionCell"
+    var ref: FIRDatabaseReference!
+    var storage: FIRStorage!
+    let newListing:Listing! = nil
+    var image:UIImage! = nil
     
     // dummy listings to test UI, just temporary :)
-    let tempData: [Listing] = [
-        Listing([UIImage(named: "duck")!], "Duck for sale", "This is a duck i'm selling. Dope condition.", 10, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Selling a duck", "This is a duck i'm selling. Dope condition.", 12, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Duckss", "This is a duck i'm selling. Dope condition.", 13, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Duckling", "This is a duck i'm selling. Dope condition.", 8, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Ugly duckling", "This is a duck i'm selling. Dope condition.", 28, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Gray Goose", "This is a duck i'm selling. Dope condition.", 69, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Gander", "This is a duck i'm selling. Dope condition.", 100, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Talking Duck", "This is a duck i'm selling. Dope condition.", 11, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Duck is to good to pass up", "This is a duck i'm selling. Dope condition.", 6, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell")),
-        Listing([UIImage(named: "duck")!], "Duck Dodgers", "This is a duck i'm selling. Dope condition.", 10, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!, "Scott", "Campbell"))]
+    var tempData: [Listing] = []
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Get a reference to the firebase db and storage
+        ref = FIRDatabase.database().reference()
+        
+        //Get a snapshot of listings
+        let listingRef = self.ref.child("listings")
+        
+        //Watch for changes to listings
+        listingRef.observe(FIRDataEventType.value){(snap: FIRDataSnapshot) in
+            let enumerator = snap.children
+            var tempListing: Listing
+            
+            //Iterate over listings
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                //Get basic info about the listing
+                let title = rest.childSnapshot(forPath: "title").value as? String
+                let currentPrice = rest.childSnapshot(forPath: "currentPrice").value as? Int
+                let desc = rest.childSnapshot(forPath: "desc").value as? String
+                let imageURLS = rest.childSnapshot(forPath: "imageURL")
+                
+                var imageURLArray:[URL] = []
+                var index = 0
+                
+                for item in 0...imageURLS.childrenCount-1 {
+                    let varNum = String(item)
+                    let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
+                    
+                    print("url")
+                    print(URL(string:urlString))
+                    
+                    imageURLArray.append(URL(string:urlString)!)
+                }
+                
+                //Check for existing listings
+                for listing in self.tempData {
+                    if listing.listingID == rest.key {
+                        self.tempData.remove(at: index)
+                    }
+                    index+=1
+                }
+                
+                // Create a listing for the data within the snapshot
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice!, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                
+                self.tempData.append(tempListing)
+            }
+            
+            
+            //Copying some listings for the profile page - TEMPORAL - RONNY
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            if appDelegate != nil
+            {
+                appDelegate?.dummyUser.soldListings = []
+                appDelegate?.dummyUser.buyingListings = [self.tempData[0]]
+                appDelegate?.dummyUser.favoritedListings = [self.tempData[1]]
+                appDelegate?.dummyUser.soldListings = [self.tempData[2]]
+                appDelegate?.dummyUser.postedListings = [self.tempData[3]]
+            }
+            
+            
+            //Refresh listing view
+            self.listingsCollectionView.reloadData()
+        }
     }
-
+    
     // Dispose of any resources that can be recreated.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -239,7 +239,8 @@ extension ProfileTableViewController: UITableViewDataSource {
             if (topListing != nil && indexPath.row <= topListing.count)
             {
                 let l = topListing[index.row]
-                cell.itemPhoto.image = l.photos.first
+  //              cell.itemPhoto.image = l.photos.first
+                cell.itemPhoto.image = UIImage(named: "eggs")
                 cell.itemTitle.text = l.title
                 cell.bigLabel.text = String(l.buyoutPrice)
             }
@@ -253,7 +254,8 @@ extension ProfileTableViewController: UITableViewDataSource {
             if (bottomListing != nil && indexPath.row <= bottomListing.count)
             {
                 let l = bottomListing[index.row]
-                cell.itemPhoto.image = l.photos.first
+//                cell.itemPhoto.image = l.photos.first
+                cell.itemPhoto.image = UIImage(named: "duckShoes")
                 cell.itemTitle.text = l.title
                 cell.bigLabel.text = String(l.buyoutPrice)
             }

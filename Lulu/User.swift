@@ -22,8 +22,6 @@ class User {
     var buyingListings: [Listing]!
     
     
-    var allListings : [[Listing]]!
-    
     
     
     // User initialization.
