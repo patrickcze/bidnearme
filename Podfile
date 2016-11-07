@@ -6,10 +6,14 @@ target 'Lulu' do
   use_frameworks!
 
   # Pods for Lulu
+  pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'AlamofireImage', '~> 3.1'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
 
   target 'LuluTests' do
     inherit! :search_paths
