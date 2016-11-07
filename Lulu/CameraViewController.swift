@@ -165,14 +165,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let listingDetails:NSDictionary = [
             "title": listingTitle ?? "Test",
-            "startPrice": startPrice,
+            "startPrice": startPrice ?? -1,
             "endDate": endDate ?? "endDate",
             "desc": desc ?? "desc",
             "imageURL": imageURLs,
             "endDate": " ",
             "seller":" ",
             "buyoutPrice": " ",
-            "currentPrice": startPrice
+            "currentPrice": startPrice ?? -1
         ]
 
         
