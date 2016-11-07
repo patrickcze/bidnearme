@@ -163,6 +163,7 @@
 				BC60E8E91DC69439004D7FB8 /* Models */,
 				BC60E8E81DC6942E004D7FB8 /* Controllers */,
 				3DC987021DB5DCD20022A2ED /* Main.storyboard */,
+				3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */,
 				5BDB41C11DC81D63005D2F7F /* Profile.storyboard */,
 				BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */,
 				BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */,
@@ -222,7 +223,6 @@
 		BC60E8E91DC69439004D7FB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */,
 				BC60E8ED1DC694A7004D7FB8 /* Listing.swift */,
 				BC60E8EF1DC694AE004D7FB8 /* User.swift */,
 			);
@@ -242,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */,
-				3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -250,6 +249,7 @@
 		BC60E8EC1DC69468004D7FB8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
