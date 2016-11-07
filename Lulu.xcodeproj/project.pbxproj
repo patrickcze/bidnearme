@@ -166,7 +166,6 @@
 		3DC986FB1DB5DCD20022A2ED /* Lulu */ = {
 			isa = PBXGroup;
 			children = (
-				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
 				BC60E8EA1DC6944D004D7FB8 /* Views */,
 				BC60E8E91DC69439004D7FB8 /* Models */,
 				BC60E8E81DC6942E004D7FB8 /* Controllers */,
@@ -181,6 +180,7 @@
 				3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */,
 				3DC9870A1DB5DCD20022A2ED /* Info.plist */,
 				3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */,
+				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
 			);
 			path = Lulu;
 			sourceTree = "<group>";
