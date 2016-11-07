@@ -7,135 +7,183 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseDatabase
 
-class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     //MARK Outlets
     @IBOutlet weak var addPhotosImage: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var descTextArea: UITextView!
     @IBOutlet weak var startingPriceTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
-    @IBOutlet weak var postButton: UIButton!
-    @IBOutlet weak var userImage: UIImageView!
-    @IBOutlet weak var usersNameLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
-    @IBOutlet weak var starLabel: UILabel!//static
-    @IBOutlet weak var memberSinceLabel: UILabel!//static
-    @IBOutlet weak var yearLabel: UILabel!
-    @IBOutlet weak var repliesInLabel: UILabel!
-    @IBOutlet weak var takePicButton: UIButton!
-    @IBOutlet weak var uploadPicButton: UIButton!
-    @IBOutlet weak var dataTesterLabel: UILabel!
-   
+    @IBOutlet weak var postButtonOutlet: UIButton!
     
     //MARK properties
-    
-    
     var tempUserData: User!
+    
+    var ref: FIRDatabaseReference!
     
     var user: User? {
         didSet {
-            if let user = user {
-                usersNameLabel.text = user.firstName + " " + user.lastName
-                userImage.image = user.profileImage
-                ratingLabel.text = String(user.rating) + " Stars"
-                yearLabel.text = "Member Since " + String(user.memberSince)
-                repliesInLabel.text = "Replies " + user.replyingHabit
-            }
+//            if let user = user {
+//                usersNameLabel.text = user.firstName + " " + user.lastName
+//                userImage.image = user.profileImage
+//                ratingLabel.text = String(user.rating) + " Stars"
+//                yearLabel.text = "Member Since " + String(user.memberSince)
+//                repliesInLabel.text = "Replies " + user.replyingHabit
+//            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //make user photo circular
-        userImage?.layer.cornerRadius = userImage.frame.height/2
-        userImage?.clipsToBounds = true
+        ref = FIRDatabase.database().reference()
         
-        // accessing data stored in the appDelegate
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        if let temp = appDelegate?.temporaryUser
-        {
-            tempUserData = temp
-            userImage.image = tempUserData.profileImage
-    
-            
-    
-            
-        }
-        else // exception
-        {
-            print("CameraViewController: user NULL")
-        }
-
+        descTextArea.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        descTextArea.layer.borderWidth = 1.0
+        descTextArea.layer.cornerRadius = 5.0
         
-
-        // Do any additional setup after loading the view.
+        descTextArea.delegate = self
+        
+        postButtonOutlet.layer.cornerRadius = 5.0
+        
+        titleTextField.delegate = self
+        startingPriceTextField.delegate = self
+        endDateTextField.delegate = self
+        
+        let numberToolbar = UIToolbar()
+        numberToolbar.barStyle = UIBarStyle.default
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(CameraViewController.donePressed))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CameraViewController.cancelPressed))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        
+        numberToolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        numberToolbar.isUserInteractionEnabled = true
+        numberToolbar.sizeToFit()
+        
+        startingPriceTextField.inputAccessoryView = numberToolbar
     }
     
-    
+    func donePressed(){
+        view.endEditing(true)
+    }
+    func cancelPressed(){
+        view.endEditing(true) // or do something
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func importImageButtonClicked(_ sender: AnyObject) {
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
+    //Creates image view ,
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        print("Tapped")
         
-        image.allowsEditing = false
-        self.present(image, animated: true)
-        {
-            //After it is complete
+        let alert:UIAlertController = UIAlertController.init(title: "Your choice", message: "Take a photo or use an existing one?", preferredStyle: .actionSheet)
+        
+        let cancelActionButton: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+            print("Cancel")
         }
+        alert.addAction(cancelActionButton)
+        
+        let photoLibraryButton: UIAlertAction = UIAlertAction(title: "Select from Photo Library", style: .default) { action -> Void in
+            print("photoLibraryButton")
+            
+            // UIImagePickerController is a view controller that lets a user pick media from their photo library.
+            let imagePickerController = UIImagePickerController()
+            
+            // Only allow photos to be picked, not taken.
+            imagePickerController.sourceType = .photoLibrary
+            
+            // Make sure ViewController is notified when the user picks an image.
+            imagePickerController.delegate = self
+            
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        alert.addAction(photoLibraryButton)
+        
+        let cameraButton: UIAlertAction = UIAlertAction(title: "Take a Photo", style: .default) { action -> Void in
+            print("cameraButton")
+            
+            // UIImagePickerController is a view controller that lets a user pick media from their photo library.
+            let imagePickerController = UIImagePickerController()
+            
+            // Only allow photos to be picked, not taken.
+            imagePickerController.sourceType = .camera
+            
+            // Make sure ViewController is notified when the user picks an image.
+            imagePickerController.delegate = self
+            
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        alert.addAction(cameraButton)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func takePhotoButtonClicked(_ sender: AnyObject)
-    {
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.camera
-        
-        image.allowsEditing = false
-        self.present(image, animated: true)
-        {
-            //after it is complete
-        }
-    }
- 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
             addPhotosImage.image = image
         }
-        else
-        {
-            //Error message
-        }
+        else{}
         
         self.dismiss(animated: true, completion: nil)
     }
     
+    //MARK:UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        //Hide the keybaord
+        textField.resignFirstResponder()
+        
+        return true
+    }
     
-    //Save data entered
-    @IBAction func postButtonClicked(_ sender: AnyObject) {
-        /*
-        let defaults = UserDefaults.standard
-        
-        defaults.set(addPhotosImage.image, forKey: "itemPhoto")
-        defaults.set(titleTextField.text, forKey: "title")
-        defaults.set(descriptionTextField.text, forKey: "description")
-        defaults.set(startingPriceTextField.text, forKey: "price")
-        defaults.set(endDateTextField.text, forKey: "endDate")
-        
-        defaults.synchronize()*/
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
     }
     
- 
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+    
+    //Save data entered
+    @IBAction func postButtonClicked(_ sender: AnyObject) {
+        print("Post item")
+        
+        let listingTitle = titleTextField.text
+        let startPrice = Int(startingPriceTextField.text!)
+        let endDate = endDateTextField.text
+        let desc = descTextArea.text
+        let imageURLs:NSArray = ["https://firebasestorage.googleapis.com/v0/b/lulu-c1315.appspot.com/o/listingImages%2FbluePlaceholder.png?alt=media&token=f95aa419-b766-4f3f-bad3-9a86cc9e7028"]
+        
+        let listingDetails:NSDictionary = [
+            "title": listingTitle ?? "Test",
+            "startPrice": startPrice,
+            "endDate": endDate ?? "endDate",
+            "desc": desc ?? "desc",
+            "imageURL": imageURLs,
+            "endDate": " ",
+            "seller":" ",
+            "buyoutPrice": " ",
+            "currentPrice": startPrice
+        ]
+
+        
+        ref.child("listings").childByAutoId().setValue(listingDetails) { (error, ref) -> Void in
+            if (error != nil) {
+                print("ERROR")
+            } else {
+                print("Success")
+            }
+        }
+    }
     
     /*
     // MARK: - Navigation

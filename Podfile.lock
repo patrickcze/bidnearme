@@ -33,12 +33,14 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.0):
     - GoogleToolboxForMac/Defines (= 2.1.0)
   - GTMSessionFetcher/Core (1.1.7)
+  - SZTextView (1.2.2)
 
 DEPENDENCIES:
   - AlamofireImage (~> 3.1)
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - SZTextView
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
@@ -53,7 +55,8 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
 
-PODFILE CHECKSUM: 25c8ee4098c0b9bff5cae1134030d53f58c50fc1
+PODFILE CHECKSUM: 3ace3bf85eabd950a6ce62e5ea1e67ecb0fddada
 
 COCOAPODS: 1.1.1
