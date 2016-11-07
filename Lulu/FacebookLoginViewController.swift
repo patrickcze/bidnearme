@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import FacebookLogin
+import Firebase
 
 class FacebookLoginViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Configure Facebook login button to prompt for the following permissions.
+        let facebookLoginButton = LoginButton(readPermissions: [.publicProfile, .email, .userFriends])
+        facebookLoginButton.delegate = self
+        facebookLoginButton.center = view.center
+        view.addSubview(facebookLoginButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +28,6 @@ class FacebookLoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -32,4 +38,38 @@ class FacebookLoginViewController: UIViewController {
     }
     */
 
+}
+
+// MARK: - FBSDKLoginButtonDelegate protocol
+extension FacebookLoginViewController: LoginButtonDelegate {
+    /**
+     Called when the button was used to login and the process finished.
+     
+     - parameter loginButton: Button that was used to login.
+     - parameter result:      The result of the login.
+     */
+    public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+        switch result {
+        case .cancelled:
+            break
+        case let .failed(error):
+            print(error)
+            break
+        case let .success(grantedPermissions, declinedPermissions, token):
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.authenticationToken)
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                // TODO: Handle login completion with Firebase if needed.
+            }
+            break
+        }
+    }
+    
+    /**
+     Called when the button was used to logout.
+     
+     - parameter loginButton: Button that was used to logout.
+     */
+    public func loginButtonDidLogOut(_ loginButton: LoginButton) {
+        // TODO: Handle logout action.
+    }
 }
