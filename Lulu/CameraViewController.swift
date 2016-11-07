@@ -167,9 +167,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             let imageData = UIImageJPEGRepresentation(image, 0.8) {
 
             uploadImageToFirebase(data: imageData as NSData)
-            
-//            imageURLs.add(imageURLString)
-//            print("URLLLL: \(imageURLString)")
         }
         
         let listingDetails:NSDictionary = [
@@ -184,13 +181,13 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             "currentPrice": startPrice ?? -1
         ]
 
-        ref.child("listings").childByAutoId().setValue(listingDetails) { (error, ref) -> Void in
-            if (error != nil) {
-                print("ERROR")
-            } else {
-                print("Success")
-            }
-        }
+//        ref.child("listings").childByAutoId().setValue(listingDetails) { (error, ref) -> Void in
+//            if (error != nil) {
+//                print("ERROR")
+//            } else {
+//                print("Success")
+//            }
+//        }
     }
     
     
@@ -199,26 +196,19 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let uploadMetadata = FIRStorageMetadata()
         uploadMetadata.contentType = "image/jpeg"
         
-        var downloadURL:String? = nil
+        var downloadURL:String!
         
-        storageRef.put(data as Data, metadata: uploadMetadata) { metadata, error in
+        storageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
             if (error != nil) {
                 // Uh-oh, an error occurred!
             } else {
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 downloadURL = (metadata!.downloadURL()?.absoluteString)!
+                print("download URL 1 \(downloadURL)")
             }
         }
         
-        storageRef.put(data as Data, metadata: uploadMetadata) { metadata, error in
-            if (error != nil) {
-                
-            }
-            else
-            {
-                print(metadata?.downloadURL())
-            }
-        }
+        print("download URL 2 \(downloadURL)")
     }
     
    
