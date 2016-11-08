@@ -12,24 +12,39 @@ import FirebaseDatabase
 import Alamofire
 import AlamofireImage
 
+private let reuseIdentifier = "ListingCollectionCell"
+
 class HomeViewController: UIViewController {
 
     // MARK: - Outlets
+    @IBOutlet weak var searchBarContainerView: UIView!
     @IBOutlet weak var listingsCollectionView: UICollectionView!
     
     // MARK: - Properties
-    let reuseIdentifier = "ListingCollectionCell"
     var ref: FIRDatabaseReference!
     var storage: FIRStorage!
-    let newListing:Listing! = nil
-    var image:UIImage! = nil
-    
-    // dummy listings to test UI, just temporary :)
+    let newListing: Listing! = nil
+    var image: UIImage! = nil
     var tempData: [Listing] = []
+    var filteredData = [Listing]()
+    
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        return searchController
+    }()
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Configure searchbar with autolayout & add it to view.
+        searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        searchBarContainerView.addSubview(searchController.searchBar)
+        searchController.searchBar.sizeToFit()
         
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
@@ -117,15 +132,20 @@ class HomeViewController: UIViewController {
 // MARK: - UICollectionViewDataSource protocol
 extension HomeViewController: UICollectionViewDataSource {
     
-    // Required. Tell view how many cells to make.
+    // Required: Tell view how many cells to make.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tempData.count
+        return searchController.isActive ? filteredData.count : tempData.count
     }
     
-    // Required. Make a cell for each row in index path.
+    // Required: Make a cell for each row in index path.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeCollectionViewCell
-        cell.listing = tempData[indexPath.row]
+        var cell = HomeCollectionViewCell()
+        
+        // Filter cells based on search.
+        if let filteredCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? HomeCollectionViewCell {
+            filteredCell.listing = searchController.isActive ? filteredData[indexPath.row] : tempData[indexPath.row]
+            cell = filteredCell
+        }
         
         return cell
     }
@@ -133,3 +153,39 @@ extension HomeViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate protocol
 extension HomeViewController: UICollectionViewDelegate {}
+
+// MARK: - UISearchResultsUpdating protocol
+extension HomeViewController: UISearchResultsUpdating {
+    
+    // Required: Called when the search bar becomes the first responder or when the user makes changes inside the search bar.
+    func updateSearchResults(for searchController: UISearchController) {
+        filterData()
+        listingsCollectionView.reloadData()
+    }
+    
+    // Helper: Filter listing cells according to search term.
+    func filterData() {
+        filteredData = tempData.filter({ (listing) -> Bool in
+            if let searchTerm = self.searchController.searchBar.text {
+                let searchTermMatches = self.searchString(listing, searchTerm: searchTerm).count > 0
+                
+                if searchTermMatches { return true }
+            }
+            
+            return false
+        })
+    }
+    
+    // Helper: Match listing titles against search term.
+    func searchString(_ listing: Listing, searchTerm: String) -> Array<AnyObject> {
+        var matches: Array<AnyObject> = []
+        
+        do {
+            let regex = try NSRegularExpression(pattern: searchTerm, options: [.caseInsensitive, .allowCommentsAndWhitespace])
+            let range = NSMakeRange(0, listing.title.characters.count)
+            matches = regex.matches(in: listing.title, options: [], range: range)
+        } catch _ {}
+        
+        return matches
+    }
+}
