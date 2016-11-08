@@ -15,13 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    // ronny - TEMPORAL
+    var dummyUser : User!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+
+        // Override point for customization after application launch.
+        
+        // ronny - TEMPORAL
+        dummyUser = User(UIImage(named: "duck")!, "Mr. Duck", "Duckin")
+        // ----------------
+
         // Configure Facebook SDK.
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         // Initialize Firebase.
         FIRApp.configure()
+
         return true
     }
     

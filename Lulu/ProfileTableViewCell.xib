@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="43" id="zpr-Hl-b4X" customClass="ProfileTableViewCell" customModule="Lulu" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zpr-Hl-b4X" id="tiu-Qc-7A1">
+                <frame key="frameInset" width="414" height="42"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-IM-w2A">
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Cell Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="28w-VV-XhF">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="8rL-ek-fjL"/>
+                            <constraint firstAttribute="width" constant="182" id="qgs-bQ-xIj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bidders" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="iLL-bN-dDM">
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBF-rP-NsA">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="49" id="k7c-7k-d7N"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="PBF-rP-NsA" firstAttribute="leading" secondItem="tiu-Qc-7A1" secondAttribute="leading" constant="8" id="2sR-Oi-uwX"/>
+                    <constraint firstItem="28w-VV-XhF" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="3" id="3u2-V9-k29"/>
+                    <constraint firstItem="OBN-IM-w2A" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="11:14" id="6ui-UX-BO2"/>
+                    <constraint firstAttribute="bottom" secondItem="iLL-bN-dDM" secondAttribute="bottom" constant="3.5" id="Gm1-4H-pDe"/>
+                    <constraint firstAttribute="trailing" secondItem="iLL-bN-dDM" secondAttribute="trailing" constant="8" id="JJq-uk-pig"/>
+                    <constraint firstItem="28w-VV-XhF" firstAttribute="leading" secondItem="PBF-rP-NsA" secondAttribute="trailing" constant="8" id="Ju1-bd-0eb"/>
+                    <constraint firstItem="PBF-rP-NsA" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="2" id="KzX-iE-MK5"/>
+                    <constraint firstItem="iLL-bN-dDM" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="20:21" id="SGh-pc-7tK"/>
+                    <constraint firstItem="28w-VV-XhF" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="13:3" id="e0r-zK-HKu"/>
+                    <constraint firstItem="OBN-IM-w2A" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="3" id="kk0-Bl-hDe"/>
+                    <constraint firstAttribute="bottom" secondItem="PBF-rP-NsA" secondAttribute="bottom" id="qfh-OS-O91"/>
+                    <constraint firstAttribute="trailing" secondItem="OBN-IM-w2A" secondAttribute="trailing" constant="8" id="xv2-hL-KOi"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bigLabel" destination="OBN-IM-w2A" id="Hpd-qK-m5j"/>
+                <outlet property="itemPhoto" destination="PBF-rP-NsA" id="0sb-db-GNo"/>
+                <outlet property="itemTitle" destination="28w-VV-XhF" id="ZVU-nh-1Yl"/>
+                <outlet property="smallLabel" destination="iLL-bN-dDM" id="TsE-I4-2g4"/>
+            </connections>
+            <point key="canvasLocation" x="33" y="102"/>
+        </tableViewCell>
+    </objects>
+</document>
