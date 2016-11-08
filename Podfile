@@ -14,6 +14,7 @@ target 'Lulu' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'SZTextView'
 
   target 'LuluTests' do
     inherit! :search_paths
