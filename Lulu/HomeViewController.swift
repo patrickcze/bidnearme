@@ -59,7 +59,6 @@ class HomeViewController: UIViewController {
                     
                     print("url")
                     print(URL(string:urlString))
-                    
                     imageURLArray.append(URL(string:urlString)!)
                 }
                 
@@ -70,7 +69,7 @@ class HomeViewController: UIViewController {
                     }
                     index+=1
                 }
-                
+
                 // Create a listing for the data within the snapshot
                 tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice!, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 

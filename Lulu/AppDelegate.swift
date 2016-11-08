@@ -14,16 +14,24 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    //***TEMP USER added by shreya
+    var temporaryUser : User!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Configure Facebook SDK.
-        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+
+        //***TEMP USER added by shreya
+        temporaryUser = User(UIImage(named: "duck")!, "DummyDuck", "Duck")
         
         // Initialize Firebase.
         FIRApp.configure()
+    
+        // Configure Facebook SDK.
+        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         return true
     }
+
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         // Configure Facebook SDK.

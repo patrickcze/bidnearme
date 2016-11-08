@@ -15,6 +15,8 @@ class User {
     var firstName: String!
     var lastName: String!
     var rating: Int!
+    var memberSince: Int!
+    var replyingHabit: String!
     
     var postedListings: [Listing]!
     var soldListings: [Listing]!
