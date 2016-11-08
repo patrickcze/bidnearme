@@ -74,7 +74,7 @@
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.6 stars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Xf-Va-GYO">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="ljU-fw-4ET"/>
+                                    <constraint firstAttribute="height" constant="21" id="5bq-YB-hym"/>
                                     <constraint firstAttribute="width" constant="78" id="zeb-Ue-ntb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -87,6 +87,8 @@
                             <constraint firstAttribute="trailing" secondItem="frH-Eb-o0J" secondAttribute="trailing" id="0Lj-N2-Vfb"/>
                             <constraint firstItem="frH-Eb-o0J" firstAttribute="leading" secondItem="iif-aJ-vAe" secondAttribute="leading" id="1eb-t8-dNj"/>
                             <constraint firstAttribute="trailing" secondItem="8Xf-Va-GYO" secondAttribute="trailing" constant="20" id="3Iy-p6-6DF"/>
+                            <constraint firstItem="8Xf-Va-GYO" firstAttribute="width" secondItem="iif-aJ-vAe" secondAttribute="height" multiplier="39:368" id="3VY-vk-1ec"/>
+                            <constraint firstItem="8Xf-Va-GYO" firstAttribute="top" secondItem="7A5-sm-Z4h" secondAttribute="bottom" constant="20" id="8Ri-G0-NPX"/>
                             <constraint firstItem="ckD-e0-Ofv" firstAttribute="top" secondItem="Qdt-Sk-PTc" secondAttribute="bottom" id="8qa-F7-ZGh"/>
                             <constraint firstAttribute="trailing" secondItem="Qdt-Sk-PTc" secondAttribute="trailing" id="CpM-IX-Y0u"/>
                             <constraint firstItem="o2c-Zt-9ZR" firstAttribute="width" secondItem="iif-aJ-vAe" secondAttribute="height" multiplier="17:184" constant="10.152173913043484" id="F4y-22-vmg"/>
@@ -95,7 +97,6 @@
                             <constraint firstItem="jjx-X8-tDy" firstAttribute="top" secondItem="2eF-Rm-t6e" secondAttribute="bottom" constant="2" id="Haa-VI-ffl"/>
                             <constraint firstItem="frH-Eb-o0J" firstAttribute="top" secondItem="jjx-X8-tDy" secondAttribute="bottom" constant="14" id="ID2-qT-ISf"/>
                             <constraint firstItem="o2c-Zt-9ZR" firstAttribute="leading" secondItem="iif-aJ-vAe" secondAttribute="leadingMargin" constant="95" id="KyA-vY-3Id"/>
-                            <constraint firstItem="8Xf-Va-GYO" firstAttribute="top" secondItem="7A5-sm-Z4h" secondAttribute="bottom" constant="20" id="LaM-NS-luo"/>
                             <constraint firstItem="ckD-e0-Ofv" firstAttribute="top" secondItem="Qdt-Sk-PTc" secondAttribute="bottom" id="MNa-t8-79s"/>
                             <constraint firstItem="Qdt-Sk-PTc" firstAttribute="leading" secondItem="iif-aJ-vAe" secondAttribute="leading" id="NP4-ZT-YEJ"/>
                             <constraint firstItem="Qdt-Sk-PTc" firstAttribute="leading" secondItem="iif-aJ-vAe" secondAttribute="leading" id="O4Y-bP-gRZ"/>
@@ -103,13 +104,18 @@
                             <constraint firstAttribute="trailing" secondItem="Qdt-Sk-PTc" secondAttribute="trailing" id="YjN-Wj-55k"/>
                             <constraint firstItem="o2c-Zt-9ZR" firstAttribute="top" secondItem="7A5-sm-Z4h" secondAttribute="bottom" constant="20" id="as7-d1-UUq"/>
                             <constraint firstAttribute="trailing" secondItem="2eF-Rm-t6e" secondAttribute="trailing" constant="20" id="bjS-oT-UKx"/>
-                            <constraint firstItem="8Xf-Va-GYO" firstAttribute="width" secondItem="iif-aJ-vAe" secondAttribute="height" multiplier="75:736" constant="3" id="c15-fE-Ldy"/>
                             <constraint firstItem="2eF-Rm-t6e" firstAttribute="width" secondItem="iif-aJ-vAe" secondAttribute="height" multiplier="139:736" id="evK-bs-KsB"/>
                             <constraint firstItem="Qdt-Sk-PTc" firstAttribute="top" secondItem="frH-Eb-o0J" secondAttribute="bottom" constant="3" id="f1q-9g-Ykl"/>
                             <constraint firstItem="2eF-Rm-t6e" firstAttribute="top" secondItem="8Xf-Va-GYO" secondAttribute="bottom" constant="3" id="nMK-sh-7H6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="2DB-oH-BR4"/>
+                    <navigationItem key="navigationItem" id="2DB-oH-BR4">
+                        <barButtonItem key="rightBarButtonItem" title="Log in" id="um4-YH-hGb">
+                            <connections>
+                                <segue destination="zln-Sa-czQ" kind="show" id="2bw-tq-QSN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="buySellFavorite_Segment" destination="frH-Eb-o0J" id="O4v-gb-MKZ"/>
                         <outlet property="containerView" destination="Qdt-Sk-PTc" id="YVg-rD-VFX"/>
@@ -144,6 +150,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJO-Mb-hZe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3637.5999999999999" y="-127.28635682158921"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="P8k-F4-QKC">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Login.storyboard" storyboardName="Login" id="zln-Sa-czQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PE0-4p-YAg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5063" y="-536"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="WGh-uN-mdd">

@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    //MARK: - outlets
+    //MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var ratingLabel: UILabel!

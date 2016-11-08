@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Override point for customization after application launch.
         
-        // ronny - TEMPORAL
+        // ronny - TEMPORARY
         dummyUser = User(UIImage(named: "duck")!, "Mr. Duck", "Duckin")
         // ----------------
 
