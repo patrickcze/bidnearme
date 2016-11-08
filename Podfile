@@ -11,10 +11,10 @@ target 'Lulu' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'AlamofireImage', '~> 3.1'
-  pod 'SZTextView'
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'SZTextView'
 
   target 'LuluTests' do
     inherit! :search_paths

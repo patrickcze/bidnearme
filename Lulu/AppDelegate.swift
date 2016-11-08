@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         // Configure Facebook SDK.
         return SDKApplicationDelegate.shared.application(application, open: url, options: options)

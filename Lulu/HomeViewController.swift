@@ -59,7 +59,6 @@ class HomeViewController: UIViewController {
                     
                     print("url")
                     print(URL(string:urlString))
-
                     imageURLArray.append(URL(string:urlString)!)
                 }
                 
