@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileTableViewCell: UITableViewCell {
 
+    // MARK: - outlets
     @IBOutlet weak var itemTitle: UILabel!
     @IBOutlet weak var bigLabel: UILabel!
     @IBOutlet weak var itemPhoto: UIImageView!
@@ -32,7 +33,6 @@ class ProfileTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

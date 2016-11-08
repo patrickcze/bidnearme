@@ -65,7 +65,7 @@
                                 <segments>
                                     <segment title="Buy"/>
                                     <segment title="Sell"/>
-                                    <segment title="" image="heart"/>
+                                    <segment title="Favorites"/>
                                 </segments>
                                 <color key="tintColor" red="0.53657852564102559" green="0.53657852564102559" blue="0.53657852564102559" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -308,6 +308,5 @@
     </scenes>
     <resources>
         <image name="Profile" width="25" height="25"/>
-        <image name="heart" width="28" height="28"/>
     </resources>
 </document>

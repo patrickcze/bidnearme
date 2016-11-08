@@ -10,27 +10,23 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var tempUser : User!
-    
+    //MARK: - outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
- 
     @IBOutlet weak var ratingLabel: UILabel!
-    
     @IBOutlet weak var memberLabel: UILabel!
-    
     @IBOutlet weak var specialLabel: UILabel!
-    
     @IBOutlet weak var buySellFavorite_Segment: UISegmentedControl!
     
-    var currentTabItem = 0
-    let mainTableCellNames = [["Buying", "Bought"],["Selling","Sold"],["Favorites"]]
-    
+    // temp
+    var tempUser : User!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        // Do any additional setup after loading the view.
+        
         // Making the imageView Circular
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
         profilePicture?.clipsToBounds = true
@@ -41,30 +37,19 @@ class ProfileViewController: UIViewController {
         {
             tempUser = temp
             profilePicture.image = tempUser.profileImage
-            
-//            tempUser.buyingListings.removeAll()
-//            tempUser.favoritedListings.removeAll()
-//            tempUser.postedListings.removeAll()
-//            tempUser.soldListings.removeAll()
-            
             buySellFavorite_Segment.selectedSegmentIndex = 0
             buySellFavorite_Segment.sendActions(for: UIControlEvents.valueChanged)
             
         }
-        else // handle this more properly with exceptions later
+        else // handle this more properly with exceptions later 
         {
             print("*** ProfileViewController: user NULL ***")
         }
-        
-        
-        // Do any additional setup after loading the view.
     }
+    
     
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
       
-        // print("segment control Value Changed")
-        // print(" TAG = " + String(sender.tag))
-  
         if (tempUser != nil)
         {
             let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
@@ -76,44 +61,29 @@ class ProfileViewController: UIViewController {
             switch (sender.selectedSegmentIndex)
             {
             case 0: // Buy
-                
-                //print("setting up viewController for BUY segementedControl")
-                
                 tableV.topTableLabel.text = "Buying"
                 tableV.bottomTableLabel.text = "Bought"
-                
                 tableV.topListing = tempUser.buyingListings
                 tableV.bottomListing = tempUser.buyingListings
-                
                 break
             case 1: // Sell
-                //print("setting up viewController for SELL segementedControl")
-                
                 tableV.topTableLabel.text = "Selling"
                 tableV.bottomTableLabel.text = "Sold"
-                
                 tableV.topListing = tempUser.postedListings
                 tableV.bottomListing = tempUser.soldListings
-                
                 break
             case 2: // Favorite
-                //print("setting up viewController for FAVORITE segementedControl")
-                
                 tableV.topTableLabel.text = "Watching"
-                
                 tableV.topListing = tempUser.favoritedListings
                 tableV.bottomListing = tempUser.postedListings
-                
                 tableV.bottomTableLabel.isHidden = true
                 tableV.bottomTableView.isHidden = true
-                
                 break
             default:
                 print("Default - segmentValueChanged - Profile.storyboard")
             }
-            
             tableV.view.frame = containerView.bounds
-        //    tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }
     
@@ -124,8 +94,6 @@ class ProfileViewController: UIViewController {
     }
     
     
-
-
     /*
     // MARK: - Navigation
      
@@ -135,5 +103,4 @@ class ProfileViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
