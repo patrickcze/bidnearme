@@ -18,6 +18,7 @@
 		3DC987141DB5DCD30022A2ED /* LuluTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC987131DB5DCD30022A2ED /* LuluTests.swift */; };
 		3DC9871F1DB5DCD30022A2ED /* LuluUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
+		7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD434C1DD256B800E0CECE /* CameraViewController.swift */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
 		BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */; };
 		BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */; };
@@ -67,6 +68,7 @@
 		3DC987201DB5DCD30022A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lulu.entitlements; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CBD434C1DD256B800E0CECE /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B23BC5FAFA25FE2B9CCAAF71 /* Pods-LuluUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B6FF26F7DD977EF76C058AD4 /* Pods-LuluUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +205,14 @@
 			path = LuluUITests;
 			sourceTree = "<group>";
 		};
+		7CBD43491DD2558400E0CECE /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				7CBD434C1DD256B800E0CECE /* CameraViewController.swift */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		BC60E8E81DC6942E004D7FB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +234,7 @@
 		BC60E8EA1DC6944D004D7FB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7CBD43491DD2558400E0CECE /* Camera */,
 				BC60E8EC1DC69468004D7FB8 /* Home */,
 			);
 			name = Views;
@@ -718,6 +729,7 @@
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* FacebookLoginViewController.swift in Sources */,
 				BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */,
+				7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
 			);

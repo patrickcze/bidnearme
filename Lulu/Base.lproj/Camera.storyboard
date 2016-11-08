@@ -1,27 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Q2g-SW-cgl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Q2g-SW-cgl">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Camera View Controller-->
         <scene sceneID="MRl-4q-trz">
             <objects>
-                <viewController id="hVk-e1-SdS" sceneMemberID="viewController">
+                <viewController id="hVk-e1-SdS" customClass="CameraViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="azm-Ly-zvT"/>
                         <viewControllerLayoutGuide type="bottom" id="Pc0-8N-UUQ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Uoj-lp-mNE">
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" id="5Dq-a3-PZa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cxw-nW-nZG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="516"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addPhotoImage" translatesAutoresizingMaskIntoConstraints="NO" id="L9S-3a-eIq">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="276"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="L9S-3a-eIq" secondAttribute="height" multiplier="125:92" id="JMl-wy-E6M"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="8Dz-0s-lf5" appends="YES" id="FuF-6l-qNu"/>
+                                        </connections>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-Hc-D2P">
+                                        <rect key="frame" x="0.0" y="286" width="375" height="30"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6UW-Ze-nCC">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </stackView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="6I5-wR-66M" customClass="SZTextView">
+                                        <rect key="frame" x="0.0" y="326" width="375" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="QGI-22-jX5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Description..."/>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-PD-Ucb">
+                                        <rect key="frame" x="0.0" y="436" width="375" height="30"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Bidding..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6o-nA-hBl">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.5" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="End Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XBJ-D8-Kcc">
+                                                <rect key="frame" x="192.5" y="0.0" width="182.5" height="30"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S5h-oW-iwX">
+                                        <rect key="frame" x="0.0" y="476" width="375" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3JJ-cx-iYo"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Post Item">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="postButtonClicked:" destination="hVk-e1-SdS" eventType="touchUpInside" id="VDN-bk-nMH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="6I5-wR-66M" firstAttribute="top" secondItem="UHu-Hc-D2P" secondAttribute="bottom" constant="10" id="Buf-2E-R1y"/>
+                                    <constraint firstItem="PrX-PD-Ucb" firstAttribute="top" secondItem="6I5-wR-66M" secondAttribute="bottom" constant="10" id="fex-9R-DjD"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Cxw-nW-nZG" firstAttribute="width" secondItem="5Dq-a3-PZa" secondAttribute="width" id="VIV-3J-8Ve"/>
+                            <constraint firstAttribute="bottom" secondItem="Cxw-nW-nZG" secondAttribute="bottom" id="aIW-p0-TCp"/>
+                            <constraint firstItem="Cxw-nW-nZG" firstAttribute="leading" secondItem="5Dq-a3-PZa" secondAttribute="leading" id="dYw-63-MLz"/>
+                            <constraint firstItem="Cxw-nW-nZG" firstAttribute="top" secondItem="5Dq-a3-PZa" secondAttribute="top" id="iKD-mj-m8w"/>
+                            <constraint firstAttribute="trailing" secondItem="Cxw-nW-nZG" secondAttribute="trailing" id="jvc-gK-mc2"/>
+                        </constraints>
+                    </scrollView>
                     <navigationItem key="navigationItem" id="LkT-GY-3bj"/>
+                    <connections>
+                        <outlet property="addPhotosImage" destination="L9S-3a-eIq" id="7cr-0Y-Nao"/>
+                        <outlet property="descTextArea" destination="6I5-wR-66M" id="gfw-xb-Yv5"/>
+                        <outlet property="endDateTextField" destination="XBJ-D8-Kcc" id="C8B-qJ-rC8"/>
+                        <outlet property="postButtonOutlet" destination="S5h-oW-iwX" id="dGy-1p-fll"/>
+                        <outlet property="startingPriceTextField" destination="H6o-nA-hBl" id="za9-1o-L7D"/>
+                        <outlet property="titleTextField" destination="6UW-Ze-nCC" id="ibw-gF-uyw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2n-ce-Ce0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8Dz-0s-lf5">
+                    <connections>
+                        <action selector="imageTapped:" destination="hVk-e1-SdS" id="pEP-OK-wnq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4913" y="752"/>
         </scene>
@@ -50,5 +151,6 @@
     </scenes>
     <resources>
         <image name="Camera" width="25" height="25"/>
+        <image name="addPhotoImage" width="1792" height="1792"/>
     </resources>
 </document>
