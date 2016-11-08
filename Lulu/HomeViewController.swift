@@ -120,9 +120,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     // Required: Tell view how many cells to make.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = searchController.isActive ? filteredData.count : tempData.count
-        
-        return count
+        return searchController.isActive ? filteredData.count : tempData.count
     }
     
     // Required: Make a cell for each row in index path.
