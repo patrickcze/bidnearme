@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		037594D8F826E509A7BA30D4 /* Pods_Lulu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */; };
-<<<<<<< HEAD
 		358605481DC8590E0003FF96 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358605471DC8590D0003FF96 /* CameraViewController.swift */; };
 		3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */; };
-=======
 		3D03AA0D1DCED52D0034908C /* FacebookLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D03AA0C1DCED52D0034908C /* FacebookLoginViewController.swift */; };
 		3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */; };
 		3D546E661DCFA85200188DBD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D546E651DCFA85200188DBD /* Login.storyboard */; };
->>>>>>> develop
+		3D03AA0D1DCED52D0034908C /* FacebookLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D03AA0C1DCED52D0034908C /* FacebookLoginViewController.swift */; };
+		3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */; };
+		3D546E661DCFA85200188DBD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D546E651DCFA85200188DBD /* Login.storyboard */; };
 		3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */; };
 		3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987021DB5DCD20022A2ED /* Main.storyboard */; };
 		3DC987061DB5DCD20022A2ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987051DB5DCD20022A2ED /* Assets.xcassets */; };
@@ -55,14 +55,14 @@
 		17BA0F083ACB4BF20E51B9B5 /* Pods-LuluTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests.debug.xcconfig"; sourceTree = "<group>"; };
 		20EB9E2CDD15CB5157BECCEE /* Pods-Lulu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lulu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lulu/Pods-Lulu.debug.xcconfig"; sourceTree = "<group>"; };
 		334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-<<<<<<< HEAD
 		358605471DC8590D0003FF96 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-=======
 		3D03AA0C1DCED52D0034908C /* FacebookLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginViewController.swift; sourceTree = "<group>"; };
 		3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D546E651DCFA85200188DBD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
->>>>>>> develop
+		3D03AA0C1DCED52D0034908C /* FacebookLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginViewController.swift; sourceTree = "<group>"; };
+		3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3D546E651DCFA85200188DBD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		3DC986F91DB5DCD20022A2ED /* Lulu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lulu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DC987031DB5DCD20022A2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,10 +198,8 @@
 				3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */,
 				3DC9870A1DB5DCD20022A2ED /* Info.plist */,
 				3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */,
-<<<<<<< HEAD
-=======
+                3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
 				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
->>>>>>> develop
 			);
 			path = Lulu;
 			sourceTree = "<group>";
