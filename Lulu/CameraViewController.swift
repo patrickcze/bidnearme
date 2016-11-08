@@ -65,6 +65,17 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         numberToolbar.sizeToFit()
         
         startingPriceTextField.inputAccessoryView = numberToolbar
+        
+        let descToolbar = UIToolbar()
+        descToolbar.barStyle = UIBarStyle.default
+        descToolbar.items = [
+            UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CameraViewController.cancelPressed)),
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(CameraViewController.donePressed))
+        ]
+        
+        descToolbar.sizeToFit()
+        descTextArea.inputAccessoryView = descToolbar
     }
     
     func donePressed(){
