@@ -12,38 +12,36 @@ import FirebaseDatabase
 import Alamofire
 import AlamofireImage
 
+private let reuseIdentifier = "ListingCollectionCell"
+
 class HomeViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var searchBarContainerView: UIView!
     @IBOutlet weak var listingsCollectionView: UICollectionView!
     
-    // Wire up the search controller.
+    // MARK: - Properties
+    var ref: FIRDatabaseReference!
+    var storage: FIRStorage!
+    let newListing: Listing! = nil
+    var image: UIImage! = nil
+    var tempData: [Listing] = []
+    var filteredData = [Listing]()
+    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-            searchController.searchResultsUpdater = self
-            searchController.hidesNavigationBarDuringPresentation = true
-            searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = false
         
         return searchController
     }()
-    
-    // MARK: - Properties
-    let reuseIdentifier = "ListingCollectionCell"
-    var ref: FIRDatabaseReference!
-    var storage: FIRStorage!
-    let newListing:Listing! = nil
-    var image:UIImage! = nil
-    
-    // dummy listings to test UI, just temporary :)
-    var tempData: [Listing] = []
-    var filteredData = [Listing]()
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configure searchbar with autolayout & add to view.
+        // Configure searchbar with autolayout & add it to view.
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         searchBarContainerView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
@@ -122,11 +120,9 @@ extension HomeViewController: UICollectionViewDataSource {
     
     // Required: Tell view how many cells to make.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if searchController.isActive {
-            return filteredData.count
-        } else {
-            return tempData.count
-        }
+        let count = searchController.isActive ? filteredData.count : tempData.count
+        
+        return count
     }
     
     // Required: Make a cell for each row in index path.
@@ -149,26 +145,26 @@ extension HomeViewController: UICollectionViewDelegate {}
 // MARK: - UISearchResultsUpdating protocol
 extension HomeViewController: UISearchResultsUpdating {
     
-    // Required:
+    // Required: Called when the search bar becomes the first responder or when the user makes changes inside the search bar.
     func updateSearchResults(for searchController: UISearchController) {
         filterData()
         listingsCollectionView.reloadData()
     }
     
-    // Helper:
+    // Helper: Filter listing cells according to search term.
     func filterData() {
         filteredData = tempData.filter({ (listing) -> Bool in
             if let searchTerm = self.searchController.searchBar.text {
                 let searchTermMatches = self.searchString(listing, searchTerm: searchTerm).count > 0
-                if searchTermMatches {
-                    return true
-                }
+                
+                if searchTermMatches { return true }
             }
+            
             return false
         })
     }
     
-    // Helper:
+    // Helper: Match listing titles against search term.
     func searchString(_ listing: Listing, searchTerm: String) -> Array<AnyObject> {
         var matches: Array<AnyObject> = []
         
@@ -177,6 +173,7 @@ extension HomeViewController: UISearchResultsUpdating {
             let range = NSMakeRange(0, listing.title.characters.count)
             matches = regex.matches(in: listing.title, options: [], range: range)
         } catch _ {}
+        
         return matches
     }
 }
