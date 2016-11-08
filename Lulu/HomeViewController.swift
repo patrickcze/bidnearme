@@ -15,7 +15,18 @@ import AlamofireImage
 class HomeViewController: UIViewController {
 
     // MARK: - Outlets
+    @IBOutlet weak var searchBarContainerView: UIView!
     @IBOutlet weak var listingsCollectionView: UICollectionView!
+    
+    // Wire up the search controller.
+    lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+            searchController.searchResultsUpdater = self
+            searchController.hidesNavigationBarDuringPresentation = true
+            searchController.dimsBackgroundDuringPresentation = false
+        
+        return searchController
+    }()
     
     // MARK: - Properties
     let reuseIdentifier = "ListingCollectionCell"
@@ -26,10 +37,16 @@ class HomeViewController: UIViewController {
     
     // dummy listings to test UI, just temporary :)
     var tempData: [Listing] = []
+    var filteredData = [Listing]()
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Configure searchbar with autolayout & add to view.
+        searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        searchBarContainerView.addSubview(searchController.searchBar)
+        searchController.searchBar.sizeToFit()
         
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
@@ -103,15 +120,24 @@ class HomeViewController: UIViewController {
 // MARK: - UICollectionViewDataSource protocol
 extension HomeViewController: UICollectionViewDataSource {
     
-    // Required. Tell view how many cells to make.
+    // Required: Tell view how many cells to make.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tempData.count
+        if searchController.isActive {
+            return filteredData.count
+        } else {
+            return tempData.count
+        }
     }
     
-    // Required. Make a cell for each row in index path.
+    // Required: Make a cell for each row in index path.
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeCollectionViewCell
-        cell.listing = tempData[indexPath.row]
+        var cell = HomeCollectionViewCell()
+        
+        // Filter cells based on search.
+        if let filteredCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? HomeCollectionViewCell {
+            filteredCell.listing = searchController.isActive ? filteredData[indexPath.row] : tempData[indexPath.row]
+            cell = filteredCell
+        }
         
         return cell
     }
@@ -119,3 +145,38 @@ extension HomeViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate protocol
 extension HomeViewController: UICollectionViewDelegate {}
+
+// MARK: - UISearchResultsUpdating protocol
+extension HomeViewController: UISearchResultsUpdating {
+    
+    // Required:
+    func updateSearchResults(for searchController: UISearchController) {
+        filterData()
+        listingsCollectionView.reloadData()
+    }
+    
+    // Helper:
+    func filterData() {
+        filteredData = tempData.filter({ (listing) -> Bool in
+            if let searchTerm = self.searchController.searchBar.text {
+                let searchTermMatches = self.searchString(listing, searchTerm: searchTerm).count > 0
+                if searchTermMatches {
+                    return true
+                }
+            }
+            return false
+        })
+    }
+    
+    // Helper:
+    func searchString(_ listing: Listing, searchTerm: String) -> Array<AnyObject> {
+        var matches: Array<AnyObject> = []
+        
+        do {
+            let regex = try NSRegularExpression(pattern: searchTerm, options: [.caseInsensitive, .allowCommentsAndWhitespace])
+            let range = NSMakeRange(0, listing.title.characters.count)
+            matches = regex.matches(in: listing.title, options: [], range: range)
+        } catch _ {}
+        return matches
+    }
+}
