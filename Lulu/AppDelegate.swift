@@ -7,6 +7,10 @@
 //
 
 import UIKit
+<<<<<<< HEAD
+=======
+import FacebookCore
+>>>>>>> develop
 import Firebase
 
 @UIApplicationMain
@@ -18,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var temporaryUser : User!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+<<<<<<< HEAD
 
         //***TEMP USER added by shreya
         temporaryUser = User(UIImage(named: "duck")!, "DummyDuck", "Duck")
@@ -28,6 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+=======
+        // Configure Facebook SDK.
+        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        // Initialize Firebase.
+        FIRApp.configure()
+        return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        // Configure Facebook SDK.
+        return SDKApplicationDelegate.shared.application(application, open: url, options: options)
+    }
+>>>>>>> develop
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
