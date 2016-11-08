@@ -11,7 +11,7 @@
 // STILL A PROTOTYPE, GOOD ENOUGH FOR WEDNESDAY 09, 2016 DEMO.
 // *** THIS IS NOT THE FINAL VERSION! FOR THE APP ***
 //
-// If I use a tableview inside another tableview, ti should reduce even more repetition code
+// If I use a tableview inside another tableview, it should reduce even more repetition code
 //
 
 import UIKit
@@ -40,7 +40,7 @@ class ProfileTableViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-
+        
         // registering the tableViewCell I made, so it can be used
         let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
         topTableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: cellIdentifier)

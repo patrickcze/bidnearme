@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     //MARK: - outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController {
     
     // temp
     var tempUser : User!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController {
         // Making the imageView Circular
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
         profilePicture?.clipsToBounds = true
-
+        
         // accessing data stored in the appDelegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         if let temp = appDelegate?.dummyUser
@@ -41,7 +41,7 @@ class ProfileViewController: UIViewController {
             buySellFavorite_Segment.sendActions(for: UIControlEvents.valueChanged)
             
         }
-        else // handle this more properly with exceptions later 
+        else // handle this more properly with exceptions later
         {
             print("*** ProfileViewController: user NULL ***")
         }
@@ -49,7 +49,7 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
-      
+        
         if (tempUser != nil)
         {
             let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
@@ -95,12 +95,12 @@ class ProfileViewController: UIViewController {
     
     
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
      
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
