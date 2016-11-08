@@ -22,7 +22,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     //MARK properties
     var tempUserData: User!
-    
     var ref: FIRDatabaseReference!
     
     var user: User? {
@@ -161,42 +160,38 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let startPrice = Int(startingPriceTextField.text!)
         let endDate = endDateTextField.text
         let desc = descTextArea.text
-        let imageURLs:NSMutableArray = ["https://firebasestorage.googleapis.com/v0/b/lulu-c1315.appspot.com/o/listingImages%2Fplaceholder.png?alt=media&token=55dd306e-946a-43ce-96d9-86c35ff2f5f5"]
         
-        if let image = (addPhotosImage.image)! as? UIImage,
-            let imageData = UIImageJPEGRepresentation(image, 0.8) {
-
-            uploadImageToFirebase(data: imageData as NSData)
-        }
-        
-        let listingDetails:NSDictionary = [
+        let listingDetails:NSMutableDictionary = [
             "title": listingTitle ?? "Test",
             "startPrice": startPrice ?? -1,
             "endDate": endDate ?? "endDate",
             "desc": desc ?? "desc",
-            "imageURL": imageURLs,
             "endDate": " ",
             "seller":" ",
             "buyoutPrice": " ",
             "currentPrice": startPrice ?? -1
         ]
-
-//        ref.child("listings").childByAutoId().setValue(listingDetails) { (error, ref) -> Void in
-//            if (error != nil) {
-//                print("ERROR")
-//            } else {
-//                print("Success")
-//            }
-//        }
+        
+        let dbreference = ref.child("listings").childByAutoId()
+        
+        print(dbreference)
+        print(dbreference.description() as String)
+        
+        let image = (addPhotosImage.image)!
+        let imageData = UIImageJPEGRepresentation(image, 0.8)
+        
+        uploadImageToFirebase(data: imageData!, listingData: listingDetails, dbreference: dbreference)
     }
     
-    
-    func uploadImageToFirebase(data: NSData)   {
-        let storageRef = FIRStorage.storage().reference(withPath: "listingImages/test4.jpg")
+    func uploadImageToFirebase(data: Data, listingData: NSMutableDictionary, dbreference: FIRDatabaseReference) {
+        let dbrefString = String(dbreference.description().characters.suffix(20))
+        
+        let storageRef = FIRStorage.storage().reference(withPath: "listingImages/\(dbrefString).jpg")
         let uploadMetadata = FIRStorageMetadata()
         uploadMetadata.contentType = "image/jpeg"
         
         var downloadURL:String!
+        print(storageRef)
         
         storageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
             if (error != nil) {
@@ -205,13 +200,32 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                 // Metadata contains file metadata such as size, content-type, and download URL.
                 downloadURL = (metadata!.downloadURL()?.absoluteString)!
                 print("download URL 1 \(downloadURL)")
+                
+                listingData.addEntries(from: ["imageURL": [downloadURL]])
+                
+                print(listingData)
+                self.uploadListingToDB(listingData, dbreference: dbreference)
             }
         }
-        
-        print("download URL 2 \(downloadURL)")
     }
     
-   
+    func uploadListingToDB(_ listingDetails: NSMutableDictionary, dbreference: FIRDatabaseReference) {
+        print(listingDetails)
+        
+        dbreference.setValue(listingDetails) { (error, ref) -> Void in
+            if (error != nil) {
+                print("ERROR")
+            } else {
+                print("Success")
+                
+                self.titleTextField.text = ""
+                self.startingPriceTextField.text = ""
+                self.endDateTextField.text = ""
+                self.descTextArea.text = ""
+                self.addPhotosImage.image = UIImage(named: "addPhotoImage")
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -222,5 +236,4 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         // Pass the selected object to the new view controller.
     }
     */
-
 }
