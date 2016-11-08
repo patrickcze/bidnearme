@@ -113,7 +113,7 @@ class ProfileViewController: UIViewController {
             }
             
             tableV.view.frame = containerView.bounds
-            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //    tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }
     

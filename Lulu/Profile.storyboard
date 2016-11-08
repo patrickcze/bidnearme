@@ -182,10 +182,9 @@
                                     <constraint firstAttribute="height" constant="206" id="beV-Zk-gxS"/>
                                 </constraints>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1Fq-Di-V1c">
-                                    <rect key="frame" x="0.0" y="79" width="414" height="31"/>
+                                    <rect key="frame" x="0.0" y="79" width="414" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                    <inset key="titleEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Show More"/>
                                     <connections>
                                         <action selector="tableViewButtonPressed:" destination="2hA-SQ-OLz" eventType="touchUpInside" id="xrq-wr-tb4"/>
@@ -222,10 +221,9 @@
                                     <constraint firstAttribute="width" constant="414" id="Yy7-Hm-LkF"/>
                                 </constraints>
                                 <button key="tableFooterView" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sDX-0g-KkW">
-                                    <rect key="frame" x="0.0" y="79" width="414" height="27"/>
+                                    <rect key="frame" x="0.0" y="79" width="414" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                    <inset key="titleEdgeInsets" minX="0.0" minY="-4" maxX="0.0" maxY="0.0"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Show More"/>
                                     <connections>
                                         <action selector="tableViewButtonPressed:" destination="2hA-SQ-OLz" eventType="touchUpInside" id="xV1-wo-WIA"/>
