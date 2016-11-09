@@ -44,7 +44,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qdt-Sk-PTc">
-                                <frame key="frameInset" minY="214" width="375" height="404"/>
+                                <frame key="frameInset" minY="204" width="375" height="414"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <segue destination="DCb-LH-A5T" kind="embed" id="JLU-Ny-RC5"/>
@@ -58,21 +58,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ner-EO-iWd">
-                                <frame key="frameInset" minY="180" width="375" height="31"/>
+                                <frame key="frameInset" minY="168" width="375" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="doublearrow" translatesAutoresizingMaskIntoConstraints="NO" id="gIM-dn-o2X">
-                                <frame key="frameInset" minX="201" minY="188" width="12" height="14"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbU-xL-m00">
-                                <frame key="frameInset" minX="123" minY="180" width="90" height="31"/>
+                                <frame key="frameInset" minX="4" minY="168" width="121" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                 <state key="normal" title="ITEM         ">
                                     <color key="titleColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -81,8 +77,12 @@
                                     <action selector="listingSelectionPressed:" destination="QfP-OH-PWc" eventType="touchUpInside" id="Rcn-kS-D35"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="doublearrow" translatesAutoresizingMaskIntoConstraints="NO" id="gIM-dn-o2X">
+                                <frame key="frameInset" minX="113" minY="178" width="12" height="14"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <pickerView hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gek-jD-C2R">
-                                <frame key="frameInset" minY="121" height="148"/>
+                                <frame key="frameInset" minY="113" height="148"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="QfP-OH-PWc" id="gYM-MF-OqE"/>
@@ -101,7 +101,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="containerView" destination="Qdt-Sk-PTc" id="YVg-rD-VFX"/>
-                        <outlet property="doubleArrowIcon" destination="gIM-dn-o2X" id="sO6-d1-3v7"/>
                         <outlet property="listingPickerView" destination="gek-jD-C2R" id="RSX-Om-6PN"/>
                         <outlet property="listingSelectionButton" destination="dbU-xL-m00" id="jmh-Ll-RTu"/>
                         <outlet property="memberLabel" destination="2eF-Rm-t6e" id="l3a-aI-tCX"/>
@@ -153,7 +152,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hKl-6a-YCd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MLd-Uo-P08">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="404"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -309,7 +308,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="TableViewController" id="l0f-0N-mTQ" customClass="TableViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tHF-so-HYu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="404"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -318,7 +317,7 @@
                         </connections>
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="404"/>
+                    <size key="freeformSize" width="375" height="414"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euz-vh-Jki" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

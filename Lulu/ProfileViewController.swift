@@ -11,7 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var arrowLabel: UILabel!
-    @IBOutlet weak var doubleArrowIcon: UIImageView!
+    @IBOutlet weak var listIcon: UIImageView!
     //MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -74,8 +74,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func listingSelectionPressed(_ sender: UIButton) {
         listingPickerView.isHidden = false
-        listingSelectionButton.isHidden = true
-        doubleArrowIcon.isHidden = true
+        //listingSelectionButton.isHidden = true
         listingPickerView.becomeFirstResponder()
     }
     
@@ -147,7 +146,6 @@ extension ProfileViewController: UIPickerViewDataSource {
             
             listingPickerView.isHidden = true
             listingSelectionButton.isHidden = false
-            doubleArrowIcon.isHidden = false
         }
     }
     
