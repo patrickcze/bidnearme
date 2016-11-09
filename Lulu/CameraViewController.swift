@@ -219,11 +219,11 @@ extension CameraViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        // TODO: deal with this in some way
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        // TODO: deal with this in some way
     }
 }
 
