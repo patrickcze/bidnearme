@@ -216,6 +216,7 @@
 		BC60E8E81DC6942E004D7FB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7CBD43491DD2558400E0CECE /* Camera */,
 				3D03AA091DCED3240034908C /* Login */,
 				BC60E8EB1DC6945F004D7FB8 /* Home */,
 			);
@@ -234,7 +235,6 @@
 		BC60E8EA1DC6944D004D7FB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7CBD43491DD2558400E0CECE /* Camera */,
 				BC60E8EC1DC69468004D7FB8 /* Home */,
 			);
 			name = Views;
@@ -344,7 +344,6 @@
 				TargetAttributes = {
 					3DC986F81DB5DCD20022A2ED = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = XT94S8NSYB;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -905,7 +904,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = XT94S8NSYB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
@@ -922,7 +921,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = XT94S8NSYB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
