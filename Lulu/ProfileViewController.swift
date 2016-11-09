@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var memberLabel: UILabel!
     @IBOutlet weak var specialLabel: UILabel!
     @IBOutlet weak var listingTypeTableView: UITableView!
+    @IBOutlet weak var upperView: UIView! // the background for the top part of the profile page (Name, profile pciture, rating label, etc.
     
     // MARK: - Properties
     let listingTypes = ["Buying", "Bought", "Selling", "Sold", "Favorites"]
@@ -39,6 +40,10 @@ class ProfileViewController: UIViewController {
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
         profilePicture?.clipsToBounds = true
         profilePicture.contentMode = UIViewContentMode.scaleToFill
+        
+        // Making upperview and bottom table view frame corners rounded
+        upperView.layer.cornerRadius = 3
+        listingTypeTableView.layer.cornerRadius = 3
         
         // accessing data stored in the appDelegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -94,8 +99,6 @@ extension ProfileViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListingTypeCell", for: indexPath) as! ListingTypeTableViewCell
         let index = indexPath as NSIndexPath
         cell.name.text = listingTypes[index.row]
-        cell.contentView.layer.borderColor = UIColor.black.cgColor
-        cell.contentView.layer.borderWidth = 0.3
         return cell
     }
     
