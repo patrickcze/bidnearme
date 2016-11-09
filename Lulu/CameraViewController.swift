@@ -2,7 +2,7 @@
 //  CameraViewController.swift
 //  Lulu
 //
-//  Created by Patrick Czeczko on 2016-11-08.
+//  Created by Patrick Czeczko, Shreya Chopra on 2016-11-08.
 //  Copyright © 2016 Team Lulu. All rights reserved.
 //
 
@@ -10,8 +10,8 @@ import UIKit
 import FirebaseStorage
 import FirebaseDatabase
 
+
 class CameraViewController: UIViewController {
-    
     // MARK: - Outlets
     @IBOutlet weak var addPhotosImage: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -160,8 +160,8 @@ class CameraViewController: UIViewController {
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate
 extension CameraViewController: UIImagePickerControllerDelegate {
-    //MARK: - UIImagePickerControllerDelegate
     //Creates image view
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
         print("Tapped")
@@ -219,11 +219,12 @@ extension CameraViewController: UIImagePickerControllerDelegate {
     }
 }
 
+// MARK: - UINavigationControllerDelegate
 extension CameraViewController: UINavigationControllerDelegate {
 }
 
+// MARK: - UITextFieldDelegate
 extension CameraViewController: UITextFieldDelegate {
-    //MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         //Hide the keyboard
@@ -241,5 +242,6 @@ extension CameraViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - UITextViewDelegate
 extension CameraViewController: UITextViewDelegate {
 }
