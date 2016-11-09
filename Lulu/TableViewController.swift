@@ -24,10 +24,6 @@ class TableViewController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         listings = []
-//        self.tableView.layer.borderWidth = 0.3
-//        self.tableView.layer.borderColor = UIColor.black.cgColor
-//        self.tableView.layer.cornerRadius = 0
-//        
         // registering the tableViewCell I made, so it can be used
         let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
         self.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: cellIdentifier)

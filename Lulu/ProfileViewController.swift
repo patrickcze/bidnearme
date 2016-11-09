@@ -10,7 +10,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet weak var pickerBakcgroud: UILabel!
     @IBOutlet weak var arrowLabel: UILabel!
     @IBOutlet weak var doubleArrowIcon: UIImageView!
     //MARK: - Outlets
@@ -37,12 +36,6 @@ class ProfileViewController: UIViewController {
         listingPickerView.delegate = self
         listingPickerView.dataSource = self
         listingPickerView.isHidden = true
-        
-        listingSelectionButton.layer.borderWidth = 0.3
-        listingSelectionButton.layer.borderColor = UIColor.black.cgColor
-        listingSelectionButton.layer.cornerRadius = 2
-        
-        pickerBakcgroud.isHidden = true
         
         // Making the imageView Circular
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
@@ -80,7 +73,6 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func listingSelectionPressed(_ sender: UIButton) {
-        pickerBakcgroud.isHidden = false
         listingPickerView.isHidden = false
         listingSelectionButton.isHidden = true
         doubleArrowIcon.isHidden = true
@@ -93,7 +85,6 @@ class ProfileViewController: UIViewController {
         listingPickerView.resignFirstResponder()
         listingPickerView.isHidden = true
         listingSelectionButton.isHidden = false
-        pickerBakcgroud.isHidden = true
     }
     
     /*
@@ -155,7 +146,6 @@ extension ProfileViewController: UIPickerViewDataSource {
             tableView.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             
             listingPickerView.isHidden = true
-            pickerBakcgroud.isHidden = true
             listingSelectionButton.isHidden = false
             doubleArrowIcon.isHidden = false
         }
