@@ -54,18 +54,18 @@ class ListingTableViewController: UITableViewController {
         let listing = listings[index.row]
         cell.itemTitle.text = listing.title
         cell.itemPhoto.image = UIImage(named: "duckCar")
-            
-            switch listingType {
-            case 0, 4:
+        
+        switch listingType {
+        case 0, 4:
             cell.smallLabel.text = " bidders"
-            case 1,3:
+        case 1,3:
             cell.smallLabel.text = " date"
-            case 2:
+        case 2:
             cell.smallLabel.text = " Highest bid"
-            default:
+        default:
             print("Default -> ListingTableViewController -> cellForRowAt (Profile)")
-            }
-            return cell
+        }
+        return cell
     }
     
     /*

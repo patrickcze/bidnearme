@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-   
+    
     // MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
@@ -17,12 +17,12 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var memberLabel: UILabel!
     @IBOutlet weak var specialLabel: UILabel!
     @IBOutlet weak var listingTypeTableView: UITableView!
- 
+    
     // MARK: - Properties
     let listingTypes = ["Buying", "Bought", "Selling", "Sold", "Favorites"]
     var allListings : [[Listing]]!
     
-    // Temporary 
+    // Temporary
     var tempUser : User!
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController {
         
         self.listingTypeTableView.delegate = self
         self.listingTypeTableView.dataSource = self
-
+        
         // Making the imageView Circular
         profilePicture?.layoutIfNeeded()
         profilePicture?.layer.masksToBounds = false
@@ -64,19 +64,19 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // setting up the type of listing for ListingTableViewController
+        // setting up the type of listing that ListingTableViewController will be displaying
         if (segue.identifier != nil && segue.identifier == "ListingTableViewSegue"){
             let row = self.listingTypeTableView.indexPathForSelectedRow?.row
             let listingTableViewController = segue.destination as! ListingTableViewController
             listingTableViewController.listingType = row!
             listingTableViewController.listings = allListings[row!]
         }
-     }
+    }
 }
 
 // MARK: - UITableViewDataSource protocol
@@ -85,7 +85,7 @@ extension ProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listingTypes.count
     }
@@ -94,13 +94,8 @@ extension ProfileViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListingTypeCell", for: indexPath) as! ListingTypeTableViewCell
         let index = indexPath as NSIndexPath
         cell.name.text = listingTypes[index.row]
-        
         cell.contentView.layer.borderColor = UIColor.black.cgColor
         cell.contentView.layer.borderWidth = 0.3
-        //        self.contentView.layer.cornerRadius = 2
-        //        self.contentView.clipsToBounds = true
-
-        
         return cell
     }
 }
