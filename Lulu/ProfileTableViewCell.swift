@@ -27,6 +27,11 @@ class ProfileTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 0.5
+        
         // Initialization code
         
     }
