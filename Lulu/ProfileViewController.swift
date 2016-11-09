@@ -10,14 +10,20 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var arrowLabel: UILabel!
+    @IBOutlet weak var listIcon: UIImageView!
     //MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var memberLabel: UILabel!
     @IBOutlet weak var specialLabel: UILabel!
-    @IBOutlet weak var buySellFavorite_Segment: UISegmentedControl!
-    
+    @IBOutlet weak var listingPickerView: UIPickerView!
+    @IBOutlet weak var listingSelectionButton: UIButton!
+   
+    //MARK: - Properties
+    let pickerViewTitles = ["Buying", "Bought", "Selling", "Sold", "Favorites"]
+    var allListings : [[Listing]]!
     // temp
     var tempUser : User!
     
@@ -26,6 +32,10 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+ 
+        listingPickerView.delegate = self
+        listingPickerView.dataSource = self
+        listingPickerView.isHidden = true
         
         // Making the imageView Circular
         profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
@@ -33,66 +43,48 @@ class ProfileViewController: UIViewController {
         
         // accessing data stored in the appDelegate
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        if let temp = appDelegate?.dummyUser
-        {
+        if let temp = appDelegate?.dummyUser {
             tempUser = temp
             profilePicture.image = tempUser.profileImage
-            buySellFavorite_Segment.selectedSegmentIndex = 0
-            buySellFavorite_Segment.sendActions(for: UIControlEvents.valueChanged)
+            
+            allListings = [
+                tempUser.buyingListings,   // 0
+                tempUser.buyingListings,   // 1 <- THIS should be boughtListings
+                tempUser.postedListings,   // 2
+                tempUser.soldListings,     // 3
+                tempUser.favoritedListings // 4
+            ]
+            
+            
+            listingSelectionButton.setTitle(String(pickerViewTitles[2]), for: .normal)
+            listingPickerView.selectRow(2, inComponent: 0, animated: false)
+            self.pickerView(listingPickerView, didSelectRow: 2, inComponent: 0)
+            
             
         }
-        else // handle this more properly with exceptions later
-        {
+        else { // handle this more properly with exceptions later
             print("*** ProfileViewController: user NULL ***")
         }
     }
-    
-    
-    @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
-        
-        if (tempUser != nil)
-        {
-            let tableV = self.storyboard?.instantiateViewController(withIdentifier: "ProfileTableView") as! ProfileTableViewController
-            
-            containerView.addSubview(tableV.view)
-            addChildViewController(tableV)
-            tableV.didMove(toParentViewController: self)
-            
-            switch (sender.selectedSegmentIndex)
-            {
-            case 0: // Buy
-                tableV.topTableLabel.text = "Buying"
-                tableV.bottomTableLabel.text = "Bought"
-                tableV.topListing = tempUser.buyingListings
-                tableV.bottomListing = tempUser.buyingListings
-                break
-            case 1: // Sell
-                tableV.topTableLabel.text = "Selling"
-                tableV.bottomTableLabel.text = "Sold"
-                tableV.topListing = tempUser.postedListings
-                tableV.bottomListing = tempUser.soldListings
-                break
-            case 2: // Favorite
-                tableV.topTableLabel.text = "Watching"
-                tableV.topListing = tempUser.favoritedListings
-                tableV.bottomListing = tempUser.postedListings
-                tableV.bottomTableLabel.isHidden = true
-                tableV.bottomTableView.isHidden = true
-                break
-            default:
-                print("Default - segmentValueChanged - Profile.storyboard")
-            }
-            tableV.view.frame = containerView.bounds
-            tableV.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        }
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func listingSelectionPressed(_ sender: UIButton) {
+        listingPickerView.isHidden = false
+        //listingSelectionButton.isHidden = true
+        listingPickerView.becomeFirstResponder()
+    }
+    
+    // TODO: Make sure about this if it works when you click on the tableviewCell when
+    // pickerView was visible (it was not working)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        listingPickerView.resignFirstResponder()
+        listingPickerView.isHidden = true
+        listingSelectionButton.isHidden = false
+    }
     
     /*
      // MARK: - Navigation
@@ -104,3 +96,88 @@ class ProfileViewController: UIViewController {
      }
      */
 }
+
+
+// MARK: - UIPickerDataSource protocol
+extension ProfileViewController: UIPickerViewDataSource {
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerViewTitles[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        // there is only one component
+        if (component == 0 && tempUser != nil) {
+            
+            let tableView = self.storyboard?.instantiateViewController(withIdentifier: "TableViewController") as! TableViewController
+            
+            containerView.addSubview(tableView.view)
+            addChildViewController(tableView)
+            tableView.didMove(toParentViewController: self)
+            
+            tableView.listings = allListings[row]
+            tableView.listingType = row
+            
+            listingSelectionButton.setTitle(String(pickerViewTitles[row]), for: .normal)
+            
+            switch(row) {
+            // Buying
+            case 0:
+                break;
+            // Bought
+            case 1:
+                break
+            // Selling
+            case 2:
+                break
+            // Sold
+            case 3:
+                break
+            // Favorites
+            case 4:
+                break
+            default:
+                print("Default -> ProfileViewController -> didSelectRow PickerView")
+            }
+            
+            tableView.view.frame = containerView.bounds
+            tableView.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            listingPickerView.isHidden = true
+            listingSelectionButton.isHidden = false
+        }
+    }
+    
+    //    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    //        <#code#>
+    //    }
+    //
+    //    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+    //        <#code#>
+    //    }
+    //
+    //   func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+    //
+    //        return CGFloat(10)
+    //
+    //  }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    
+}
+
+// MARK: - UIPickerDataSource protocol
+extension ProfileViewController: UIPickerViewDelegate {
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerViewTitles.count
+    }
+    
+}
+
+
