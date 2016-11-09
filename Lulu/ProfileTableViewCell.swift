@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileTableViewCell: UITableViewCell {
 
-    // MARK: - outlets
+    // MARK: - Outlets
     @IBOutlet weak var itemTitle: UILabel!
     @IBOutlet weak var bigLabel: UILabel!
     @IBOutlet weak var itemPhoto: UIImageView!
