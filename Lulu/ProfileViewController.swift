@@ -98,6 +98,15 @@ extension ProfileViewController: UITableViewDataSource {
         cell.contentView.layer.borderWidth = 0.3
         return cell
     }
+    
+    // making all the rows to fit inside the tableView frame
+    @objc(tableView:heightForRowAtIndexPath:) func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.height/CGFloat(listingTypes.count)
+    }
+    
+    @objc(tableView:estimatedHeightForRowAtIndexPath:) func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.height/CGFloat(listingTypes.count)
+    }
 }
 
 // MARK: - UITableViewDelegate protocol

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,32 +16,56 @@
                 <frame key="frameInset" width="375" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-IM-w2A">
-                        <frame key="frameInset" minY="12" width="33" height="17" maxX="9"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-IM-w2A">
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="OBN-IM-w2A" secondAttribute="height" multiplier="33:17" id="1oo-zj-NMq"/>
+                            <constraint firstAttribute="height" constant="17" id="A0n-V8-z8h"/>
+                            <constraint firstAttribute="width" constant="33" id="Zrg-Eo-JMT"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Item Cell Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="28w-VV-XhF">
-                        <frame key="frameInset" minX="22.40%" minY="8" width="48.00%" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Cell Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="28w-VV-XhF">
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="28w-VV-XhF" secondAttribute="height" multiplier="60:7" id="ZI7-6M-paE"/>
+                            <constraint firstAttribute="width" constant="180" id="hyR-yZ-3bA"/>
+                            <constraint firstAttribute="height" constant="21" id="oRh-2B-0U4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PBF-rP-NsA">
-                        <frame key="frameInset" minX="8" minY="8" width="68" height="59"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBF-rP-NsA">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="74" id="6mu-EO-EDJ"/>
+                            <constraint firstAttribute="width" secondItem="PBF-rP-NsA" secondAttribute="height" multiplier="38:37" constant="-2" id="ZUg-Ok-agE"/>
+                            <constraint firstAttribute="width" constant="74" id="hPf-Rp-Nmr"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bidders" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="iLL-bN-dDM">
-                        <frame key="frameInset" width="50" height="17" maxX="8" maxY="8"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bidders" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="iLL-bN-dDM">
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="iLL-bN-dDM" secondAttribute="height" multiplier="50:17" id="U8e-FW-A84"/>
+                            <constraint firstAttribute="width" constant="50" id="bQW-33-4Fc"/>
+                            <constraint firstAttribute="height" constant="17" id="m9i-Mn-SEt"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="OBN-IM-w2A" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="10" id="Gts-Ck-uSp"/>
+                    <constraint firstItem="OBN-IM-w2A" firstAttribute="leading" secondItem="28w-VV-XhF" secondAttribute="trailing" constant="52" id="Ph3-lI-zgW"/>
+                    <constraint firstItem="PBF-rP-NsA" firstAttribute="leading" secondItem="tiu-Qc-7A1" secondAttribute="leading" id="QuS-Ec-CUM"/>
+                    <constraint firstItem="28w-VV-XhF" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" constant="8" id="Zmr-qM-ehx"/>
+                    <constraint firstAttribute="bottom" secondItem="PBF-rP-NsA" secondAttribute="bottom" id="fOB-hb-eIr"/>
+                    <constraint firstAttribute="trailing" secondItem="iLL-bN-dDM" secondAttribute="trailing" constant="13" id="foL-hu-NMo"/>
+                    <constraint firstAttribute="trailing" secondItem="OBN-IM-w2A" secondAttribute="trailing" constant="13" id="pyp-V4-yjY"/>
+                    <constraint firstItem="PBF-rP-NsA" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="top" id="qpY-Bq-zxw"/>
+                    <constraint firstAttribute="bottom" secondItem="iLL-bN-dDM" secondAttribute="bottom" constant="8" id="suJ-pG-pPB"/>
+                    <constraint firstItem="28w-VV-XhF" firstAttribute="leading" secondItem="PBF-rP-NsA" secondAttribute="trailing" constant="23" id="wR4-ff-m1r"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bigLabel" destination="OBN-IM-w2A" id="Hpd-qK-m5j"/>
