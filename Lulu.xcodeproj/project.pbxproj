@@ -19,9 +19,9 @@
 		3DC9871F1DB5DCD30022A2ED /* LuluUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */; };
 		5B005A1B1DCAA5EF002C7482 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B005A1A1DCAA5EF002C7482 /* ProfileTableViewCell.xib */; };
 		5B054AD01DD15C9A00099683 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B054ACF1DD15C9A00099683 /* Profile.storyboard */; };
-		5B054AD41DD2A02B00099683 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AD31DD2A02B00099683 /* TableViewController.swift */; };
+		5B054AE41DD33A4B00099683 /* ListingTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AE31DD33A4B00099683 /* ListingTypeTableViewCell.swift */; };
+		5B054AE61DD33C0400099683 /* ListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AE51DD33C0400099683 /* ListingTableViewController.swift */; };
 		5B1584CD1DCAA4440073F77C /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1584CC1DCAA4440073F77C /* ProfileTableViewCell.swift */; };
-		5B28E12A1DCA8BC0007C7704 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B28E1291DCA8BC0007C7704 /* ProfileTableViewController.swift */; };
 		5B4982A41DC6F98100C839CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4982A31DC6F98100C839CF /* ProfileViewController.swift */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
@@ -73,9 +73,9 @@
 		3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lulu.entitlements; sourceTree = "<group>"; };
 		5B005A1A1DCAA5EF002C7482 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		5B054ACF1DD15C9A00099683 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		5B054AD31DD2A02B00099683 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		5B054AE31DD33A4B00099683 /* ListingTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingTypeTableViewCell.swift; sourceTree = "<group>"; };
+		5B054AE51DD33C0400099683 /* ListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingTableViewController.swift; sourceTree = "<group>"; };
 		5B1584CC1DCAA4440073F77C /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
-		5B28E1291DCA8BC0007C7704 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		5B4982A31DC6F98100C839CF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +218,7 @@
 			children = (
 				5B1584CC1DCAA4440073F77C /* ProfileTableViewCell.swift */,
 				5B005A1A1DCAA5EF002C7482 /* ProfileTableViewCell.xib */,
+				5B054AE31DD33A4B00099683 /* ListingTypeTableViewCell.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -226,8 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				5B4982A31DC6F98100C839CF /* ProfileViewController.swift */,
-				5B28E1291DCA8BC0007C7704 /* ProfileTableViewController.swift */,
-				5B054AD31DD2A02B00099683 /* TableViewController.swift */,
+				5B054AE51DD33C0400099683 /* ListingTableViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -697,14 +697,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B054AE61DD33C0400099683 /* ListingTableViewController.swift in Sources */,
 				5B4982A41DC6F98100C839CF /* ProfileViewController.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
 				5B1584CD1DCAA4440073F77C /* ProfileTableViewCell.swift in Sources */,
-				5B054AD41DD2A02B00099683 /* TableViewController.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* FacebookLoginViewController.swift in Sources */,
 				BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */,
-				5B28E12A1DCA8BC0007C7704 /* ProfileTableViewController.swift in Sources */,
+				5B054AE41DD33A4B00099683 /* ListingTypeTableViewCell.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
 			);
