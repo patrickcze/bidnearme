@@ -83,8 +83,6 @@ class CameraViewController: UIViewController {
     
     // Function handles the steps required to take the data on the view and place it into the DB
     @IBAction func postButtonClicked(_ sender: AnyObject) {
-        print("Post item")
-        
         // Disable post button while uploading information
         self.postButtonOutlet.isEnabled = false
         
@@ -121,7 +119,6 @@ class CameraViewController: UIViewController {
         uploadMetadata.contentType = "image/jpeg"
         
         var downloadURL:String!
-        print(storageRef)
         
         storageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
             if (error != nil) {
@@ -139,21 +136,16 @@ class CameraViewController: UIViewController {
     
     // Places the listing details in the DB and resets the fields on the page
     func uploadListingToDB(_ listingDetails: NSMutableDictionary, dbreference: FIRDatabaseReference) {
-        print(listingDetails)
-        
         dbreference.setValue(listingDetails) { (error, ref) -> Void in
             if (error != nil) {
                 // Uh-oh, an error occurred!
                 // TODO: deal with this in some way
             } else {
-                print("Success")
-                
                 self.titleTextField.text = ""
                 self.startingPriceTextField.text = ""
                 self.endDateTextField.text = ""
                 self.descTextArea.text = ""
                 self.addPhotosImage.image = UIImage(named: "addPhotoImage")
-                
                 self.postButtonOutlet.isEnabled = true
             }
         }
@@ -164,18 +156,13 @@ class CameraViewController: UIViewController {
 extension CameraViewController: UIImagePickerControllerDelegate {
     //Creates image view
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
-        print("Tapped")
-        
         let alert:UIAlertController = UIAlertController.init(title: "Your choice", message: "Take a photo or use an existing one?", preferredStyle: .actionSheet)
         
         let cancelActionButton: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
-            print("Cancel")
         }
         alert.addAction(cancelActionButton)
         
         let photoLibraryButton: UIAlertAction = UIAlertAction(title: "Select from Photo Library", style: .default) { action -> Void in
-            print("photoLibraryButton")
-            
             // UIImagePickerController is a view controller that lets a user pick media from their photo library.
             let imagePickerController = UIImagePickerController()
             
@@ -190,8 +177,6 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         alert.addAction(photoLibraryButton)
         
         let cameraButton: UIAlertAction = UIAlertAction(title: "Take a Photo", style: .default) { action -> Void in
-            print("cameraButton")
-            
             // UIImagePickerController is a view controller that lets a user pick media from their photo library.
             let imagePickerController = UIImagePickerController()
             
