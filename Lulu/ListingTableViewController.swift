@@ -21,7 +21,6 @@ class ListingTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        //istings = []
         // registering the tableViewCell I made, so it can be used
         let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
         self.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
