@@ -12,7 +12,6 @@ import FirebaseAuth
 
 class FacebookLoginViewController: UIViewController {
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +27,25 @@ class FacebookLoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /**
+     Logs into Firebase with the given credential.
+     
+     - parameter credential: Firebase authentication credential created using a FIRAuthProvider.
+     */
+    func firebaseLogin(_ credential: FIRAuthCredential) {
+        if let user = FIRAuth.auth()?.currentUser {
+            // User is already logged in, associate third-party login user with credential in Firebase.
+            user.link(with: credential) { (user, error) in
+                // TODO: Display error somehow if it exists.
+            }
+        } else {
+            // Sign in into Firebase.
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                // TODO: Display error somehow if it exists.
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -37,7 +55,6 @@ class FacebookLoginViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 // MARK: - FBSDKLoginButtonDelegate protocol
@@ -55,11 +72,9 @@ extension FacebookLoginViewController: LoginButtonDelegate {
         case let .failed(error):
             print(error)
             break
-        case let .success(grantedPermissions, declinedPermissions, token):
+        case let .success(_, _, token):
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: token.authenticationToken)
-            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                // TODO: Handle login completion with Firebase if needed.
-            }
+            firebaseLogin(credential)
             break
         }
     }
