@@ -29,8 +29,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the view.        
         self.listingTypeTableView.delegate = self
         self.listingTypeTableView.dataSource = self
         
@@ -113,5 +112,9 @@ extension ProfileViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate protocol
-extension ProfileViewController: UITableViewDelegate {}
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            self.listingTypeTableView.deselectRow(at: indexPath, animated: true)
+    }
+}
 
