@@ -9,11 +9,17 @@
 import UIKit
 import FacebookLogin
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
+    
+    // MARK: - Properties
+    var ref: FIRDatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = FIRDatabase.database().reference()
         
         // Configure Facebook login button to prompt for the following permissions.
         let facebookLoginButton = LoginButton(readPermissions: [.publicProfile, .email, .userFriends])
@@ -22,11 +28,6 @@ class LoginViewController: UIViewController {
         view.addSubview(facebookLoginButton)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     /**
      Logs into Firebase with the given credential.
      
@@ -39,11 +40,48 @@ class LoginViewController: UIViewController {
                 // TODO: Display error somehow if it exists.
             }
         } else {
-            // Sign in into Firebase.
+            // Sign into Firebase.
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                // TODO: Display error somehow if it exists.
+                
+                guard let user = user, error == nil else {
+                    // TODO: Display error message.
+                    return
+                }
+                
+                // Save user profile into database.
+                self.saveUserInfo(user)
             }
         }
+    }
+    
+    /**
+     Logs out of Firebase.
+     */
+    func firebaseLogout() {
+        try! FIRAuth.auth()?.signOut()
+    }
+    
+    /**
+     Saves user profile information to the database.
+     
+     - parameter user: User to be saved in the database.
+     */
+    func saveUserInfo(_ user: FIRUser) {
+        ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // Don't do anything if the user already exists in the database.
+            guard !snapshot.exists() else {
+                return
+            }
+            
+            // Otherwise, add this user to the database.
+            let userDict = [
+                "name": user.displayName ?? "",
+                "createdTimestamp": FIRServerValue.timestamp()
+                ] as [String: Any]
+            
+            self.ref.child("users").child(user.uid).setValue(userDict)
+        })
     }
     
     /*
@@ -85,6 +123,6 @@ extension LoginViewController: LoginButtonDelegate {
      - parameter loginButton: Button that was used to logout.
      */
     public func loginButtonDidLogOut(_ loginButton: LoginButton) {
-        // TODO: Handle logout action.
+        firebaseLogout()
     }
 }
