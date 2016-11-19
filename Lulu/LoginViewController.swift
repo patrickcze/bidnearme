@@ -1,5 +1,5 @@
 //
-//  FacebookLoginViewController.swift
+//  LoginViewController.swift
 //  Lulu
 //
 //  Created by Jan Clarin on 11/5/16.
@@ -10,7 +10,7 @@ import UIKit
 import FacebookLogin
 import FirebaseAuth
 
-class FacebookLoginViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +58,7 @@ class FacebookLoginViewController: UIViewController {
 }
 
 // MARK: - FBSDKLoginButtonDelegate protocol
-extension FacebookLoginViewController: LoginButtonDelegate {
+extension LoginViewController: LoginButtonDelegate {
     /**
      Called when the button was used to login and the process finished.
      
