@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +23,6 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replies Quickly" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jjx-X8-tDy">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="d2v-Dn-R4i"/>
                                             <constraint firstAttribute="width" constant="95" id="dbb-XJ-3Rz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -34,7 +32,6 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member since: 2015" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2eF-Rm-t6e">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="126" id="NZA-oL-N8Q"/>
-                                            <constraint firstAttribute="height" constant="18" id="sT2-ee-nAm"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.53725490196078429" green="0.53725490196078429" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,7 +39,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Mr. Duck" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="o2c-Zt-9ZR">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="8Te-HG-IhI"/>
                                             <constraint firstAttribute="width" constant="119" id="JaC-gH-9PY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -53,12 +49,10 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="Oz0-VT-jcT"/>
                                             <constraint firstAttribute="width" constant="90" id="pRH-JG-hb0"/>
-                                            <constraint firstAttribute="width" secondItem="ADB-Nr-Hwv" secondAttribute="height" multiplier="1:1" id="zqS-jB-hQZ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.6 stars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Xf-Va-GYO">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="4Wt-cV-4Rw"/>
                                             <constraint firstAttribute="width" constant="71" id="XeW-x1-vVB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -89,7 +83,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e2s-dy-Glg" id="Zmh-iD-g6r">
-                                            <frame key="frameInset" width="343" height="59"/>
+                                            <frame key="frameInset" width="343" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Listing Type" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="XOi-Nt-e6K">
