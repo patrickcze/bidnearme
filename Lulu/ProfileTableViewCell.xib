@@ -22,6 +22,12 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBF-rP-NsA"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bidders" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLL-bN-dDM">
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Cell Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="28w-VV-XhF">
                         <constraints>
                             <constraint firstAttribute="width" constant="89" id="cKJ-Kr-hxn"/>
@@ -30,12 +36,6 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bidders" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLL-bN-dDM">
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBF-rP-NsA"/>
                 </subviews>
                 <constraints>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="bottom" secondItem="tiu-Qc-7A1" secondAttribute="bottomMargin" id="0hW-hL-mM2"/>
@@ -45,7 +45,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="OBN-IM-w2A" secondAttribute="trailing" constant="12" id="GQS-zn-tQf"/>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="leading" secondItem="tiu-Qc-7A1" secondAttribute="leadingMargin" id="HEf-C8-M6j"/>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="topMargin" id="Lac-Wc-r7v"/>
-                    <constraint firstItem="28w-VV-XhF" firstAttribute="leading" secondItem="PBF-rP-NsA" secondAttribute="trailing" constant="34" id="Row-RS-yRU"/>
+                    <constraint firstItem="28w-VV-XhF" firstAttribute="leading" secondItem="PBF-rP-NsA" secondAttribute="trailing" constant="20" id="Row-RS-yRU"/>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="29:37" id="avn-TQ-WXA"/>
                     <constraint firstAttribute="bottomMargin" secondItem="iLL-bN-dDM" secondAttribute="bottom" constant="3.5" id="lsh-dY-Uaz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="iLL-bN-dDM" secondAttribute="trailing" constant="12" id="rwK-WZ-ANl"/>

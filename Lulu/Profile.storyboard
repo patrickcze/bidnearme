@@ -31,12 +31,7 @@
                                         <color key="textColor" red="0.53725490196078429" green="0.53725490196078429" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Mr. Duck" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="o2c-Zt-9ZR">
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.6 stars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Xf-Va-GYO">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.6 stars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Xf-Va-GYO">
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -47,18 +42,23 @@
                                             <constraint firstAttribute="height" constant="80" id="gh9-HE-oSk"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Mr. Duck" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="o2c-Zt-9ZR">
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="8Xf-Va-GYO" firstAttribute="trailing" secondItem="gE9-qr-ydS" secondAttribute="trailingMargin" constant="-0.5" id="EIh-si-KdF"/>
                                     <constraint firstItem="2eF-Rm-t6e" firstAttribute="trailing" secondItem="gE9-qr-ydS" secondAttribute="trailingMargin" id="LDR-Gi-JLS"/>
                                     <constraint firstItem="jjx-X8-tDy" firstAttribute="top" secondItem="2eF-Rm-t6e" secondAttribute="bottom" constant="19" id="Nkm-et-YxS"/>
-                                    <constraint firstItem="o2c-Zt-9ZR" firstAttribute="leading" secondItem="ADB-Nr-Hwv" secondAttribute="trailing" constant="18" id="Ysv-NK-vzL"/>
-                                    <constraint firstItem="ADB-Nr-Hwv" firstAttribute="top" secondItem="gE9-qr-ydS" secondAttribute="topMargin" constant="17" id="ZaO-mf-0vL"/>
+                                    <constraint firstItem="o2c-Zt-9ZR" firstAttribute="leading" secondItem="ADB-Nr-Hwv" secondAttribute="trailing" constant="8" id="Ysv-NK-vzL"/>
+                                    <constraint firstItem="ADB-Nr-Hwv" firstAttribute="top" secondItem="gE9-qr-ydS" secondAttribute="topMargin" constant="24" id="ZaO-mf-0vL"/>
                                     <constraint firstItem="o2c-Zt-9ZR" firstAttribute="top" secondItem="gE9-qr-ydS" secondAttribute="topMargin" constant="17" id="evc-4B-RnH"/>
                                     <constraint firstItem="jjx-X8-tDy" firstAttribute="trailing" secondItem="gE9-qr-ydS" secondAttribute="trailingMargin" id="jVc-M8-2Sa"/>
                                     <constraint firstItem="2eF-Rm-t6e" firstAttribute="top" secondItem="8Xf-Va-GYO" secondAttribute="bottom" constant="21.5" id="tS2-QE-VGz"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="ADB-Nr-Hwv" secondAttribute="bottom" constant="28.5" id="xOl-UL-1Xk"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="ADB-Nr-Hwv" secondAttribute="bottom" constant="21.5" id="xOl-UL-1Xk"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="jjx-X8-tDy" secondAttribute="bottom" constant="17" id="xco-bo-8dG"/>
                                     <constraint firstItem="8Xf-Va-GYO" firstAttribute="top" secondItem="gE9-qr-ydS" secondAttribute="topMargin" constant="17" id="xmn-SK-7yn"/>
                                 </constraints>
@@ -69,8 +69,8 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListingTypeCell" id="e2s-dy-Glg" customClass="ListingTypeTableViewCell" customModule="Lulu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e2s-dy-Glg" id="Zmh-iD-g6r">
-                                            <frame key="frameInset" width="343" height="60"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="e2s-dy-Glg" id="Zmh-iD-g6r">
+                                            <frame key="frameInset" width="343" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Listing Type" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="XOi-Nt-e6K">
@@ -79,21 +79,18 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="fHS-x3-OjO">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="13" id="dzT-bs-LzM"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.55216247522602679" green="0.55340684952091501" blue="0.57239583333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fHS-x3-OjO" firstAttribute="centerX" secondItem="Zmh-iD-g6r" secondAttribute="centerX" constant="157" id="80e-tt-W7T"/>
-                                                <constraint firstItem="XOi-Nt-e6K" firstAttribute="leading" secondItem="Zmh-iD-g6r" secondAttribute="leadingMargin" id="8ro-Kr-zP1"/>
-                                                <constraint firstItem="XOi-Nt-e6K" firstAttribute="centerY" secondItem="Zmh-iD-g6r" secondAttribute="centerY" id="NF7-yg-nUR"/>
-                                                <constraint firstItem="XOi-Nt-e6K" firstAttribute="centerX" secondItem="Zmh-iD-g6r" secondAttribute="centerX" constant="-102.5" id="OCf-Tj-L0T"/>
-                                                <constraint firstItem="fHS-x3-OjO" firstAttribute="trailing" secondItem="Zmh-iD-g6r" secondAttribute="trailingMargin" id="bfY-Ib-q2i"/>
-                                                <constraint firstItem="fHS-x3-OjO" firstAttribute="centerY" secondItem="Zmh-iD-g6r" secondAttribute="centerY" id="tw6-uz-xq0"/>
+                                                <constraint firstItem="fHS-x3-OjO" firstAttribute="top" secondItem="Zmh-iD-g6r" secondAttribute="top" constant="15" id="7ze-5m-qQ5"/>
+                                                <constraint firstItem="fHS-x3-OjO" firstAttribute="trailing" secondItem="Zmh-iD-g6r" secondAttribute="trailingMargin" id="XK7-8a-fsM"/>
+                                                <constraint firstItem="XOi-Nt-e6K" firstAttribute="centerY" secondItem="Zmh-iD-g6r" secondAttribute="centerY" id="k15-PH-n3Z"/>
+                                                <constraint firstAttribute="bottom" secondItem="fHS-x3-OjO" secondAttribute="bottom" constant="15" id="oZX-wc-84D"/>
+                                                <constraint firstItem="XOi-Nt-e6K" firstAttribute="centerX" secondItem="Zmh-iD-g6r" secondAttribute="centerX" constant="-90.5" id="pS7-wl-XRc"/>
+                                                <constraint firstItem="XOi-Nt-e6K" firstAttribute="leading" secondItem="Zmh-iD-g6r" secondAttribute="leadingMargin" id="s6t-s4-ALo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
