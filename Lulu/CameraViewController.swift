@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import FirebaseStorage
+import FirebaseAuth
 import FirebaseDatabase
-
+import FirebaseStorage
 
 class CameraViewController: UIViewController {
     // MARK: - Outlets
@@ -27,7 +27,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup reference to the database
+        // Set up reference to the database
         firebaseDBReference = FIRDatabase.database().reference()
         
         // Establish border colouring and corners on textview and button to matach styles
@@ -36,13 +36,13 @@ class CameraViewController: UIViewController {
         descTextArea.layer.cornerRadius = 5.0
         postButtonOutlet.layer.cornerRadius = 5.0
         
-        // Setup appropriate delegates
+        // Set up appropriate delegates
         descTextArea.delegate = self
         titleTextField.delegate = self
         startingPriceTextField.delegate = self
         endDateTextField.delegate = self
         
-        // Setup toolbar to appear above numebrica keybaord when setting price
+        // Set up toolbar to appear above numerical keyboard when setting price
         let numberToolbar = UIToolbar()
         numberToolbar.barStyle = UIBarStyle.default
         
@@ -86,6 +86,7 @@ class CameraViewController: UIViewController {
         // Disable post button while uploading information
         self.postButtonOutlet.isEnabled = false
         
+        let userId = FIRAuth.auth()?.currentUser?.uid
         let listingTitle = titleTextField.text
         let startPrice = Int(startingPriceTextField.text!)
         let endDate = endDateTextField.text
@@ -97,7 +98,7 @@ class CameraViewController: UIViewController {
             "endDate": endDate ?? "endDate",
             "desc": desc ?? "desc",
             "endDate": " ",
-            "seller":" ",
+            "seller": " ",
             "buyoutPrice": " ",
             "currentPrice": startPrice ?? -1
         ]
@@ -107,31 +108,33 @@ class CameraViewController: UIViewController {
         let image = (addPhotosImage.image)!
         let imageData = UIImageJPEGRepresentation(image, 0.8)
         
-        uploadImageToFirebase(data: imageData!, listingData: listingDetails, dbreference: dbreference)
+        if let imageUrl = uploadImageToFirebase(data: imageData!, dbreference: dbreference) {
+            listingDetails.setValue([imageUrl], forKey: "imageUrl")
+            self.uploadListingToDB(listingDetails, dbreference: dbreference)
+        } else {
+            // TODO: Display error indicating that
+        }
     }
     
-    // Handles uploading the image to firebase upon which the listing details are sent to the database
-    func uploadImageToFirebase(data: Data, listingData: NSMutableDictionary, dbreference: FIRDatabaseReference) {
+    /**
+     Uploads a listing image to Firebase and returns its image URL if it was uploaded successfully.
+     */
+    func uploadImageToFirebase(data: Data, dbreference: FIRDatabaseReference) -> String? {
         let dbrefString = String(dbreference.description().characters.suffix(20))
-        
         let storageRef = FIRStorage.storage().reference(withPath: "listingImages/\(dbrefString).jpg")
         let uploadMetadata = FIRStorageMetadata()
         uploadMetadata.contentType = "image/jpeg"
         
-        var downloadURL:String!
-        
+        var imageUrl: String?
         storageRef.put(data as Data, metadata: uploadMetadata) { (metadata, error) in
             if (error != nil) {
                 // Uh-oh, an error occurred!
                 // TODO: deal with this in some way
             } else {
-                downloadURL = (metadata!.downloadURL()?.absoluteString)!
-                
-                listingData.addEntries(from: ["imageURL": [downloadURL]])
-                
-                self.uploadListingToDB(listingData, dbreference: dbreference)
+                imageUrl = metadata!.downloadURL()?.absoluteString
             }
         }
+        return imageUrl
     }
     
     // Places the listing details in the DB and resets the fields on the page
