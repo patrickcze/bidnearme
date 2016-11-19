@@ -15,7 +15,7 @@ import AlamofireImage
 private let reuseIdentifier = "ListingCollectionCell"
 
 class HomeViewController: UIViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var searchBarContainerView: UIView!
     @IBOutlet weak var listingsCollectionView: UICollectionView!
@@ -91,6 +91,22 @@ class HomeViewController: UIViewController {
                 
                 self.tempData.append(tempListing)
             }
+            
+            
+            // ronny - Copying some listings for the profile page - TEMPORAL
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            if appDelegate != nil && self.tempData.count >= 4
+            {
+                appDelegate?.dummyUser.soldListings = []
+                appDelegate?.dummyUser.buyingListings = [self.tempData[0],self.tempData[1],self.tempData[2],self.tempData[3]]
+                appDelegate?.dummyUser.favoritedListings = [self.tempData[1]]
+                appDelegate?.dummyUser.soldListings = [self.tempData[2]]
+                appDelegate?.dummyUser.postedListings = [self.tempData[3]]
+            }
+            // -----------------------
+            
+            
+            
             //Refresh listing view
             self.listingsCollectionView.reloadData()
         }

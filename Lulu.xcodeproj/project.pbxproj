@@ -17,12 +17,17 @@
 		3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */; };
 		3DC987141DB5DCD30022A2ED /* LuluTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC987131DB5DCD30022A2ED /* LuluTests.swift */; };
 		3DC9871F1DB5DCD30022A2ED /* LuluUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */; };
+		5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AEE1DE005C000099683 /* ListingTableViewController.swift */; };
+		5B054AF11DE005CC00099683 /* ListingTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AF01DE005CC00099683 /* ListingTypeTableViewCell.swift */; };
+		5B054AF31DE005E100099683 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AF21DE005E100099683 /* ProfileTableViewCell.swift */; };
+		5B054AF51DE005EE00099683 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B054AF41DE005EE00099683 /* ProfileTableViewCell.xib */; };
+		5B054AF71DE005FC00099683 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AF61DE005FC00099683 /* ProfileViewController.swift */; };
+		5B054AF91DE0065300099683 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B054AF81DE0065300099683 /* Profile.storyboard */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
 		7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD434C1DD256B800E0CECE /* CameraViewController.swift */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
 		BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */; };
 		BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */; };
-		BC60E8E11DC688DE004D7FB8 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8E01DC688DE004D7FB8 /* Profile.storyboard */; };
 		BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */; };
 		BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */; };
 		BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8ED1DC694A7004D7FB8 /* Listing.swift */; };
@@ -67,6 +72,12 @@
 		3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuluUITests.swift; sourceTree = "<group>"; };
 		3DC987201DB5DCD30022A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lulu.entitlements; sourceTree = "<group>"; };
+		5B054AEE1DE005C000099683 /* ListingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingTableViewController.swift; sourceTree = "<group>"; };
+		5B054AF01DE005CC00099683 /* ListingTypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingTypeTableViewCell.swift; sourceTree = "<group>"; };
+		5B054AF21DE005E100099683 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		5B054AF41DE005EE00099683 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		5B054AF61DE005FC00099683 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5B054AF81DE0065300099683 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBD434C1DD256B800E0CECE /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +86,6 @@
 		BC60E8D91DC688AB004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Groups.storyboard; sourceTree = "<group>"; };
 		BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		BC60E8DE1DC688CE004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Camera.storyboard; sourceTree = "<group>"; };
-		BC60E8E01DC688DE004D7FB8 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		BC60E8ED1DC694A7004D7FB8 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
@@ -173,8 +183,8 @@
 				BC60E8E81DC6942E004D7FB8 /* Controllers */,
 				3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */,
 				3DC987021DB5DCD20022A2ED /* Main.storyboard */,
-				BC60E8E01DC688DE004D7FB8 /* Profile.storyboard */,
 				3D546E651DCFA85200188DBD /* Login.storyboard */,
+				5B054AF81DE0065300099683 /* Profile.storyboard */,
 				BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */,
 				BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */,
 				BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */,
@@ -205,6 +215,25 @@
 			path = LuluUITests;
 			sourceTree = "<group>";
 		};
+		5B054AEC1DE0057A00099683 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5B054AF01DE005CC00099683 /* ListingTypeTableViewCell.swift */,
+				5B054AF41DE005EE00099683 /* ProfileTableViewCell.xib */,
+				5B054AF21DE005E100099683 /* ProfileTableViewCell.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		5B054AED1DE0058300099683 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5B054AF61DE005FC00099683 /* ProfileViewController.swift */,
+				5B054AEE1DE005C000099683 /* ListingTableViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		7CBD43491DD2558400E0CECE /* Camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +245,7 @@
 		BC60E8E81DC6942E004D7FB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B054AED1DE0058300099683 /* Profile */,
 				7CBD43491DD2558400E0CECE /* Camera */,
 				3D03AA091DCED3240034908C /* Login */,
 				BC60E8EB1DC6945F004D7FB8 /* Home */,
@@ -235,6 +265,7 @@
 		BC60E8EA1DC6944D004D7FB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5B054AEC1DE0057A00099683 /* Profile */,
 				BC60E8EC1DC69468004D7FB8 /* Home */,
 			);
 			name = Views;
@@ -390,13 +421,14 @@
 			files = (
 				BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */,
 				3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */,
+				5B054AF91DE0065300099683 /* Profile.storyboard in Resources */,
 				BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */,
 				3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */,
 				3DC987061DB5DCD20022A2ED /* Assets.xcassets in Resources */,
 				BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */,
-				BC60E8E11DC688DE004D7FB8 /* Profile.storyboard in Resources */,
 				3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */,
 				3D546E661DCFA85200188DBD /* Login.storyboard in Resources */,
+				5B054AF51DE005EE00099683 /* ProfileTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,9 +756,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
+				5B054AF31DE005E100099683 /* ProfileTableViewCell.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* FacebookLoginViewController.swift in Sources */,
+				5B054AF11DE005CC00099683 /* ListingTypeTableViewCell.swift in Sources */,
+				5B054AF71DE005FC00099683 /* ProfileViewController.swift in Sources */,
 				BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */,
 				7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
