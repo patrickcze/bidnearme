@@ -72,9 +72,6 @@ class HomeViewController: UIViewController {
                     let varNum = String(item)
                     let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
                     
-                    print("url")
-                    print(URL(string:urlString))
-                    
                     imageURLArray.append(URL(string:urlString)!)
                 }
                 
