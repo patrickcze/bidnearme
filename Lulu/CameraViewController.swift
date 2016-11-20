@@ -57,6 +57,15 @@ class CameraViewController: UIViewController {
         
         startingPriceTextField.inputAccessoryView = numberToolbar
         
+        //set up date picker
+        let datePicker: UIDatePicker = UIDatePicker()
+        datePicker.frame = CGRect(x: 10, y:50, width: self.view.frame.width, height: 200)
+        datePicker.timeZone = NSTimeZone.local
+        datePicker.backgroundColor = UIColor.white
+        
+        datePicker.addTarget(self, action: #selector(CameraViewController.datePickerValueChanged(_:)), for: .valueChanged)
+        self.view.addSubview(datePicker)
+        
         // Setup toolbar to be above keybaord on text area
         let descToolbar = UIToolbar()
         descToolbar.barStyle = UIBarStyle.default
@@ -79,6 +88,20 @@ class CameraViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    //changes date and time value in text field
+    func datePickerValueChanged(_ sender: UIDatePicker){
+        
+        //creating date formatter
+        let dateFormatter: DateFormatter = DateFormatter()
+        
+        //set date format
+        dateFormatter.dateFormat = "MM/dd/YYYY hh:mm a"
+        
+        //Apply date format
+        endDateTextField.text = dateFormatter.string(from: sender.date)
+        
     }
     
     // Function handles the steps required to take the data on the view and place it into the DB
