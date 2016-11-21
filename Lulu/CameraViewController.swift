@@ -6,12 +6,99 @@
 //  Copyright © 2016 Team Lulu. All rights reserved.
 //
 
+
+/*
+ var data = ["1 Day", "3 Days", "5 Days", "7 Days", "10 Days", "14 Days"]
+ var picker = UIPickerView()
+ 
+ override func viewDidLoad() {
+ super.viewDidLoad()
+ 
+ //set up picker to delegate
+ picker.delegate = self
+ 
+ //set up picker to datasource
+ picker.dataSource = self
+ 
+ //set up input view of end date text field to picker
+ endDateTextField.inputView = picker
+ 
+ // Initialize reference to the Firebase database.
+ ref = FIRDatabase.database().reference()
+ 
+ // Initialize reference to the Firebase storage.
+ storageRef = FIRStorage.storage().reference()
+ 
+ // Establish border colouring and corners on textview and button to matach styles
+ descriptionTextArea.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+ descriptionTextArea.layer.borderWidth = 1.0
+ descriptionTextArea.layer.cornerRadius = 5.0
+ postListingButton.layer.cornerRadius = 5.0
+ 
+ // Set up appropriate delegates
+ descriptionTextArea.delegate = self
+ titleTextField.delegate = self
+ startingPriceTextField.delegate = self
+ endDateTextField.delegate = self
+ 
+ // Set up toolbar to appear above numerical keyboard when setting price
+ let numberToolbar = UIToolbar()
+ numberToolbar.barStyle = UIBarStyle.default
+ 
+ numberToolbar.setItems([
+ UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CameraViewController.cancelPressed)),
+ UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+ UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(CameraViewController.donePressed))
+ ], animated: false)
+ 
+ numberToolbar.isUserInteractionEnabled = true
+ numberToolbar.sizeToFit()
+ 
+ startingPriceTextField.inputAccessoryView = numberToolbar
+ 
+ // Setup toolbar to be above keybaord on text area
+ let descriptionToolbar = UIToolbar()
+ descriptionToolbar.barStyle = UIBarStyle.default
+ descriptionToolbar.items = [
+ UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(CameraViewController.cancelPressed)),
+ UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+ UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(CameraViewController.donePressed))
+ ]
+ 
+ descriptionToolbar.sizeToFit()
+ descriptionTextArea.inputAccessoryView = descriptionToolbar
+ }
+ 
+ // returns the number of 'columns' to display.
+ public func numberOfComponents(in pickerView: UIPickerView) -> Int{
+ return 1;
+ }
+ 
+ // returns the # of rows in each component.
+ public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+ return data.count
+ 
+ }
+ 
+ //places text in text field
+ func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+ endDateTextField.text = data[row]
+ }
+ 
+ // title for each row
+ func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+ return data[row]
+ }
+ 
+ */
+
+
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
 
 
-class CameraViewController: UIViewController {
+class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     // MARK: - Outlets
     @IBOutlet weak var addPhotosImage: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -24,8 +111,20 @@ class CameraViewController: UIViewController {
     var tempUserData: User!
     var firebaseDBReference: FIRDatabaseReference!
     
+    var data = ["1 Day", "3 Days", "5 Days", "7 Days", "10 Days", "14 Days"]
+    var picker = UIPickerView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //set up picker to delegate
+        picker.delegate = self
+        
+        //set up picker to datasource
+        picker.dataSource = self
+        
+        //set up input view of end date text field to picker
+        endDateTextField.inputView = picker
         
         // Setup reference to the database
         firebaseDBReference = FIRDatabase.database().reference()
@@ -57,15 +156,6 @@ class CameraViewController: UIViewController {
         
         startingPriceTextField.inputAccessoryView = numberToolbar
         
-        //set up date picker
-        let datePicker: UIDatePicker = UIDatePicker()
-        datePicker.frame = CGRect(x: 10, y:50, width: self.view.frame.width, height: 200)
-        datePicker.timeZone = NSTimeZone.local
-        datePicker.backgroundColor = UIColor.white
-        
-        datePicker.addTarget(self, action: #selector(CameraViewController.datePickerValueChanged(_:)), for: .valueChanged)
-        self.view.addSubview(datePicker)
-        
         // Setup toolbar to be above keybaord on text area
         let descToolbar = UIToolbar()
         descToolbar.barStyle = UIBarStyle.default
@@ -79,6 +169,27 @@ class CameraViewController: UIViewController {
         descTextArea.inputAccessoryView = descToolbar
     }
     
+    // returns the number of 'columns' to display.
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 1;
+    }
+    
+    // returns the # of rows in each component.
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return data.count
+        
+    }
+    
+    //places text in text field
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        endDateTextField.text = data[row]
+    }
+    
+    // title for each row
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return data[row]
+    }
+    
     func donePressed(){
         view.endEditing(true)
     }
@@ -88,20 +199,6 @@ class CameraViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    //changes date and time value in text field
-    func datePickerValueChanged(_ sender: UIDatePicker){
-        
-        //creating date formatter
-        let dateFormatter: DateFormatter = DateFormatter()
-        
-        //set date format
-        dateFormatter.dateFormat = "MM/dd/YYYY hh:mm a"
-        
-        //Apply date format
-        endDateTextField.text = dateFormatter.string(from: sender.date)
-        
     }
     
     // Function handles the steps required to take the data on the view and place it into the DB
