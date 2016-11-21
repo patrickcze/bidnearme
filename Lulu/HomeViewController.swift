@@ -47,6 +47,8 @@ class HomeViewController: UIViewController {
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         searchBarContainerView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,6 +133,18 @@ class HomeViewController: UIViewController {
             let cellHeight = layout.itemSize.height
             layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
             layout.invalidateLayout()
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    // Notifies the view controller that a segue is about to be performed.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowListingDetail" {
+            if let indexPath = listingsCollectionView.indexPathsForSelectedItems {
+                let destinationController = segue.destination as! ListingDetailViewController
+                destinationController.listing = tempData[indexPath[0].row]
+            }
         }
     }
 }
