@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FirebaseCore
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 import Alamofire
 import AlamofireImage
 
@@ -40,30 +42,32 @@ class HomeViewController: UIViewController {
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         // Configure searchbar with autolayout & add it to view.
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         searchBarContainerView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
         //Get a snapshot of listings
-        let listingRef = self.ref.child("listings")
+        let listingRef = ref.child("listings")
         
         //Watch for changes to listings
-        listingRef.observe(FIRDataEventType.value){(snap: FIRDataSnapshot) in
+        listingRef.observe(FIRDataEventType.value, with: { (snap) in
             let enumerator = snap.children
             var tempListing: Listing
             
             //Iterate over listings
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
                 //Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
-                let currentPrice = rest.childSnapshot(forPath: "currentPrice").value as? Int
-                let desc = rest.childSnapshot(forPath: "desc").value as? String
-                let imageURLS = rest.childSnapshot(forPath: "imageURL")
+                let currentPrice = rest.childSnapshot(forPath: "startingPrice").value as! Double
+                let desc = rest.childSnapshot(forPath: "description").value as? String
+                let imageURLS = rest.childSnapshot(forPath: "imageUrls")
                 
                 var imageURLArray:[URL] = []
                 var index = 0
@@ -84,7 +88,7 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice!, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, Int(currentPrice), 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }
@@ -92,21 +96,24 @@ class HomeViewController: UIViewController {
             
             // ronny - Copying some listings for the profile page - TEMPORAL
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            if appDelegate != nil && self.tempData.count >= 4
+            if appDelegate != nil && self.tempData.count > 0
             {
+                appDelegate?.dummyUser.buyingListings = [self.tempData[0]]
+                appDelegate?.dummyUser.favoritedListings = [self.tempData[0]]
+                appDelegate?.dummyUser.soldListings = [self.tempData[0]]
+                appDelegate?.dummyUser.postedListings = [self.tempData[0]]
+            }
+            else {
+                appDelegate?.dummyUser.buyingListings = []
+                appDelegate?.dummyUser.favoritedListings = []
                 appDelegate?.dummyUser.soldListings = []
-                appDelegate?.dummyUser.buyingListings = [self.tempData[0],self.tempData[1],self.tempData[2],self.tempData[3]]
-                appDelegate?.dummyUser.favoritedListings = [self.tempData[1]]
-                appDelegate?.dummyUser.soldListings = [self.tempData[2]]
-                appDelegate?.dummyUser.postedListings = [self.tempData[3]]
+                appDelegate?.dummyUser.postedListings = []
             }
             // -----------------------
             
-            
-            
             //Refresh listing view
             self.listingsCollectionView.reloadData()
-        }
+        })
     }
     
     // Dispose of any resources that can be recreated.
