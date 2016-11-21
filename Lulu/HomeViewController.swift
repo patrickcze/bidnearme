@@ -46,7 +46,9 @@ class HomeViewController: UIViewController {
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         searchBarContainerView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
@@ -83,13 +85,13 @@ class HomeViewController: UIViewController {
                     }
                     index+=1
                 }
-
+                
                 // Create a listing for the data within the snapshot
                 tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }
-        
+            
             
             // ronny - Copying some listings for the profile page - TEMPORAL
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
