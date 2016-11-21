@@ -10,6 +10,7 @@ import UIKit
 import FirebaseCore
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 import Alamofire
 import AlamofireImage
 
@@ -41,6 +42,8 @@ class HomeViewController: UIViewController {
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        try! FIRAuth.auth()?.signOut()
         
         // Configure searchbar with autolayout & add it to view.
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
