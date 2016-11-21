@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                 //Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
-                let currentPrice = rest.childSnapshot(forPath: "startPrice").value as? Int
+                let currentPrice = rest.childSnapshot(forPath: "startingPrice").value as? Int
                 let desc = rest.childSnapshot(forPath: "description").value as? String
                 let imageURLS = rest.childSnapshot(forPath: "imageUrls")
                 

@@ -139,7 +139,7 @@ class CameraViewController: UIViewController {
             let listing: [String: Any] = [
                 "sellerId": sellerId,
                 "title": title,
-                "startPrice": startingPrice,
+                "startingPrice": startingPrice,
                 "description": description,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
