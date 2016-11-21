@@ -62,10 +62,10 @@ class HomeViewController: UIViewController {
             var tempListing: Listing
             
             //Iterate over listings
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
                 //Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
-                let currentPrice = rest.childSnapshot(forPath: "startingPrice").value as? Int
+                let currentPrice = rest.childSnapshot(forPath: "startingPrice").value as! Double
                 let desc = rest.childSnapshot(forPath: "description").value as? String
                 let imageURLS = rest.childSnapshot(forPath: "imageUrls")
                 
@@ -88,7 +88,7 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice!, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, Int(currentPrice), 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }
