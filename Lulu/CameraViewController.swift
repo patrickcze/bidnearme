@@ -96,13 +96,10 @@ class CameraViewController: UIViewController {
         // Disable post button while uploading information
         self.postListingButton.isEnabled = false
         
-        let sellerId = "test"
-        /*
         guard let sellerId = FIRAuth.auth()?.currentUser?.uid else {
             // TODO: Indicate that a user is logged in.
             return
         }
-        */
         
         guard let title = titleTextField.text else {
             // TODO: Indicate that a title is necessary
