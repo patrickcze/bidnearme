@@ -61,9 +61,9 @@ class HomeViewController: UIViewController {
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                 //Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
-                let currentPrice = rest.childSnapshot(forPath: "currentPrice").value as? Int
-                let desc = rest.childSnapshot(forPath: "desc").value as? String
-                let imageURLS = rest.childSnapshot(forPath: "imageURL")
+                let currentPrice = 25
+                let desc = rest.childSnapshot(forPath: "description").value as? String
+                let imageURLS = rest.childSnapshot(forPath: "imageUrls")
                 
                 var imageURLArray:[URL] = []
                 var index = 0
@@ -84,11 +84,11 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice!, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }
-            
+        
             
             // ronny - Copying some listings for the profile page - TEMPORAL
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
