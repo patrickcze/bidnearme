@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseCore
 import FirebaseStorage
 import FirebaseDatabase
 import Alamofire
@@ -50,10 +51,10 @@ class HomeViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         //Get a snapshot of listings
-        let listingRef = self.ref.child("listings")
+        let listingRef = ref.child("listings")
         
         //Watch for changes to listings
-        listingRef.observe(FIRDataEventType.value){(snap: FIRDataSnapshot) in
+        listingRef.observe(FIRDataEventType.value, with: { (snap) in
             let enumerator = snap.children
             var tempListing: Listing
             
@@ -82,7 +83,7 @@ class HomeViewController: UIViewController {
                     }
                     index+=1
                 }
-                
+
                 // Create a listing for the data within the snapshot
                 tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
@@ -107,11 +108,9 @@ class HomeViewController: UIViewController {
             }
             // -----------------------
             
-            
-            
             //Refresh listing view
             self.listingsCollectionView.reloadData()
-        }
+        })
     }
     
     // Dispose of any resources that can be recreated.
