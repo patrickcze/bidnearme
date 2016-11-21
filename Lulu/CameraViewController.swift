@@ -149,7 +149,7 @@ class CameraViewController: UIViewController {
             ]
             
             // TODO: Allow user input for auction duration.
-            self.writeListing(listing, withAuctionDuration: ListingTimeInterval.oneWeek)
+            self.writeListing(listing, withAuctionDuration: ListingTimeInterval.sevenDays)
         }
     }
     

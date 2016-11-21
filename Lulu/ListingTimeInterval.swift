@@ -10,9 +10,9 @@ enum ListingTimeInterval: Int {
     case oneDay = 1
     case threeDays = 3
     case fiveDays = 5
+    case sevenDays = 7
     case tenDays = 10
-    case oneWeek = 7
-    case twoWeeks = 14
+    case fourteenDays = 14
     
     var numberOfMilliseconds: Int {
         let millisecondsPerDay = 86400000
