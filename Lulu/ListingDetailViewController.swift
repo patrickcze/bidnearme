@@ -63,6 +63,10 @@ class ListingDetailViewController: UIViewController {
             
             // TODO: Implement ratings for sellers.
             profileRating.rating = 3
+            
+            for button in profileRating.ratingButtons{
+                button.isUserInteractionEnabled = false
+            }
         }
     }
     
