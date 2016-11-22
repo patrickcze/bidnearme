@@ -17,16 +17,8 @@ class RatingControl: UIView {
         }
     }
     
-    var reviews = 0 {
-        didSet {
-            setNeedsLayout()
-        }
-    }
-    
     var ratingButtons = [UIButton]()
-    var reviewLabel = UILabel()
     let buttonSpacing = 2
-    let labelSpacing = 3
     let starCount = 5
     
     // MARK: - Initialization
@@ -49,19 +41,12 @@ class RatingControl: UIView {
             ratingButtons += [button]
             addSubview(button)
         }
-        
-        reviewLabel.font = UIFont(name: "HelveticaNeue-Light", size: 12)
-        reviewLabel.textColor = UIColor.lightGray
-        reviewLabel.text = String(self.reviews) + " Reviews"
-        
-        addSubview(reviewLabel)
     }
     
     // The natural size for the receiving view, considering only properties of the view itself.
     override public var intrinsicContentSize: CGSize {
         let buttonSize = Int(frame.size.height / 1.25)
-        let width = (buttonSize * starCount) + (buttonSpacing * (starCount - 1)) + Int(reviewLabel.frame.width)
-        
+        let width = (buttonSize * starCount) + (buttonSpacing * (starCount - 1))
         return CGSize(width: width, height: buttonSize)
     }
     
@@ -76,14 +61,7 @@ class RatingControl: UIView {
             button.frame = buttonFrame
         }
         
-        // Offset the labels' origin
-        var labelFrame = CGRect(x: 0, y: 0, width: buttonSize * 10, height: buttonSize)
-        labelFrame.origin.x = CGFloat(5 * (buttonSize + labelSpacing))
-        
-        reviewLabel.frame = labelFrame
-        
         updateButtonSelectionStates()
-        updateReviewCount()
     }
     
     // If the index of a button is less than the rating, that button should be selected.
@@ -91,11 +69,6 @@ class RatingControl: UIView {
         for (index, button) in ratingButtons.enumerated() {
             button.isSelected = index < rating
         }
-    }
-    
-    // Update the number of reviews.
-    func updateReviewCount() {
-        reviewLabel.text = String(self.reviews) + " Reviews"
     }
 }
 

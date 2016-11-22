@@ -23,14 +23,17 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileRating: RatingControl!
     
+    @IBOutlet weak var placeBidButton: UIButton!
+    
     // MARK: - Properties
     var listing: Listing?
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        placeBidButton.layer.cornerRadius = 5.0
         
         if let listing = listing {
             listingImageView.af_setImage(withURL: listing.photos[0])
@@ -40,8 +43,8 @@ class ListingDetailViewController: UIViewController {
             profileImageView.image = listing.seller.profileImage
             profileNameLabel.text = "\(listing.seller.firstName!) \(listing.seller.lastName!)"
             
+            // TODO: Implement ratings for sellers.
             profileRating.rating = 3
-            profileRating.reviews = 10
         }
     }
 }
