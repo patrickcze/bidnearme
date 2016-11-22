@@ -6,6 +6,7 @@
 //  Copyright © 2016 Team Lulu. All rights reserved.
 //
 
+
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
@@ -30,21 +31,11 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //set up picker to delegate
-        auctionDurationPicker.delegate = self
-        
-        //set up picker to datasource
-        auctionDurationPicker.dataSource = self
-        
-        //set up input view of end date text field to picker
-        endDateTextField.inputView = auctionDurationPicker
-        
         // Initialize reference to the Firebase database.
         ref = FIRDatabase.database().reference()
         
         // Initialize reference to the Firebase storage.
         storageRef = FIRStorage.storage().reference()
-
         
         // Establish border colouring and corners on textview and button to matach styles
         descriptionTextArea.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
@@ -116,7 +107,7 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row]
     }
-    
+
     func donePressed(){
         view.endEditing(true)
     }
