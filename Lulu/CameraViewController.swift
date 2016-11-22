@@ -116,6 +116,9 @@ class CameraViewController: UIViewController {
             return
         }
         
+        // TODO: Replace this with picker value convert to the enum.
+        let auctionDuration = ListingTimeInterval.sevenDays
+        
         // Prepare and upload listing image to Firebase Storage.
         // TODO: Throw errors.
         guard let image = addPhotosImage.image else {
@@ -123,13 +126,8 @@ class CameraViewController: UIViewController {
             return
         }
         
-        guard let imageData = UIImageJPEGRepresentation(image, 0.8) else {
-            // TODO: Display error message about file format.
-            return
-        }
-        
         // Upload the image and write the listing if the image was successfully uploaded.
-        uploadImage(imageData: imageData) { (imageUrl) in
+        uploadImage(image: image) { (imageUrl) in
             
             guard let imageUrlString = imageUrl?.absoluteString else {
                 // TODO: Display error message about upload failure.
@@ -149,7 +147,11 @@ class CameraViewController: UIViewController {
             ]
             
             // TODO: Allow user input for auction duration.
-            self.writeListing(listing, withAuctionDuration: ListingTimeInterval.sevenDays)
+            self.writeListing(listing) { (listingRef) in
+                self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
+                self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
+                self.resetListingViews()
+            }
         }
     }
     
@@ -165,13 +167,18 @@ class CameraViewController: UIViewController {
     
     /**
      Uploads an image to Firebase and returns its image URL if it was uploaded successfully.
+     
+     - parameter image: Image to upload.
+     - parameter completion: Completion block to pass the new image's URL to.
      */
-    func uploadImage(imageData: Data, completion: @escaping (URL?) -> Void) {
+    func uploadImage(image: UIImage, completion: @escaping (URL?) -> Void) {
+        // Convert image to JPEG. Any file type supported by UIImage will work.
+        let imageData = UIImageJPEGRepresentation(image, 0.8)!
         let uuid = UUID().uuidString
         let imageRef = storageRef.child("listingImages/\(uuid).jpg")
         let metadata = FIRStorageMetadata()
         metadata.contentType = "image/jpeg"
-        
+
         imageRef.put(imageData, metadata: metadata) { (metadata, error) in
             if error != nil {
                 // Uh-oh, an error occurred!
@@ -182,21 +189,35 @@ class CameraViewController: UIViewController {
         }
     }
     
-    // Places the listing details in the DB and resets the fields on the page
-    func writeListing(_ listing: [String: Any], withAuctionDuration: ListingTimeInterval) {
-        let newListingRef = ref.child("listings").childByAutoId()
+    /**
+     Writes the listing to the database.
+     
+     - parameter listing: Dictionary with listing information.
+     - parameter completion: Completion block to pass the new listing reference to.
+     */
+    func writeListing(_ listing: [String: Any], completion: @escaping (FIRDatabaseReference) -> Void) {
+        let listingRef = ref.child("listings").childByAutoId()
         
         // Write the listing to the database. Firebase sets the createdTimestamp for use below.
-        newListingRef.setValue(listing) { (error, newRef) in
+        listingRef.setValue(listing) { (error, newListingRef) in
             if error != nil {
                 // TODO: deal with this in some way
             }
-            self.resetListingViews()
+            
+            completion(newListingRef)
         }
-        
-        // Sets the listing's auction end time based on createdTimestamp and duration.
-        // This is necessary as createdTimestamp is written by Firebase server-side.
-        newListingRef.observeSingleEvent(of: .value, with: { (snapshot) in
+    }
+    
+    /**
+     Sets the listing's auction end time based on createdTimestamp and duration.
+     This is necessary as createdTimestamp is written by Firebase server-side.
+     
+     - parameter listingRef: Firebase Database reference to the listing.
+     - parameter withAuctionDuration: Specified duration of the auction.
+     */
+    func updateListingAuctionEnd(listingRef: FIRDatabaseReference, withAuctionDuration: ListingTimeInterval) {
+
+        listingRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let listing = snapshot.value as? [String: Any]
             guard let createdTimestamp = listing?["createdTimestamp"] as? Int else {
                 // TODO: Handle error with retrieving created timestamp value.
@@ -205,10 +226,20 @@ class CameraViewController: UIViewController {
             
             // Update the listing's timestamp based on the duration.
             let auctionEndTimestamp = self.getLaterTimestamp(time: withAuctionDuration, from: createdTimestamp)
-            newListingRef.updateChildValues(["auctionEndTimestamp": auctionEndTimestamp])
+            listingRef.updateChildValues(["auctionEndTimestamp": auctionEndTimestamp])
         }) { (error) in
             // TODO: Handle error with updating.
         }
+    }
+    
+    /**
+     Adds the listing to the user's selling list.
+     
+     - parameter listingId: Listing ID of the listing to associate with the user.
+     - parameter userId: User ID of the user to associate the listing to.
+     */
+    func addListingToUserSelling(listingId: String, userId: String) {
+        ref.child("users/\(userId)/listings/selling/\(listingId)").setValue(true)
     }
 }
 
@@ -266,25 +297,6 @@ extension CameraViewController: UIImagePickerControllerDelegate {
 
 // MARK: - UINavigationControllerDelegate
 extension CameraViewController: UINavigationControllerDelegate {
-}
-
-// MARK: - UITextFieldDelegate
-extension CameraViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        //Hide the keyboard
-        textField.resignFirstResponder()
-        
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // TODO: deal with this in some way
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // TODO: deal with this in some way
-    }
 }
 
 // MARK: - UITextViewDelegate
