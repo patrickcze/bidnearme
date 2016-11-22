@@ -91,6 +91,16 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         descriptionToolbar.sizeToFit()
         descriptionTextArea.inputAccessoryView = descriptionToolbar
+        
+        // Setup toolbar to be above keybaord on text area
+        let durationPickerToolbar = UIToolbar()
+        durationPickerToolbar.barStyle = UIBarStyle.default
+        durationPickerToolbar.items = [
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(CameraViewController.donePressed))
+        ]
+        
+        durationPickerToolbar.sizeToFit()
+        endDateTextField.inputAccessoryView = descriptionToolbar
     }
     
     // returns the number of 'columns' to display.
