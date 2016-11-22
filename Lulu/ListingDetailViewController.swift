@@ -35,6 +35,7 @@ class ListingDetailViewController: UIViewController {
         
         bidValueTextField.delegate = self
     
+        // Setup the toolbar for the bidding textview
         let numberToolbar = UIToolbar()
         numberToolbar.barStyle = UIBarStyle.default
         
