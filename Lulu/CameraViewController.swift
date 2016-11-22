@@ -25,7 +25,7 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var ref: FIRDatabaseReference!
     var storageRef: FIRStorageReference!
     
-    var data = ["1 Day", "3 Days", "5 Days", "7 Days", "10 Days", "14 Days"]
+    //var data = ["1 Day", "3 Days", "5 Days", "7 Days", "10 Days", "14 Days"]
     var auctionDurationPicker = UIPickerView()
     
     override func viewDidLoad() {
@@ -48,7 +48,6 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         titleTextField.delegate = self
         startingPriceTextField.delegate = self
         endDateTextField.delegate = self
-        
         
         //set up picker to delegate
         auctionDurationPicker.delegate = self
@@ -94,18 +93,20 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // returns the # of rows in each component.
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return data.count
+        return ListingTimeInterval.count.hashValue
         
     }
     
     //places text in text field
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        endDateTextField.text = data[row]
+        endDateTextField.text = ListingTimeInterval(rawValue: row)?.description;
     }
     
     // title for each row
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
+        return ListingTimeInterval(rawValue: row)?.description;
+        
+        //return data[row]
     }
 
     func donePressed(){
