@@ -38,6 +38,8 @@ class RatingControl: UIView {
             
             button.adjustsImageWhenDisabled = false
             
+            button.isUserInteractionEnabled = false
+            
             ratingButtons += [button]
             addSubview(button)
         }
