@@ -77,6 +77,7 @@ class LoginViewController: UIViewController {
             // Otherwise, add this user to the database.
             let userDict = [
                 "name": user.displayName ?? "",
+                "profileImageUrl": String(describing: FIRAuth.auth()?.currentUser?.photoURL),
                 "createdTimestamp": FIRServerValue.timestamp()
                 ] as [String: Any]
             
