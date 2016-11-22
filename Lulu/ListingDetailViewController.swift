@@ -23,6 +23,7 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileRating: RatingControl!
     
+    @IBOutlet weak var bidValueTextField: UITextField!
     @IBOutlet weak var placeBidButton: UIButton!
     
     // MARK: - Properties
@@ -31,7 +32,23 @@ class ListingDetailViewController: UIViewController {
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bidValueTextField.delegate = self
     
+        let numberToolbar = UIToolbar()
+        numberToolbar.barStyle = UIBarStyle.default
+        
+        numberToolbar.setItems([
+            UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ListingDetailViewController.cancelPressed)),
+            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(ListingDetailViewController.donePressed))
+            ], animated: false)
+        
+        numberToolbar.isUserInteractionEnabled = true
+        numberToolbar.sizeToFit()
+        
+        bidValueTextField.inputAccessoryView = numberToolbar
+        
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         placeBidButton.layer.cornerRadius = 5.0
         
@@ -46,5 +63,29 @@ class ListingDetailViewController: UIViewController {
             // TODO: Implement ratings for sellers.
             profileRating.rating = 3
         }
+    }
+    
+    func donePressed(){
+        view.endEditing(true)
+    }
+    
+    func cancelPressed(){
+        view.endEditing(true) // or do something
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension ListingDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // TODO: deal with this in some way
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // TODO: deal with this in some way
     }
 }

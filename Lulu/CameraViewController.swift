@@ -268,25 +268,6 @@ extension CameraViewController: UIImagePickerControllerDelegate {
 extension CameraViewController: UINavigationControllerDelegate {
 }
 
-// MARK: - UITextFieldDelegate
-extension CameraViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        //Hide the keyboard
-        textField.resignFirstResponder()
-        
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // TODO: deal with this in some way
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // TODO: deal with this in some way
-    }
-}
-
 // MARK: - UITextViewDelegate
 extension CameraViewController: UITextViewDelegate {
 }
