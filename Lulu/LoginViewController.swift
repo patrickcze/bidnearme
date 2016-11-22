@@ -49,7 +49,7 @@ class LoginViewController: UIViewController {
                 }
                 
                 // Save user profile into database.
-                self.saveUserInfo(user)
+                self.saveUserInfo(user, profileImageURL: String(describing: user.photoURL!))
             }
         }
     }
@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
      
      - parameter user: User to be saved in the database.
      */
-    func saveUserInfo(_ user: FIRUser) {
+    func saveUserInfo(_ user: FIRUser, profileImageURL: String) {
         ref.child("users").child(user.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
             // Don't do anything if the user already exists in the database.
@@ -77,6 +77,7 @@ class LoginViewController: UIViewController {
             // Otherwise, add this user to the database.
             let userDict = [
                 "name": user.displayName ?? "",
+                "profileImageUrl": profileImageURL,
                 "createdTimestamp": FIRServerValue.timestamp()
                 ] as [String: Any]
             
