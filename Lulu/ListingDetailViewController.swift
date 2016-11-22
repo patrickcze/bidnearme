@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 import Alamofire
 import AlamofireImage
 
@@ -28,10 +29,14 @@ class ListingDetailViewController: UIViewController {
     
     // MARK: - Properties
     var listing: Listing?
+    var ref: FIRDatabaseReference?
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Get a reference to the firebase db and storage
+        ref = FIRDatabase.database().reference()
         
         bidValueTextField.delegate = self
     
@@ -77,6 +82,35 @@ class ListingDetailViewController: UIViewController {
     func cancelPressed(){
         view.endEditing(true) // or do something
     }
+    
+    @IBAction func placeBidPress(_ sender: Any) {
+        // Check mif the user placed a bid value in the text field
+        if let bidAmount = Double(bidValueTextField.text!) {
+            print("user placed bid of \(bidAmount)")
+            
+            //TODO: Validate input of price
+            
+            let listingID = listing?.listingID
+            
+            let listingRef = ref?.child("listings").child(listingID!)
+            
+            listingRef?.observeSingleEvent(of: .value, with: {snapshot in
+                //Check if bid table exists
+                if snapshot.hasChild("bids"){
+                    let bidsRef = listingRef?.child("bids").childByAutoId()
+                    
+                    bidsRef?.child("bidderID").setValue(FIRAuth.auth()?.currentUser?.uid)
+                    bidsRef?.child("amount").setValue(bidAmount)
+                    bidsRef?.child("createdTimestamp").setValue(FIRServerValue.timestamp())
+                }
+                else {
+                    // TODO: bids table is missing should never happen
+                }
+            })
+        }
+        bidValueTextField.text = ""
+    }
+    
 }
 
 // MARK: - UITextFieldDelegate

@@ -231,9 +231,10 @@ class CameraViewController: UIViewController {
             if error != nil {
                 // TODO: deal with this in some way
             }
-            
             completion(newListingRef)
         }
+        
+        listingRef.child("bids").setValue("")
     }
     
     /**
@@ -255,6 +256,7 @@ class CameraViewController: UIViewController {
             // Update the listing's timestamp based on the duration.
             let auctionEndTimestamp = self.getLaterTimestamp(time: withAuctionDuration, from: createdTimestamp)
             listingRef.updateChildValues(["auctionEndTimestamp": auctionEndTimestamp])
+            
         }) { (error) in
             // TODO: Handle error with updating.
         }
@@ -269,6 +271,7 @@ class CameraViewController: UIViewController {
     func addListingToUserSelling(listingId: String, userId: String) {
         ref.child("users/\(userId)/listings/selling/\(listingId)").setValue(true)
     }
+    
 }
 
 
