@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ronny - Temporal code for Profile page
         dummyUser = User(UIImage(named: "duck")!, "Mr. Duck", "Duckin")
         // ----------------
-
         
         // Configure Facebook SDK.
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)

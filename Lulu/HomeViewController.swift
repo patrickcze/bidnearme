@@ -47,6 +47,8 @@ class HomeViewController: UIViewController {
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         searchBarContainerView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,6 +135,18 @@ class HomeViewController: UIViewController {
             layout.invalidateLayout()
         }
     }
+    
+    // MARK: - Navigation
+    
+    // Notifies the view controller that a segue is about to be performed.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowListingDetail" {
+            if let indexPath = listingsCollectionView.indexPathsForSelectedItems {
+                let destinationController = segue.destination as! ListingDetailViewController
+                destinationController.listing = tempData[indexPath[0].row]
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource protocol
@@ -193,5 +207,24 @@ extension HomeViewController: UISearchResultsUpdating {
         } catch _ {}
         
         return matches
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension CameraViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        //Hide the keyboard
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // TODO: deal with this in some way
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // TODO: deal with this in some way
     }
 }
