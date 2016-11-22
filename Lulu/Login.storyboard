@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Facebook Login View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="XKA-5J-Oip">
             <objects>
-                <viewController id="m07-HL-KyD" customClass="FacebookLoginViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="m07-HL-KyD" customClass="LoginViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WIM-vl-U6O"/>
                         <viewControllerLayoutGuide type="bottom" id="u8a-YJ-dby"/>
