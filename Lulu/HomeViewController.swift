@@ -88,9 +88,7 @@ class HomeViewController: UIViewController {
                     }
                     index+=1
                 }
-    
-                print(rest.childSnapshot(forPath: "bids"))
-                
+                    
                 let bidEnumerator = rest.childSnapshot(forPath: "bids").children
                 var maxPrice = currentPrice
                 

@@ -56,9 +56,11 @@ class ListingDetailViewController: UIViewController {
         
         bidValueTextField.inputAccessoryView = numberToolbar
         
+        // Setting user image to a circle
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         placeBidButton.layer.cornerRadius = 5.0
         
+        // Checks if listing data is avaliable
         if let listing = listing {
             listingImageView.af_setImage(withURL: listing.photos[0])
             listingTitleLabel.text = listing.title
@@ -101,36 +103,50 @@ class ListingDetailViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func placeBidPress(_ sender: Any) {
-        // Check mif the user placed a bid value in the text field
-        if let bidAmount = Double(bidValueTextField.text!) {
-            //TODO: Validate input of price
+        //Check if user is logged in
+        if let user = FIRAuth.auth()?.currentUser {
             
-            let listingID = listing?.listingID
-            
-            let listingRef = ref?.child("listings").child(listingID!)
-            
-            listingRef?.observeSingleEvent(of: .value, with: {snapshot in
+            // Check if the user placed a bid value in the text field
+            if let bidAmount = Double(bidValueTextField.text!) {
+                //TODO: Validate input of price
+                
+                let listingID = listing?.listingID
+                let listingRef = ref?.child("listings").child(listingID!)
+                
                 //Check if bid table exists
-                if snapshot.hasChild("bids"){
-                    let bidsRef = listingRef?.child("bids").childByAutoId()
-                    
-                    let bidObject: [String: Any] = [
-                        "bidderID": FIRAuth.auth()?.currentUser?.uid,
-                        "amount": bidAmount,
-                        "createdTimestamp": FIRServerValue.timestamp()
-                    ]
-                    
-                    bidsRef?.setValue(bidObject) { (error) in
-                        if error != nil {
-                            // TODO: deal with this in some way
+                listingRef?.observeSingleEvent(of: .value, with: {snapshot in
+                    if snapshot.hasChild("bids"){
+                        
+                        //Create new location for bid
+                        let bidsRef = listingRef?.child("bids").childByAutoId()
+                        
+                        let bidObject: [String: Any] = [
+                            "bidderID": user.uid,
+                            "amount": bidAmount,
+                            "createdTimestamp": FIRServerValue.timestamp()
+                        ]
+                        
+                        bidsRef?.setValue(bidObject) { (error) in
+                            if error != nil {
+                                // TODO: deal with this in some way
+                            }
                         }
                     }
-                }
-                else {
-                    // TODO: bids table is missing should never happen
-                }
-            })
+                    else {
+                        // TODO: bids table is missing should never happen
+                    }
+                })
+            }
+        } else {
+            // No user is signed in. Remind them with an alert
+            let alert = UIAlertController(title: "Your not signed in...", message: "Please sign into your account in the profile tab", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(defaultAction)
+            
+            self.present(alert, animated: true, completion: nil)
         }
+        
         bidValueTextField.text = ""
     }
 }
