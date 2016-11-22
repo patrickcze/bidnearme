@@ -57,6 +57,7 @@ class ListingDetailViewController: UIViewController {
         bidValueTextField.inputAccessoryView = numberToolbar
         
         // Setting user image to a circle
+        
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         placeBidButton.layer.cornerRadius = 5.0
         

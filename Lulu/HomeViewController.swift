@@ -65,15 +65,17 @@ class HomeViewController: UIViewController {
             
             //Iterate over listings
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
-                //Get basic info about the listing
+                // Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
                 let currentPrice = rest.childSnapshot(forPath: "startingPrice").value as! Double
                 let desc = rest.childSnapshot(forPath: "description").value as? String
                 let imageURLS = rest.childSnapshot(forPath: "imageUrls")
+                let sellerId = rest.childSnapshot(forPath: "sellerId").value as? String
                 
                 var imageURLArray:[URL] = []
                 var index = 0
                 
+                // Get a list of URLs of the listing images
                 for item in 0...imageURLS.childrenCount-1 {
                     let varNum = String(item)
                     let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
@@ -81,14 +83,15 @@ class HomeViewController: UIViewController {
                     imageURLArray.append(URL(string:urlString)!)
                 }
                 
-                //Check for existing listings
+                // Check for existing listings
                 for listing in self.tempData {
                     if listing.listingID == rest.key {
                         self.tempData.remove(at: index)
                     }
                     index+=1
                 }
-                    
+                
+                // Find the largest current bid
                 let bidEnumerator = rest.childSnapshot(forPath: "bids").children
                 var maxPrice = currentPrice
                 
