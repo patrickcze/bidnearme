@@ -19,6 +19,7 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var listingImageView: UIImageView!
     @IBOutlet weak var listingTitleLabel: UILabel!
     @IBOutlet weak var listingDescriptionLabel: UILabel!
+    @IBOutlet weak var listingCurrentPrice: UILabel!
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileNameLabel: UILabel!
@@ -66,6 +67,23 @@ class ListingDetailViewController: UIViewController {
             profileImageView.image = listing.seller.profileImage
             profileNameLabel.text = "\(listing.seller.firstName!) \(listing.seller.lastName!)"
             
+            ref?.child("listings").child(listing.listingID).child("bids").observe(.value, with: { snapshot in
+                print(snapshot)
+
+                let enumerator = snapshot.children
+                var maxPrice = listing.startPrice!
+                
+                while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                    let bidAmount = rest.childSnapshot(forPath: "amount").value as! Double
+                    
+                    if (bidAmount > listing.startPrice!) {
+                        maxPrice = bidAmount
+                    }
+                }
+                
+                self.listingCurrentPrice.text = "$" + String(maxPrice)
+            })
+            
             // TODO: Implement ratings for sellers.
             profileRating.rating = 3
             
@@ -83,11 +101,10 @@ class ListingDetailViewController: UIViewController {
         view.endEditing(true) // or do something
     }
     
+    // MARK: - Actions
     @IBAction func placeBidPress(_ sender: Any) {
         // Check mif the user placed a bid value in the text field
         if let bidAmount = Double(bidValueTextField.text!) {
-            print("user placed bid of \(bidAmount)")
-            
             //TODO: Validate input of price
             
             let listingID = listing?.listingID
@@ -99,9 +116,19 @@ class ListingDetailViewController: UIViewController {
                 if snapshot.hasChild("bids"){
                     let bidsRef = listingRef?.child("bids").childByAutoId()
                     
-                    bidsRef?.child("bidderID").setValue(FIRAuth.auth()?.currentUser?.uid)
-                    bidsRef?.child("amount").setValue(bidAmount)
-                    bidsRef?.child("createdTimestamp").setValue(FIRServerValue.timestamp())
+                    let bidObject: [String: Any] = [
+                        "bidderID": FIRAuth.auth()?.currentUser?.uid,
+                        "amount": bidAmount,
+                        "createdTimestamp": FIRServerValue.timestamp()
+                    ]
+                    
+                    bidsRef?.setValue(bidObject) { (error) in
+                        if error != nil {
+                            // TODO: deal with this in some way
+                        }
+                    }
+
+                    
                 }
                 else {
                     // TODO: bids table is missing should never happen
@@ -110,7 +137,6 @@ class ListingDetailViewController: UIViewController {
         }
         bidValueTextField.text = ""
     }
-    
 }
 
 // MARK: - UITextFieldDelegate
