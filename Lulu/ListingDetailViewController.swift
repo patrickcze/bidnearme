@@ -68,15 +68,13 @@ class ListingDetailViewController: UIViewController {
             profileNameLabel.text = "\(listing.seller.firstName!) \(listing.seller.lastName!)"
             
             ref?.child("listings").child(listing.listingID).child("bids").observe(.value, with: { snapshot in
-                print(snapshot)
-
                 let enumerator = snapshot.children
                 var maxPrice = listing.startPrice!
                 
                 while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                     let bidAmount = rest.childSnapshot(forPath: "amount").value as! Double
                     
-                    if (bidAmount > listing.startPrice!) {
+                    if (bidAmount > maxPrice) {
                         maxPrice = bidAmount
                     }
                 }
@@ -127,8 +125,6 @@ class ListingDetailViewController: UIViewController {
                             // TODO: deal with this in some way
                         }
                     }
-
-                    
                 }
                 else {
                     // TODO: bids table is missing should never happen
