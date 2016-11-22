@@ -58,8 +58,8 @@ class HomeViewController: UIViewController {
         //Get a snapshot of listings
         let listingRef = ref.child("listings")
         
-        //Watch for changes to listings
-        listingRef.observe(FIRDataEventType.value, with: { (snap) in
+        //Get list of current listings
+        listingRef.observeSingleEvent(of: .value, with: { (snap) in
             let enumerator = snap.children
             var tempListing: Listing
             
@@ -88,9 +88,22 @@ class HomeViewController: UIViewController {
                     }
                     index+=1
                 }
+    
+                print(rest.childSnapshot(forPath: "bids"))
+                
+                let bidEnumerator = rest.childSnapshot(forPath: "bids").children
+                var maxPrice = currentPrice
+                
+                while let bidData = bidEnumerator.nextObject() as? FIRDataSnapshot {
+                    let bidAmount = bidData.childSnapshot(forPath: "amount").value as! Double
+                    
+                    if (bidAmount > maxPrice) {
+                        maxPrice = bidAmount
+                    }
+                }
                 
                 // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, currentPrice, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, maxPrice, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }
