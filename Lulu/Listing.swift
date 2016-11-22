@@ -16,7 +16,7 @@ class Listing {
     var title: String!
     var description: String!
     
-    var startPrice: Int!
+    var startPrice: Double!
     var currentPrice: Int!
     var buyoutPrice: Int!
     
@@ -28,7 +28,7 @@ class Listing {
     var favorited: [User]!
     
     // Listing initialization.
-    init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Int, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
+    init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
         self.listingID = id
         self.photos = photos
         self.title = title
