@@ -123,6 +123,8 @@ class ListingDetailViewController: UIViewController {
                             ]
                             
                             self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
+                        } else {
+                            // TODO: Let the user know they bid lower than the required amount
                         }
                     }
                 })
