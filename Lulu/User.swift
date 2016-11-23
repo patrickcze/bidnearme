@@ -9,23 +9,22 @@
 import UIKit
 
 class User {
-
+    
     // MARK: - Properties
-    var profileImage: UIImage!
-    var firstName: String!
-    var lastName: String!
-    var rating: Int!
+    var name: String!
+    var profileImageUrl: URL?
+    let createdTimestamp: Int!
+    var listingIdsByType: [ListingType: [String]]!
     
-    var postedListings: [Listing]!
-    var soldListings: [Listing]!
-    var favoritedListings: [Listing]!
-    var buyingListings: [Listing]!
+    init(name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]]) {
+        self.name = name
+        self.profileImageUrl = profileImageUrl
+        self.createdTimestamp = createdTimestamp
+        self.listingIdsByType = listingIdsByType
+    }
     
-    // User initialization.
-    init(_ profileImage: UIImage, _ firstName: String, _ lastName: String) {
-        self.profileImage = profileImage
-        self.firstName = firstName
-        self.lastName = lastName
+    convenience init() {
+        self.init(name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:])
     }
 }
 

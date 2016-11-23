@@ -42,7 +42,7 @@ class HomeViewController: UIViewController {
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         // Configure searchbar with autolayout & add it to view.
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         searchBarContainerView.addSubview(searchController.searchBar)
@@ -52,6 +52,8 @@ class HomeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
@@ -64,7 +66,7 @@ class HomeViewController: UIViewController {
             var tempListing: Listing
             
             //Iterate over listings
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                 // Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
                 let desc = rest.childSnapshot(forPath: "description").value as? String
@@ -98,28 +100,10 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User())
                 
                 self.tempData.append(tempListing)
             }
-            
-            
-            // ronny - Copying some listings for the profile page - TEMPORAL
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            if appDelegate != nil && self.tempData.count > 0
-            {
-                appDelegate?.dummyUser.buyingListings = [self.tempData[0]]
-                appDelegate?.dummyUser.favoritedListings = [self.tempData[0]]
-                appDelegate?.dummyUser.soldListings = [self.tempData[0]]
-                appDelegate?.dummyUser.postedListings = [self.tempData[0]]
-            }
-            else {
-                appDelegate?.dummyUser.buyingListings = []
-                appDelegate?.dummyUser.favoritedListings = []
-                appDelegate?.dummyUser.soldListings = []
-                appDelegate?.dummyUser.postedListings = []
-            }
-            // -----------------------
             
             //Refresh listing view
             self.listingsCollectionView.reloadData()
