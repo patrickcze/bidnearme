@@ -67,7 +67,6 @@ class HomeViewController: UIViewController {
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
                 // Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
-                let currentPrice = rest.childSnapshot(forPath: "startingPrice").value as! Double
                 let desc = rest.childSnapshot(forPath: "description").value as? String
                 let imageURLS = rest.childSnapshot(forPath: "imageUrls")
                 let sellerId = rest.childSnapshot(forPath: "sellerId").value as? String
@@ -91,20 +90,16 @@ class HomeViewController: UIViewController {
                     index+=1
                 }
                 
-                // Find the largest current bid
-                let bidEnumerator = rest.childSnapshot(forPath: "bids").children
-                var maxPrice = currentPrice
+                // Handle getting the listings highest price
+                let highestBidId = rest.childSnapshot(forPath: "winningBidId").value as! String
+                var highestBidAmount = rest.childSnapshot(forPath: "startingPrice").value as! Double
                 
-                while let bidData = bidEnumerator.nextObject() as? FIRDataSnapshot {
-                    let bidAmount = bidData.childSnapshot(forPath: "amount").value as! Double
-                    
-                    if (bidAmount > maxPrice) {
-                        maxPrice = bidAmount
-                    }
+                if highestBidId != "" {
+                    highestBidAmount = rest.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
                 }
                 
                 // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, maxPrice, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }
