@@ -78,8 +78,7 @@ class ListingDetailViewController: UIViewController {
                     highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
                 }
                 
-
-                self.listingCurrentPrice.text = "$" + String(highestBidAmount)
+                self.listingCurrentPrice.text = "$" + String(format:"%.2f", highestBidAmount)
             })
             
             // TODO: Implement ratings for sellers.
