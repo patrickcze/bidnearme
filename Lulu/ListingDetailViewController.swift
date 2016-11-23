@@ -70,19 +70,12 @@ class ListingDetailViewController: UIViewController {
             profileImageView.image = listing.seller.profileImage
             profileNameLabel.text = "\(listing.seller.firstName!) \(listing.seller.lastName!)"
             
-            ref?.child("listings").child(listing.listingID).child("bids").observe(.value, with: { snapshot in
-                let enumerator = snapshot.children
-                var maxPrice = listing.startPrice!
-                
-                while let rest = enumerator.nextObject() as? FIRDataSnapshot {
-                    let bidAmount = rest.childSnapshot(forPath: "amount").value as! Double
-                    
-                    if (bidAmount > maxPrice) {
-                        maxPrice = bidAmount
-                    }
-                }
-                
-                self.listingCurrentPrice.text = "$" + String(maxPrice)
+            // Keeps the price on the image current with the highest bid
+            ref?.child("listings").child(listing.listingID).observe(.value, with: { snapshot in
+                let highestBidListingID = snapshot.childSnapshot(forPath: "winningBidId").value as! String
+                let highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
+
+                self.listingCurrentPrice.text = "$" + String(highestBidAmount)
             })
             
             // TODO: Implement ratings for sellers.
