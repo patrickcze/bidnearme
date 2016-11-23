@@ -23,7 +23,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
                 listingImageView.af_setImage(withURL: list.photos[0])
                 listingTitleLabel.text = list.title
                 listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-                listingPriceLabel.text = "$" + String(list.startPrice)
+                listingPriceLabel.text = "$" + String(format:"%.2f", list.startPrice)
             }
         }
     }

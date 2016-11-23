@@ -205,7 +205,6 @@
 				3DC9870A1DB5DCD20022A2ED /* Info.plist */,
 				3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */,
 				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
-				BC945CA91DE63CAF00F4F803 /* TextField.swift */,
 			);
 			path = Lulu;
 			sourceTree = "<group>";
@@ -291,6 +290,7 @@
 				5B054AEC1DE0057A00099683 /* Profile */,
 				BC60E8EC1DC69468004D7FB8 /* Home */,
 				BC079C251DE3BA0C007F6BDA /* RatingControl.swift */,
+				BC945CA91DE63CAF00F4F803 /* TextField.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";

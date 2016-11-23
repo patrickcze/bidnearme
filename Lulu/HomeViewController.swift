@@ -58,22 +58,22 @@ class HomeViewController: UIViewController {
         //Get a snapshot of listings
         let listingRef = ref.child("listings")
         
-        //Watch for changes to listings
-        listingRef.observe(FIRDataEventType.value, with: { (snap) in
+        //Get list of current listings
+        listingRef.observeSingleEvent(of: .value, with: { (snap) in
             let enumerator = snap.children
             var tempListing: Listing
             
             //Iterate over listings
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
-                //Get basic info about the listing
+                // Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
-                let currentPrice = rest.childSnapshot(forPath: "startingPrice").value as! Double
                 let desc = rest.childSnapshot(forPath: "description").value as? String
                 let imageURLS = rest.childSnapshot(forPath: "imageUrls")
                 
                 var imageURLArray:[URL] = []
                 var index = 0
                 
+                // Get a list of URLs of the listing images
                 for item in 0...imageURLS.childrenCount-1 {
                     let varNum = String(item)
                     let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
                     imageURLArray.append(URL(string:urlString)!)
                 }
                 
-                //Check for existing listings
+                // Check for existing listings
                 for listing in self.tempData {
                     if listing.listingID == rest.key {
                         self.tempData.remove(at: index)
@@ -89,8 +89,16 @@ class HomeViewController: UIViewController {
                     index+=1
                 }
                 
+                // Handle getting the listings highest price
+                let highestBidId = rest.childSnapshot(forPath: "winningBidId").value as! String
+                var highestBidAmount = rest.childSnapshot(forPath: "startingPrice").value as! Double
+                
+                if !highestBidId.isEmpty {
+                    highestBidAmount = rest.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
+                }
+                
                 // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, Int(currentPrice), 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User(UIImage(named: "duck")!,"Scott","Campbell"))
                 
                 self.tempData.append(tempListing)
             }

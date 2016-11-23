@@ -37,7 +37,7 @@
                                         <rect key="frame" x="12" y="12" width="169.5" height="214.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="169" height="214"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="214"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9vL-O0-5jV">
@@ -53,10 +53,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-GX-gLW">
-                                                    <rect key="frame" x="124.5" y="6" width="45" height="25"/>
+                                                    <rect key="frame" x="109.5" y="6" width="60" height="25"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6k-uD-0Xt">
-                                                            <rect key="frame" x="4" y="5.5" width="34.5" height="14.5"/>
+                                                            <rect key="frame" x="11.5" y="5.5" width="34.5" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -66,7 +66,7 @@
                                                     <constraints>
                                                         <constraint firstItem="N6k-uD-0Xt" firstAttribute="centerY" secondItem="u3D-GX-gLW" secondAttribute="centerY" id="icN-RO-vcY"/>
                                                         <constraint firstAttribute="height" constant="25" id="sH8-ZM-Knr"/>
-                                                        <constraint firstAttribute="width" constant="45" id="yci-hZ-Y17"/>
+                                                        <constraint firstAttribute="width" constant="60" id="yci-hZ-Y17"/>
                                                         <constraint firstItem="N6k-uD-0Xt" firstAttribute="centerX" secondItem="u3D-GX-gLW" secondAttribute="centerX" constant="-1.5" id="zIe-RJ-QRK"/>
                                                     </constraints>
                                                 </view>
@@ -257,10 +257,18 @@
                                             <action selector="tappedBidButton:" destination="MDN-iP-6rO" eventType="touchUpInside" id="m5S-Ub-qHA"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vde-G1-P3a">
+                                        <rect key="frame" x="24" y="24" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="hc0-hk-1uK" secondAttribute="trailing" constant="12" id="5SV-Xv-upy"/>
+                                    <constraint firstItem="vde-G1-P3a" firstAttribute="top" secondItem="4C6-EW-tLq" secondAttribute="top" constant="24" id="6Cu-to-hbu"/>
+                                    <constraint firstItem="vde-G1-P3a" firstAttribute="leading" secondItem="4C6-EW-tLq" secondAttribute="leading" constant="24" id="Hwn-uK-N9Y"/>
                                     <constraint firstItem="aDt-n9-afe" firstAttribute="leading" secondItem="4C6-EW-tLq" secondAttribute="leading" id="THU-jp-9Zx"/>
                                     <constraint firstItem="D8f-fH-iyC" firstAttribute="height" secondItem="4C6-EW-tLq" secondAttribute="height" multiplier="0.5" id="XtW-6f-6gi"/>
                                     <constraint firstItem="aDt-n9-afe" firstAttribute="top" secondItem="hc0-hk-1uK" secondAttribute="bottom" constant="12" id="YOE-7J-jQh"/>
@@ -285,6 +293,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="listingCurrentPrice" destination="vde-G1-P3a" id="Ied-Ga-qjb"/>
                         <outlet property="listingDescriptionLabel" destination="EYF-n8-Tm7" id="BwW-0b-BdD"/>
                         <outlet property="listingImageView" destination="D8f-fH-iyC" id="H25-aZ-cuO"/>
                         <outlet property="listingTitleLabel" destination="vO6-co-Qp0" id="AET-Zm-gOE"/>
