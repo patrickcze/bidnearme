@@ -180,7 +180,13 @@ class ListingDetailViewController: UIViewController {
     
     //Function add the listing key of the item the user is bidding on to the db in their user data
     func addBidToUserBuyingProfile(listingKey: String) {
-        ref?.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("listings").child("buying").child(listingKey).setValue(true)
+        guard let userId = FIRAuth.auth()?.currentUser?.uid else {
+            alertUserNotLoggedIn()
+            return
+        }
+        
+        let biddingListingType = ListingType.bidding.description
+        ref?.child("users").child(userId).child("listings").child(biddingListingType).child(listingKey).setValue(true)
     }
 }
 
