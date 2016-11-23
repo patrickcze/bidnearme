@@ -74,7 +74,7 @@ class ListingDetailViewController: UIViewController {
                 let highestBidListingID = snapshot.childSnapshot(forPath: "winningBidId").value as! String
                 var highestBidAmount = snapshot.childSnapshot(forPath: "startingPrice").value as! Double
                 
-                if highestBidListingID.isEmpty {
+                if !highestBidListingID.isEmpty {
                     highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
                 }
                 
@@ -135,13 +135,16 @@ class ListingDetailViewController: UIViewController {
     
     //Check if the users bid will be the new highest bid
     func isHighestBid(bidAmount: Double, listingSnapshot: FIRDataSnapshot) -> Bool {
-        if let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as? String {
-            if !highestBidId.isEmpty {
-                let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids/\(highestBidId)/amount").value as! Double
-                return bidAmount > highestBidAmount
-            }
+        //Check to see if there is a current highest bid
+        let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
+        
+        if highestBidId.isEmpty{
+            return true
         }
-        return true
+        
+        let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
+        
+        return bidAmount > highestBidAmount
     }
 
     // Executes the users bid and places it in the DB
