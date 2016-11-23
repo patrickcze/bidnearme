@@ -74,7 +74,7 @@ class ListingDetailViewController: UIViewController {
                 let highestBidListingID = snapshot.childSnapshot(forPath: "winningBidId").value as! String
                 var highestBidAmount = snapshot.childSnapshot(forPath: "startingPrice").value as! Double
                 
-                if highestBidListingID != "" {
+                if highestBidListingID.isEmpty {
                     highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
                 }
                 

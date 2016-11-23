@@ -93,7 +93,7 @@ class HomeViewController: UIViewController {
                 let highestBidId = rest.childSnapshot(forPath: "winningBidId").value as! String
                 var highestBidAmount = rest.childSnapshot(forPath: "startingPrice").value as! Double
                 
-                if highestBidId != "" {
+                if highestBidId.isEmpty {
                     highestBidAmount = rest.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
                 }
                 
