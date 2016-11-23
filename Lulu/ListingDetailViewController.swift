@@ -57,7 +57,6 @@ class ListingDetailViewController: UIViewController {
         bidValueTextField.inputAccessoryView = numberToolbar
         
         // Setting user image to a circle
-        
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         placeBidButton.layer.cornerRadius = 5.0
         
@@ -149,19 +148,19 @@ class ListingDetailViewController: UIViewController {
         
         bidRef.setValue(bidObject) { (error, bidRef) in
             if error == nil {
-                self.updateWinningBid(listingRef: listingRef, highestBidId: bidRef.key)
+                self.updateListingWinningBidId(listingRef: listingRef, highestBidId: bidRef.key)
             }
         }
     }
 
     // Updates the winning bid field in the listing
-    func updateWinningBid(listingRef: FIRDatabaseReference, highestBidId: String) {
+    func updateListingWinningBidId(listingRef: FIRDatabaseReference, highestBidId: String) {
         listingRef.child("winningBidId").setValue(highestBidId)
     }
     
     // Lets the user know that they need to login to bid
     func alertUserNotLoggedIn() {
-        let alert = UIAlertController(title: "Your not signed in...", message: "Please sign into your account in the profile tab", preferredStyle: .alert)
+        let alert = UIAlertController(title: "You're not signed in...", message: "Please sign into your account in the profile tab", preferredStyle: .alert)
         
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(defaultAction)
