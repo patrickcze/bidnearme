@@ -139,12 +139,11 @@ class ListingDetailViewController: UIViewController {
         
         let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as? String
         
-        if highestBidId.isEmpty {
+        if (highestBidId?.isEmpty)! {
             return true
         }
         else {
-            let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
-            
+            let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId!).childSnapshot(forPath: "amount").value as! Double
             return bidAmount > highestBidAmount
         }
     }
