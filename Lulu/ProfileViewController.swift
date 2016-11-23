@@ -48,8 +48,8 @@ class ProfileViewController: UIViewController {
         ref = FIRDatabase.database().reference()
 
         // Do any additional setup after loading the view.
-        self.listingTypeTableView.delegate = self
-        self.listingTypeTableView.dataSource = self
+        listingTypeTableView.delegate = self
+        listingTypeTableView.dataSource = self
         
         // Making the imageView Circular
         if let profilePicture = profilePicture {
@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController {
      Populates the user views with info if the profileUser has been specified.
      */
     func populateUserViews() {
-        guard let user = self.profileUser else {
+        guard let user = profileUser else {
             fatalError("This should not be called until profileUser is initialized.")
         }
         
@@ -146,10 +146,13 @@ class ProfileViewController: UIViewController {
         
         // Set up listingTypeTableView before seguing. Give it proper listings, selling, buying, or etc., to display based on row selected.
         if segue.identifier != nil && segue.identifier == "ListingTableViewSegue" {
-            let row = self.listingTypeTableView.indexPathForSelectedRow?.row
             let listingTableViewController = segue.destination as! ListingTableViewController
             
-            let listingType = listingTypes[row!]
+            guard let row = listingTypeTableView.indexPathForSelectedRow?.row else {
+                fatalError("Row does not exist in table view.")
+            }
+            
+            let listingType = listingTypes[row]
             listingTableViewController.listingIds = self.profileUser?.listingIdsByType[listingType]
         }
     }
