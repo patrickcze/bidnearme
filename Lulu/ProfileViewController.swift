@@ -123,7 +123,7 @@ class ProfileViewController: UIViewController {
     }
     
     /**
-     Get all listing IDs of every listing type. listingType.rawValue must exactly match one of the database listing types under User.
+     Get all listing IDs of every listing type. listingType.description must exactly match one of the database listing types under User.
      */
     func getListingIdsByType(listingTreeIds: [String: [String: Bool]]) -> [ListingType: [String]] {
         var listingIdsByType = [ListingType: [String]]()
@@ -132,7 +132,7 @@ class ProfileViewController: UIViewController {
         for listingType in ListingType.allValues {
             listingIdsByType[listingType] = []
             
-            if let listingIdsOfType = listingTreeIds[listingType.rawValue], !listingIdsOfType.isEmpty {
+            if let listingIdsOfType = listingTreeIds[listingType.description], !listingIdsOfType.isEmpty {
                 listingIdsByType[listingType] = Array(listingIdsOfType.keys) // Gets listing IDs as an array.
             }
         }
@@ -172,7 +172,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListingTypeCell", for: indexPath) as! ListingTypeTableViewCell
         let index = indexPath as NSIndexPath
-        let capitalizedListingTypeName = listingTypes[index.row].rawValue.capitalized
+        let capitalizedListingTypeName = listingTypes[index.row].description.capitalized
         cell.name.text = capitalizedListingTypeName
         return cell
     }
