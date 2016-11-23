@@ -81,7 +81,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="e2s-dy-Glg" id="Zmh-iD-g6r">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Listing Type" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="XOi-Nt-e6K">
@@ -141,6 +141,7 @@
                     <connections>
                         <outlet property="listingTypeTableView" destination="Cdo-Qq-xiB" id="cva-4D-1Aa"/>
                         <outlet property="memberLabel" destination="2eF-Rm-t6e" id="l3a-aI-tCX"/>
+                        <outlet property="profileNameLabel" destination="o2c-Zt-9ZR" id="CVP-st-DBc"/>
                         <outlet property="profilePicture" destination="ADB-Nr-Hwv" id="FqR-9m-qb7"/>
                         <outlet property="ratingLabel" destination="8Xf-Va-GYO" id="kEk-We-odV"/>
                         <outlet property="specialLabel" destination="jjx-X8-tDy" id="oXk-uG-J5g"/>
