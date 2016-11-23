@@ -72,7 +72,12 @@ class ListingDetailViewController: UIViewController {
             // Keeps the price on the image current with the highest bid
             ref?.child("listings").child(listing.listingID).observe(.value, with: { snapshot in
                 let highestBidListingID = snapshot.childSnapshot(forPath: "winningBidId").value as! String
-                let highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
+                var highestBidAmount = snapshot.childSnapshot(forPath: "startingPrice").value as! Double
+                
+                if highestBidListingID != "" {
+                    highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
+                }
+                
 
                 self.listingCurrentPrice.text = "$" + String(highestBidAmount)
             })
