@@ -267,7 +267,8 @@ class CameraViewController: UIViewController {
      - parameter userId: User ID of the user to associate the listing to.
      */
     func addListingToUserSelling(listingId: String, userId: String) {
-        ref.child("users/\(userId)/listings/selling/\(listingId)").setValue(true)
+        let sellingListingType = ListingType.selling.description
+        ref.child("users/\(userId)/listings/\(sellingListingType)/\(listingId)").setValue(true)
     }
     
 }
