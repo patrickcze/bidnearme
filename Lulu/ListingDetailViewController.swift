@@ -158,7 +158,7 @@ class ListingDetailViewController: UIViewController {
         bidRef.setValue(bidObject) { (error, bidRef) in
             if error == nil {
                 self.updateListingWinningBidId(listingRef: listingRef, highestBidId: bidRef.key)
-                self.addBidToUserBuyingProfile(listingKey: listingRef.key)
+                self.addBidToUserBiddingProfile(listingKey: listingRef.key)
             }
         }
     }
@@ -179,7 +179,7 @@ class ListingDetailViewController: UIViewController {
     }
     
     //Function add the listing key of the item the user is bidding on to the db in their user data
-    func addBidToUserBuyingProfile(listingKey: String) {
+    func addBidToUserBiddingProfile(listingKey: String) {
         guard let userId = FIRAuth.auth()?.currentUser?.uid else {
             alertUserNotLoggedIn()
             return
