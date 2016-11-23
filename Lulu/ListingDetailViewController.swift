@@ -137,7 +137,7 @@ class ListingDetailViewController: UIViewController {
     func isHighestBid(bidAmount: Double, listingSnapshot: FIRDataSnapshot) -> Bool {
         //Check to see if there is a current highest bid
         
-        let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
+        let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as? String
         
         if highestBidId.isEmpty {
             return true
