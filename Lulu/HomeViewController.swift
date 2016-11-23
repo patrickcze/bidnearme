@@ -69,7 +69,6 @@ class HomeViewController: UIViewController {
                 let title = rest.childSnapshot(forPath: "title").value as? String
                 let desc = rest.childSnapshot(forPath: "description").value as? String
                 let imageURLS = rest.childSnapshot(forPath: "imageUrls")
-                let sellerId = rest.childSnapshot(forPath: "sellerId").value as? String
                 
                 var imageURLArray:[URL] = []
                 var index = 0
