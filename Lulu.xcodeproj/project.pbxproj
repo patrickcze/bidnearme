@@ -35,6 +35,8 @@
 		BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */; };
 		BC60E8EE1DC694A7004D7FB8 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8ED1DC694A7004D7FB8 /* Listing.swift */; };
 		BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8EF1DC694AE004D7FB8 /* User.swift */; };
+		BC945CAA1DE63CAF00F4F803 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC945CA91DE63CAF00F4F803 /* TextField.swift */; };
+		BC945CAC1DE641D300F4F803 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC945CAB1DE641D300F4F803 /* MapKit.framework */; };
 		BCC2090D8C5F294469753619 /* Pods_LuluUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 776591287087069E1588D125 /* Pods_LuluUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		BC60E8ED1DC694A7004D7FB8 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		BC60E8EF1DC694AE004D7FB8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BC945CA91DE63CAF00F4F803 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		BC945CAB1DE641D300F4F803 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C5710CCB540D2710E2E873AF /* Pods-Lulu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lulu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lulu/Pods-Lulu.release.xcconfig"; sourceTree = "<group>"; };
 		F3146664803A1C5188FE4B2A /* Pods-LuluTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuluTests/Pods-LuluTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC945CAC1DE641D300F4F803 /* MapKit.framework in Frameworks */,
 				037594D8F826E509A7BA30D4 /* Pods_Lulu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +136,7 @@
 		199DC2786E3C637F48AB3746 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC945CAB1DE641D300F4F803 /* MapKit.framework */,
 				A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */,
 				334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */,
 				776591287087069E1588D125 /* Pods_LuluUITests.framework */,
@@ -199,6 +205,7 @@
 				3DC9870A1DB5DCD20022A2ED /* Info.plist */,
 				3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */,
 				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
+				BC945CA91DE63CAF00F4F803 /* TextField.swift */,
 			);
 			path = Lulu;
 			sourceTree = "<group>";
@@ -395,6 +402,9 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 						};
@@ -776,6 +786,7 @@
 				BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */,
 				5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
+				BC945CAA1DE63CAF00F4F803 /* TextField.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* LoginViewController.swift in Sources */,
 				5B054AF31DE005E100099683 /* ProfileTableViewCell.swift in Sources */,
