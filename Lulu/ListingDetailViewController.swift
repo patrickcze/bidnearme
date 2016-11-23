@@ -58,8 +58,11 @@ class ListingDetailViewController: UIViewController {
             listingTitleLabel.text = listing.title
             listingDescriptionLabel.text = listing.description
             
-            profileImageView.image = listing.seller.profileImage
-            profileNameLabel.text = "\(listing.seller.firstName!) \(listing.seller.lastName!)"
+            if let profileImageUrl = listing.seller.profileImageUrl {
+                profileImageView.af_setImage(withURL: profileImageUrl)
+            }
+            
+            profileNameLabel.text = listing.seller.name
             
             // TODO: Implement ratings for sellers.
             profileRating.rating = 3
