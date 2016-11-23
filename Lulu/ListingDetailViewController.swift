@@ -142,10 +142,9 @@ class ListingDetailViewController: UIViewController {
         if (highestBidId?.isEmpty)! {
             return true
         }
-        else {
-            let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId!).childSnapshot(forPath: "amount").value as! Double
-            return bidAmount > highestBidAmount
-        }
+        
+        let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId!).childSnapshot(forPath: "amount").value as! Double
+        return bidAmount > highestBidAmount
     }
 
     // Executes the users bid and places it in the DB
