@@ -20,4 +20,8 @@ enum ListingType: String {
     case watching = "watching"
     
     static let allValues = [selling, sold, bidding, won, lost, watching]
+    
+    var description: String {
+        return self.rawValue
+    }
 }
