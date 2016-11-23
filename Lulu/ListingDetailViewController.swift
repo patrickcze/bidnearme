@@ -47,7 +47,7 @@ class ListingDetailViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
-        placeBidButton.backgroundColor = UIColor(red: 0.0, green: 0.35, blue: 0.71, alpha: 1)
+        placeBidButton.backgroundColor = ColorPalette.blue
         listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         
         mapView.layer.cornerRadius = 5.0
@@ -257,8 +257,8 @@ extension ListingDetailViewController: MKMapViewDelegate {
     // Optional. Asks the delegate for a renderer object to use when drawing the specified overlay.
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let circleRenderer = MKCircleRenderer(overlay: overlay)
-        circleRenderer.fillColor = UIColor(red: 0.0, green: 0.35, blue: 0.71, alpha: 1).withAlphaComponent(0.5)
-        circleRenderer.strokeColor = UIColor(red: 0.0, green: 0.35, blue: 0.71, alpha: 1)
+        circleRenderer.fillColor = ColorPalette.blue.withAlphaComponent(0.5)
+        circleRenderer.strokeColor = ColorPalette.blue
         circleRenderer.lineWidth = 1.0
         
         return circleRenderer
