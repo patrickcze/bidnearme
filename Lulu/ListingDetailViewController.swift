@@ -106,49 +106,80 @@ class ListingDetailViewController: UIViewController {
     @IBAction func placeBidPress(_ sender: Any) {
         //Check if user is logged in
         if let user = FIRAuth.auth()?.currentUser {
-            
             // Check if the user placed a bid value in the text field
             if let bidAmount = Double(bidValueTextField.text!) {
-                //TODO: Validate input of price
-                
+
                 let listingID = listing?.listingID
                 let listingRef = ref?.child("listings").child(listingID!)
                 
                 //Check if bid table exists
                 listingRef?.observeSingleEvent(of: .value, with: {snapshot in
                     if snapshot.hasChild("bids"){
-                        
-                        //Create new location for bid
-                        let bidsRef = listingRef?.child("bids").childByAutoId()
-                        
-                        let bidObject: [String: Any] = [
-                            "bidderID": user.uid,
-                            "amount": bidAmount,
-                            "createdTimestamp": FIRServerValue.timestamp()
-                        ]
-                        
-                        bidsRef?.setValue(bidObject) { (error) in
-                            if error != nil {
-                                // TODO: deal with this in some way
-                            }
+                        if self.isHighestBid(bidAmount: bidAmount, listingSnapshot: snapshot) {
+                            let bidObject: [String : Any] = [
+                                "amount": bidAmount,
+                                "bidderId": user.uid,
+                                "createdTimestamp" : FIRServerValue.timestamp()
+                            ]
+                            
+                            self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
                         }
-                    }
-                    else {
-                        // TODO: bids table is missing should never happen
                     }
                 })
             }
         } else {
             // No user is signed in. Remind them with an alert
-            let alert = UIAlertController(title: "Your not signed in...", message: "Please sign into your account in the profile tab", preferredStyle: .alert)
-            
-            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(defaultAction)
-            
-            self.present(alert, animated: true, completion: nil)
+            alertUserNotLoggedIn()
         }
         
         bidValueTextField.text = ""
+    }
+    
+    //Check if the users bid will be the new highest bid
+    func isHighestBid(bidAmount: Double, listingSnapshot: FIRDataSnapshot) -> Bool {
+        //Check to see if there is a current highest bid
+        if listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String  == ""{
+            return true
+        }
+        else {
+            let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
+            let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
+            
+            if bidAmount > highestBidAmount {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+
+    // Executes the users bid and places it in the DB
+    func placeBidInDB(bidObject:[String:Any], listingRef: FIRDatabaseReference) {
+        let bidRef = listingRef.child("bids").childByAutoId()
+        
+        bidRef.setValue(bidObject) { (error, bidRef) in
+            if error == nil {
+                self.updateWinningBid(listingRef: listingRef, highestBidId: bidRef.key)
+            }
+        }
+    }
+
+    // Updates the winning bid field in the listing
+    func updateWinningBid(listingRef: FIRDatabaseReference, highestBidId: String) {
+        print(listingRef)
+        print(highestBidId)
+        
+        listingRef.child("winningBidId").setValue(highestBidId)
+    }
+    
+    // Lets the user know that they need to login to bid
+    func alertUserNotLoggedIn() {
+        let alert = UIAlertController(title: "Your not signed in...", message: "Please sign into your account in the profile tab", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(defaultAction)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

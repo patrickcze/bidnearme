@@ -170,7 +170,7 @@ class CameraViewController: UIViewController {
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
                 "winningBidId": "",
-                "bids": [String: Any](),
+                "bids": "nil",
                 "imageUrls": [imageUrlString]
             ]
             
@@ -233,8 +233,6 @@ class CameraViewController: UIViewController {
             }
             completion(newListingRef)
         }
-        
-        listingRef.child("bids").setValue("")
     }
     
     /**
