@@ -27,5 +27,3 @@ class User {
         self.init(name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:])
     }
 }
-
-
