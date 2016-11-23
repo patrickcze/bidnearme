@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
 class ProfileViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var memberLabel: UILabel!
     @IBOutlet weak var specialLabel: UILabel!
@@ -20,52 +23,120 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var upperView: UIView! // the background for the top part of the profile page (Name, profile pciture, rating label, etc.
     
     // MARK: - Properties
-    let listingTypes = ["Buying", "Bought", "Selling", "Sold", "Favorites"]
-    var allListings : [[Listing]]!
+    var ref: FIRDatabaseReference!
     
-    // Temporary
-    var tempUser : User!
+    var profileUser: User?
+    
+    let listingTypes = [
+        ListingType.selling,
+        ListingType.sold,
+        ListingType.bidding,
+        ListingType.watching,
+        ListingType.won,
+        ListingType.lost
+        ]
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.        
-        self.listingTypeTableView.delegate = self
-        self.listingTypeTableView.dataSource = self
+        // Initialize database reference.
+        ref = FIRDatabase.database().reference()
+
+        // Do any additional setup after loading the view.
+        listingTypeTableView.delegate = self
+        listingTypeTableView.dataSource = self
         
         // Making the imageView Circular
-        profilePicture?.layoutIfNeeded()
-        profilePicture?.layer.masksToBounds = false
-        profilePicture?.layer.cornerRadius = profilePicture.frame.height/2
-        profilePicture?.clipsToBounds = true
-        profilePicture.contentMode = UIViewContentMode.scaleToFill
-        
-        // Making upperview and bottom table view frame corners rounded
+        if let profilePicture = profilePicture {
+            profilePicture.layoutIfNeeded()
+            profilePicture.layer.masksToBounds = false
+            profilePicture.layer.cornerRadius = profilePicture.frame.height/2
+            profilePicture.clipsToBounds = true
+            profilePicture.contentMode = UIViewContentMode.scaleToFill
+        }
+
+        // Making upper view and bottom table view frame corners rounded
         upperView.layer.cornerRadius = 3
         listingTypeTableView.layer.cornerRadius = 3
         
-        // accessing data stored in the appDelegate
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        if let temp = appDelegate?.dummyUser {
-            tempUser = temp
-            profilePicture.image = tempUser.profileImage
-            
-            allListings = [
-                tempUser.buyingListings,   // 0
-                tempUser.buyingListings,   // 1 <- THIS should be boughtListings
-                tempUser.postedListings,   // 2
-                tempUser.soldListings,     // 3
-                tempUser.favoritedListings // 4
-            ]
+        guard let userId = FIRAuth.auth()?.currentUser?.uid else {
+            // TODO: Segue to sign in page.
+            return
         }
-        else { // handle this more properly with exceptions later
-            print("*** ProfileViewController: user NULL ***")
+        
+        getUser(withId: userId) { (user) in
+            self.profileUser = user
+            self.populateUserViews()
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    /**
+     Populates the user views with info if the profileUser has been specified.
+     */
+    func populateUserViews() {
+        guard let user = profileUser else {
+            fatalError("This should not be called until profileUser is initialized.")
+        }
+        
+        if let profileImageUrl = user.profileImageUrl {
+            profilePicture.af_setImage(withURL: profileImageUrl)
+        }
+        
+        if let name = user.name {
+            profileNameLabel.text = name
+        }
+    }
+    
+    /**
+     Gets user information as a User and calls completion with the User object.
+     */
+    func getUser(withId id: String, completion: @escaping (User?) -> Void) {
+        ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let user = snapshot.value as? [String: Any] else {
+                completion(nil)
+                return
+            }
+            
+            let name = user["name"] as! String
+            let createdTimestamp = user["createdTimestamp"] as! Int
+            
+            var profileImageUrl: URL?
+            if let profileImageUrlString = user["profileImageUrl"] as? String, !profileImageUrlString.isEmpty {
+                profileImageUrl = URL(string: profileImageUrlString)
+            }
+
+            // Retrieve user listings.
+            var listingIdsByType = [ListingType: [String]]()
+            
+            // Listings: ["selling" -> ["listingId1" -> true, "listingId2" -> true], "buying" -> []]
+            if let listingTreeIds = user["listings"] as? [String: [String: Bool]] {
+                listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
+            }
+
+            completion(User(name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType))
+        })
+    }
+    
+    /**
+     Get all listing IDs of every listing type. listingType.rawValue must exactly match one of the database listing types under User.
+     */
+    func getListingIdsByType(listingTreeIds: [String: [String: Bool]]) -> [ListingType: [String]] {
+        var listingIdsByType = [ListingType: [String]]()
+        
+        // For every case in ListingType, e.g. selling, buying, etc., retrieve just the listing IDs; ignoring the booleans.
+        for listingType in ListingType.allValues {
+            listingIdsByType[listingType] = []
+            
+            if let listingIdsOfType = listingTreeIds[listingType.rawValue], !listingIdsOfType.isEmpty {
+                listingIdsByType[listingType] = Array(listingIdsOfType.keys) // Gets listing IDs as an array.
+            }
+        }
+        return listingIdsByType
     }
     
     // MARK: - Navigation
@@ -73,12 +144,16 @@ class ProfileViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        // setting up the type of listing that ListingTableViewController will be displaying
-        if (segue.identifier != nil && segue.identifier == "ListingTableViewSegue"){
-            let row = self.listingTypeTableView.indexPathForSelectedRow?.row
+        // Set up listingTypeTableView before seguing. Give it proper listings, selling, buying, or etc., to display based on row selected.
+        if segue.identifier != nil && segue.identifier == "ListingTableViewSegue" {
             let listingTableViewController = segue.destination as! ListingTableViewController
-            listingTableViewController.listingType = row!
-            listingTableViewController.listings = allListings[row!]
+            
+            guard let row = listingTypeTableView.indexPathForSelectedRow?.row else {
+                fatalError("Row does not exist in table view.")
+            }
+            
+            let listingType = listingTypes[row]
+            listingTableViewController.listingIds = self.profileUser?.listingIdsByType[listingType]
         }
     }
 }
@@ -97,7 +172,8 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListingTypeCell", for: indexPath) as! ListingTypeTableViewCell
         let index = indexPath as NSIndexPath
-        cell.name.text = listingTypes[index.row]
+        let capitalizedListingTypeName = listingTypes[index.row].rawValue.capitalized
+        cell.name.text = capitalizedListingTypeName
         return cell
     }
     
@@ -117,4 +193,3 @@ extension ProfileViewController: UITableViewDelegate {
             self.listingTypeTableView.deselectRow(at: indexPath, animated: true)
     }
 }
-

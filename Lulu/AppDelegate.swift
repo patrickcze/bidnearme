@@ -14,15 +14,8 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    // ronny - TEMPORAL
-    var dummyUser : User!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        // ronny - Temporal code for Profile page
-        dummyUser = User(UIImage(named: "duck")!, "Mr. Duck", "Duckin")
-        // ----------------
         
         // Configure Facebook SDK.
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
