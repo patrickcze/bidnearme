@@ -139,7 +139,7 @@ class ListingDetailViewController: UIViewController {
             let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
             let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
             
-            return bidAmount > highestBidAmount 
+            return bidAmount > highestBidAmount
         }
     }
 
@@ -156,9 +156,6 @@ class ListingDetailViewController: UIViewController {
 
     // Updates the winning bid field in the listing
     func updateWinningBid(listingRef: FIRDatabaseReference, highestBidId: String) {
-        print(listingRef)
-        print(highestBidId)
-        
         listingRef.child("winningBidId").setValue(highestBidId)
     }
     
