@@ -24,12 +24,12 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var ref: FIRDatabaseReference!
     var storageRef: FIRStorageReference!
     
-    let auctionDurationPickerArray = [ListingTimeInterval.oneDay.description,
+    /*let auctionDurationPickerArray = [ListingTimeInterval.oneDay.description,
                                       ListingTimeInterval.threeDays.description,
                                       ListingTimeInterval.fiveDays.description,
                                       ListingTimeInterval.sevenDays.description,
                                       ListingTimeInterval.tenDays.description,
-                                      ListingTimeInterval.fourteenDays.description]
+                                      ListingTimeInterval.fourteenDays.description]*/
     
     var auctionDurationPicker = UIPickerView()
     
@@ -109,18 +109,22 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // returns the # of rows in each component.
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return auctionDurationPickerArray.count
+        return ListingTimeInterval.count
+        //return ListingTimeInterval.count.hashValue
+        //return auctionDurationPickerArray.count
         
     }
     
-    //places text in text field
+    //places text in text field and stores in database
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        endDateTextField.text = auctionDurationPickerArray[row]
+        //endDateTextField.text = description
+        //endDateTextField.text = auctionDurationPickerArray[row]//place duration value in textfield
     }
     
     // title for each row
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return auctionDurationPickerArray[row]
+        //return ListingTimeInterval(rawValue: row)?.description;
+        //return auctionDurationPickerArray[row]
     }
 
     func donePressed(){
@@ -167,7 +171,8 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
         // TODO: Replace this with picker value convert to the enum.
-        let auctionDuration = ListingTimeInterval.sevenDays
+        //let auctionDuration = auctionDurationPicker.sevenDay
+        //let auctionDuration = ListingTimeInterval.r
         
         // Prepare and upload listing image to Firebase Storage.
         // TODO: Throw errors.
@@ -196,12 +201,12 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 "imageUrls": [imageUrlString]
             ]
             
-            // TODO: Allow user input for auction duration.
+         /*   // TODO: Allow user input for auction duration.
             self.writeListing(listing) { (listingRef) in
                 self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
                 self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
                 self.resetListingViews()
-            }
+            }*/
         }
     }
     

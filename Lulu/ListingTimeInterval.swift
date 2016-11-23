@@ -13,15 +13,14 @@ enum ListingTimeInterval: Int {
     case sevenDays = 7
     case tenDays = 10
     case fourteenDays = 14
+    static var count: Int{return ListingTimeInterval.fourteenDays.hashValue +1}
+    //static var count: Int { return ListingTimeInterval.fourteenDays.hashValue + 1 }
+    //static let allValues = [oneDay, threeDays, fiveDays, sevenDays, tenDays, fourteenDays]
     
     var description: String {
         switch self {
         case .oneDay: return "1 Day"
-        case .threeDays: return "3 Days"
-        case .fiveDays: return "5 Days"
-        case .sevenDays: return "7 Days"
-        case .tenDays: return "10 Days"
-        case .fourteenDays: return "14 Days"
+        default: return "\(self.rawValue) Days"
         }
     }
     
