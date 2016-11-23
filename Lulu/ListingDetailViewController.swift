@@ -108,6 +108,7 @@ class ListingDetailViewController: UIViewController {
                 //Check if bid table exists
                 listingRef?.observeSingleEvent(of: .value, with: {snapshot in
                     if snapshot.hasChild("bids"){
+                        //Checks that the desired bid is the highest
                         if self.isHighestBid(bidAmount: bidAmount, listingSnapshot: snapshot) {
                             let bidObject: [String : Any] = [
                                 "amount": bidAmount,
