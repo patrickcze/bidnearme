@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseDatabase
+import FirebaseAuth
 import Alamofire
 import AlamofireImage
 
@@ -18,6 +19,7 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var listingImageView: UIImageView!
     @IBOutlet weak var listingTitleLabel: UILabel!
     @IBOutlet weak var listingDescriptionLabel: UILabel!
+    @IBOutlet weak var listingCurrentPrice: UILabel!
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileNameLabel: UILabel!
@@ -28,10 +30,14 @@ class ListingDetailViewController: UIViewController {
     
     // MARK: - Properties
     var listing: Listing?
+    var ref: FIRDatabaseReference?
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Get a reference to the firebase db and storage
+        ref = FIRDatabase.database().reference()
         
         bidValueTextField.delegate = self
     
@@ -50,9 +56,11 @@ class ListingDetailViewController: UIViewController {
         
         bidValueTextField.inputAccessoryView = numberToolbar
         
+        // Setting user image to a circle
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         placeBidButton.layer.cornerRadius = 5.0
         
+        // Checks if listing data is avaliable
         if let listing = listing {
             listingImageView.af_setImage(withURL: listing.photos[0])
             listingTitleLabel.text = listing.title
@@ -63,6 +71,18 @@ class ListingDetailViewController: UIViewController {
             }
             
             profileNameLabel.text = listing.seller.name
+            
+            // Keeps the price on the image current with the highest bid
+            ref?.child("listings").child(listing.listingID).observe(.value, with: { snapshot in
+                let highestBidListingID = snapshot.childSnapshot(forPath: "winningBidId").value as! String
+                var highestBidAmount = snapshot.childSnapshot(forPath: "startingPrice").value as! Double
+                
+                if !highestBidListingID.isEmpty {
+                    highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
+                }
+                
+                self.listingCurrentPrice.text = "$" + String(format:"%.2f", highestBidAmount)
+            })
             
             // TODO: Implement ratings for sellers.
             profileRating.rating = 3
@@ -79,6 +99,88 @@ class ListingDetailViewController: UIViewController {
     
     func cancelPressed(){
         view.endEditing(true) // or do something
+    }
+    
+    // MARK: - Actions
+    @IBAction func placeBidPress(_ sender: Any) {
+        //Check if user is logged in
+        if let user = FIRAuth.auth()?.currentUser {
+            // Check if the user placed a bid value in the text field
+            if let bidAmount = Double(bidValueTextField.text!) {
+
+                let listingID = listing?.listingID
+                let listingRef = ref?.child("listings").child(listingID!)
+                
+                //Check if bid table exists
+                listingRef?.observeSingleEvent(of: .value, with: {snapshot in
+                    if snapshot.hasChild("bids"){
+                        //Checks that the desired bid is the highest
+                        if self.isHighestBid(bidAmount: bidAmount, listingSnapshot: snapshot) {
+                            let bidObject: [String : Any] = [
+                                "amount": bidAmount,
+                                "bidderId": user.uid,
+                                "createdTimestamp" : FIRServerValue.timestamp()
+                            ]
+                            
+                            self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
+                        } else {
+                            // TODO: Let the user know they bid lower than the required amount
+                        }
+                    }
+                })
+            }
+        } else {
+            // No user is signed in. Remind them with an alert
+            alertUserNotLoggedIn()
+        }
+        
+        bidValueTextField.text = ""
+    }
+    
+    //Check if the users bid will be the new highest bid
+    func isHighestBid(bidAmount: Double, listingSnapshot: FIRDataSnapshot) -> Bool {
+        //Check to see if there is a current highest bid
+        let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
+        
+        if highestBidId.isEmpty{
+            return true
+        }
+        
+        let highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
+        
+        return bidAmount > highestBidAmount
+    }
+
+    // Executes the users bid and places it in the DB
+    func placeBidInDB(bidObject:[String:Any], listingRef: FIRDatabaseReference) {
+        let bidRef = listingRef.child("bids").childByAutoId()
+        
+        bidRef.setValue(bidObject) { (error, bidRef) in
+            if error == nil {
+                self.updateListingWinningBidId(listingRef: listingRef, highestBidId: bidRef.key)
+                self.addBidToUserBuyingProfile(listingKey: listingRef.key)
+            }
+        }
+    }
+
+    // Updates the winning bid field in the listing
+    func updateListingWinningBidId(listingRef: FIRDatabaseReference, highestBidId: String) {
+        listingRef.child("winningBidId").setValue(highestBidId)
+    }
+    
+    // Lets the user know that they need to login to bid
+    func alertUserNotLoggedIn() {
+        let alert = UIAlertController(title: "You're not signed in...", message: "Please sign into your account in the profile tab", preferredStyle: .alert)
+        
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(defaultAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //Function add the listing key of the item the user is bidding on to the db in their user data
+    func addBidToUserBuyingProfile(listingKey: String) {
+        ref?.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("listings").child("buying").child(listingKey).setValue(true)
     }
 }
 

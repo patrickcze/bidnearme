@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -52,10 +53,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-GX-gLW">
-                                                    <rect key="frame" x="124.5" y="6" width="45" height="25"/>
+                                                    <rect key="frame" x="109.5" y="6" width="60" height="25"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6k-uD-0Xt">
-                                                            <rect key="frame" x="4" y="5.5" width="34.5" height="14.5"/>
+                                                            <rect key="frame" x="11.5" y="5.5" width="34.5" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -65,7 +66,7 @@
                                                     <constraints>
                                                         <constraint firstItem="N6k-uD-0Xt" firstAttribute="centerY" secondItem="u3D-GX-gLW" secondAttribute="centerY" id="icN-RO-vcY"/>
                                                         <constraint firstAttribute="height" constant="25" id="sH8-ZM-Knr"/>
-                                                        <constraint firstAttribute="width" constant="45" id="yci-hZ-Y17"/>
+                                                        <constraint firstAttribute="width" constant="60" id="yci-hZ-Y17"/>
                                                         <constraint firstItem="N6k-uD-0Xt" firstAttribute="centerX" secondItem="u3D-GX-gLW" secondAttribute="centerX" constant="-1.5" id="zIe-RJ-QRK"/>
                                                     </constraints>
                                                 </view>
@@ -197,6 +198,9 @@
                                                         <state key="normal" title="Place Bid">
                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="placeBidPress:" destination="MDN-iP-6rO" eventType="touchUpInside" id="AJE-Xj-uTi"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -258,16 +262,36 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwi-dp-wqp">
+                                        <rect key="frame" x="300" y="8" width="75" height="35"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bBx-7t-HEW">
+                                                <rect key="frame" x="1" y="8" width="70.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="1Sm-Hw-YZv"/>
+                                            <constraint firstAttribute="height" constant="35" id="HUA-A2-rx4"/>
+                                            <constraint firstItem="bBx-7t-HEW" firstAttribute="centerX" secondItem="Nwi-dp-wqp" secondAttribute="centerX" constant="-1.5" id="KC5-ev-rV2"/>
+                                            <constraint firstItem="bBx-7t-HEW" firstAttribute="centerY" secondItem="Nwi-dp-wqp" secondAttribute="centerY" id="eoJ-Nr-rHY"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="hc0-hk-1uK" secondAttribute="bottom" constant="12" id="0vD-rT-KjS"/>
                                     <constraint firstAttribute="trailing" secondItem="hc0-hk-1uK" secondAttribute="trailing" constant="12" id="5SV-Xv-upy"/>
+                                    <constraint firstItem="Nwi-dp-wqp" firstAttribute="top" secondItem="4C6-EW-tLq" secondAttribute="topMargin" id="Uy2-WU-cq6"/>
                                     <constraint firstItem="D8f-fH-iyC" firstAttribute="height" secondItem="4C6-EW-tLq" secondAttribute="height" multiplier="0.5" id="XtW-6f-6gi"/>
                                     <constraint firstAttribute="bottom" secondItem="hc0-hk-1uK" secondAttribute="bottom" constant="12" id="bNv-gp-fTG"/>
                                     <constraint firstItem="hc0-hk-1uK" firstAttribute="leading" secondItem="4C6-EW-tLq" secondAttribute="leading" constant="12" id="cJd-lg-639"/>
                                     <constraint firstItem="D8f-fH-iyC" firstAttribute="leading" secondItem="4C6-EW-tLq" secondAttribute="leading" id="cSV-nx-DsX"/>
                                     <constraint firstAttribute="trailing" secondItem="D8f-fH-iyC" secondAttribute="trailing" id="chT-vO-ybM"/>
+                                    <constraint firstItem="Nwi-dp-wqp" firstAttribute="trailing" secondItem="D8f-fH-iyC" secondAttribute="trailing" id="qam-IF-SMK"/>
                                     <constraint firstItem="hc0-hk-1uK" firstAttribute="top" secondItem="D8f-fH-iyC" secondAttribute="bottom" constant="12" id="vEw-vi-DNf"/>
                                     <constraint firstItem="hc0-hk-1uK" firstAttribute="leading" secondItem="4C6-EW-tLq" secondAttribute="leading" constant="12" id="vpo-fs-R3r"/>
                                     <constraint firstItem="D8f-fH-iyC" firstAttribute="top" secondItem="4C6-EW-tLq" secondAttribute="top" id="y8e-gL-Kfu"/>
@@ -285,6 +309,7 @@
                     </view>
                     <connections>
                         <outlet property="bidValueTextField" destination="KzW-Aw-3BP" id="SUV-CJ-32f"/>
+                        <outlet property="listingCurrentPrice" destination="bBx-7t-HEW" id="bHY-1q-kUb"/>
                         <outlet property="listingDescriptionLabel" destination="EYF-n8-Tm7" id="BwW-0b-BdD"/>
                         <outlet property="listingImageView" destination="D8f-fH-iyC" id="H25-aZ-cuO"/>
                         <outlet property="listingTitleLabel" destination="vO6-co-Qp0" id="AET-Zm-gOE"/>
