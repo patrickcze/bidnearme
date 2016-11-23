@@ -66,8 +66,11 @@ class ListingDetailViewController: UIViewController {
             listingTitleLabel.text = listing.title
             listingDescriptionLabel.text = listing.description
             
-            profileImageView.image = listing.seller.profileImage
-            profileNameLabel.text = "\(listing.seller.firstName!) \(listing.seller.lastName!)"
+            if let profileImageUrl = listing.seller.profileImageUrl {
+                profileImageView.af_setImage(withURL: profileImageUrl)
+            }
+            
+            profileNameLabel.text = listing.seller.name
             
             // Keeps the price on the image current with the highest bid
             ref?.child("listings").child(listing.listingID).observe(.value, with: { snapshot in
