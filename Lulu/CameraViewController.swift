@@ -25,7 +25,7 @@ class CameraViewController: UIViewController {
     var storageRef: FIRStorageReference!
     
     /*let auctionDurationPickerArray = [ListingTimeInterval.oneDay.description,
-                                      ListingTimeInterval.threeDays.description,
+                                       ListingTimeInterval.threeDays.description,
                                       ListingTimeInterval.fiveDays.description,
                                       ListingTimeInterval.sevenDays.description,
                                       ListingTimeInterval.tenDays.description,
