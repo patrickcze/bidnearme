@@ -179,14 +179,19 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
+        
+        /*let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
         guard auctionDurationPickerSelectedRow < ListingTimeInterval.allValues.count else {
             fatalError("Selected row is does not exist in ListingTimeInterval")
-        }
+        }*/
         
         // TODO: Replace this with picker value convert to the enum.
+        let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
+        
+       /* // TODO: Replace this with picker value convert to the enum.
         guard let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow] else {
             return
-        }
+        }*/
         
         // Prepare and upload listing image to Firebase Storage.
         // TODO: Throw errors.
@@ -218,7 +223,7 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             // TODO: Allow user input for auction duration.
             self.writeListing(listing) { (listingRef) in
                 self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
-               // self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
+                self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
                 self.resetListingViews()
             }
         }
