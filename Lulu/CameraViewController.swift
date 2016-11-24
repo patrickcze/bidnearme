@@ -178,12 +178,12 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             return
         }
         
-        let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
+        //let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
         
-        /*let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
+        let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
         guard auctionDurationPickerSelectedRow < ListingTimeInterval.allValues.count else {
             fatalError("Selected row is does not exist in ListingTimeInterval")
-        }*/
+        }
         
         // TODO: Replace this with picker value convert to the enum.
         let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
