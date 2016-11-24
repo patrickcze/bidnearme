@@ -71,7 +71,7 @@ class ListingDetailViewController: UIViewController {
                     highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
                 }
                 
-                self.listingCurrentPrice.text = "$" + String(format:"%.2f", highestBidAmount)
+                self.listingCurrentPrice.text = "$\(String(format:"%.2f", highestBidAmount))"
             })
             
             // TODO: Implement ratings for sellers.
@@ -88,7 +88,6 @@ class ListingDetailViewController: UIViewController {
     // Set a new geocoder for annotating the lister's location on the mapView.
     // TODO: Set the location string to the users actual location when geo-location is setup.
     func setGeocoder() {
-        // MapKit Geo Coder
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString("34 Bridlecreek Pk Sw, Calgary AB, Canada T2Y3N6", completionHandler: { placemarks, error in
             if error != nil {
@@ -96,7 +95,7 @@ class ListingDetailViewController: UIViewController {
                 return
             }
             
-            // Get the placemarks - always take first mark.
+            // Get the placemarks, and always take the first mark.
             if let placemarks = placemarks {
                 let placemark = placemarks[0]
                 
@@ -211,7 +210,6 @@ class ListingDetailViewController: UIViewController {
                 })
             }
         } else {
-            // No user is signed in. Remind them with an alert
             alertUserNotLoggedIn()
         }
         
@@ -244,8 +242,6 @@ extension ListingDetailViewController: UITextFieldDelegate {
         keyboardToolbar.isUserInteractionEnabled = true
         keyboardToolbar.sizeToFit()
         textField.inputAccessoryView = keyboardToolbar
-        
-        //toolbarTextField.becomeFirstResponder()
         
         return true
     }
