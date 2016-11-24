@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 
-class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class CameraViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var addPhotosImage: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
@@ -100,39 +100,6 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         durationPickerToolbar.sizeToFit()
         endDateTextField.inputAccessoryView = descriptionToolbar
-    }
-    
-    // returns the number of 'columns' to display.
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int{
-        return 1;
-    }
-    
-    // returns the # of rows in each component.
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        //return ListingTimeInterval.count
-        //return ListingTimeInterval.count.hashValue
-        return ListingTimeInterval.allValues.count
-        
-    }
-    
-    //places text in text field and stores in database
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        //endDateTextField.text = description
-        
-        endDateTextField.text = ListingTimeInterval.allValues[row].description//place duration value in textfield
-    }
-    
-    // title for each row
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        /*guard let ListingTimeInterval(rawValue: row)else{
-            fatalError("Unknown auctionDurationOption")
-        }
-        
-        return description*/
-        //return ListingTimeInterval(rawValue: row)?.description;
-        return ListingTimeInterval.allValues[row].description
     }
 
     func donePressed(){
@@ -376,3 +343,42 @@ extension CameraViewController: UINavigationControllerDelegate {
 // MARK: - UITextViewDelegate
 extension CameraViewController: UITextViewDelegate {
 }
+
+// MARK: - UIPickerViewDelegate and UIPickerViewDelegate
+extension CameraViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    // returns the number of 'columns' to display.
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 1;
+    }
+    
+    // returns the # of rows in each component.
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        //return ListingTimeInterval.count
+        //return ListingTimeInterval.count.hashValue
+        return ListingTimeInterval.allValues.count
+        
+    }
+    
+    // title for each row
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        /*guard let ListingTimeInterval(rawValue: row)else{
+         fatalError("Unknown auctionDurationOption")
+         }
+         
+         return description*/
+        //return ListingTimeInterval(rawValue: row)?.description;
+        return ListingTimeInterval.allValues[row].description
+    }
+    
+    //places text in text field
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        //endDateTextField.text = description
+        
+        endDateTextField.text = ListingTimeInterval.allValues[row].description//place duration value in textfield
+    }
+    
+}
+
