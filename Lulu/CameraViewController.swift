@@ -23,14 +23,6 @@ class CameraViewController: UIViewController {
     // MARK: - Properties
     var ref: FIRDatabaseReference!
     var storageRef: FIRStorageReference!
-    
-    /*let auctionDurationPickerArray = [ListingTimeInterval.oneDay.description,
-                                       ListingTimeInterval.threeDays.description,
-                                      ListingTimeInterval.fiveDays.description,
-                                      ListingTimeInterval.sevenDays.description,
-                                      ListingTimeInterval.tenDays.description,
-                                      ListingTimeInterval.fourteenDays.description]*/
-    
     var auctionDurationPicker = UIPickerView()
     
     
@@ -152,14 +144,10 @@ class CameraViewController: UIViewController {
             fatalError("Selected row is does not exist in ListingTimeInterval")
         }
         
-        // TODO: Replace this with picker value convert to the enum.
+        // saving value of selected row from picker
         let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
         
-       /* // TODO: Replace this with picker value convert to the enum.
-        guard let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow] else {
-            return
-        }*/
-        
+ 
         // Prepare and upload listing image to Firebase Storage.
         // TODO: Throw errors.
         guard let image = addPhotosImage.image else {
@@ -354,29 +342,17 @@ extension CameraViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     
     // returns the # of rows in each component.
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        //return ListingTimeInterval.count
-        //return ListingTimeInterval.count.hashValue
         return ListingTimeInterval.allValues.count
         
     }
     
     // title for each row
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        /*guard let ListingTimeInterval(rawValue: row)else{
-         fatalError("Unknown auctionDurationOption")
-         }
-         
-         return description*/
-        //return ListingTimeInterval(rawValue: row)?.description;
         return ListingTimeInterval.allValues[row].description
     }
     
     //places text in text field
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        //endDateTextField.text = description
-        
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {        
         endDateTextField.text = ListingTimeInterval.allValues[row].description//place duration value in textfield
     }
     
