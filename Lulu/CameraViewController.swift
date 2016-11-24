@@ -218,7 +218,7 @@ class CameraViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             // TODO: Allow user input for auction duration.
             self.writeListing(listing) { (listingRef) in
                 self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
-                self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
+               // self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
                 self.resetListingViews()
             }
         }
