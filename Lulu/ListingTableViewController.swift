@@ -50,13 +50,31 @@ class ListingTableViewController: UITableViewController {
             }
             
             //let auctionEndTimestamp = listing["auctionEndTimestamp"] as! Int
-            //let bids = listing?["bids"] as! [String:Any]
+            
+            // TO-DO: Make this clearer (make a function)
+            var allBids : [Bid]!
+            if let bids = listing["bids"] as? [String:Any] {
+                allBids = []
+                for bidKey in bids.keys {
+                    
+                    self.listingsRef.child(listingId).child("bids").child(bidKey).observeSingleEvent(of: .value, with: { (snap) in
+                        
+                        if let aBid = snap.value as? [String: Any] {
+                            let amount = aBid["amount"] as! Double
+                            let bidderId = aBid["bidderId"] as! String
+                            let createdTimestamp = aBid["createdTimestamp"] as! Int
+                            print(amount)
+                            allBids.append(Bid(amount,bidderId,createdTimestamp))
+                        }
+                    })
+                }
+            }
+            
             //let createdTimestamp = listing["createdTimestamp"] as? Int ?? -1
             let description = listing["description"] as? String ?? ""
             
-            let imageUrls = listing["imageUrls"] as? [String] ?? ["URL for no photo avaiable?"]
+            let imageUrls = listing["imageUrls"] as? [String] ?? ["URL for no photo available? from DB?"]
             let imageURLS = imageUrls.map{URL.init(string: $0)} as! [URL]
-            
             
             //let sellerId = listing?["sellerId"] as! String
             let startingPrice = listing["startingPrice"] as? Double ?? 0.00
@@ -66,23 +84,25 @@ class ListingTableViewController: UITableViewController {
             let title = listing["title"] as? String ?? "N/A"
             //let winningBidId = listing?["winningBidId"] as! String
             
-            completion(Listing("ID", imageURLS, title, description, startingPrice, buyoutPrice, "Oct 30", "Nov 9", User()))
+            let tempListing = Listing("ID", imageURLS, title, description, startingPrice, buyoutPrice, "Oct 30", "Nov 9", User())
+            tempListing.bids = allBids
+            
+            completion(tempListing)
             
             // ASK ABOUT IF we need to initialize a new user with the given ID or just pass the userID. ListingViewDetails should retrieve the user from the DB
         })
     }
-    
-    // TO-DO: Is it efficient to call self.tableView.reloadData() inside the 
-    // closure below? 
+
+    // TO-DO: Is it efficient to call self.tableView.reloadData() inside the
+    // closure below?
     // The table updates because of that. If I call reloadData() (in viewWillAppear() after invoking retrieveListings())
     // the tableView does not update.
-   func retrieveListings() {
+    func retrieveListings() {
         listings = []
         for listingId in listingIds {
             getListing(withId: listingId){ (listing)  in
                 self.listings.append(listing)
                 self.tableView.reloadData()
-                print(self.listings.count)
             }
         }
     }
@@ -108,7 +128,7 @@ class ListingTableViewController: UITableViewController {
         return cell
     }
     
-    // TO-DO: finish implementing this function
+    // TO-DO: finish implementing this function. Ask what should I display for each different listing type
     func setupCell(_ cell: ProfileTableViewCell, _ listing: Listing) {
         
         cell.itemTitle.text = listing.title
@@ -117,19 +137,26 @@ class ListingTableViewController: UITableViewController {
         } else {
             cell.itemPhoto.image = UIImage()  // display a "photo no available"?
         }
+
+        var bidAmount = "Highest Bid"
+        
+        if let b = listing.getHighestBid() {
+           bidAmount = b.amount.description
+        }
+        
         switch (listingType.description) {
             
         case "bidding", "watching", "selling": // buyout and highest bid
             cell.bigLabel.text = listing.buyoutPrice.description
-            cell.smallLabel.text = "Highest bid"
+            cell.smallLabel.text = bidAmount
         case "won", "sold": //  highest bid amount and date
-            cell.bigLabel.text = "Bid amount"
+            cell.bigLabel.text = bidAmount
             cell.smallLabel.text = listing.endDate
         case "lost": // date and bid that won but with different color?
-            cell.bigLabel.text = "Bid amount"
+            cell.bigLabel.text = bidAmount
             cell.bigLabel.backgroundColor = UIColor.red
             cell.bigLabel.alpha = 0.7
-            cell.bigLabel.text = "Bid amount"
+            cell.bigLabel.text = bidAmount
             cell.smallLabel.text = listing.endDate
         default:
             fatalError("*** Switch statement was not exhaustive enough: ListingTableViewController->setUpCell")

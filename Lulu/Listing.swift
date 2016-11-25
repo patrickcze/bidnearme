@@ -9,7 +9,7 @@
 import UIKit
 
 class Listing {
-
+    
     // MARK: - Properties
     var listingID: String!
     var photos: [URL]!
@@ -27,6 +27,8 @@ class Listing {
     var bidders: [User]!
     var favorited: [User]!
     
+    var bids: [Bid]!
+    
     // Listing initialization.
     init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
         self.listingID = id
@@ -38,5 +40,14 @@ class Listing {
         self.startDate = startDate
         self.endDate = endDate
         self.seller = seller
+    }
+    
+    func getHighestBid() -> Bid? {
+        
+        if let highestBid = bids.last {
+            return highestBid
+        } else {
+            return nil
+        }
     }
 }

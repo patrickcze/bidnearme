@@ -25,6 +25,7 @@
 		5B054AF51DE005EE00099683 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B054AF41DE005EE00099683 /* ProfileTableViewCell.xib */; };
 		5B054AF71DE005FC00099683 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AF61DE005FC00099683 /* ProfileViewController.swift */; };
 		5B054AF91DE0065300099683 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B054AF81DE0065300099683 /* Profile.storyboard */; };
+		5B40E8471DE8DE1F0009A46F /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B40E8461DE8DE1E0009A46F /* Bid.swift */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
 		7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD434C1DD256B800E0CECE /* CameraViewController.swift */; };
 		BC079C241DE3B0DA007F6BDA /* ListingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C231DE3B0DA007F6BDA /* ListingDetailViewController.swift */; };
@@ -84,6 +85,7 @@
 		5B054AF41DE005EE00099683 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		5B054AF61DE005FC00099683 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5B054AF81DE0065300099683 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		5B40E8461DE8DE1E0009A46F /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CBD434C1DD256B800E0CECE /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -277,6 +279,7 @@
 				BC60E8EF1DC694AE004D7FB8 /* User.swift */,
 				3D0B763F1DE2682D00368CFA /* ListingTimeInterval.swift */,
 				3D763BE01DE52C0C000CE3C7 /* ListingType.swift */,
+				5B40E8461DE8DE1E0009A46F /* Bid.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */,
 				5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
+				5B40E8471DE8DE1F0009A46F /* Bid.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* LoginViewController.swift in Sources */,
 				3D763BE11DE52C0C000CE3C7 /* ListingType.swift in Sources */,
