@@ -13,14 +13,16 @@ import FirebaseDatabase
 class ProfileViewController: UIViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var loginButton: UIBarButtonItem!
+    @IBOutlet weak var upperView: UIView! // the background for the top part of the profile page (Name, profile pciture, rating label, etc.
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var memberLabel: UILabel!
     @IBOutlet weak var specialLabel: UILabel!
     @IBOutlet weak var listingTypeTableView: UITableView!
-    @IBOutlet weak var upperView: UIView! // the background for the top part of the profile page (Name, profile pciture, rating label, etc.
+    @IBOutlet weak var alertView: UIView!
+    @IBOutlet weak var alertLabel: UILabel!
     
     // MARK: - Properties
     var ref: FIRDatabaseReference!
@@ -39,6 +41,25 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        loginButton.title = "Log out"
+        alertView.isHidden = true
+        
+        guard let userId = FIRAuth.auth()?.currentUser?.uid else {
+            alertLabel.text = " Please log-in!"
+            loginButton.title = "Log in"
+            profileNameLabel.text = ""
+            ratingLabel.text = ""
+            memberLabel.text = ""
+            specialLabel.text = ""
+            alertView.isHidden = false
+            profilePicture.image = UIImage(named: "nophoto")
+            return
+        }
+        
+        getUser(withId: userId) { (user) in
+            self.profileUser = user
+            self.populateUserViews()
+        }
     }
     
     override func viewDidLoad() {
@@ -62,19 +83,15 @@ class ProfileViewController: UIViewController {
 
         // Making upper view and bottom table view frame corners rounded
         upperView.layer.cornerRadius = 3
+        upperView.layer.masksToBounds = true
         listingTypeTableView.layer.cornerRadius = 3
-        
-        guard let userId = FIRAuth.auth()?.currentUser?.uid else {
-            // TODO: Segue to sign in page.
-            return
-        }
-        
-        getUser(withId: userId) { (user) in
-            self.profileUser = user
-            self.populateUserViews()
-        }
+        listingTypeTableView.layer.masksToBounds = true
+        alertLabel.layer.cornerRadius = 5
+        alertLabel.layer.masksToBounds = true
     }
     
+    
+    // TO-DO: finish updating the top part of profile view by using the user's information
     /**
      Populates the user views with info if the profileUser has been specified.
      */
@@ -90,6 +107,11 @@ class ProfileViewController: UIViewController {
         if let name = user.name {
             profileNameLabel.text = name
         }
+        
+        // TO-DO ->
+        ratingLabel.text = "4.6 starts"
+        memberLabel.text = "Member since: 2016"
+        specialLabel.text = "Replies quickly"
     }
     
     /**
@@ -154,6 +176,7 @@ class ProfileViewController: UIViewController {
             
             let listingType = listingTypes[row]
             listingTableViewController.listingIds = self.profileUser?.listingIdsByType[listingType]
+            listingTableViewController.listingType = listingType
         }
     }
 }
