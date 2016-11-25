@@ -29,13 +29,11 @@ class ListingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Register custom TableViewCell nib.
         let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
         self.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         self.tableView.register(nib,forCellReuseIdentifier: cellIdentifier)
     }
-    
     
     // TO-DO: ask about buyout price in listing and FINISH implementing this function
     /**
@@ -88,7 +86,6 @@ class ListingTableViewController: UITableViewController {
             }
         }
     }
-    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
