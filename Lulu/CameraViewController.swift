@@ -137,14 +137,13 @@ class CameraViewController: UIViewController {
             return
         }
         
-        //let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
-        
+        // assign value of selected row as picked value
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
         guard auctionDurationPickerSelectedRow < ListingTimeInterval.allValues.count else {
             fatalError("Selected row is does not exist in ListingTimeInterval")
         }
         
-        // saving value of selected row from picker
+        // saving value of selected row from picker for database
         let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
         
  
@@ -343,7 +342,6 @@ extension CameraViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     // returns the # of rows in each component.
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         return ListingTimeInterval.allValues.count
-        
     }
     
     // title for each row
@@ -353,7 +351,7 @@ extension CameraViewController: UIPickerViewDelegate, UIPickerViewDataSource{
     
     //places text in text field
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {        
-        endDateTextField.text = ListingTimeInterval.allValues[row].description//place duration value in textfield
+        endDateTextField.text = ListingTimeInterval.allValues[row].description
     }
     
 }
