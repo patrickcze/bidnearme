@@ -50,29 +50,8 @@ class ListingTableViewController: UITableViewController {
             }
             
             //let auctionEndTimestamp = listing["auctionEndTimestamp"] as! Int
-            
-            // TO-DO: Make this clearer (make a function)
-            var allBids : [Bid]!
-            if let bids = listing["bids"] as? [String:Any] {
-                allBids = []
-                for bidKey in bids.keys {
-                    
-                    self.listingsRef.child(listingId).child("bids").child(bidKey).observeSingleEvent(of: .value, with: { (snap) in
-                        
-                        if let aBid = snap.value as? [String: Any] {
-                            let amount = aBid["amount"] as! Double
-                            let bidderId = aBid["bidderId"] as! String
-                            let createdTimestamp = aBid["createdTimestamp"] as! Int
-                            print(amount)
-                            allBids.append(Bid(amount,bidderId,createdTimestamp))
-                        }
-                    })
-                }
-            }
-            
             //let createdTimestamp = listing["createdTimestamp"] as? Int ?? -1
             let description = listing["description"] as? String ?? ""
-            
             let imageUrls = listing["imageUrls"] as? [String] ?? ["URL for no photo available? from DB?"]
             let imageURLS = imageUrls.map{URL.init(string: $0)} as! [URL]
             
@@ -82,17 +61,38 @@ class ListingTableViewController: UITableViewController {
             let buyoutPrice = 99999// <- ASK ABOUT THIS FIELD IN DB
             
             let title = listing["title"] as? String ?? "N/A"
-            //let winningBidId = listing?["winningBidId"] as! String
-            
+            let winningBidId = listing["winningBidId"] as! String
+        
+            // TO-DO: do we need to init bids fields so it is easy in listingDetail to display them?
+//            var allBids : [Bid]!
+//            if let bids = listing["bids"] as? [String:Any] {
+//                allBids = []
+//                for bidKey in bids{
+//                    let aBid = bidKey.value as! [String : Any]
+//                    let amount = aBid["amount"] as! Double
+//                    let bidderId = aBid["bidderId"] as! String
+//                    let createdTimestamp = aBid["createdTimestamp"] as! Int
+//                    allBids.append(Bid(amount,bidderId,createdTimestamp))
+//                }
+//            }
+
             let tempListing = Listing("ID", imageURLS, title, description, startingPrice, buyoutPrice, "Oct 30", "Nov 9", User())
-            tempListing.bids = allBids
+        
+            if let bids = listing["bids"] as? [String:Any] {
+                if let highestBid = bids[winningBidId] as? [String : Any] {
+                    let amount = highestBid["amount"] as! Double
+                    let bidderId = highestBid["bidderId"] as! String
+                    let createdTimestamp = highestBid["createdTimestamp"] as! Int
+                    tempListing.winningBid = Bid(amount,bidderId,createdTimestamp)
+                }
+            }
             
             completion(tempListing)
             
             // ASK ABOUT IF we need to initialize a new user with the given ID or just pass the userID. ListingViewDetails should retrieve the user from the DB
         })
     }
-
+    
     // TO-DO: Is it efficient to call self.tableView.reloadData() inside the
     // closure below?
     // The table updates because of that. If I call reloadData() (in viewWillAppear() after invoking retrieveListings())
@@ -137,17 +137,17 @@ class ListingTableViewController: UITableViewController {
         } else {
             cell.itemPhoto.image = UIImage()  // display a "photo no available"?
         }
-
-        var bidAmount = "Highest Bid"
         
-        if let b = listing.getHighestBid() {
-           bidAmount = b.amount.description
+        var bidAmount = "0 bidders"
+        
+        if let b = listing.winningBid {
+            bidAmount = b.amount.description
         }
         
         switch (listingType.description) {
             
         case "bidding", "watching", "selling": // buyout and highest bid
-            cell.bigLabel.text = listing.buyoutPrice.description
+            cell.bigLabel.text = "Buy now!" //listing.buyoutPrice.description
             cell.smallLabel.text = bidAmount
         case "won", "sold": //  highest bid amount and date
             cell.bigLabel.text = bidAmount

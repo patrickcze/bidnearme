@@ -27,7 +27,7 @@ class Listing {
     var bidders: [User]!
     var favorited: [User]!
     
-    var bids: [Bid]!
+    var winningBid: Bid! // ronny: I need this for profile
     
     // Listing initialization.
     init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
@@ -40,14 +40,5 @@ class Listing {
         self.startDate = startDate
         self.endDate = endDate
         self.seller = seller
-    }
-    
-    func getHighestBid() -> Bid? {
-        
-        if let highestBid = bids.last {
-            return highestBid
-        } else {
-            return nil
-        }
     }
 }
