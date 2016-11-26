@@ -54,30 +54,13 @@ class ListingTableViewController: UITableViewController {
             let description = listing["description"] as? String ?? ""
             let imageUrls = listing["imageUrls"] as? [String] ?? ["URL for no photo available? from DB?"]
             let imageURLS = imageUrls.map{URL.init(string: $0)} as! [URL]
-            
             //let sellerId = listing?["sellerId"] as! String
             let startingPrice = listing["startingPrice"] as? Double ?? 0.00
-            
             let buyoutPrice = 99999// <- ASK ABOUT THIS FIELD IN DB
-            
             let title = listing["title"] as? String ?? "N/A"
             let winningBidId = listing["winningBidId"] as! String
-        
-            // TO-DO: do we need to init bids fields so it is easy in listingDetail to display them?
-//            var allBids : [Bid]!
-//            if let bids = listing["bids"] as? [String:Any] {
-//                allBids = []
-//                for bidKey in bids{
-//                    let aBid = bidKey.value as! [String : Any]
-//                    let amount = aBid["amount"] as! Double
-//                    let bidderId = aBid["bidderId"] as! String
-//                    let createdTimestamp = aBid["createdTimestamp"] as! Int
-//                    allBids.append(Bid(amount,bidderId,createdTimestamp))
-//                }
-//            }
-
             let tempListing = Listing("ID", imageURLS, title, description, startingPrice, buyoutPrice, "Oct 30", "Nov 9", User())
-        
+            
             if let bids = listing["bids"] as? [String:Any] {
                 if let highestBid = bids[winningBidId] as? [String : Any] {
                     let amount = highestBid["amount"] as! Double
@@ -86,9 +69,7 @@ class ListingTableViewController: UITableViewController {
                     tempListing.winningBid = Bid(amount,bidderId,createdTimestamp)
                 }
             }
-            
             completion(tempListing)
-            
             // ASK ABOUT IF we need to initialize a new user with the given ID or just pass the userID. ListingViewDetails should retrieve the user from the DB
         })
     }
@@ -138,7 +119,7 @@ class ListingTableViewController: UITableViewController {
             cell.itemPhoto.image = UIImage()  // display a "photo no available"?
         }
         
-        var bidAmount = "0 bidders"
+        var bidAmount = listing.startPrice.description
         
         if let b = listing.winningBid {
             bidAmount = b.amount.description
