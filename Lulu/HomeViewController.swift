@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
             var tempListing: Listing
             
             //Iterate over listings
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
                 // Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
                 let desc = rest.childSnapshot(forPath: "description").value as? String
