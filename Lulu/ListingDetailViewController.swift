@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 import FirebaseStorage
 import FirebaseDatabase
 import FirebaseAuth
@@ -19,46 +20,38 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var listingImageView: UIImageView!
     @IBOutlet weak var listingTitleLabel: UILabel!
     @IBOutlet weak var listingDescriptionLabel: UILabel!
+    @IBOutlet weak var listingPriceTag: UIView!
     @IBOutlet weak var listingCurrentPrice: UILabel!
-    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileRating: RatingControl!
-    
-    @IBOutlet weak var bidValueTextField: UITextField!
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var placeBidButton: UIButton!
     
     // MARK: - Properties
     var listing: Listing?
+    var textField: UITextField!
+    var toolbarTextField: UITextField!
     var ref: FIRDatabaseReference?
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        textField.keyboardType = .numberPad
+        textField.delegate = self
+        view.addSubview(textField)
+        
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
-        bidValueTextField.delegate = self
-    
-        // Setup the toolbar for the bidding textview
-        let numberToolbar = UIToolbar()
-        numberToolbar.barStyle = UIBarStyle.default
-        
-        numberToolbar.setItems([
-            UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(ListingDetailViewController.cancelPressed)),
-            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(ListingDetailViewController.donePressed))
-            ], animated: false)
-        
-        numberToolbar.isUserInteractionEnabled = true
-        numberToolbar.sizeToFit()
-        
-        bidValueTextField.inputAccessoryView = numberToolbar
-        
-        // Setting user image to a circle
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
-        placeBidButton.layer.cornerRadius = 5.0
+        placeBidButton.backgroundColor = ColorPalette.blue
+        listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        
+        mapView.layer.cornerRadius = 5.0
+        setGeocoder()
         
         // Checks if listing data is avaliable
         if let listing = listing {
@@ -81,7 +74,7 @@ class ListingDetailViewController: UIViewController {
                     highestBidAmount = snapshot.childSnapshot(forPath: "bids/\(highestBidListingID)/amount").value as! Double
                 }
                 
-                self.listingCurrentPrice.text = "$" + String(format:"%.2f", highestBidAmount)
+                self.listingCurrentPrice.text = "$\(String(format:"%.2f", highestBidAmount))"
             })
             
             // TODO: Implement ratings for sellers.
@@ -93,49 +86,41 @@ class ListingDetailViewController: UIViewController {
         }
     }
     
-    func donePressed(){
-        view.endEditing(true)
-    }
+    // MARK: - MKMapView
     
-    func cancelPressed(){
-        view.endEditing(true) // or do something
-    }
-    
-    // MARK: - Actions
-    @IBAction func placeBidPress(_ sender: Any) {
-        //Check if user is logged in
-        if let user = FIRAuth.auth()?.currentUser {
-            // Check if the user placed a bid value in the text field
-            if let bidAmount = Double(bidValueTextField.text!) {
-
-                let listingID = listing?.listingID
-                let listingRef = ref?.child("listings").child(listingID!)
-                
-                //Check if bid table exists
-                listingRef?.observeSingleEvent(of: .value, with: {snapshot in
-                    if snapshot.hasChild("bids"){
-                        //Checks that the desired bid is the highest
-                        if self.isHighestBid(bidAmount: bidAmount, listingSnapshot: snapshot) {
-                            let bidObject: [String : Any] = [
-                                "amount": bidAmount,
-                                "bidderId": user.uid,
-                                "createdTimestamp" : FIRServerValue.timestamp()
-                            ]
-                            
-                            self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
-                        } else {
-                            // TODO: Let the user know they bid lower than the required amount
-                        }
-                    }
-                })
+    // Set a new geocoder for annotating the lister's location on the mapView.
+    // TODO: Set the location string to the users actual location when geo-location is setup.
+    func setGeocoder() {
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString("34 Bridlecreek Pk Sw, Calgary AB, Canada T2Y3N6", completionHandler: { placemarks, error in
+            if error != nil {
+                return
             }
-        } else {
-            // No user is signed in. Remind them with an alert
-            alertUserNotLoggedIn()
-        }
-        
-        bidValueTextField.text = ""
+            
+            // Get the placemarks, and always take the first mark.
+            if let placemarks = placemarks {
+                let placemark = placemarks[0]
+                
+                if let location = placemark.location {
+                    self.setLocationOverlay(location.coordinate)
+                    
+                    // Set the zoom level.
+                    let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 750, 750)
+                    self.mapView.setRegion(region, animated: false)
+                }
+            }
+        })
     }
+    
+    // Create a circular map overlay for seller's location.
+    func setLocationOverlay(_ center: CLLocationCoordinate2D) {
+        let radius = CLLocationDistance(150)
+        let overlay = MKCircle(center: center, radius: radius)
+        
+        mapView.add(overlay)
+    }
+    
+    // MARK: - Bidding System
     
     //Check if the users bid will be the new highest bid
     func isHighestBid(bidAmount: Double, listingSnapshot: FIRDataSnapshot) -> Bool {
@@ -188,20 +173,98 @@ class ListingDetailViewController: UIViewController {
         let biddingListingType = ListingType.bidding.description
         ref?.child("users").child(userId).child("listings").child(biddingListingType).child(listingKey).setValue(true)
     }
+    
+    // MARK: - UIResponder
+    
+    // Optional. Tells the responder when one or more fingers touch down in a view or window.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        textField.resignFirstResponder()
+    }
+    
+    // MARK: - Actions
+    
+    // Respond to tappedBidButton tap.
+    @IBAction func tappedBidButton(_ sender: UIButton) {
+        textField.becomeFirstResponder()
+    }
+    
+    // Respond to placeBidButton tap.
+    func tappedPlaceBid() {
+        //Check if user is logged in
+        if let user = FIRAuth.auth()?.currentUser {
+            // Check if the user placed a bid value in the text field
+            if let bidAmount = Double(toolbarTextField.text!) {
+                
+                let listingID = listing?.listingID
+                let listingRef = ref?.child("listings").child(listingID!)
+                
+                //Check if bid table exists
+                listingRef?.observeSingleEvent(of: .value, with: {snapshot in
+                    if snapshot.hasChild("bids"){
+                        //Checks that the desired bid is the highest
+                        if self.isHighestBid(bidAmount: bidAmount, listingSnapshot: snapshot) {
+                            let bidObject: [String : Any] = [
+                                "amount": bidAmount,
+                                "bidderId": user.uid,
+                                "createdTimestamp" : FIRServerValue.timestamp()
+                            ]
+                            
+                            self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
+                        } else {
+                            // TODO: Let the user know they bid lower than the required amount
+                        }
+                    }
+                })
+            }
+        } else {
+            alertUserNotLoggedIn()
+        }
+        
+        view.endEditing(true)
+        textField.resignFirstResponder()
+    }
 }
 
 // MARK: - UITextFieldDelegate
 extension ListingDetailViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-
+    
+    // Optional. Asks the delegate if editing should begin in the specified text field.
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.barStyle = UIBarStyle.default
+        
+        toolbarTextField = TextField()
+        toolbarTextField.placeholder = "Enter your price"
+        toolbarTextField.backgroundColor = UIColor.lightText
+        toolbarTextField.keyboardType = .numberPad
+        toolbarTextField.layer.cornerRadius = 5.0
+        toolbarTextField.sizeToFit()
+        
+        keyboardToolbar.setItems([
+            UIBarButtonItem(customView: toolbarTextField),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Place Bid", style: .plain, target: self, action: #selector(tappedPlaceBid))
+            ], animated: false)
+        
+        keyboardToolbar.isUserInteractionEnabled = true
+        keyboardToolbar.sizeToFit()
+        textField.inputAccessoryView = keyboardToolbar
+        
         return true
     }
+}
+
+// MARK: - MKMapViewDelegate protocol
+extension ListingDetailViewController: MKMapViewDelegate {
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        // TODO: deal with this in some way
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // TODO: deal with this in some way
+    // Optional. Asks the delegate for a renderer object to use when drawing the specified overlay.
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let circleRenderer = MKCircleRenderer(overlay: overlay)
+        circleRenderer.fillColor = ColorPalette.blue.withAlphaComponent(0.5)
+        circleRenderer.strokeColor = ColorPalette.blue
+        circleRenderer.lineWidth = 1.0
+        
+        return circleRenderer
     }
 }
