@@ -23,6 +23,8 @@ class CameraViewController: UIViewController {
     // MARK: - Properties
     var ref: FIRDatabaseReference!
     var storageRef: FIRStorageReference!
+    var auctionDurationPicker = UIPickerView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,15 @@ class CameraViewController: UIViewController {
         titleTextField.delegate = self
         startingPriceTextField.delegate = self
         endDateTextField.delegate = self
+        
+        //set up picker to delegate
+        auctionDurationPicker.delegate = self
+        
+        //set up picker to datasource
+        auctionDurationPicker.dataSource = self
+        
+        //set up input view of end date text field to picker
+        endDateTextField.inputView = auctionDurationPicker
         
         // Set up toolbar to appear above numerical keyboard when setting price
         let numberToolbar = UIToolbar()
@@ -71,8 +82,18 @@ class CameraViewController: UIViewController {
         
         descriptionToolbar.sizeToFit()
         descriptionTextArea.inputAccessoryView = descriptionToolbar
+        
+        // Setup toolbar to be above keybaord on text area
+        let durationPickerToolbar = UIToolbar()
+        durationPickerToolbar.barStyle = UIBarStyle.default
+        durationPickerToolbar.items = [
+            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(CameraViewController.donePressed))
+        ]
+        
+        durationPickerToolbar.sizeToFit()
+        endDateTextField.inputAccessoryView = descriptionToolbar
     }
-    
+
     func donePressed(){
         view.endEditing(true)
     }
@@ -116,9 +137,16 @@ class CameraViewController: UIViewController {
             return
         }
         
-        // TODO: Replace this with picker value convert to the enum.
-        let auctionDuration = ListingTimeInterval.sevenDays
+        // assign value of selected row as picked value
+        let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
+        guard auctionDurationPickerSelectedRow < ListingTimeInterval.allValues.count else {
+            fatalError("Selected row is does not exist in ListingTimeInterval")
+        }
         
+        // saving value of selected row from picker for database
+        let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
+        
+ 
         // Prepare and upload listing image to Firebase Storage.
         // TODO: Throw errors.
         guard let image = addPhotosImage.image else {
@@ -239,7 +267,8 @@ class CameraViewController: UIViewController {
      - parameter userId: User ID of the user to associate the listing to.
      */
     func addListingToUserSelling(listingId: String, userId: String) {
-        ref.child("users/\(userId)/listings/selling/\(listingId)").setValue(true)
+        let sellingListingType = ListingType.selling.description
+        ref.child("users/\(userId)/listings/\(sellingListingType)/\(listingId)").setValue(true)
     }
     
 }
@@ -303,3 +332,29 @@ extension CameraViewController: UINavigationControllerDelegate {
 // MARK: - UITextViewDelegate
 extension CameraViewController: UITextViewDelegate {
 }
+
+// MARK: - UIPickerViewDelegate and UIPickerViewDelegate
+extension CameraViewController: UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    // returns the number of 'columns' to display.
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 1;
+    }
+    
+    // returns the # of rows in each component.
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return ListingTimeInterval.allValues.count
+    }
+    
+    // title for each row
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return ListingTimeInterval.allValues[row].description
+    }
+    
+    //places text in text field
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {        
+        endDateTextField.text = ListingTimeInterval.allValues[row].description
+    }
+    
+}
+

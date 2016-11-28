@@ -59,8 +59,11 @@ class ListingDetailViewController: UIViewController {
             listingTitleLabel.text = listing.title
             listingDescriptionLabel.text = listing.description
             
-            profileImageView.image = listing.seller.profileImage
-            profileNameLabel.text = "\(listing.seller.firstName!) \(listing.seller.lastName!)"
+            if let profileImageUrl = listing.seller.profileImageUrl {
+                profileImageView.af_setImage(withURL: profileImageUrl)
+            }
+            
+            profileNameLabel.text = listing.seller.name
             
             // Keeps the price on the image current with the highest bid
             ref?.child("listings").child(listing.listingID).observe(.value, with: { snapshot in
@@ -140,7 +143,7 @@ class ListingDetailViewController: UIViewController {
         bidRef.setValue(bidObject) { (error, bidRef) in
             if error == nil {
                 self.updateListingWinningBidId(listingRef: listingRef, highestBidId: bidRef.key)
-                self.addBidToUserBuyingProfile(listingKey: listingRef.key)
+                self.addBidToUserBiddingProfile(listingKey: listingRef.key)
             }
         }
     }
@@ -160,9 +163,15 @@ class ListingDetailViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // Add the listing key of the item the user is bidding on to the db in their user data
-    func addBidToUserBuyingProfile(listingKey: String) {
-        ref?.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).child("listings").child("buying").child(listingKey).setValue(true)
+    //Function add the listing key of the item the user is bidding on to the db in their user data
+    func addBidToUserBiddingProfile(listingKey: String) {
+        guard let userId = FIRAuth.auth()?.currentUser?.uid else {
+            alertUserNotLoggedIn()
+            return
+        }
+        
+        let biddingListingType = ListingType.bidding.description
+        ref?.child("users").child(userId).child("listings").child(biddingListingType).child(listingKey).setValue(true)
     }
     
     // MARK: - UIResponder
