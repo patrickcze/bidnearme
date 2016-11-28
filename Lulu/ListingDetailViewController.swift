@@ -48,7 +48,7 @@ class ListingDetailViewController: UIViewController {
         
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         placeBidButton.backgroundColor = ColorPalette.blue
-        listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         mapView.layer.cornerRadius = 5.0
         setGeocoder()
@@ -91,7 +91,6 @@ class ListingDetailViewController: UIViewController {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString("34 Bridlecreek Pk Sw, Calgary AB, Canada T2Y3N6", completionHandler: { placemarks, error in
             if error != nil {
-                print(error!)
                 return
             }
             
@@ -103,7 +102,7 @@ class ListingDetailViewController: UIViewController {
                     self.setLocationOverlay(location.coordinate)
                     
                     // Set the zoom level.
-                    let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+                    let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 750, 750)
                     self.mapView.setRegion(region, animated: false)
                 }
             }
@@ -177,7 +176,7 @@ class ListingDetailViewController: UIViewController {
     // MARK: - Actions
     
     // Respond to tappedBidButton tap.
-    @IBAction func tappedBidButton(_ sender: Any) {
+    @IBAction func tappedBidButton(_ sender: UIButton) {
         textField.becomeFirstResponder()
     }
     
