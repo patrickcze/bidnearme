@@ -57,6 +57,9 @@ class ListingDetailViewController: UIViewController {
         
         // Checks if listing data is avaliable
         if let listing = listing {
+            //Set navigation bar title to the listing title
+            navigationItem.title = listing.title
+            
             listingImageView.af_setImage(withURL: listing.photos[0])
             listingTitleLabel.text = listing.title
             listingDescriptionLabel.text = listing.description
