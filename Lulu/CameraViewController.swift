@@ -41,6 +41,9 @@ class CameraViewController: UIViewController {
         descriptionTextArea.layer.cornerRadius = 5.0
         postListingButton.layer.cornerRadius = 5.0
         
+        //Set button colour to correct blue colour
+        postListingButton.backgroundColor = ColorPalette.bidBlue
+        
         // Set up appropriate delegates
         descriptionTextArea.delegate = self
         titleTextField.delegate = self

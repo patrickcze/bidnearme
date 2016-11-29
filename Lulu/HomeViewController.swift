@@ -33,7 +33,8 @@ class HomeViewController: UIViewController {
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = true
+        //Prevents the search bar and cancel button from disappearing when searching
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         
         return searchController
@@ -43,10 +44,20 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //This section sets the bid near me logo in the top left corner
+        let logoImage = UIImage.init(named: "appLogo")
+        let logoImageView = UIImageView.init(image: logoImage)
+        logoImageView.frame = CGRect(x: -40, y: 5, width: 125, height: 25)
+        logoImageView.contentMode = .scaleAspectFit
+        let imageItem = UIBarButtonItem.init(customView: logoImageView)
+        let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeSpacer.width = -15
+        navigationItem.leftBarButtonItems = [negativeSpacer, imageItem]
+        
         // Configure searchbar with autolayout & add it to view.
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        searchBarContainerView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
+        navigationItem.titleView = searchController.searchBar
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
