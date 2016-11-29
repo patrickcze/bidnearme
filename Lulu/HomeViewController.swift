@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         
         return searchController
@@ -45,8 +45,8 @@ class HomeViewController: UIViewController {
         
         // Configure searchbar with autolayout & add it to view.
         searchController.searchBar.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        searchBarContainerView.addSubview(searchController.searchBar)
         searchController.searchBar.sizeToFit()
+        navigationItem.titleView = searchController.searchBar
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
