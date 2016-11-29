@@ -10,5 +10,5 @@ import UIKit
 
 // MARK: - Color constants
 public struct ColorPalette {
-    static let blue = UIColor(red: 0.0, green: 0.35, blue: 0.71, alpha: 1.0)
+    static let bidblue = UIColor(red:0.00, green:0.384, blue:0.804, alpha:1.0)
 }

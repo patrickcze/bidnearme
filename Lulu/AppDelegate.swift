@@ -22,6 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize Firebase.
         FIRApp.configure()
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        
+        navigationBarAppearace.barStyle = UIBarStyle.black
+        navigationBarAppearace.barTintColor = ColorPalette.bidblue
+        navigationBarAppearace.isTranslucent = false
+        navigationBarAppearace.tintColor = UIColor.white
+        
+        UITabBar.appearance().barTintColor = UIColor.white
+        UITabBar.appearance().tintColor = ColorPalette.bidblue
+                
         return true
     }
     

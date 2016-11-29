@@ -38,6 +38,8 @@ class ListingDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        placeBidButton.backgroundColor = ColorPalette.bidblue
+        
         textField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         textField.keyboardType = .numberPad
         textField.delegate = self
@@ -47,7 +49,7 @@ class ListingDetailViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
-        placeBidButton.backgroundColor = ColorPalette.blue
+        placeBidButton.backgroundColor = ColorPalette.bidblue
         listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         mapView.layer.cornerRadius = 5.0
@@ -261,8 +263,8 @@ extension ListingDetailViewController: MKMapViewDelegate {
     // Optional. Asks the delegate for a renderer object to use when drawing the specified overlay.
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let circleRenderer = MKCircleRenderer(overlay: overlay)
-        circleRenderer.fillColor = ColorPalette.blue.withAlphaComponent(0.5)
-        circleRenderer.strokeColor = ColorPalette.blue
+        circleRenderer.fillColor = ColorPalette.bidblue.withAlphaComponent(0.5)
+        circleRenderer.strokeColor = ColorPalette.bidblue
         circleRenderer.lineWidth = 1.0
         
         return circleRenderer
