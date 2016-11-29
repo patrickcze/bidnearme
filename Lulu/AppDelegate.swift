@@ -23,15 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize Firebase.
         FIRApp.configure()
         
-        let navigationBarAppearace = UINavigationBar.appearance()
-        
-        navigationBarAppearace.barStyle = UIBarStyle.black
-        navigationBarAppearace.barTintColor = ColorPalette.bidblue
-        navigationBarAppearace.isTranslucent = false
-        navigationBarAppearace.tintColor = UIColor.white
-        
-        UITabBar.appearance().barTintColor = UIColor.white
-        UITabBar.appearance().tintColor = ColorPalette.bidblue
+        setNavAnTabBarAppearance()
                 
         return true
     }
@@ -63,6 +55,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    //Sets the correct colours throughout the entire interface for the navigation and tab bars
+    func setNavAnTabBarAppearance (){
+        let navigationBarAppearance = UINavigationBar.appearance()
+        
+        navigationBarAppearance.barStyle = UIBarStyle.black
+        navigationBarAppearance.barTintColor = ColorPalette.bidBlue
+        navigationBarAppearance.isTranslucent = false
+        navigationBarAppearance.tintColor = UIColor.white
+        
+        UITabBar.appearance().barTintColor = UIColor.white
+        UITabBar.appearance().tintColor = ColorPalette.bidBlue
+    }
 }
 

@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        //Prevents the search bar and cancel button from disappearing when searching
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         
@@ -43,6 +44,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //This section sets the bid near me logo in the top left corner
         let logoImage = UIImage.init(named: "appLogo")
         let logoImageView = UIImageView.init(image: logoImage)
         logoImageView.frame = CGRect(x: -40, y: 5, width: 125, height: 25)
