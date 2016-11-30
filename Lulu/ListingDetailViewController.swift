@@ -36,15 +36,21 @@ class ListingDetailViewController: UIViewController {
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
+      
         super.viewDidLoad()
-        
+      
         placeBidButton.backgroundColor = ColorPalette.bidBlue
         
         textField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         textField.keyboardType = .numberPad
         textField.delegate = self
         view.addSubview(textField)
-        
+      
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboards))
+        view.addGestureRecognizer(tap)
+      
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+      
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
@@ -178,15 +184,7 @@ class ListingDetailViewController: UIViewController {
         let biddingListingType = ListingType.bidding.description
         ref?.child("users").child(userId).child("listings").child(biddingListingType).child(listingKey).setValue(true)
     }
-    
-    // MARK: - UIResponder
-    
-    // Optional. Tells the responder when one or more fingers touch down in a view or window.
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-        textField.resignFirstResponder()
-    }
-    
+  
     // MARK: - Actions
     
     // Respond to tappedBidButton tap.
@@ -225,9 +223,26 @@ class ListingDetailViewController: UIViewController {
         } else {
             alertUserNotLoggedIn()
         }
-        
+      
+      dismissKeyboards()
+    }
+  
+    // Dismiss textfield keyboards from the view in order.
+    func dismissKeyboards() {
         view.endEditing(true)
+        toolbarTextField.resignFirstResponder()
         textField.resignFirstResponder()
+    }
+  
+    // MARK: - Observers
+  
+    // Observe NSNotification.Name.UIKeyboardWillShow
+    func keyboardWillAppear(notification: NSNotification) {
+      guard toolbarTextField != nil, !toolbarTextField.isFirstResponder else {
+        return
+      }
+    
+      toolbarTextField.becomeFirstResponder()
     }
 }
 
@@ -255,7 +270,7 @@ extension ListingDetailViewController: UITextFieldDelegate {
         keyboardToolbar.isUserInteractionEnabled = true
         keyboardToolbar.sizeToFit()
         textField.inputAccessoryView = keyboardToolbar
-        
+      
         return true
     }
 }
