@@ -60,8 +60,12 @@ class ListingTableViewController: UITableViewController {
             //let auctionEndTimestamp = listing["auctionEndTimestamp"] as! Int
             //let createdTimestamp = listing["createdTimestamp"] as? Int ?? -1
             let description = listing["description"] as? String ?? ""
-            let imageUrls = listing["imageUrls"] as? [String] ?? ["URL for no photo available? from DB?"]
-            let imageURLS = imageUrls.map{URL.init(string: $0)} as! [URL]
+            
+            var imageURLS : [URL] = []
+            if let imageUrls = listing["imageUrls"] as? [String], !imageUrls.isEmpty {
+             imageURLS = imageUrls.map{URL.init(string: $0)} as! [URL]
+            }
+            
             //let sellerId = listing?["sellerId"] as! String
             let startingPrice = listing["startingPrice"] as? Double ?? 0.00
             //let buyoutPrice = 99999// No supported yet
