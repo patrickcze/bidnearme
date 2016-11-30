@@ -16,6 +16,8 @@ target 'Lulu' do
   pod 'FacebookShare'
   pod 'SZTextView'
 
+  pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+
   target 'LuluTests' do
     inherit! :search_paths
     # Pods for testing
