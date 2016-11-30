@@ -23,6 +23,7 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var listingPriceTag: UIView!
     @IBOutlet weak var listingCurrentPrice: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+  @IBOutlet weak var profileHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileRating: RatingControl!
     @IBOutlet weak var mapView: MKMapView!
@@ -47,6 +48,7 @@ class ListingDetailViewController: UIViewController {
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         placeBidButton.backgroundColor = ColorPalette.bidBlue
         listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        profileHeightConstraint.constant = view.frame.width * 0.75
         
         mapView.layer.cornerRadius = 5.0
         setGeocoder()
