@@ -62,7 +62,7 @@ class ListingTableViewController: UITableViewController {
             let description = listing["description"] as? String ?? ""
             
             var imageURLS : [URL] = []
-            if let imageUrls = listing["imageUrls"] as? [String], !imageUrls.isEmpty {
+            if let imageUrls = listing["imageUrls"] as? [String] {
              imageURLS = imageUrls.map{URL.init(string: $0)} as! [URL]
             }
             
@@ -72,7 +72,7 @@ class ListingTableViewController: UITableViewController {
             let title = listing["title"] as? String ?? "N/A"
             
             //buyout in Listing model is Int. Should it be Double too? Or we should remove it since it is not supported yet?
-            let tempListing = Listing("ID", imageURLS, title, description, startingPrice, Int(startingPrice), "Oct 30", "Nov 9", User())
+            let tempListing = Listing(listingId, imageURLS, title, description, startingPrice, Int(startingPrice), "Oct 30", "Nov 9", User())
             
             guard let winningBidId = listing["winningBidId"] as? String else {
                 completion(tempListing)
