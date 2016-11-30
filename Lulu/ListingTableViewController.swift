@@ -58,10 +58,16 @@ class ListingTableViewController: UITableViewController {
             let imageURLS = imageUrls.map{URL.init(string: $0)} as! [URL]
             //let sellerId = listing?["sellerId"] as! String
             let startingPrice = listing["startingPrice"] as? Double ?? 0.00
-            let buyoutPrice = 99999// <- ASK ABOUT THIS FIELD IN DB
+            //let buyoutPrice = 99999// No supported yet
             let title = listing["title"] as? String ?? "N/A"
-            let winningBidId = listing["winningBidId"] as! String
-            let tempListing = Listing("ID", imageURLS, title, description, startingPrice, buyoutPrice, "Oct 30", "Nov 9", User())
+            
+            //buyout in Listing model is Int. Should it be Double too? Or we should remove it since it is not supported yet?
+            let tempListing = Listing("ID", imageURLS, title, description, startingPrice, Int(startingPrice), "Oct 30", "Nov 9", User())
+            
+            guard let winningBidId = listing["winningBidId"] as? String else {
+                completion(tempListing)
+                return
+            }
             
             // Getting the highest bid
             if let bids = listing["bids"] as? [String:Any] {
@@ -69,7 +75,7 @@ class ListingTableViewController: UITableViewController {
                     let amount = highestBid["amount"] as! Double
                     let bidderId = highestBid["bidderId"] as! String
                     let createdTimestamp = highestBid["createdTimestamp"] as! Int
-                    tempListing.winningBid = Bid(amount,bidderId,createdTimestamp)
+                    tempListing.winningBid = Bid(amount: amount,bidderId: bidderId,createdTimestamp: createdTimestamp)
                 }
             }
             completion(tempListing)

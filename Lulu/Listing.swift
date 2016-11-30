@@ -27,7 +27,7 @@ class Listing {
     var bidders: [User]!
     var favorited: [User]!
     
-    var winningBid: Bid! // ronny: I need this for profile
+    var winningBid: Bid!
     
     // Listing initialization.
     init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
