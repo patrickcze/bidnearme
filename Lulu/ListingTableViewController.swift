@@ -23,6 +23,12 @@ class ListingTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // listingType should be set before this view. Currently, it is being called in ProfileViewController before seguing here
+        guard let _ = listingType else {
+            fatalError("listingType = nil -> ListingTableViewController->viewWillAppear()")
+        }
+        
         navigationTitle.title = listingType.description
         retrieveListings()
     }
@@ -137,22 +143,20 @@ class ListingTableViewController: UITableViewController {
             bidAmount = b.amount.description
         }
         
-        switch (listingType.description) {
+        switch (listingType!) {
             
-        case "bidding", "watching", "selling": // buyout and highest bid
+        case .bidding, .watching, .selling: // buyout and highest bid
             cell.bigLabel.text = "Buy now!" //listing.buyoutPrice.description
             cell.smallLabel.text = bidAmount
-        case "won", "sold": //  highest bid amount and date
+        case .won, .sold: //  highest bid amount and date
             cell.bigLabel.text = bidAmount
             cell.smallLabel.text = listing.endDate
-        case "lost": // date and bid that won but with different color?
+        case .lost: // date and bid that won but with different color?
             cell.bigLabel.text = bidAmount
             cell.bigLabel.backgroundColor = UIColor.red
             cell.bigLabel.alpha = 0.7
             cell.bigLabel.text = bidAmount
             cell.smallLabel.text = listing.endDate
-        default:
-            fatalError("*** Switch statement was not exhaustive enough: ListingTableViewController->setUpCell")
-        }
+          }
     }
 }
