@@ -42,6 +42,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loginButton.title = "Log out"
+        alertLabel.isHidden = true
         alertView.isHidden = true
         
         guard let userId = FIRAuth.auth()?.currentUser?.uid else {
@@ -52,6 +53,7 @@ class ProfileViewController: UIViewController {
             memberLabel.text = ""
             specialLabel.text = ""
             alertView.isHidden = false
+            alertLabel.isHidden = false
             profilePicture.image = UIImage(named: "nophoto")
             return
         }
