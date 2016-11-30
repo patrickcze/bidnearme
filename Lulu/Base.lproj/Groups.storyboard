@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zf3-q9-HMi">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zf3-q9-HMi">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +21,18 @@
                     <view key="view" contentMode="scaleToFill" id="3lp-He-Vqf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GroupsComingSoon" translatesAutoresizingMaskIntoConstraints="NO" id="QtI-Xr-omJ">
+                                <rect key="frame" x="17" y="64" width="342" height="538"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QtI-Xr-omJ" firstAttribute="top" secondItem="1LN-9Z-2Mp" secondAttribute="bottom" id="2fe-5f-ena"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QtI-Xr-omJ" secondAttribute="trailing" id="U9M-Fc-Kt1"/>
+                            <constraint firstItem="QtI-Xr-omJ" firstAttribute="centerX" secondItem="3lp-He-Vqf" secondAttribute="centerX" id="i8i-xQ-dLa"/>
+                            <constraint firstItem="QtI-Xr-omJ" firstAttribute="centerY" secondItem="3lp-He-Vqf" secondAttribute="centerY" id="jRz-1T-7QZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pg5-iz-DTY"/>
                 </viewController>
@@ -24,16 +40,15 @@
             </objects>
             <point key="canvasLocation" x="482" y="663"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Groups-->
         <scene sceneID="dML-Px-gDR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zf3-q9-HMi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Groups" id="qvq-L1-tz9">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    <tabBarItem key="tabBarItem" title="Groups" image="Groups" id="qvq-L1-tz9">
+                        <inset key="imageInsets" minX="0.0" minY="3" maxX="0.0" maxY="-3"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SjU-ZG-xrr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -49,6 +64,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Groups" width="25" height="25"/>
+        <image name="Groups" width="22" height="20"/>
+        <image name="GroupsComingSoon" width="1536" height="2048"/>
     </resources>
 </document>
