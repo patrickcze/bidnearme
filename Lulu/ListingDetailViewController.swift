@@ -36,20 +36,10 @@ class ListingDetailViewController: UIViewController {
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
-      
         super.viewDidLoad()
       
+        setTextFields()
         placeBidButton.backgroundColor = ColorPalette.bidBlue
-        
-        textField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        textField.keyboardType = .numberPad
-        textField.delegate = self
-        view.addSubview(textField)
-      
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboards))
-        view.addGestureRecognizer(tap)
-      
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
       
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
@@ -96,7 +86,20 @@ class ListingDetailViewController: UIViewController {
             }
         }
     }
-    
+  
+    // Logic for textfield and toolbarTextField.
+    func setTextFields() {
+      textField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+      textField.keyboardType = .numberPad
+      textField.delegate = self
+      view.addSubview(textField)
+      
+      let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboards))
+      view.addGestureRecognizer(tap)
+      
+      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+  
     // MARK: - MKMapView
     
     // Set a new geocoder for annotating the lister's location on the mapView.
