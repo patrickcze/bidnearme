@@ -36,11 +36,11 @@ class ProfileViewController: UIViewController {
         ListingType.watching,
         ListingType.won,
         ListingType.lost
-        ]
+    ]
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         loginButton.title = "Log out"
         alertView.isHidden = true
         
@@ -67,7 +67,7 @@ class ProfileViewController: UIViewController {
         
         // Initialize database reference.
         ref = FIRDatabase.database().reference()
-
+        
         // Do any additional setup after loading the view.
         listingTypeTableView.delegate = self
         listingTypeTableView.dataSource = self
@@ -80,7 +80,7 @@ class ProfileViewController: UIViewController {
             profilePicture.clipsToBounds = true
             profilePicture.contentMode = UIViewContentMode.scaleToFill
         }
-
+        
         // Making upper view and bottom table view frame corners rounded
         upperView.layer.cornerRadius = 3
         upperView.layer.masksToBounds = true
@@ -131,7 +131,7 @@ class ProfileViewController: UIViewController {
             if let profileImageUrlString = user["profileImageUrl"] as? String, !profileImageUrlString.isEmpty {
                 profileImageUrl = URL(string: profileImageUrlString)
             }
-
+            
             // Retrieve user listings.
             var listingIdsByType = [ListingType: [String]]()
             
@@ -139,7 +139,7 @@ class ProfileViewController: UIViewController {
             if let listingTreeIds = user["listings"] as? [String: [String: Bool]] {
                 listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
             }
-
+            
             completion(User(name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType))
         })
     }
@@ -213,6 +213,6 @@ extension ProfileViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate protocol
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            self.listingTypeTableView.deselectRow(at: indexPath, animated: true)
+        self.listingTypeTableView.deselectRow(at: indexPath, animated: true)
     }
 }

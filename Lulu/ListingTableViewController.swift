@@ -36,6 +36,8 @@ class ListingTableViewController: UITableViewController {
     }
     
     // TO-DO: ask about buyout price in listing and FINISH implementing this function
+    // ASK ABOUT IF we need to initialize a new user with the given ID or just pass the userID.
+    // ListingViewDetails should retrieve the user from the DB?
     /**
      Gets listing information
      */
@@ -61,6 +63,7 @@ class ListingTableViewController: UITableViewController {
             let winningBidId = listing["winningBidId"] as! String
             let tempListing = Listing("ID", imageURLS, title, description, startingPrice, buyoutPrice, "Oct 30", "Nov 9", User())
             
+            // Getting the highest bid
             if let bids = listing["bids"] as? [String:Any] {
                 if let highestBid = bids[winningBidId] as? [String : Any] {
                     let amount = highestBid["amount"] as! Double
@@ -70,14 +73,13 @@ class ListingTableViewController: UITableViewController {
                 }
             }
             completion(tempListing)
-            // ASK ABOUT IF we need to initialize a new user with the given ID or just pass the userID. ListingViewDetails should retrieve the user from the DB
         })
     }
     
     // TO-DO: Is it efficient to call self.tableView.reloadData() inside the
     // closure below?
-    // The table updates because of that. If I call reloadData() (in viewWillAppear() after invoking retrieveListings())
-    // the tableView does not update.
+    // The table is updating because of that. If I call reloadData() (in viewWillAppear() after invoking
+    // retrieveListings(), the tableView does not update.
     func retrieveListings() {
         listings = []
         for listingId in listingIds {
@@ -107,6 +109,10 @@ class ListingTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // TO-DO: finish implementing this function. Ask what should I display for each different listing type
