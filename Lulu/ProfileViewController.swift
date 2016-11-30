@@ -40,6 +40,8 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+     
+        ref = FIRDatabase.database().reference()
         
         loginButton.title = "Log out"
         alertLabel.isHidden = true
@@ -68,7 +70,6 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         // Initialize database reference.
-        ref = FIRDatabase.database().reference()
         
         // Do any additional setup after loading the view.
         listingTypeTableView.delegate = self
