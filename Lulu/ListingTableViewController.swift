@@ -142,7 +142,7 @@ class ListingTableViewController: UITableViewController {
             cell.itemPhoto.image = UIImage()  // display a "photo no available"?
         }
         
-        var bidAmount = listing.startPrice.description
+        var bidAmount = String(format: "%.2f", listing.startPrice)
         cell.bigLabel.textColor = UIColor.black // for selling (if there is not bidders) and watching
         
         if let b = listing.winningBid {
