@@ -23,6 +23,12 @@ class User {
         self.listingIdsByType = listingIdsByType
     }
     
+    init(name: String, profileImageUrl: URL?, createdTimestamp: Int) {
+        self.name = name
+        self.profileImageUrl = profileImageUrl
+        self.createdTimestamp = createdTimestamp
+    }
+    
     convenience init() {
         self.init(name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:])
     }

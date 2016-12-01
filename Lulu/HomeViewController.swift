@@ -117,7 +117,6 @@ class HomeViewController: UIViewController {
         //Get list of current listings
         listingRef.observeSingleEvent(of: .value, with: { (snap) in
             let enumerator = snap.children
-            var tempListing: Listing
             
             //Iterate over listings
             while let rest = enumerator.nextObject() as? FIRDataSnapshot {
@@ -125,6 +124,7 @@ class HomeViewController: UIViewController {
                 let title = rest.childSnapshot(forPath: "title").value as? String
                 let desc = rest.childSnapshot(forPath: "description").value as? String
                 let imageURLS = rest.childSnapshot(forPath: "imageUrls")
+                let sellerId = rest.childSnapshot(forPath: "sellerId").value as? String
                 
                 var imageURLArray:[URL] = []
                 var index = 0
@@ -153,14 +153,25 @@ class HomeViewController: UIViewController {
                     highestBidAmount = rest.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
                 }
                 
-                // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User())
-                
-                self.listings.append(tempListing)
+                // Get the details for the seller
+                self.ref.child("users").child(sellerId!).observeSingleEvent(of: .value, with: { (sellerDataSnap) in
+                    
+                    // Gather imporetant details abouyt the seller 
+                    let sellerName = sellerDataSnap.childSnapshot(forPath: "name").value as? String
+                    let sellerCreatedTimestamp = sellerDataSnap.childSnapshot(forPath: "createdTimestamp").value as? Int
+                    let sellerImageUrl = sellerDataSnap.childSnapshot(forPath: "profileImageUrl").value as? String
+                    
+                    let seller = User(name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
+                    
+                    // Create a listing for the data within the snapshot
+                    let tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", seller)
+                    
+                    self.listings.append(tempListing)
+                    
+                    //Refresh listing view
+                    self.listingsCollectionView.reloadData()
+                })
             }
-            
-            //Refresh listing view
-            self.listingsCollectionView.reloadData()
         })
     }
     
