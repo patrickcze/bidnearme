@@ -30,6 +30,8 @@ class HomeViewController: UIViewController {
     var tempData: [Listing] = []
     var filteredData = [Listing]()
     
+    var refreshControl: UIRefreshControl!
+    
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -60,6 +62,11 @@ class HomeViewController: UIViewController {
         navigationItem.titleView = searchController.searchBar
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        //Adds a refresh controller to the listing collection be able to refresh with a pull down
+        refreshControl = UIRefreshControl()
+        listingsCollectionView.alwaysBounceVertical = true
+        self.listingsCollectionView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,9 +75,11 @@ class HomeViewController: UIViewController {
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
-        //Get a snapshot of listings
-        let listingRef = ref.child("listings")
+        let currentEpochTime = NSDate().timeIntervalSince1970 as Double * 1000
         
+        //Get a snapshot of listings
+        let listingRef = ref.child("listings").queryOrdered(byChild: "auctionEndTimestamp").queryStarting(atValue: currentEpochTime)
+    
         //Get list of current listings
         listingRef.observeSingleEvent(of: .value, with: { (snap) in
             let enumerator = snap.children
