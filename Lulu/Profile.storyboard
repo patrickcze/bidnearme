@@ -160,11 +160,11 @@
             </objects>
             <point key="canvasLocation" x="4567.1999999999998" y="-130.88455772113943"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--My Stuff-->
         <scene sceneID="Gtx-Bz-tUP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VBU-oU-tDK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Profile" id="RYz-fJ-RDh">
+                    <tabBarItem key="tabBarItem" title="My Stuff" image="Profile" id="RYz-fJ-RDh">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
