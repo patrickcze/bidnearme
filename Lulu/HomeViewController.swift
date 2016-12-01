@@ -27,8 +27,10 @@ class HomeViewController: UIViewController {
     var storage: FIRStorage!
     let newListing: Listing! = nil
     var image: UIImage! = nil
-    var tempData: [Listing] = []
+    var listings: [Listing] = []
     var filteredData = [Listing]()
+    
+    var refreshControl: UIRefreshControl!
     
     lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -60,6 +62,13 @@ class HomeViewController: UIViewController {
         navigationItem.titleView = searchController.searchBar
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        //Adds a refresh controller to the listing collection be able to refresh with a pull down
+        listingsCollectionView.alwaysBounceVertical = true
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(sender:)), for: .valueChanged)
+        self.listingsCollectionView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,57 +77,10 @@ class HomeViewController: UIViewController {
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
-        //Get a snapshot of listings
-        let listingRef = ref.child("listings")
-        
-        //Get list of current listings
-        listingRef.observeSingleEvent(of: .value, with: { (snap) in
-            let enumerator = snap.children
-            var tempListing: Listing
-            
-            //Iterate over listings
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
-                // Get basic info about the listing
-                let title = rest.childSnapshot(forPath: "title").value as? String
-                let desc = rest.childSnapshot(forPath: "description").value as? String
-                let imageURLS = rest.childSnapshot(forPath: "imageUrls")
-                
-                var imageURLArray:[URL] = []
-                var index = 0
-                
-                // Get a list of URLs of the listing images
-                for item in 0...imageURLS.childrenCount-1 {
-                    let varNum = String(item)
-                    let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
-                    
-                    imageURLArray.append(URL(string:urlString)!)
-                }
-                
-                // Check for existing listings
-                for listing in self.tempData {
-                    if listing.listingID == rest.key {
-                        self.tempData.remove(at: index)
-                    }
-                    index+=1
-                }
-                
-                // Handle getting the listings highest price
-                let highestBidId = rest.childSnapshot(forPath: "winningBidId").value as! String
-                var highestBidAmount = rest.childSnapshot(forPath: "startingPrice").value as! Double
-                
-                if !highestBidId.isEmpty {
-                    highestBidAmount = rest.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
-                }
-                
-                // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User())
-                
-                self.tempData.append(tempListing)
-            }
-            
-            //Refresh listing view
-            self.listingsCollectionView.reloadData()
-        })
+        //Prevents listing list reloading every time you come into the view
+        if listings.isEmpty {
+            loadCurrentListingsFromFirebase()
+        }
     }
     
     // Dispose of any resources that can be recreated.
@@ -139,6 +101,69 @@ class HomeViewController: UIViewController {
         }
     }
     
+    //Implements actions required after the pull to refresh has been triggered
+    func handleRefresh(sender:AnyObject) {
+        loadCurrentListingsFromFirebase()
+        self.refreshControl?.endRefreshing()
+    }
+    
+    //Loads the current valid listings from the firebase database
+    func loadCurrentListingsFromFirebase (){
+        let currentEpochTime = NSDate().timeIntervalSince1970 as Double * 1000
+        
+        //Get a snapshot of listings
+        let listingRef = ref.child("listings").queryOrdered(byChild: "auctionEndTimestamp").queryStarting(atValue: currentEpochTime)
+        
+        //Get list of current listings
+        listingRef.observeSingleEvent(of: .value, with: { (snap) in
+            let enumerator = snap.children
+            var tempListing: Listing
+            
+            //Iterate over listings
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+                // Get basic info about the listing
+                let title = rest.childSnapshot(forPath: "title").value as? String
+                let desc = rest.childSnapshot(forPath: "description").value as? String
+                let imageURLS = rest.childSnapshot(forPath: "imageUrls")
+                
+                var imageURLArray:[URL] = []
+                var index = 0
+                
+                // Get a list of URLs of the listing images
+                for item in 0...imageURLS.childrenCount-1 {
+                    let varNum = String(item)
+                    let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
+                    
+                    imageURLArray.append(URL(string:urlString)!)
+                }
+                
+                // Check for existing listings
+                for listing in self.listings {
+                    if listing.listingID == rest.key {
+                        self.listings.remove(at: index)
+                    }
+                    index+=1
+                }
+                
+                // Handle getting the listings highest price
+                let highestBidId = rest.childSnapshot(forPath: "winningBidId").value as! String
+                var highestBidAmount = rest.childSnapshot(forPath: "startingPrice").value as! Double
+                
+                if !highestBidId.isEmpty {
+                    highestBidAmount = rest.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
+                }
+                
+                // Create a listing for the data within the snapshot
+                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User())
+                
+                self.listings.append(tempListing)
+            }
+            
+            //Refresh listing view
+            self.listingsCollectionView.reloadData()
+        })
+    }
+    
     // MARK: - Navigation
     
     // Notifies the view controller that a segue is about to be performed.
@@ -146,7 +171,7 @@ class HomeViewController: UIViewController {
         if segue.identifier == "ShowListingDetail" {
             if let indexPath = listingsCollectionView.indexPathsForSelectedItems {
                 let destinationController = segue.destination as! ListingDetailViewController
-                destinationController.listing = tempData[indexPath[0].row]
+                destinationController.listing = listings[indexPath[0].row]
             }
         }
     }
@@ -157,7 +182,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     // Required: Tell view how many cells to make.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchController.isActive ? filteredData.count : tempData.count
+        return searchController.isActive ? filteredData.count : listings.count
     }
     
     // Required: Make a cell for each row in index path.
@@ -166,7 +191,7 @@ extension HomeViewController: UICollectionViewDataSource {
         
         // Filter cells based on search.
         if let filteredCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? HomeCollectionViewCell {
-            filteredCell.listing = searchController.isActive ? filteredData[indexPath.row] : tempData[indexPath.row]
+            filteredCell.listing = searchController.isActive ? filteredData[indexPath.row] : listings[indexPath.row]
             cell = filteredCell
         }
         
@@ -188,7 +213,7 @@ extension HomeViewController: UISearchResultsUpdating {
     
     // Helper: Filter listing cells according to search term.
     func filterData() {
-        filteredData = tempData.filter({ (listing) -> Bool in
+        filteredData = listings.filter({ (listing) -> Bool in
             if let searchTerm = self.searchController.searchBar.text {
                 let searchTermMatches = self.searchString(listing, searchTerm: searchTerm).count > 0
                 
