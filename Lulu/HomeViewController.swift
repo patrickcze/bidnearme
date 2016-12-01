@@ -64,8 +64,10 @@ class HomeViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         //Adds a refresh controller to the listing collection be able to refresh with a pull down
-        refreshControl = UIRefreshControl()
         listingsCollectionView.alwaysBounceVertical = true
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(sender:)), for: .valueChanged)
         self.listingsCollectionView.addSubview(refreshControl)
     }
     
@@ -75,18 +77,50 @@ class HomeViewController: UIViewController {
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
+        //Prevents listing list reloading every time you come into the view
+        if tempData.isEmpty {
+            loadCurrentListingsFromFirebase()
+        }
+    }
+    
+    // Dispose of any resources that can be recreated.
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // Notifies view controller that it's view laid out subviews.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Adjust listingsCollectionViewCell width to screensize.
+        if let layout = listingsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            let cellWidth = (view.bounds.width - 36.0) / 2.0
+            let cellHeight = layout.itemSize.height
+            layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+            layout.invalidateLayout()
+        }
+    }
+    
+    //Implements actions required after the pull to refresh has been triggered
+    func handleRefresh(sender:AnyObject) {
+        loadCurrentListingsFromFirebase()
+        self.refreshControl?.endRefreshing()
+    }
+    
+    //Loads the current valid listings from the firebase database
+    func loadCurrentListingsFromFirebase (){
         let currentEpochTime = NSDate().timeIntervalSince1970 as Double * 1000
         
         //Get a snapshot of listings
         let listingRef = ref.child("listings").queryOrdered(byChild: "auctionEndTimestamp").queryStarting(atValue: currentEpochTime)
-    
+        
         //Get list of current listings
         listingRef.observeSingleEvent(of: .value, with: { (snap) in
             let enumerator = snap.children
             var tempListing: Listing
             
             //Iterate over listings
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {                
+            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
                 // Get basic info about the listing
                 let title = rest.childSnapshot(forPath: "title").value as? String
                 let desc = rest.childSnapshot(forPath: "description").value as? String
@@ -128,24 +162,6 @@ class HomeViewController: UIViewController {
             //Refresh listing view
             self.listingsCollectionView.reloadData()
         })
-    }
-    
-    // Dispose of any resources that can be recreated.
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    // Notifies view controller that it's view laid out subviews.
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        // Adjust listingsCollectionViewCell width to screensize.
-        if let layout = listingsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let cellWidth = (view.bounds.width - 36.0) / 2.0
-            let cellHeight = layout.itemSize.height
-            layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-            layout.invalidateLayout()
-        }
     }
     
     // MARK: - Navigation
