@@ -27,7 +27,7 @@ class HomeViewController: UIViewController {
     var storage: FIRStorage!
     let newListing: Listing! = nil
     var image: UIImage! = nil
-    var tempData: [Listing] = []
+    var listingData: [Listing] = []
     var filteredData = [Listing]()
     
     var refreshControl: UIRefreshControl!
@@ -78,7 +78,7 @@ class HomeViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         //Prevents listing list reloading every time you come into the view
-        if tempData.isEmpty {
+        if listingData.isEmpty {
             loadCurrentListingsFromFirebase()
         }
     }
@@ -138,9 +138,9 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Check for existing listings
-                for listing in self.tempData {
+                for listing in self.listingData {
                     if listing.listingID == rest.key {
-                        self.tempData.remove(at: index)
+                        self.listingData.remove(at: index)
                     }
                     index+=1
                 }
@@ -156,7 +156,7 @@ class HomeViewController: UIViewController {
                 // Create a listing for the data within the snapshot
                 tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User())
                 
-                self.tempData.append(tempListing)
+                self.listingData.append(tempListing)
             }
             
             //Refresh listing view
@@ -171,7 +171,7 @@ class HomeViewController: UIViewController {
         if segue.identifier == "ShowListingDetail" {
             if let indexPath = listingsCollectionView.indexPathsForSelectedItems {
                 let destinationController = segue.destination as! ListingDetailViewController
-                destinationController.listing = tempData[indexPath[0].row]
+                destinationController.listing = listingData[indexPath[0].row]
             }
         }
     }
@@ -182,7 +182,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     // Required: Tell view how many cells to make.
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchController.isActive ? filteredData.count : tempData.count
+        return searchController.isActive ? filteredData.count : listingData.count
     }
     
     // Required: Make a cell for each row in index path.
@@ -191,7 +191,7 @@ extension HomeViewController: UICollectionViewDataSource {
         
         // Filter cells based on search.
         if let filteredCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? HomeCollectionViewCell {
-            filteredCell.listing = searchController.isActive ? filteredData[indexPath.row] : tempData[indexPath.row]
+            filteredCell.listing = searchController.isActive ? filteredData[indexPath.row] : listingData[indexPath.row]
             cell = filteredCell
         }
         
@@ -213,7 +213,7 @@ extension HomeViewController: UISearchResultsUpdating {
     
     // Helper: Filter listing cells according to search term.
     func filterData() {
-        filteredData = tempData.filter({ (listing) -> Bool in
+        filteredData = listingData.filter({ (listing) -> Bool in
             if let searchTerm = self.searchController.searchBar.text {
                 let searchTermMatches = self.searchString(listing, searchTerm: searchTerm).count > 0
                 
