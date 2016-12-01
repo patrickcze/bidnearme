@@ -40,7 +40,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-     
+        
         ref = FIRDatabase.database().reference()
         
         loginButton.title = "Log out"
@@ -142,8 +142,7 @@ class ProfileViewController: UIViewController {
             if let listingTreeIds = user["listings"] as? [String: [String: Bool]] {
                 listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
             }
-            
-            completion(User(name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType))
+            completion(User(uid: id,name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType))
         })
     }
     
@@ -178,8 +177,9 @@ class ProfileViewController: UIViewController {
             }
             
             let listingType = listingTypes[row]
-            listingTableViewController.listingIds = self.profileUser?.listingIdsByType[listingType]
+            listingTableViewController.listingIds = profileUser?.listingIdsByType[listingType]
             listingTableViewController.listingType = listingType
+            listingTableViewController.uid = profileUser?.uid
         }
     }
 }

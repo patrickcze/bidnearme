@@ -20,13 +20,14 @@ class ListingTableViewController: UITableViewController {
     var listingIds: [String]!
     var listings: [Listing?]!
     var listingType : ListingType!
+    var uid : String!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // listingType should be set before this view. Currently, it is being called in ProfileViewController before seguing here
-        guard let _ = listingType else {
-            fatalError("listingType = nil -> ListingTableViewController->viewWillAppear()")
+        // listingType and uid should be set before this view. Currently, it is being called in ProfileViewController before seguing here
+        guard let _ = listingType, let _ = uid else{
+            fatalError("listingType = nil or uid = nil -> ListingTableViewController->viewWillAppear()")
         }
         
         navigationTitle.title = listingType.description
@@ -63,7 +64,7 @@ class ListingTableViewController: UITableViewController {
             
             var imageUrls : [URL] = []
             if let imageUrlStrings = listing["imageUrls"] as? [String] {
-             imageUrls = imageUrlStrings.map{URL.init(string: $0)} as! [URL]
+                imageUrls = imageUrlStrings.map{URL.init(string: $0)} as! [URL]
             }
             
             //let sellerId = listing?["sellerId"] as! String
@@ -131,10 +132,10 @@ class ListingTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // TO-DO: finish implementing this function. Ask what should I display for each different listing type
     func setupCell(_ cell: ProfileTableViewCell, _ listing: Listing) {
         
         cell.itemTitle.text = listing.title
+        
         if let photoUrl = listing.photos.first {
             cell.itemPhoto.af_setImage(withURL: photoUrl)
         } else {
@@ -142,25 +143,28 @@ class ListingTableViewController: UITableViewController {
         }
         
         var bidAmount = listing.startPrice.description
+        cell.bigLabel.textColor = UIColor.black // for selling (if there is not bidders) and watching
         
         if let b = listing.winningBid {
             bidAmount = b.amount.description
+            
+            switch (listingType!) {
+            case .bidding: // text color is green if user bid is winning. Otherwise, red
+                if listing.winningBid.bidderId == uid! {
+                    cell.bigLabel.textColor = UIColor(colorLiteralRed: 0.13, green: 0.55, blue: 0.13, alpha: 1)
+                } else {
+                    cell.bigLabel.textColor = UIColor.red
+                }
+            case .watching:
+                break
+            case .selling,.won, .sold : // there is at least a bidder, so text color is green
+                cell.bigLabel.textColor = UIColor(colorLiteralRed: 0.13, green: 0.55, blue: 0.13, alpha: 1)
+            case .lost: // text color always red
+                cell.bigLabel.textColor = UIColor.red
+            }
         }
         
-        switch (listingType!) {
-            
-        case .bidding, .watching, .selling: // buyout and highest bid
-            cell.bigLabel.text = "Buy now!" //listing.buyoutPrice.description
-            cell.smallLabel.text = bidAmount
-        case .won, .sold: //  highest bid amount and date
-            cell.bigLabel.text = bidAmount
-            cell.smallLabel.text = listing.endDate
-        case .lost: // date and bid that won but with different color?
-            cell.bigLabel.text = bidAmount
-            cell.bigLabel.backgroundColor = UIColor.red
-            cell.bigLabel.alpha = 0.7
-            cell.bigLabel.text = bidAmount
-            cell.smallLabel.text = listing.endDate
-          }
+        cell.bigLabel.text = "$ " + bidAmount
+        cell.smallLabel.text = listing.endDate
     }
 }
