@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import GeoFire
 
 class CameraViewController: UIViewController {
     // MARK: - Outlets
@@ -25,6 +26,9 @@ class CameraViewController: UIViewController {
     var storageRef: FIRStorageReference!
     var auctionDurationPicker = UIPickerView()
     
+    //MARK: - GeoFire object 
+    let geofireRef = FIRDatabase.database().reference()
+    let geoFire = GeoFire(firebaseRef: geofireRef)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -326,6 +330,9 @@ extension CameraViewController: UIImagePickerControllerDelegate {
         
         self.dismiss(animated: true, completion: nil)
     }
+    
+ 
+    
 }
 
 // MARK: - UINavigationControllerDelegate
