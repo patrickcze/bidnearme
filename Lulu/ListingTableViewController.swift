@@ -58,22 +58,33 @@ class ListingTableViewController: UITableViewController {
                 return
             }
             
-            //let auctionEndTimestamp = listing["auctionEndTimestamp"] as! Int
-            //let createdTimestamp = listing["createdTimestamp"] as? Int ?? -1
-            let description = listing["description"] as? String ?? ""
+            //let sellerId = listing?["sellerId"] as! String
+            //let buyoutPrice = 99999// No supported yet
+    
+            guard
+                let createdTimestamp = listing["createdTimestamp"] as? Int,
+                let auctionEndTimestamp = listing["auctionEndTimestamp"] as? Int,
+                let startingPrice = listing["startingPrice"] as? Double,
+                let description = listing["description"] as? String,
+                let title = listing["title"] as? String else {
+                    //TO-DO: Handle error
+                    return
+            }
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.medium
+            dateFormatter.timeStyle = DateFormatter.Style.short
+            
+            let startDate = Date(timeIntervalSince1970: TimeInterval(createdTimestamp/1000))
+            let endDate = Date(timeIntervalSince1970: TimeInterval(auctionEndTimestamp/1000))
+        
             var imageUrls : [URL] = []
             if let imageUrlStrings = listing["imageUrls"] as? [String] {
                 imageUrls = imageUrlStrings.map{URL.init(string: $0)} as! [URL]
             }
             
-            //let sellerId = listing?["sellerId"] as! String
-            let startingPrice = listing["startingPrice"] as? Double ?? 0.00
-            //let buyoutPrice = 99999// No supported yet
-            let title = listing["title"] as? String ?? "N/A"
-            
             //buyout in Listing model is Int. Should it be Double too? Or we should remove it since it is not supported in the app yet?
-            let tempListing = Listing(listingId, imageUrls, title, description, startingPrice, Int(startingPrice), "Oct 30", "Nov 9", User())
+            let tempListing = Listing(listingId, imageUrls, title, description, startingPrice, Int(startingPrice), dateFormatter.string(from: startDate), dateFormatter.string(from: endDate), User())
             
             guard let winningBidId = listing["winningBidId"] as? String else {
                 completion(tempListing)
@@ -124,7 +135,6 @@ class ListingTableViewController: UITableViewController {
         } else {
             cell = ProfileTableViewCell()
         }
-        
         return cell
     }
     
@@ -142,12 +152,11 @@ class ListingTableViewController: UITableViewController {
             cell.itemPhoto.image = UIImage()  // display a "photo no available"?
         }
         
-        var bidAmount = String(format: "%.2f", listing.startPrice)
+        var bidAmount = listing.startPrice!
         cell.bigLabel.textColor = UIColor.black // for selling (if there is not bidders) and watching
         
         if let b = listing.winningBid {
-            bidAmount = b.amount.description
-            
+            bidAmount = b.amount!
             switch (listingType!) {
             case .bidding: // text color is green if user bid is winning. Otherwise, red
                 if listing.winningBid.bidderId == uid! {
@@ -155,7 +164,7 @@ class ListingTableViewController: UITableViewController {
                 } else {
                     cell.bigLabel.textColor = UIColor.red
                 }
-            case .watching:
+            case .watching: // text color black
                 break
             case .selling,.won, .sold : // there is at least a bidder, so text color is green
                 cell.bigLabel.textColor = UIColor(colorLiteralRed: 0.13, green: 0.55, blue: 0.13, alpha: 1)
@@ -163,8 +172,7 @@ class ListingTableViewController: UITableViewController {
                 cell.bigLabel.textColor = UIColor.red
             }
         }
-        
-        cell.bigLabel.text = "$ " + bidAmount
+        cell.bigLabel.text = String(format: "$ %.2f", bidAmount)
         cell.smallLabel.text = listing.endDate
     }
 }
