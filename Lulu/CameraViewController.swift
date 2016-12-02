@@ -35,10 +35,6 @@ class CameraViewController: UIViewController {
         // Initialize reference to the Firebase storage.
         storageRef = FIRStorage.storage().reference()
         
-        //create GeoFire object
-        let geofireRef = FIRDatabase.database().reference()
-        let geoFire = GeoFire(firebaseRef: geofireRef)
-        
         // Establish border colouring and corners on textview and button to matach styles
         descriptionTextArea.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
         descriptionTextArea.layer.borderWidth = 1.0
@@ -121,6 +117,11 @@ class CameraViewController: UIViewController {
     // TODO: Allow user selection for auction duration.
     // Function handles the steps required to take the listing data on the view and place it into the DB
     @IBAction func postButtonClicked(_ sender: AnyObject) {
+        
+        //GeoFire object
+        let geofireRef = FIRDatabase.database().reference()
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        
         // Disable post button while uploading information
         self.postListingButton.isEnabled = false
         
@@ -153,6 +154,14 @@ class CameraViewController: UIViewController {
         // saving value of selected row from picker for database
         let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
         
+        //saving location of object with callback function
+        geoFire!.setLocation(CLLocation(latitude: 37.7853889, longitude: -122.4056973), forKey: "firebase-hq") { (error) in
+            if (error != nil) {
+                print("An error occured: \(error)")
+            } else {
+                print("Saved location successfully!")
+            }
+        }
  
         // Prepare and upload listing image to Firebase Storage.
         // TODO: Throw errors.
