@@ -13,7 +13,7 @@ class User {
     // MARK: - Properties
     var name: String!
     var profileImageUrl: URL?
-    var createdTimestamp: Int!
+    let createdTimestamp: Int!
     var listingIdsByType: [ListingType: [String]]!
     
     init(name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]]) {
