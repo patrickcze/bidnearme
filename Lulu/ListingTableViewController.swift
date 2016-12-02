@@ -84,10 +84,10 @@ class ListingTableViewController: UITableViewController {
             }
             
             //buyout in Listing model is Int. Should it be Double too? Or we should remove it since it is not supported in the app yet?
-            let tempListing = Listing(listingId, imageUrls, title, description, startingPrice, Int(startingPrice), dateFormatter.string(from: startDate), dateFormatter.string(from: endDate), User())
+            let aListing = Listing(listingId, imageUrls, title, description, startingPrice, Int(startingPrice), dateFormatter.string(from: startDate), dateFormatter.string(from: endDate), User())
             
             guard let winningBidId = listing["winningBidId"] as? String else {
-                completion(tempListing)
+                completion(aListing)
                 return
             }
             
@@ -97,10 +97,10 @@ class ListingTableViewController: UITableViewController {
                     let amount = highestBid["amount"] as! Double
                     let bidderId = highestBid["bidderId"] as! String
                     let createdTimestamp = highestBid["createdTimestamp"] as! Int
-                    tempListing.winningBid = Bid(amount: amount,bidderId: bidderId,createdTimestamp: createdTimestamp)
+                    aListing.winningBid = Bid(amount: amount,bidderId: bidderId,createdTimestamp: createdTimestamp)
                 }
             }
-            completion(tempListing)
+            completion(aListing)
         })
     }
     
