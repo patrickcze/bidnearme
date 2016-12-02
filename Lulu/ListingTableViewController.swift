@@ -53,9 +53,11 @@ class ListingTableViewController: UITableViewController {
         self.tableView.register(nib,forCellReuseIdentifier: cellIdentifier)
     }
     
-    // TO-DO: ask about buyout price in listing and FINISH implementing this function
-    // ASK ABOUT IF we need to initialize a new user with the given ID or just pass the userID.
-    // ListingViewDetails should retrieve the user from the DB?
+    // TO-DO: Fields "sellerId" and "buyoutPrice" (currently no supported in the app) are not being used.
+    //        "Listing" model should have a "sellerId" : String instead of seller : User
+    //  
+    //         Ask about why buyoutPrice is an Int and not a Double? since startPrice is a Double.
+    //
     /**
      Gets listing information
      */
@@ -94,7 +96,6 @@ class ListingTableViewController: UITableViewController {
                 imageUrls = imageUrlStrings.map{URL.init(string: $0)} as! [URL]
             }
             
-            //buyout in Listing model is Int. Should it be Double too? Or we should remove it since it is not supported in the app yet?
             let aListing = Listing(listingId, imageUrls, title, description, startingPrice, Int(startingPrice), dateFormatter.string(from: startDate), dateFormatter.string(from: endDate), User())
             
             guard let winningBidId = listing["winningBidId"] as? String else {
