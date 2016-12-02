@@ -164,9 +164,9 @@ class HomeViewController: UIViewController {
                     let seller = User(name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
                     
                     // Create a listing for the data within the snapshot
-                    let tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", seller)
+                    let listing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", seller)
                     
-                    self.listings.append(tempListing)
+                    self.listings.append(listing)
                     
                     //Refresh listing view
                     self.listingsCollectionView.reloadData()
