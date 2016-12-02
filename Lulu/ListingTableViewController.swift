@@ -9,6 +9,10 @@
 import UIKit
 import FirebaseDatabase
 
+// TO-DO: Update current user's listing (the one that is being displayed) everytime an user 
+//        switches tabs back and forth.
+//        Some ways to approach this: Using notifications, checking users listings in 
+//        viewWillAppear() or unwind this view automatically when user switches tabs (from this view).
 class ListingTableViewController: UITableViewController {
     
     // MARK: - Outlets
