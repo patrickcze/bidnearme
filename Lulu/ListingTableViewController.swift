@@ -12,7 +12,9 @@ import FirebaseDatabase
 // TO-DO: Update current user's listing (the one that is being displayed) everytime an user 
 //        switches tabs back and forth.
 //        Some ways to approach this: Using notifications, checking users listings in 
-//        viewWillAppear() or unwind this view automatically when user switches tabs (from this view).
+//        viewWillAppear() or unwind/pop this view automatically when user switches tabs (from this view).
+//
+//        Current fix: I am poping this view from navigationController.
 class ListingTableViewController: UITableViewController {
     
     // MARK: - Outlets
@@ -36,6 +38,11 @@ class ListingTableViewController: UITableViewController {
         
         navigationTitle.title = listingType.description.capitalized
         retrieveListings()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        //discarding the returned value. Otherwise, a warning gets displayed.
+        _ = navigationController?.popViewController(animated:  false)
     }
     
     override func viewDidLoad() {
