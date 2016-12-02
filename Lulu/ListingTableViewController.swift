@@ -104,16 +104,14 @@ class ListingTableViewController: UITableViewController {
         })
     }
     
-    // TO-DO: Is it efficient to call self.tableView.reloadData() inside the
-    // closure below?
-    // The table is updating because of that. If I call reloadData() (in viewWillAppear() after invoking
-    // retrieveListings(), the tableView does not update.
-    func retrieveListings() {
+     func retrieveListings() {
         listings = []
         for listingId in listingIds {
             getListing(withId: listingId){ (listing)  in
                 self.listings.append(listing)
-                self.tableView.reloadData()
+                if (self.listings.count == self.listingIds.count) {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
