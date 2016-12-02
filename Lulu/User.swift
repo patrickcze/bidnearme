@@ -23,6 +23,10 @@ class User {
         self.listingIdsByType = listingIdsByType
     }
     
+    convenience init(name: String, profileImageUrl: URL?, createdTimestamp: Int) {
+        self.init(name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:])
+    }
+    
     convenience init() {
         self.init(name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:])
     }
