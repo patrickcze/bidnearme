@@ -162,11 +162,11 @@ class ListingTableViewController: UITableViewController {
             cell.itemPhoto.image = UIImage()  // display a "photo no available"?
         }
         
-        var bidAmount = listing.startPrice!
+        var winningBidAmount = listing.startPrice!
         cell.bigLabel.textColor = UIColor.black // for selling (if there is not bidders) and watching
         
         if let b = listing.winningBid {
-            bidAmount = b.amount!
+            winningBidAmount = b.amount!
             switch (listingType!) {
             case .bidding: // text color is green if user bid is winning. Otherwise, red
                 if listing.winningBid.bidderId == uid! {
@@ -182,7 +182,7 @@ class ListingTableViewController: UITableViewController {
                 cell.bigLabel.textColor = UIColor.red
             }
         }
-        cell.bigLabel.text = String(format: "$%.2f", bidAmount)
+        cell.bigLabel.text = String(format: "$%.2f", winningBidAmount)
         cell.smallLabel.text = listing.endDate
     }
 }

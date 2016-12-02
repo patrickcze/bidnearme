@@ -112,7 +112,7 @@ class ProfileViewController: UIViewController {
         }
         
         // TO-DO ->
-        ratingLabel.text = "4.6 starts"
+        ratingLabel.text = "4.6 stars"
         memberLabel.text = "Member since: 2016"
         specialLabel.text = "Replies quickly"
     }
