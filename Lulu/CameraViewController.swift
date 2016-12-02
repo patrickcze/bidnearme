@@ -26,10 +26,6 @@ class CameraViewController: UIViewController {
     var storageRef: FIRStorageReference!
     var auctionDurationPicker = UIPickerView()
     
-    //MARK: - GeoFire object 
-    let geofireRef = FIRDatabase.database().reference()
-    let geoFire = GeoFire(firebaseRef: geofireRef)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +34,10 @@ class CameraViewController: UIViewController {
         
         // Initialize reference to the Firebase storage.
         storageRef = FIRStorage.storage().reference()
+        
+        //create GeoFire object
+        let geofireRef = FIRDatabase.database().reference()
+        let geoFire = GeoFire(firebaseRef: geofireRef)
         
         // Establish border colouring and corners on textview and button to matach styles
         descriptionTextArea.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
