@@ -14,7 +14,7 @@ import FirebaseDatabase
 //        Some ways to approach this: Using notifications, checking users listings in 
 //        viewWillAppear() or unwind/pop this view automatically when user switches tabs (from this view).
 //
-//        Current fix: I am poping this view from navigationController.
+//        Current fix: I am popping this view from navigationController.
 class ListingTableViewController: UITableViewController {
     
     // MARK: - Outlets
