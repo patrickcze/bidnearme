@@ -30,7 +30,7 @@ class ListingTableViewController: UITableViewController {
             fatalError("listingType = nil or uid = nil -> ListingTableViewController->viewWillAppear()")
         }
         
-        navigationTitle.title = listingType.description
+        navigationTitle.title = listingType.description.capitalized
         retrieveListings()
     }
     
@@ -172,7 +172,7 @@ class ListingTableViewController: UITableViewController {
                 cell.bigLabel.textColor = UIColor.red
             }
         }
-        cell.bigLabel.text = String(format: "$ %.2f", bidAmount)
+        cell.bigLabel.text = String(format: "$%.2f", bidAmount)
         cell.smallLabel.text = listing.endDate
     }
 }
