@@ -25,8 +25,8 @@ class User {
         self.uid = uid
     }
     
-    convenience init(name: String, profileImageUrl: URL?, createdTimestamp: Int) {
-        self.init(name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:])
+    convenience init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int) {
+        self.init(uid: uid, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:])
     }
     
     convenience init() {
