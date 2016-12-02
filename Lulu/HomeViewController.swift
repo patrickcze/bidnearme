@@ -117,14 +117,13 @@ class HomeViewController: UIViewController {
         //Get list of current listings
         listingRef.observeSingleEvent(of: .value, with: { (snap) in
             let enumerator = snap.children
-            var tempListing: Listing
             
             //Iterate over listings
-            while let rest = enumerator.nextObject() as? FIRDataSnapshot {
+            while let listingSnapshot = enumerator.nextObject() as? FIRDataSnapshot {
                 // Get basic info about the listing
-                let title = rest.childSnapshot(forPath: "title").value as? String
-                let desc = rest.childSnapshot(forPath: "description").value as? String
-                let imageURLS = rest.childSnapshot(forPath: "imageUrls")
+                let title = listingSnapshot.childSnapshot(forPath: "title").value as? String
+                let desc = listingSnapshot.childSnapshot(forPath: "description").value as? String
+                let imageURLS = listingSnapshot.childSnapshot(forPath: "imageUrls")
                 
                 var imageURLArray:[URL] = []
                 var index = 0
@@ -139,28 +138,42 @@ class HomeViewController: UIViewController {
                 
                 // Check for existing listings
                 for listing in self.listings {
-                    if listing.listingID == rest.key {
+                    if listing.listingID == listingSnapshot.key {
                         self.listings.remove(at: index)
                     }
                     index+=1
                 }
                 
                 // Handle getting the listings highest price
-                let highestBidId = rest.childSnapshot(forPath: "winningBidId").value as! String
-                var highestBidAmount = rest.childSnapshot(forPath: "startingPrice").value as! Double
+                let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
+                var highestBidAmount = listingSnapshot.childSnapshot(forPath: "startingPrice").value as! Double
                 
                 if !highestBidId.isEmpty {
-                    highestBidAmount = rest.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
+                    highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
                 }
                 
-                // Create a listing for the data within the snapshot
-                tempListing = Listing(rest.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", User())
-                
-                self.listings.append(tempListing)
+                // Check to see if the seller Id is present before grabbing the details of the seller
+                if let sellerId = listingSnapshot.childSnapshot(forPath: "sellerId").value as? String {
+                    // Get the details for the seller
+                    self.ref.child("users").child(sellerId).observeSingleEvent(of: .value, with: { (sellerDataSnap) in
+                        
+                        // Gather imporetant details abouyt the seller
+                        let sellerName = sellerDataSnap.childSnapshot(forPath: "name").value as? String
+                        let sellerCreatedTimestamp = sellerDataSnap.childSnapshot(forPath: "createdTimestamp").value as? Int
+                        let sellerImageUrl = sellerDataSnap.childSnapshot(forPath: "profileImageUrl").value as? String
+                        
+                        let seller = User(name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
+                        
+                        // Create a listing for the data within the snapshot
+                        let listing = Listing(listingSnapshot.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", seller)
+                        
+                        self.listings.append(listing)
+                        
+                        //Refresh listing view
+                        self.listingsCollectionView.reloadData()
+                    })
+                }
             }
-            
-            //Refresh listing view
-            self.listingsCollectionView.reloadData()
         })
     }
     
