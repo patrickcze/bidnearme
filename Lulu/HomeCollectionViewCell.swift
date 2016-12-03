@@ -20,11 +20,23 @@ class HomeCollectionViewCell: UICollectionViewCell {
     var listing: Listing? {
         didSet {
             if let list = listing {
-                listingImageView.af_setImage(withURL: list.photos[0])
-                listingTitleLabel.text = list.title
-                listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-                listingPriceLabel.text = "$" + String(format:"%.2f", list.startPrice)
+                if (list.winningBidId.isEmpty) {
+                    setViewObjectDetails(imageUrl: list.imageUrls[0], title: list.title, highestBidAmount: list.startPrice)
+                } else {
+                    getListingBidById(listingId:list.listingId, bidId: list.winningBidId) { (bidObject) in
+                        if let amount = bidObject?.amount {
+                            self.setViewObjectDetails(imageUrl: list.imageUrls[0], title: list.title, highestBidAmount: amount)
+                        }
+                    }
+                }
             }
         }
+    }
+    
+    func setViewObjectDetails(imageUrl: URL, title: String, highestBidAmount: Double) {
+        self.listingImageView.af_setImage(withURL: imageUrl)
+        self.listingTitleLabel.text = title
+        self.listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        self.listingPriceLabel.text = "$" + String(format:"%.2f", highestBidAmount)
     }
 }

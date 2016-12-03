@@ -2,23 +2,24 @@
 //  Bid.swift
 //  Lulu
 //
-//  Created by Ronny on 2016-11-25.
+//  Created by Patrick Czeczko on 2016-12-02.
 //  Copyright © 2016 Team Lulu. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Bid {
     
     // MARK: - Properties
-    let amount : Double!
-    let createdTimestamp : Int!
-    let bidderId : String!
+    var bidId: String
+    var bidderId: String
+    var amount: Double
+    let createdTimestamp: Int
     
-    // Bid initialization.
-    init(amount : Double, bidderId: String, createdTimestamp : Int) {
+    init(bidId: String, bidderId: String, amount: Double, createdTimestamp: Int) {
+        self.bidId = bidId
+        self.bidderId = bidderId
         self.amount = amount
         self.createdTimestamp = createdTimestamp
-        self.bidderId = bidderId
     }
 }

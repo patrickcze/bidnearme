@@ -121,58 +121,45 @@ class HomeViewController: UIViewController {
             //Iterate over listings
             while let listingSnapshot = enumerator.nextObject() as? FIRDataSnapshot {
                 // Get basic info about the listing
-                let title = listingSnapshot.childSnapshot(forPath: "title").value as? String
-                let desc = listingSnapshot.childSnapshot(forPath: "description").value as? String
-                let imageURLS = listingSnapshot.childSnapshot(forPath: "imageUrls")
+                guard let listingData = listingSnapshot.value as? [String: Any]  else {
+                    //TO-DO: Handle error
+                    return
+                }
                 
-                var imageURLArray:[URL] = []
+                guard
+                    let title = listingData["title"] as? String,
+                    let desc = listingData["description"] as? String,
+                    let startingPrice = listingData["startingPrice"] as? Double,
+                    let createdTimestamp = listingData["createdTimestamp"] as? Int,
+                    let auctionEndTimestamp = listingData["auctionEndTimestamp"] as? Int,
+                    let winningBidId = listingData["winningBidId"] as? String,
+                    let sellerId = listingData["sellerId"] as? String else {
+                        //TO-DO: Handle error
+                        return
+                }
+                
                 var index = 0
-                
-                // Get a list of URLs of the listing images
-                for item in 0...imageURLS.childrenCount-1 {
-                    let varNum = String(item)
-                    let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
-                    
-                    imageURLArray.append(URL(string:urlString)!)
+
+                var imageUrls: [URL] = []
+                if let imageUrlStrings = listingSnapshot.childSnapshot(forPath: "imageUrls").value as? [String] {
+                    imageUrls = imageUrlStrings.map { URL(string: $0)! }
                 }
                 
                 // Check for existing listings
                 for listing in self.listings {
-                    if listing.listingID == listingSnapshot.key {
+                    if listing.listingId == listingSnapshot.key {
                         self.listings.remove(at: index)
                     }
                     index+=1
                 }
                 
-                // Handle getting the listings highest price
-                let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
-                var highestBidAmount = listingSnapshot.childSnapshot(forPath: "startingPrice").value as! Double
+                // Create a listing for the data within the snapshot
+                let listing = Listing(listingId: listingSnapshot.key, sellerId: sellerId, imageUrls: imageUrls, title: title, description: desc, startPrice: startingPrice, buyoutPrice: 0.0, currencyCode: CurrencyCode.cad, createdTimestamp: createdTimestamp, auctionEndTimestamp: auctionEndTimestamp, winningBidId: winningBidId, bids: [:])
                 
-                if !highestBidId.isEmpty {
-                    highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
-                }
+                self.listings.append(listing)
                 
-                // Check to see if the seller Id is present before grabbing the details of the seller
-                if let sellerId = listingSnapshot.childSnapshot(forPath: "sellerId").value as? String {
-                    // Get the details for the seller
-                    self.ref.child("users").child(sellerId).observeSingleEvent(of: .value, with: { (sellerDataSnap) in
-                        
-                        // Gather imporetant details abouyt the seller
-                        let sellerName = sellerDataSnap.childSnapshot(forPath: "name").value as? String
-                        let sellerCreatedTimestamp = sellerDataSnap.childSnapshot(forPath: "createdTimestamp").value as? Int
-                        let sellerImageUrl = sellerDataSnap.childSnapshot(forPath: "profileImageUrl").value as? String
-                        
-                        let seller = User(uid: sellerId, name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
-                        
-                        // Create a listing for the data within the snapshot
-                        let listing = Listing(listingSnapshot.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", seller)
-                        
-                        self.listings.append(listing)
-                        
-                        //Refresh listing view
-                        self.listingsCollectionView.reloadData()
-                    })
-                }
+                //Refresh listing view
+                self.listingsCollectionView.reloadData()
             }
         })
     }

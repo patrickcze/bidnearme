@@ -142,7 +142,9 @@ class ProfileViewController: UIViewController {
             if let listingTreeIds = user["listings"] as? [String: [String: Bool]] {
                 listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
             }
-            completion(User(uid: id,name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType))
+
+            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType, ratingsById: [:], groups: []))
+
         })
     }
     

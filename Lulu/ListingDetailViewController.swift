@@ -58,18 +58,19 @@ class ListingDetailViewController: UIViewController {
             //Set navigation bar title to the listing title
             navigationItem.title = listing.title
             
-            listingImageView.af_setImage(withURL: listing.photos[0])
+            listingImageView.af_setImage(withURL: listing.imageUrls[0])
             listingTitleLabel.text = listing.title
             listingDescriptionLabel.text = listing.description
             
-            if let profileImageUrl = listing.seller.profileImageUrl {
-                profileImageView.af_setImage(withURL: profileImageUrl)
+            getUserById(userId: listing.sellerId){ (seller) in
+                if let profileImageUrl = seller.profileImageUrl {
+                    self.profileImageView.af_setImage(withURL: profileImageUrl)
+                }
+                self.profileNameLabel.text = seller.name
             }
             
-            profileNameLabel.text = listing.seller.name
-            
             // Keeps the price on the image current with the highest bid
-            ref?.child("listings").child(listing.listingID).observe(.value, with: { snapshot in
+            ref?.child("listings").child(listing.listingId).observe(.value, with: { snapshot in
                 let highestBidListingID = snapshot.childSnapshot(forPath: "winningBidId").value as! String
                 var highestBidAmount = snapshot.childSnapshot(forPath: "startingPrice").value as! Double
                 
@@ -204,8 +205,8 @@ class ListingDetailViewController: UIViewController {
             // Check if the user placed a bid value in the text field
             if let bidAmount = Double(toolbarTextField.text!) {
                 
-                let listingID = listing?.listingID
-                let listingRef = ref?.child("listings").child(listingID!)
+                let listingId = listing?.listingId
+                let listingRef = ref?.child("listings").child(listingId!)
                 
                 //Check if bid table exists
                 listingRef?.observeSingleEvent(of: .value, with: {snapshot in

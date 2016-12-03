@@ -30,7 +30,7 @@ class ListingTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         // listingType and uid should be set before this view. Currently, it is being called in ProfileViewController before seguing here
         guard let _ = listingType, let _ = uid else{
             fatalError("listingType = nil or uid = nil -> ListingTableViewController->viewWillAppear()")
@@ -71,47 +71,25 @@ class ListingTableViewController: UITableViewController {
                 return
             }
             
-            //let sellerId = listing?["sellerId"] as! String
-            //let buyoutPrice = 99999// No supported yet
+            let buyoutPrice = 99999.00// No supported yet
     
             guard
                 let createdTimestamp = listing["createdTimestamp"] as? Int,
                 let auctionEndTimestamp = listing["auctionEndTimestamp"] as? Int,
                 let startingPrice = listing["startingPrice"] as? Double,
                 let description = listing["description"] as? String,
+                let winningBidId = listing["winningBidId"] as? String,
                 let title = listing["title"] as? String else {
                     //TO-DO: Handle error
                     return
             }
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = DateFormatter.Style.medium
-            dateFormatter.timeStyle = DateFormatter.Style.short
-            
-            let startDate = Date(timeIntervalSince1970: TimeInterval(createdTimestamp/1000))
-            let endDate = Date(timeIntervalSince1970: TimeInterval(auctionEndTimestamp/1000))
         
             var imageUrls : [URL] = []
             if let imageUrlStrings = listing["imageUrls"] as? [String] {
                 imageUrls = imageUrlStrings.map{URL.init(string: $0)} as! [URL]
             }
+                        let aListing = Listing(listingId: listingId, sellerId: listing["sellerId"] as! String, imageUrls: imageUrls, title: title, description: description, startPrice: startingPrice, buyoutPrice: buyoutPrice, currencyCode: CurrencyCode.cad, createdTimestamp: createdTimestamp, auctionEndTimestamp: auctionEndTimestamp, winningBidId: winningBidId, bids: [:])
             
-            let aListing = Listing(listingId, imageUrls, title, description, startingPrice, Int(startingPrice), dateFormatter.string(from: startDate), dateFormatter.string(from: endDate), User())
-            
-            guard let winningBidId = listing["winningBidId"] as? String else {
-                completion(aListing)
-                return
-            }
-            
-            // Getting the highest bid
-            if let bids = listing["bids"] as? [String:Any] {
-                if let highestBid = bids[winningBidId] as? [String : Any] {
-                    let amount = highestBid["amount"] as! Double
-                    let bidderId = highestBid["bidderId"] as! String
-                    let createdTimestamp = highestBid["createdTimestamp"] as! Int
-                    aListing.winningBid = Bid(amount: amount,bidderId: bidderId,createdTimestamp: createdTimestamp)
-                }
-            }
             completion(aListing)
         })
     }
@@ -153,36 +131,41 @@ class ListingTableViewController: UITableViewController {
     }
     
     func setupCell(_ cell: ProfileTableViewCell, _ listing: Listing) {
-        
         cell.itemTitle.text = listing.title
-        
-        if let photoUrl = listing.photos.first {
-            cell.itemPhoto.af_setImage(withURL: photoUrl)
-        } else {
-            cell.itemPhoto.image = UIImage()  // display a "photo no available"?
-        }
-        
-        var winningBidAmount = listing.startPrice!
+        cell.itemPhoto.af_setImage(withURL: listing.imageUrls[0])
         cell.bigLabel.textColor = UIColor.black // for selling (if there is not bidders) and watching
         
-        if let b = listing.winningBid {
-            winningBidAmount = b.amount!
-            switch (listingType!) {
-            case .bidding: // text color is green if user bid is winning. Otherwise, red
-                if listing.winningBid.bidderId == uid! {
+        // Check if there is a winning bid
+        if listing.winningBidId.isEmpty {
+            cell.bigLabel.text = String(format: "$%.2f", listing.startPrice!)
+        } else {
+            // Get the data for the current winning bid
+            getListingBidById(listingId: (listing.listingId)!, bidId: listing.winningBidId, completion: { (bid) in
+                // Set the price label
+                cell.bigLabel.text = String(format: "$%.2f", (bid?.amount)!)
+                
+                switch (self.listingType!) {
+                case .bidding: // text color is green if user bid is winning. Otherwise, red
+                    if bid?.bidderId == self.uid! {
+                        cell.bigLabel.textColor = UIColor(colorLiteralRed: 0.13, green: 0.55, blue: 0.13, alpha: 1)
+                    } else {
+                        cell.bigLabel.textColor = UIColor.red
+                    }
+                case .watching: // text color black
+                    break
+                case .selling,.won, .sold : // there is at least a bidder, so text color is green
                     cell.bigLabel.textColor = UIColor(colorLiteralRed: 0.13, green: 0.55, blue: 0.13, alpha: 1)
-                } else {
+                case .lost: // text color always red
                     cell.bigLabel.textColor = UIColor.red
                 }
-            case .watching: // text color black
-                break
-            case .selling,.won, .sold : // there is at least a bidder, so text color is green
-                cell.bigLabel.textColor = UIColor(colorLiteralRed: 0.13, green: 0.55, blue: 0.13, alpha: 1)
-            case .lost: // text color always red
-                cell.bigLabel.textColor = UIColor.red
-            }
+            })
         }
-        cell.bigLabel.text = String(format: "$%.2f", winningBidAmount)
-        cell.smallLabel.text = listing.endDate
+        
+        // Set the dates and time to show when the auction will end
+        let endDate = Date(timeIntervalSince1970: TimeInterval(listing.auctionEndTimestamp/1000))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd h:m a"
+        
+        cell.smallLabel.text = dateFormatter.string(from: endDate)
     }
 }
