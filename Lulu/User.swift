@@ -11,6 +11,7 @@ import UIKit
 class User {
     
     // MARK: - Properties
+    var UId: String!
     var name: String!
     var profileImageUrl: URL?
     let createdTimestamp: Int!
@@ -18,7 +19,8 @@ class User {
     var ratings: [String: Rating]?
     var groups: [String]?
     
-    init(name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratings: [String: Rating], groups: [String]) {
+    init(UId: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratings: [String: Rating], groups: [String]) {
+        self.UId = UId
         self.name = name
         self.profileImageUrl = profileImageUrl
         self.createdTimestamp = createdTimestamp
@@ -27,11 +29,11 @@ class User {
         self.groups = groups
     }
     
-    convenience init(name: String, profileImageUrl: URL?, createdTimestamp: Int) {
-        self.init(name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratings: [:], groups: [])
+    convenience init(UId: String, name: String, profileImageUrl: URL?, createdTimestamp: Int) {
+        self.init(UId: UId,name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratings: [:], groups: [])
     }
     
     convenience init() {
-        self.init(name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:], ratings: [:], groups: [])
+        self.init(UId:"", name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:], ratings: [:], groups: [])
     }
 }
