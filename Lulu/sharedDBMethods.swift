@@ -37,25 +37,18 @@ func getUserFromUserID (userId: String, completion: @escaping (User) -> Void) {
     let storageRef = FIRDatabase.database().reference()
     
     storageRef.child("users/\(userId)").observeSingleEvent(of: .value, with: { snap in
-        if let userProfileImageUrlString = snap.childSnapshot(forPath: "profileImageUrl").value as? String {
-            let userProfileImageUrl = URL(string: userProfileImageUrlString)
-            let sellerName = snap.childSnapshot(forPath: "name").value as? String
-            let timestamp = snap.childSnapshot(forPath: "createdTimestamp").value as? Int
-            
-            let seller = User(uid: userId, name: sellerName!, profileImageUrl: userProfileImageUrl, createdTimestamp: timestamp!)
-            
-            completion(seller)
+        guard let userProfileImageUrlString = snap.childSnapshot(forPath: "profileImageUrl").value as? String else {
+            // TODO: Deal with missing profile image
+            return
         }
-        else {
-            let userProfileImageUrlString = "https://firebasestorage.googleapis.com/v0/b/lulu-c1315.appspot.com/o/listingImages%2Fnophoto.png?alt=media&token=51c25631-529c-4f09-866b-f6aaa34b5f79"
-            let userProfileImageUrl = URL(string: userProfileImageUrlString)
-            let sellerName = snap.childSnapshot(forPath: "name").value as? String
-            let timestamp = snap.childSnapshot(forPath: "createdTimestamp").value as? Int
-            
-            let seller = User(uid: userId, name: sellerName!, profileImageUrl: userProfileImageUrl, createdTimestamp: timestamp!)
-            
-            completion(seller)
-        }
+        
+        let userProfileImageUrl = URL(string: userProfileImageUrlString)
+        let sellerName = snap.childSnapshot(forPath: "name").value as? String
+        let timestamp = snap.childSnapshot(forPath: "createdTimestamp").value as? Int
+        
+        let seller = User(uid: userId, name: sellerName!, profileImageUrl: userProfileImageUrl, createdTimestamp: timestamp!)
+        
+        completion(seller)
     })
 }
 

@@ -11,10 +11,10 @@ import UIKit
 class Bid {
     
     // MARK: - Properties
-    var bidId: String!
-    var bidderId: String!
-    var amount: Double!
-    let createdTimestamp: Int!
+    var bidId: String
+    var bidderId: String
+    var amount: Double
+    let createdTimestamp: Int
     
     init(bidId: String, bidderId: String, amount: Double, createdTimestamp: Int) {
         self.bidId = bidId
