@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 
+// This function allows you to get the amount of a given bid
 func getBidAmountFromBidID(listingId: String, bidId: String, completion: @escaping (Double?) -> Void) {
     let storageRef = FIRDatabase.database().reference()
     
@@ -16,6 +17,27 @@ func getBidAmountFromBidID(listingId: String, bidId: String, completion: @escapi
         if let amount = snap.childSnapshot(forPath: "amount").value as? Double {
             completion(amount)
         }
+    })
+}
+
+// This function allows you to obatin user object with details simply from the userID
+func getUserFromUserID (userId: String, completion: @escaping (User) -> Void) {
+    let storageRef = FIRDatabase.database().reference()
+    
+    storageRef.child("users/\(userId)").observeSingleEvent(of: .value, with: { snap in
+        guard let userProfileImageUrlString = snap.childSnapshot(forPath: "profileImageUrl").value as? String else {
+            // TODO: Deal with missing profile image
+            return
+        }
+        
+        let userProfileImageUrl = URL(string: userProfileImageUrlString)
+        let sellerName = snap.childSnapshot(forPath: "name").value as? String
+        let timestamp = snap.childSnapshot(forPath: "createdTimestamp").value as? Int
+        
+        let seller = User(name: sellerName!, profileImageUrl: userProfileImageUrl, createdTimestamp: timestamp!)
+        
+        
+        completion(seller)
     })
 }
 
