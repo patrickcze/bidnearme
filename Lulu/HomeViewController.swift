@@ -162,7 +162,7 @@ class HomeViewController: UIViewController {
                         let sellerCreatedTimestamp = sellerDataSnap.childSnapshot(forPath: "createdTimestamp").value as? Int
                         let sellerImageUrl = sellerDataSnap.childSnapshot(forPath: "profileImageUrl").value as? String
                         
-                        let seller = User(name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
+                        let seller = User(uid: sellerId, name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
                         
                         // Create a listing for the data within the snapshot
                         let listing = Listing(listingSnapshot.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", seller)

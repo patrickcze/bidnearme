@@ -27,7 +27,6 @@ class ProfileTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.layer.borderWidth = 0.3
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
