@@ -15,6 +15,7 @@ target 'Lulu' do
   pod 'FacebookLogin'
   pod 'FacebookShare'
   pod 'SZTextView'
+  pod 'JSQMessagesViewController'
 
   pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
@@ -28,4 +29,17 @@ target 'Lulu' do
     # Pods for testing
   end
 
+end
+
+# Ensures that GeoFire is linked with FirebaseData
+# See: https://github.com/firebase/geofire-objc/issues/48#issuecomment-257217532
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == 'GeoFire' then
+      target.build_configurations.each do |config|
+        config.build_settings['FRAMEWORK_SEARCH_PATHS'] = "#{config.build_settings['FRAMEWORK_SEARCH_PATHS']} ${PODS_ROOT}/FirebaseDatabase/Frameworks/ $PODS_CONFIGURATION_BUILD_DIR/GoogleToolboxForMac"
+        config.build_settings['OTHER_LDFLAGS'] = "#{config.build_settings['OTHER_LDFLAGS']} -framework FirebaseDatabase"
+      end
+    end
+  end
 end
