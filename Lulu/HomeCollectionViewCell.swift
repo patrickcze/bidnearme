@@ -27,8 +27,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
                     listingPriceLabel.text = "$" + String(format:"%.2f", (list.startPrice)!)
 
                 } else {
-                    getBidAmountFromBidID(listingId:list.listingId, bidId: list.winningBidId) { (amount) in
-                        if let amount = amount {
+                    getBidObjectFromBidID(listingId:list.listingId, bidId: list.winningBidId) { (bidObject) in
+                        if let amount = bidObject?.amount {
                             self.listingImageView.af_setImage(withURL: list.imageUrls[0])
                             self.listingTitleLabel.text = list.title
                             self.listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
