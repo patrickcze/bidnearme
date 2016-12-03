@@ -23,9 +23,9 @@ func getListingBidById(listingId: String, bidId: String, completion: @escaping (
 
 // This function allows you to obatin user object with details simply from the userID
 func getUserById (userId: String, completion: @escaping (User) -> Void) {
-    let storageRef = FIRDatabase.database().reference()
+    let ref = FIRDatabase.database().reference()
     
-    storageRef.child("users/\(userId)").observeSingleEvent(of: .value, with: { snap in
+    ref.child("users/\(userId)").observeSingleEvent(of: .value, with: { snap in
         guard let userProfileImageUrlString = snap.childSnapshot(forPath: "profileImageUrl").value as? String else {
             // TODO: Deal with missing profile image
             return

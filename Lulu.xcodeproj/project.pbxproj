@@ -26,7 +26,7 @@
 		5B054AF71DE005FC00099683 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AF61DE005FC00099683 /* ProfileViewController.swift */; };
 		5B054AF91DE0065300099683 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B054AF81DE0065300099683 /* Profile.storyboard */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
-		7C9CDCCB1DF3354C00E525E8 /* CurrencyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9CDCCA1DF3354C00E525E8 /* CurrencyCodes.swift */; };
+		7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9CDCCA1DF3354C00E525E8 /* CurrencyCode.swift */; };
 		7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AC1DF2587800E525E8 /* Rating.swift */; };
 		7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AE1DF25CF500E525E8 /* Bid.swift */; };
 		7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7B01DF2622900E525E8 /* FirebaseDatabaseHelper.swift */; };
@@ -92,7 +92,7 @@
 		5B054AF61DE005FC00099683 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5B054AF81DE0065300099683 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C9CDCCA1DF3354C00E525E8 /* CurrencyCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyCodes.swift; sourceTree = "<group>"; };
+		7C9CDCCA1DF3354C00E525E8 /* CurrencyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
 		7CB0E7AC1DF2587800E525E8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		7CB0E7AE1DF25CF500E525E8 /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
 		7CB0E7B01DF2622900E525E8 /* FirebaseDatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseHelper.swift; sourceTree = "<group>"; };
@@ -305,7 +305,7 @@
 				3D763BE01DE52C0C000CE3C7 /* ListingType.swift */,
 				7CB0E7AC1DF2587800E525E8 /* Rating.swift */,
 				7CB0E7AE1DF25CF500E525E8 /* Bid.swift */,
-				7C9CDCCA1DF3354C00E525E8 /* CurrencyCodes.swift */,
+				7C9CDCCA1DF3354C00E525E8 /* CurrencyCode.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -812,7 +812,7 @@
 				7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */,
 				BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */,
 				5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */,
-				7C9CDCCB1DF3354C00E525E8 /* CurrencyCodes.swift in Sources */,
+				7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
 				BC945CAA1DE63CAF00F4F803 /* TextField.swift in Sources */,
 				7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */,

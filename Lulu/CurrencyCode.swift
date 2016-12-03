@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum currencyCodes: String {
+enum currencyCode: String {
     case cad = "CAD"
     case usd = "USD"
 }
