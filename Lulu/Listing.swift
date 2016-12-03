@@ -16,7 +16,7 @@ class Listing {
     var title: String!
     var description: String?
     var startPrice: Double!
-    var currencyCode: String?
+    var currencyCode: currencyCodes?
     var createdTimestamp: Int!
     var auctionEndTimestamp: Int!
     var winningBidId: String!
@@ -27,7 +27,7 @@ class Listing {
     var winningBid: Bid!
     
     // Listing initialization.
-    init(_ listingId:String, _ sellerId: String , _ imageUrls: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Double, _ currencyCode: String, _ createdTimestamp: Int, _ auctionEndTimestamp: Int, _ winningBidId: String, _ bids: [String: Bid]) {
+    init(_ listingId:String, _ sellerId: String , _ imageUrls: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Double, _ currencyCode: currencyCodes, _ createdTimestamp: Int, _ auctionEndTimestamp: Int, _ winningBidId: String, _ bids: [String: Bid]) {
         self.listingId = listingId
         self.imageUrls = imageUrls
         self.title = title

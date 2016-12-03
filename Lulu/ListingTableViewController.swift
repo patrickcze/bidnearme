@@ -88,7 +88,7 @@ class ListingTableViewController: UITableViewController {
             if let imageUrlStrings = listing["imageUrls"] as? [String] {
                 imageUrls = imageUrlStrings.map{URL.init(string: $0)} as! [URL]
             }
-                        let aListing = Listing(listingId, listing["sellerId"] as! String, imageUrls, title, description, startingPrice, buyoutPrice, "CAD", createdTimestamp, auctionEndTimestamp, winningBidId, [:])
+                        let aListing = Listing(listingId, listing["sellerId"] as! String, imageUrls, title, description, startingPrice, buyoutPrice, currencyCodes(rawValue: "CAD")!, createdTimestamp, auctionEndTimestamp, winningBidId, [:])
             
             completion(aListing)
         })

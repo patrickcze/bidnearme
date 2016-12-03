@@ -154,7 +154,7 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Create a listing for the data within the snapshot
-                let listing = Listing(listingSnapshot.key, sellerId, imageUrls, title, desc, startingPrice, 0.0, "CAD", createdTimestamp, auctionEndTimestamp, winningBidId, [:])
+                let listing = Listing(listingSnapshot.key, sellerId, imageUrls, title, desc, startingPrice, 0.0, currencyCodes.cad, createdTimestamp, auctionEndTimestamp, winningBidId, [:])
                 
                 self.listings.append(listing)
                 
