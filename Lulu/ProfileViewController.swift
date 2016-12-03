@@ -143,7 +143,7 @@ class ProfileViewController: UIViewController {
                 listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
             }
 
-            completion(User(UId: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType, ratings: [:], groups: []))
+            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType, ratingsById: [:], groups: []))
 
         })
     }
@@ -181,7 +181,7 @@ class ProfileViewController: UIViewController {
             let listingType = listingTypes[row]
             listingTableViewController.listingIds = profileUser?.listingIdsByType[listingType]
             listingTableViewController.listingType = listingType
-            listingTableViewController.uid = profileUser?.UId
+            listingTableViewController.uid = profileUser?.uid
         }
     }
 }

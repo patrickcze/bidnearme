@@ -11,14 +11,14 @@ import UIKit
 class Rating {
     
     // MARK: - Properties
-    var ratingUID: String!
+    var uid: String!
     var raterID: String!
     var score: Float!
     var feedbaack: String?
     let createdTimestamp: Int!
     
-    init(ratingUID: String, raterID: String, score: Float, feedback: String, createdTimestamp: Int) {
-        self.ratingUID = ratingUID
+    init(uid: String, raterID: String, score: Float, feedback: String, createdTimestamp: Int) {
+        self.uid = uid
         self.raterID = raterID
         self.score = score
         self.feedbaack = feedback
@@ -26,6 +26,6 @@ class Rating {
     }
     
     convenience init() {
-        self.init(ratingUID: "", raterID: "", score:0, feedback: "", createdTimestamp: 0)
+        self.init(uid: "", raterID: "", score:0, feedback: "", createdTimestamp: 0)
     }
 }

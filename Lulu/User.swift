@@ -11,29 +11,29 @@ import UIKit
 class User {
     
     // MARK: - Properties
-    var UId: String!
+    var uid: String!
     var name: String!
     var profileImageUrl: URL?
     let createdTimestamp: Int!
     var listingIdsByType: [ListingType: [String]]!
-    var ratings: [String: Rating]?
+    var ratingsById: [String: Rating]?
     var groups: [String]?
     
-    init(UId: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratings: [String: Rating], groups: [String]) {
-        self.UId = UId
+    init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratingsById: [String: Rating], groups: [String]) {
+        self.uid = uid
         self.name = name
         self.profileImageUrl = profileImageUrl
         self.createdTimestamp = createdTimestamp
         self.listingIdsByType = listingIdsByType
-        self.ratings = ratings
+        self.ratingsById = ratingsById
         self.groups = groups
     }
     
-    convenience init(UId: String, name: String, profileImageUrl: URL?, createdTimestamp: Int) {
-        self.init(UId: UId,name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratings: [:], groups: [])
+    convenience init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int) {
+        self.init(uid: uid,name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [])
     }
     
     convenience init() {
-        self.init(UId:"", name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:], ratings: [:], groups: [])
+        self.init(uid:"", name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:], ratingsById: [:], groups: [])
     }
 }

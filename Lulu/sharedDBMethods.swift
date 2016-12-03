@@ -46,7 +46,7 @@ func getUserFromUserID (userId: String, completion: @escaping (User) -> Void) {
         let sellerName = snap.childSnapshot(forPath: "name").value as? String
         let timestamp = snap.childSnapshot(forPath: "createdTimestamp").value as? Int
         
-        let seller = User(UId: userId, name: sellerName!, profileImageUrl: userProfileImageUrl, createdTimestamp: timestamp!)
+        let seller = User(uid: userId, name: sellerName!, profileImageUrl: userProfileImageUrl, createdTimestamp: timestamp!)
         
         
         completion(seller)

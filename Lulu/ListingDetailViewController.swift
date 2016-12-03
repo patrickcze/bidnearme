@@ -62,12 +62,12 @@ class ListingDetailViewController: UIViewController {
             listingTitleLabel.text = listing.title
             listingDescriptionLabel.text = listing.description
             
-            getUserFromUserID(userId: listing.sellerId, completion: { (seller) in
+            getUserFromUserID(userId: listing.sellerId){ (seller) in
                 if let profileImageUrl = seller.profileImageUrl {
                     self.profileImageView.af_setImage(withURL: profileImageUrl)
                 }
                 self.profileNameLabel.text = seller.name
-            })
+            }
             
             // Keeps the price on the image current with the highest bid
             ref?.child("listings").child(listing.listingId).observe(.value, with: { snapshot in
@@ -205,8 +205,8 @@ class ListingDetailViewController: UIViewController {
             // Check if the user placed a bid value in the text field
             if let bidAmount = Double(toolbarTextField.text!) {
                 
-                let listingID = listing?.listingId
-                let listingRef = ref?.child("listings").child(listingID!)
+                let listingId = listing?.listingId
+                let listingRef = ref?.child("listings").child(listingId!)
                 
                 //Check if bid table exists
                 listingRef?.observeSingleEvent(of: .value, with: {snapshot in
