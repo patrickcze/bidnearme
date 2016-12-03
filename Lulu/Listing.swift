@@ -11,32 +11,32 @@ import UIKit
 class Listing {
 
     // MARK: - Properties
-    var listingID: String!
-    var photos: [URL]!
+    var listingId: String!
+    var sellerId: String!
     var title: String!
-    var description: String!
-    
+    var description: String?
     var startPrice: Double!
-    var currentPrice: Int!
-    var buyoutPrice: Int!
-    
-    var startDate: String!
-    var endDate: String!
-    
-    var seller: User!
-    var bidders: [User]!
-    var favorited: [User]!
+    var currencyCode: String?
+    var createdTimestamp: Int!
+    var auctionEndTimestamp: Int!
+    var winningBidId: String!
+    var bids: [String: Bid]?
+    var imageUrls: [URL]!
+    var buyoutPrice: Double?
     
     // Listing initialization.
-    init(_ id:String, _ photos: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Int, _ startDate: String, _ endDate: String, _ seller: User) {
-        self.listingID = id
-        self.photos = photos
+    init(_ listingId:String, _ sellerId: String , _ imageUrls: [URL], _ title: String, _ description: String, _ startPrice: Double, _ buyoutPrice: Double, _ currencyCode: String, _ createdTimestamp: Int, _ auctionEndTimestamp: Int, _ winningBidId: String, _ bids: [String: Bid]) {
+        self.listingId = listingId
+        self.imageUrls = imageUrls
         self.title = title
         self.description = description
         self.startPrice = startPrice
         self.buyoutPrice = buyoutPrice
-        self.startDate = startDate
-        self.endDate = endDate
-        self.seller = seller
+        self.sellerId = sellerId
+        self.currencyCode = currencyCode
+        self.createdTimestamp = createdTimestamp
+        self.auctionEndTimestamp = auctionEndTimestamp
+        self.winningBidId = winningBidId
+        self.bids = bids
     }
 }

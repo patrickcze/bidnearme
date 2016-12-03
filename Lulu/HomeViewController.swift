@@ -124,6 +124,10 @@ class HomeViewController: UIViewController {
                 let title = listingSnapshot.childSnapshot(forPath: "title").value as? String
                 let desc = listingSnapshot.childSnapshot(forPath: "description").value as? String
                 let imageURLS = listingSnapshot.childSnapshot(forPath: "imageUrls")
+                let startPrice = listingSnapshot.childSnapshot(forPath: "startingPrice").value as? Double
+                let createdTimestamp = listingSnapshot.childSnapshot(forPath: "createdTimestamp").value as? Int
+                let auctionEndTimestamp = listingSnapshot.childSnapshot(forPath: "auctionEndTimestamp").value as? Int
+                let winningBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as? String
                 
                 var imageURLArray:[URL] = []
                 var index = 0
@@ -138,7 +142,7 @@ class HomeViewController: UIViewController {
                 
                 // Check for existing listings
                 for listing in self.listings {
-                    if listing.listingID == listingSnapshot.key {
+                    if listing.listingId == listingSnapshot.key {
                         self.listings.remove(at: index)
                     }
                     index+=1
@@ -165,7 +169,7 @@ class HomeViewController: UIViewController {
                         let seller = User(name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
                         
                         // Create a listing for the data within the snapshot
-                        let listing = Listing(listingSnapshot.key, imageURLArray, title!, desc!, highestBidAmount, 25, "Oct 30", "Nov 9", seller)
+                        let listing = Listing(listingSnapshot.key, sellerId, imageURLArray, title!, desc!, startPrice!, 0.0, "CAD", createdTimestamp!, auctionEndTimestamp!, winningBidId!, [:])
                         
                         self.listings.append(listing)
                         
