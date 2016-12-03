@@ -20,14 +20,14 @@ class HomeCollectionViewCell: UICollectionViewCell {
     var listing: Listing? {
         didSet {
             if let list = listing {
-                if (listing?.winningBidId.isEmpty)! {
+                if (list.winningBidId.isEmpty) {
                     listingImageView.af_setImage(withURL: list.imageUrls[0])
                     listingTitleLabel.text = list.title
                     listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-                    listingPriceLabel.text = "$" + String(format:"%.2f", (listing?.startPrice)!)
+                    listingPriceLabel.text = "$" + String(format:"%.2f", (list.startPrice)!)
 
                 } else {
-                    getBidAmountFromBidID(listingId: (listing?.listingId)!, bidId: (listing?.winningBidId)!, completion: { (amount) in
+                    getBidAmountFromBidID(listingId:list.listingId, bidId: list.winningBidId, completion: { (amount) in
                         if amount != nil {
                             self.listingImageView.af_setImage(withURL: list.imageUrls[0])
                             self.listingTitleLabel.text = list.title
