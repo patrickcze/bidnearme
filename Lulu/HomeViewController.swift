@@ -128,6 +128,7 @@ class HomeViewController: UIViewController {
                 let createdTimestamp = listingSnapshot.childSnapshot(forPath: "createdTimestamp").value as? Int
                 let auctionEndTimestamp = listingSnapshot.childSnapshot(forPath: "auctionEndTimestamp").value as? Int
                 let winningBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as? String
+                let sellerId = listingSnapshot.childSnapshot(forPath: "sellerId").value as? String
                 
                 var imageURLArray:[URL] = []
                 var index = 0
@@ -148,35 +149,13 @@ class HomeViewController: UIViewController {
                     index+=1
                 }
                 
-                // Handle getting the listings highest price
-                let highestBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as! String
-                var highestBidAmount = listingSnapshot.childSnapshot(forPath: "startingPrice").value as! Double
+                // Create a listing for the data within the snapshot
+                let listing = Listing(listingSnapshot.key, sellerId!, imageURLArray, title!, desc!, startPrice!, 0.0, "CAD", createdTimestamp!, auctionEndTimestamp!, winningBidId!, [:])
                 
-                if !highestBidId.isEmpty {
-                    highestBidAmount = listingSnapshot.childSnapshot(forPath: "bids").childSnapshot(forPath: highestBidId).childSnapshot(forPath: "amount").value as! Double
-                }
+                self.listings.append(listing)
                 
-                // Check to see if the seller Id is present before grabbing the details of the seller
-                if let sellerId = listingSnapshot.childSnapshot(forPath: "sellerId").value as? String {
-                    // Get the details for the seller
-                    self.ref.child("users").child(sellerId).observeSingleEvent(of: .value, with: { (sellerDataSnap) in
-                        
-                        // Gather imporetant details abouyt the seller
-                        let sellerName = sellerDataSnap.childSnapshot(forPath: "name").value as? String
-                        let sellerCreatedTimestamp = sellerDataSnap.childSnapshot(forPath: "createdTimestamp").value as? Int
-                        let sellerImageUrl = sellerDataSnap.childSnapshot(forPath: "profileImageUrl").value as? String
-                        
-                        let seller = User(name: sellerName!, profileImageUrl: URL(string: sellerImageUrl!), createdTimestamp: sellerCreatedTimestamp!)
-                        
-                        // Create a listing for the data within the snapshot
-                        let listing = Listing(listingSnapshot.key, sellerId, imageURLArray, title!, desc!, startPrice!, 0.0, "CAD", createdTimestamp!, auctionEndTimestamp!, winningBidId!, [:])
-                        
-                        self.listings.append(listing)
-                        
-                        //Refresh listing view
-                        self.listingsCollectionView.reloadData()
-                    })
-                }
+                //Refresh listing view
+                self.listingsCollectionView.reloadData()
             }
         })
     }
