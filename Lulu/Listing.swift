@@ -20,7 +20,7 @@ class Listing {
     var createdTimestamp: Int!
     var auctionEndTimestamp: Int!
     var winningBidId: String!
-    var bids: [String: Bid]?
+    var bidsById: [String: Bid]?
     var imageUrls: [URL]!
     var buyoutPrice: Double?
     
@@ -39,6 +39,6 @@ class Listing {
         self.createdTimestamp = createdTimestamp
         self.auctionEndTimestamp = auctionEndTimestamp
         self.winningBidId = winningBidId
-        self.bids = bids
+        self.bidsById = bids
     }
 }
