@@ -29,7 +29,7 @@
 		7C9CDCCB1DF3354C00E525E8 /* CurrencyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9CDCCA1DF3354C00E525E8 /* CurrencyCodes.swift */; };
 		7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AC1DF2587800E525E8 /* Rating.swift */; };
 		7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AE1DF25CF500E525E8 /* Bid.swift */; };
-		7CB0E7B11DF2622900E525E8 /* SharedDbMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7B01DF2622900E525E8 /* SharedDbMethods.swift */; };
+		7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7B01DF2622900E525E8 /* FirebaseDatabaseHelper.swift */; };
 		7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD434C1DD256B800E0CECE /* CameraViewController.swift */; };
 		BC079C241DE3B0DA007F6BDA /* ListingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C231DE3B0DA007F6BDA /* ListingDetailViewController.swift */; };
 		BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C251DE3BA0C007F6BDA /* RatingControl.swift */; };
@@ -95,7 +95,7 @@
 		7C9CDCCA1DF3354C00E525E8 /* CurrencyCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyCodes.swift; sourceTree = "<group>"; };
 		7CB0E7AC1DF2587800E525E8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		7CB0E7AE1DF25CF500E525E8 /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
-		7CB0E7B01DF2622900E525E8 /* SharedDbMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDbMethods.swift; sourceTree = "<group>"; };
+		7CB0E7B01DF2622900E525E8 /* FirebaseDatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseHelper.swift; sourceTree = "<group>"; };
 		7CBD434C1DD256B800E0CECE /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B23BC5FAFA25FE2B9CCAAF71 /* Pods-LuluUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 				3DC9870A1DB5DCD20022A2ED /* Info.plist */,
 				3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */,
 				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
-				7CB0E7B01DF2622900E525E8 /* SharedDbMethods.swift */,
+				7CB0E7B01DF2622900E525E8 /* FirebaseDatabaseHelper.swift */,
 			);
 			path = Lulu;
 			sourceTree = "<group>";
@@ -815,7 +815,7 @@
 				7C9CDCCB1DF3354C00E525E8 /* CurrencyCodes.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
 				BC945CAA1DE63CAF00F4F803 /* TextField.swift in Sources */,
-				7CB0E7B11DF2622900E525E8 /* SharedDbMethods.swift in Sources */,
+				7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* LoginViewController.swift in Sources */,
 				7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */,

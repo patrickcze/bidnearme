@@ -1,5 +1,5 @@
 //
-//  sharedDBMethods.swift
+//  FirebaseDatabaseHelper.swift
 //  Lulu
 //
 //  Created by Patrick Czeczko on 2016-12-02.
