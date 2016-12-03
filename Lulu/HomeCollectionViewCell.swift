@@ -23,7 +23,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
                 if (list.winningBidId.isEmpty) {
                     setViewObjectDetails(imageUrl: list.imageUrls[0], title: list.title, highestBidAmount: list.startPrice)
                 } else {
-                    getBidObjectFromBidID(listingId:list.listingId, bidId: list.winningBidId) { (bidObject) in
+                    getListingBidById(listingId:list.listingId, bidId: list.winningBidId) { (bidObject) in
                         if let amount = bidObject?.amount {
                             self.setViewObjectDetails(imageUrl: list.imageUrls[0], title: list.title, highestBidAmount: amount)
                         }

@@ -140,7 +140,7 @@ class ListingTableViewController: UITableViewController {
             cell.bigLabel.text = String(format: "$%.2f", listing.startPrice!)
         } else {
             // Get the data for the current winning bid
-            getBidObjectFromBidID(listingId: (listing.listingId)!, bidId: listing.winningBidId, completion: { (bid) in
+            getListingBidById(listingId: (listing.listingId)!, bidId: listing.winningBidId, completion: { (bid) in
                 // Set the price label
                 cell.bigLabel.text = String(format: "$%.2f", (bid?.amount)!)
                 

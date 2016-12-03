@@ -62,7 +62,7 @@ class ListingDetailViewController: UIViewController {
             listingTitleLabel.text = listing.title
             listingDescriptionLabel.text = listing.description
             
-            getUserFromUserID(userId: listing.sellerId){ (seller) in
+            getUserById(userId: listing.sellerId){ (seller) in
                 if let profileImageUrl = seller.profileImageUrl {
                     self.profileImageView.af_setImage(withURL: profileImageUrl)
                 }

@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 
 // This function allows you to get the amount of a given bid
-func getBidObjectFromBidID(listingId: String, bidId: String, completion: @escaping (Bid?) -> Void) {
+func getListingBidById(listingId: String, bidId: String, completion: @escaping (Bid?) -> Void) {
     let ref = FIRDatabase.database().reference()
     
     ref.child("listings/\(listingId)/bids/\(bidId)").observeSingleEvent(of: .value, with: { snap in
@@ -22,7 +22,7 @@ func getBidObjectFromBidID(listingId: String, bidId: String, completion: @escapi
 }
 
 // This function allows you to obatin user object with details simply from the userID
-func getUserFromUserID (userId: String, completion: @escaping (User) -> Void) {
+func getUserById (userId: String, completion: @escaping (User) -> Void) {
     let storageRef = FIRDatabase.database().reference()
     
     storageRef.child("users/\(userId)").observeSingleEvent(of: .value, with: { snap in
