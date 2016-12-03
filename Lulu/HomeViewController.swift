@@ -121,24 +121,28 @@ class HomeViewController: UIViewController {
             //Iterate over listings
             while let listingSnapshot = enumerator.nextObject() as? FIRDataSnapshot {
                 // Get basic info about the listing
-                let title = listingSnapshot.childSnapshot(forPath: "title").value as? String
-                let desc = listingSnapshot.childSnapshot(forPath: "description").value as? String
-                let imageURLS = listingSnapshot.childSnapshot(forPath: "imageUrls")
-                let startPrice = listingSnapshot.childSnapshot(forPath: "startingPrice").value as? Double
-                let createdTimestamp = listingSnapshot.childSnapshot(forPath: "createdTimestamp").value as? Int
-                let auctionEndTimestamp = listingSnapshot.childSnapshot(forPath: "auctionEndTimestamp").value as? Int
-                let winningBidId = listingSnapshot.childSnapshot(forPath: "winningBidId").value as? String
-                let sellerId = listingSnapshot.childSnapshot(forPath: "sellerId").value as? String
+                guard let listingData = listingSnapshot.value as? [String: Any]  else {
+                    //TO-DO: Handle error
+                    return
+                }
                 
-                var imageURLArray:[URL] = []
+                guard
+                    let title = listingData["title"] as? String,
+                    let desc = listingData["description"] as? String,
+                    let startingPrice = listingData["startingPrice"] as? Double,
+                    let createdTimestamp = listingData["createdTimestamp"] as? Int,
+                    let auctionEndTimestamp = listingData["auctionEndTimestamp"] as? Int,
+                    let winningBidId = listingData["winningBidId"] as? String,
+                    let sellerId = listingData["sellerId"] as? String else {
+                        //TO-DO: Handle error
+                        return
+                }
+                
                 var index = 0
-                
-                // Get a list of URLs of the listing images
-                for item in 0...imageURLS.childrenCount-1 {
-                    let varNum = String(item)
-                    let urlString = imageURLS.childSnapshot(forPath: varNum).value as! String
-                    
-                    imageURLArray.append(URL(string:urlString)!)
+
+                var imageUrls: [URL] = []
+                if let imageUrlStrings = listingSnapshot.childSnapshot(forPath: "imageUrls").value as? [String] {
+                    imageUrls = imageUrlStrings.map { URL(string: $0)! }
                 }
                 
                 // Check for existing listings
@@ -150,7 +154,7 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Create a listing for the data within the snapshot
-                let listing = Listing(listingSnapshot.key, sellerId!, imageURLArray, title!, desc!, startPrice!, 0.0, "CAD", createdTimestamp!, auctionEndTimestamp!, winningBidId!, [:])
+                let listing = Listing(listingSnapshot.key, sellerId, imageUrls, title, desc, startingPrice, 0.0, "CAD", createdTimestamp, auctionEndTimestamp, winningBidId, [:])
                 
                 self.listings.append(listing)
                 

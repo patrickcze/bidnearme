@@ -27,14 +27,14 @@ class HomeCollectionViewCell: UICollectionViewCell {
                     listingPriceLabel.text = "$" + String(format:"%.2f", (list.startPrice)!)
 
                 } else {
-                    getBidAmountFromBidID(listingId:list.listingId, bidId: list.winningBidId, completion: { (amount) in
-                        if amount != nil {
+                    getBidAmountFromBidID(listingId:list.listingId, bidId: list.winningBidId) { (amount) in
+                        if let amount = amount {
                             self.listingImageView.af_setImage(withURL: list.imageUrls[0])
                             self.listingTitleLabel.text = list.title
                             self.listingPriceTag.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-                            self.listingPriceLabel.text = "$" + String(format:"%.2f", amount!)
+                            self.listingPriceLabel.text = "$" + String(format:"%.2f", amount)
                         }
-                    })
+                    }
                 }
             }
         }
