@@ -1,0 +1,23 @@
+//
+//  Chat.swift
+//  Lulu
+//
+//  Created by Jan Clarin on 12/3/16.
+//  Copyright © 2016 Team Lulu. All rights reserved.
+//
+
+import Foundation
+
+class Chat {
+    
+    // MARK: - Properties
+    let uid: String
+    let lastMessage: String
+    let createdTimeStamp: Int
+    
+    init(uid: String, lastMessage: String, createdTimestamp: Int) {
+        self.uid = uid
+        self.lastMessage = lastMessage
+        self.createdTimeStamp = createdTimestamp
+    }
+}
