@@ -23,7 +23,7 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var listingPriceTag: UIView!
     @IBOutlet weak var listingCurrentPrice: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-  @IBOutlet weak var profileHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileRating: RatingControl!
     @IBOutlet weak var mapView: MKMapView!
