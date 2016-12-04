@@ -34,7 +34,7 @@ class CameraViewController: UIViewController {
         
         // Initialize reference to the Firebase storage.
         storageRef = FIRStorage.storage().reference()
-        
+
         // Establish border colouring and corners on textview and button to matach styles
         descriptionTextArea.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
         descriptionTextArea.layer.borderWidth = 1.0
@@ -118,10 +118,6 @@ class CameraViewController: UIViewController {
     // Function handles the steps required to take the listing data on the view and place it into the DB
     @IBAction func postButtonClicked(_ sender: AnyObject) {
         
-        //GeoFire object
-        let geofireRef = FIRDatabase.database().reference()
-        let geoFire = GeoFire(firebaseRef: geofireRef)
-        
         // Disable post button while uploading information
         self.postListingButton.isEnabled = false
         
@@ -145,6 +141,29 @@ class CameraViewController: UIViewController {
             return
         }
         
+        
+        //initialize reference to geoFire
+        let geofireRef = FIRDatabase.database().reference()
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        
+        //initialize objects for location retrieval
+        var geocoder = CLGeocoder()
+        let coordinates = MKPointAnnotation()
+        
+        //call to convert postal code to longitude and latitude
+        coordinates = geocoder.geocodeAddressString(postalCode, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+            
+        })
+        
+        //set latitude and longitude location 
+        geoFire!.setLocation(CLLocation(latitude: coordinates.coordinate.latitude, longitude: coordinates.coordinate.longitude), forKey: "firebase-hq") { (error) in
+            if (error != nil) {
+                print("An error occured: \(error)")
+            } else {
+                print("Saved location successfully!")
+            }
+        }
+        
         // assign value of selected row as picked value
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
         guard auctionDurationPickerSelectedRow < ListingTimeInterval.allValues.count else {
@@ -153,15 +172,6 @@ class CameraViewController: UIViewController {
         
         // saving value of selected row from picker for database
         let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
-        
-        //saving location of object with callback function
-        geoFire!.setLocation(CLLocation(latitude: 37.7853889, longitude: -122.4056973), forKey: "firebase-hq") { (error) in
-            if (error != nil) {
-                print("An error occured: \(error)")
-            } else {
-                print("Saved location successfully!")
-            }
-        }
  
         // Prepare and upload listing image to Firebase Storage.
         // TODO: Throw errors.
@@ -287,7 +297,44 @@ class CameraViewController: UIViewController {
         ref.child("users/\(userId)/listings/\(sellingListingType)/\(listingId)").setValue(true)
     }
     
+    /**
+     Converts the postal code to latitude and longitude
+    
+    */
+    
+    /*func geocodeAddressString(_ addressString: String, completionHandler: @escaping CLGeocodeCompletionHandler){
+        if error = nil {
+            if placemarks!.count = 0 {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = (placemarks.location?.coordinate)!
+                return annotation
+            }
+        }
+    }*/
+    
+    
+    /*func addressToCoordinatesConverter(postalCode: String) {
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(postalCode, completionHandler: { (placemarks, error) -> Void in
+            if error == nil {
+                if placemarks!.count == 0 {
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = (placemarks.location?.coordinate)!
+                    return annotation
+                }
+            }
+        })
+    }*/
+    
+    /**
+      Saves location of object with callback
+    
+    */
+
+    
 }
+
+
 
 
 // MARK: - UIImagePickerControllerDelegate
