@@ -42,7 +42,7 @@ class ListingTableViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         //discarding the returned value. Otherwise, a warning gets displayed.
-        _ = navigationController?.popViewController(animated:  false)
+         //   _ = navigationController?.popViewController(animated:  false) This does not work anymore. Since I am linking the cell to another View. TO-DO: find another way to fix this.
     }
     
     override func viewDidLoad() {
@@ -127,6 +127,7 @@ class ListingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ListingDetail", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -167,5 +168,17 @@ class ListingTableViewController: UITableViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd h:m a"
         
         cell.smallLabel.text = dateFormatter.string(from: endDate)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let identifier = segue.identifier {
+            if (identifier == "ListingDetail") {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    let destinationController = segue.destination as! ListingDetailViewController
+                    destinationController.listing = listings[indexPath.row]
+                }
+            }
+        }
     }
 }

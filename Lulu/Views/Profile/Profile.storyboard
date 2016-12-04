@@ -209,11 +209,20 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="navigationTitle" destination="uZh-Vv-hs1" id="LrJ-3D-KNl"/>
+                        <segue destination="46V-0J-iVY" kind="show" identifier="ListingDetail" id="C6V-jt-Krw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G50-hm-FDq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5617" y="-81"/>
+            <point key="canvasLocation" x="5682" y="-107"/>
+        </scene>
+        <!--ListingDetail-->
+        <scene sceneID="D6a-Ia-WFX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="ListingDetail" id="46V-0J-iVY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1LF-D1-xRW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6478" y="-219"/>
         </scene>
     </scenes>
     <resources>
