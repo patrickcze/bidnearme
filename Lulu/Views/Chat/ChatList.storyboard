@@ -42,10 +42,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Sje-J5-4Px"/>
+                    <connections>
+                        <segue destination="Cff-01-34p" kind="showDetail" identifier="ShowChatMessages" action="showViewController:sender:" id="nro-RF-Ptt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iIc-RD-gSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3352.8000000000002" y="1247.2263868065968"/>
+        </scene>
+        <!--ChatMessagesViewController-->
+        <scene sceneID="r69-ZT-REr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ChatMessages" referencedIdentifier="ChatMessagesViewController" id="Cff-01-34p" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uar-VZ-dUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4081" y="1247"/>
         </scene>
         <!--Chat-->
         <scene sceneID="nWh-ck-QzD">
