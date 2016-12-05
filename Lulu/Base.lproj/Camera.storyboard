@@ -51,6 +51,11 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Description..."/>
                                         </userDefinedRuntimeAttributes>
                                     </textView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick-Up Postal Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4xd-gL-qXc">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PrX-PD-Ucb">
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Start Bidding..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H6o-nA-hBl">
@@ -101,6 +106,7 @@
                         <outlet property="descriptionTextArea" destination="6I5-wR-66M" id="NZD-VI-u9Y"/>
                         <outlet property="endDateTextField" destination="XBJ-D8-Kcc" id="C8B-qJ-rC8"/>
                         <outlet property="postListingButton" destination="S5h-oW-iwX" id="5vC-lx-7jI"/>
+                        <outlet property="postalCodeTextField" destination="4xd-gL-qXc" id="X5A-Ak-Ajx"/>
                         <outlet property="startingPriceTextField" destination="H6o-nA-hBl" id="za9-1o-L7D"/>
                         <outlet property="titleTextField" destination="6UW-Ze-nCC" id="ibw-gF-uyw"/>
                     </connections>
