@@ -205,6 +205,11 @@ class ListingDetailViewController: UIViewController {
         textField.becomeFirstResponder()
     }
     
+    /**
+     Respond to Chat button being pressed.
+     If there is an existing chat between the listing and the bidder, then get that chat and display it.
+     Otherwise, create a new chat and display it.
+     */
     @IBAction func didTapChatButton(_ sender: UIBarButtonItem) {
         guard let bidderId = FIRAuth.auth()?.currentUser?.uid else {
             alertUserNotLoggedIn()
