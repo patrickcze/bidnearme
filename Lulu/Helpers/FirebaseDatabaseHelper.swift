@@ -86,8 +86,10 @@ func writeChat(listingId: String, sellerId: String, buyerId: String, completion:
 
 func writeUserChat(userId: String, chatId: String) {
     let userChatsRef = FIRDatabase.database().reference().child("users/\(userId)/chats")
-    
     userChatsRef.setValue([chatId: true]) { (error, _) in
-        // TODO: Handle error.
+        if error != nil {
+            // TODO: Handle error.
+            return
+        }
     }
 }
