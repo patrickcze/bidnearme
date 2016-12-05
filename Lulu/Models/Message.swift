@@ -22,4 +22,8 @@ class Message {
         self.text = text
         self.createdTimestamp = createdTimestamp
     }
+    
+    convenience init() {
+        self.init(id: "", senderUid: "", text: "", createdTimestamp: 0)
+    }
 }
