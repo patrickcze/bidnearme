@@ -13,8 +13,8 @@ final class ChatListViewController: UITableViewController {
     
     // MARK: - Properties
     let cellIdentifier = "ChatCell"
+    var chats = [Chat]()
     var loggedInUser: User?
-    var chats: [Chat] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
