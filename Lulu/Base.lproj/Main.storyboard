@@ -38,7 +38,7 @@
                                         <rect key="frame" x="12" y="12" width="169.5" height="214.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="169.5" height="214.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="214"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9vL-O0-5jV">
@@ -392,10 +392,10 @@
             </objects>
             <point key="canvasLocation" x="-445" y="206"/>
         </scene>
-        <!--Chat-->
+        <!--ChatList-->
         <scene sceneID="vGh-wk-mYC">
             <objects>
-                <viewControllerPlaceholder storyboardName="Chat" id="Em2-Po-8BM" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="ChatList" id="Em2-Po-8BM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="hlF-Da-mnU"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvG-Yy-8bL" userLabel="First Responder" sceneMemberID="firstResponder"/>

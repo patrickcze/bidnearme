@@ -38,7 +38,7 @@
 		BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C251DE3BA0C007F6BDA /* RatingControl.swift */; };
 		BC21B35A1DE66371001400C9 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21B3591DE66371001400C9 /* ColorPalette.swift */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
-		BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */; };
+		BC60E8DC1DC688BC004D7FB8 /* ChatList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DB1DC688BC004D7FB8 /* ChatList.storyboard */; };
 		BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */; };
 		BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */; };
 		BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */; };
@@ -110,7 +110,7 @@
 		BC079C251DE3BA0C007F6BDA /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		BC21B3591DE66371001400C9 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		BC60E8D91DC688AB004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Groups.storyboard; sourceTree = "<group>"; };
-		BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		BC60E8DB1DC688BC004D7FB8 /* ChatList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChatList.storyboard; sourceTree = "<group>"; };
 		BC60E8DE1DC688CE004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Camera.storyboard; sourceTree = "<group>"; };
 		BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 		3D149F991DF393BF00C9F8A2 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				BC60E8DB1DC688BC004D7FB8 /* Chat.storyboard */,
+				BC60E8DB1DC688BC004D7FB8 /* ChatList.storyboard */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -536,7 +536,7 @@
 				BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */,
 				3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */,
 				3DC987061DB5DCD20022A2ED /* Assets.xcassets in Resources */,
-				BC60E8DC1DC688BC004D7FB8 /* Chat.storyboard in Resources */,
+				BC60E8DC1DC688BC004D7FB8 /* ChatList.storyboard in Resources */,
 				3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */,
 				3D546E661DCFA85200188DBD /* Login.storyboard in Resources */,
 				5B054AF51DE005EE00099683 /* ProfileTableViewCell.xib in Resources */,
