@@ -174,6 +174,7 @@ class CameraViewController: UIViewController {
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
                 "winningBidId": "",
                 "bids": "",
+                "bidderChatIds": [:],
                 "imageUrls": [imageUrlString]
             ]
             

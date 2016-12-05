@@ -145,6 +145,8 @@ class HomeViewController: UIViewController {
                     imageUrls = imageUrlStrings.map { URL(string: $0)! }
                 }
                 
+                let bidderChatIds = listingData["bidderChatIds"] as? [String: String] ?? [:]
+                
                 // Check for existing listings
                 for listing in self.listings {
                     if listing.listingId == listingSnapshot.key {
@@ -154,7 +156,7 @@ class HomeViewController: UIViewController {
                 }
                 
                 // Create a listing for the data within the snapshot
-                let listing = Listing(listingId: listingSnapshot.key, sellerId: sellerId, imageUrls: imageUrls, title: title, description: desc, startPrice: startingPrice, buyoutPrice: 0.0, currencyCode: CurrencyCode.cad, createdTimestamp: createdTimestamp, auctionEndTimestamp: auctionEndTimestamp, winningBidId: winningBidId, bids: [:])
+                let listing = Listing(listingId: listingSnapshot.key, sellerId: sellerId, imageUrls: imageUrls, title: title, description: desc, startPrice: startingPrice, buyoutPrice: 0.0, currencyCode: CurrencyCode.cad, createdTimestamp: createdTimestamp, auctionEndTimestamp: auctionEndTimestamp, winningBidId: winningBidId, bids: [:], bidderChatIds: bidderChatIds)
                 
                 self.listings.append(listing)
                 
