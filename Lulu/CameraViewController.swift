@@ -11,6 +11,9 @@ import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
 import GeoFire
+import CoreLocation
+import AddressBookUI
+
 
 class CameraViewController: UIViewController {
     // MARK: - Outlets
@@ -25,7 +28,11 @@ class CameraViewController: UIViewController {
     var ref: FIRDatabaseReference!
     var storageRef: FIRStorageReference!
     var auctionDurationPicker = UIPickerView()
+    //let baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?"
+    //let apiKey =
     
+    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -141,28 +148,19 @@ class CameraViewController: UIViewController {
             return
         }
         
-        
-        //initialize reference to geoFire
-        let geofireRef = FIRDatabase.database().reference()
-        let geoFire = GeoFire(firebaseRef: geofireRef)
-        
         //initialize objects for location retrieval
-        var geocoder = CLGeocoder()
-        let coordinates = MKPointAnnotation()
+        //var geocoder = CLGeocoder()
+        //let coordinates = MKPointAnnotation()
         
         //call to convert postal code to longitude and latitude
-        coordinates = geocoder.geocodeAddressString(postalCode, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
-            
-        })
+        //let coordinates = postalCodeToCoordinatesConverter(postalCode)
         
-        //set latitude and longitude location 
-        geoFire!.setLocation(CLLocation(latitude: coordinates.coordinate.latitude, longitude: coordinates.coordinate.longitude), forKey: "firebase-hq") { (error) in
-            if (error != nil) {
-                print("An error occured: \(error)")
-            } else {
-                print("Saved location successfully!")
-            }
-        }
+        /*coordinates = geocoder.geocodeAddressString(postalCode, completionHandler: {(placemarks: [CLPlacemark]?, error: NSError?) -> Void in
+        })*/
+        
+
+        //set latitude and longitude location with callback
+        //forwardGeocoding(postalCodeTextfield.text)
         
         // assign value of selected row as picked value
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
@@ -298,9 +296,51 @@ class CameraViewController: UIViewController {
     }
     
     /**
-     Converts the postal code to latitude and longitude
+     Converts the postal code to latitude and longitude and saves the coordinate
     
     */
+    
+    func forwardGeocoding(postalCode: String){
+        CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            //initialize reference to geoFire
+            let geofireRef = FIRDatabase.database().reference()
+            let geoFire = GeoFire(firebaseRef: geofireRef)
+            
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinate = location?.coordinate
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "firebase-hq") { (error) in
+                    if (error != nil) {
+                        print("An error occured: \(error)")
+                    } else {
+                        print("Saved location successfully!")
+                    }
+                }
+            }
+        })
+    }
+    
+    /*func postalCodeToCoordinatesConverter(postalCode: String) {
+        let url = NSURL(string: "\(baseUrl)address=\(postalCode)&key=\(apiKey)")
+        let data = NSData(contentsOfURL: url!)
+        let json = try! JSONSerialization.JSONOBjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+        if let result = json["results"] as? NSArray {
+            if let geometry = result[0]["geomery"] as? NSDictionary {
+                if let location = geometry["location"] as? NSDictionary {
+                    let latitude = location["lat"] as! Float
+                    let longitude = location["lng"] as! Float
+                    let coordinates = (latitude, longitude)
+                    return coordinates
+                }
+            }
+        }
+    }*/
     
     /*func geocodeAddressString(_ addressString: String, completionHandler: @escaping CLGeocodeCompletionHandler){
         if error = nil {
