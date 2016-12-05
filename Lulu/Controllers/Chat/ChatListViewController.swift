@@ -31,8 +31,8 @@ final class ChatListViewController: UITableViewController {
                     if let chat = chat {
                         self.chats.append(chat)
                     }
+                    self.tableView.reloadData()
                 }
-                self.tableView.reloadData()
             }
         }
 
