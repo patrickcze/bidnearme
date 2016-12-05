@@ -23,7 +23,7 @@ class ListingDetailViewController: UIViewController {
     @IBOutlet weak var listingPriceTag: UIView!
     @IBOutlet weak var listingCurrentPrice: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-  @IBOutlet weak var profileHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileRating: RatingControl!
     @IBOutlet weak var mapView: MKMapView!
@@ -196,6 +196,21 @@ class ListingDetailViewController: UIViewController {
     // Respond to tappedBidButton tap.
     @IBAction func tappedBidButton(_ sender: UIButton) {
         textField.becomeFirstResponder()
+    }
+    
+    @IBAction func didTapChatButton(_ sender: UIBarButtonItem) {
+        guard let buyerId = FIRAuth.auth()?.currentUser?.uid else {
+            alertUserNotLoggedIn()
+            return
+        }
+        guard let listing = listing else { return }
+        guard let sellerId = listing.sellerId else { fatalError("SellerId must be defined for a listing.") }
+        
+        // Write chat to database.
+        writeChat(listingId: listing.listingId, sellerId: sellerId, buyerId: buyerId) { (chat) in
+            // TODO: Open chat messages page.
+            let hello = chat.uid
+        }
     }
     
     // Respond to placeBidButton tap.

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GbK-XA-uiX">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GbK-XA-uiX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -122,20 +122,20 @@
             </objects>
             <point key="canvasLocation" x="1706.4000000000001" y="-251.42428785607197"/>
         </scene>
-        <!--Listing Detail View Controller-->
+        <!--Listing Detail-->
         <scene sceneID="30N-3Y-fQv">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="NKc-Ms-tJH" customClass="ListingDetailViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Listing Detail" hidesBottomBarWhenPushed="YES" id="NKc-Ms-tJH" customClass="ListingDetailViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MLU-kk-zfC"/>
                         <viewControllerLayoutGuide type="bottom" id="ERi-PK-FwC"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="ciE-NJ-89D">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="951"/>
+                    <view key="view" contentMode="scaleToFill" id="ciE-NJ-89D">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfc-fY-NF1">
-                                <rect key="frame" x="0.0" y="891" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="940" width="375" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="KFL-gc-sY5"/>
                                 </constraints>
@@ -147,7 +147,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HF7-DK-H3c">
-                                <rect key="frame" x="0.0" y="64" width="375" height="827"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="876"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyz-pF-TbF" userLabel="Subview">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="608.5"/>
@@ -310,6 +310,15 @@
                             <constraint firstItem="HF7-DK-H3c" firstAttribute="leading" secondItem="ciE-NJ-89D" secondAttribute="leading" id="zqr-xB-0nM"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="kKW-eG-tXJ">
+                        <barButtonItem key="rightBarButtonItem" title="Chat" id="n0d-jC-xEQ">
+                            <connections>
+                                <action selector="didTapChatButton:" destination="NKc-Ms-tJH" id="Yu1-kc-S6u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
