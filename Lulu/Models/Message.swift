@@ -11,7 +11,7 @@ import Foundation
 class Message {
     
     // MARK: - Properties
-    let id: String
+    let id: String // Not unique in Messages. Unique within a chat. e.g. "m1", "m2", etc.
     let senderUid: String
     let text: String
     let createdTimestamp: Int
