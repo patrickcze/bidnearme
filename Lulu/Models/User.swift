@@ -18,7 +18,7 @@ class User {
     var listingIdsByType: [ListingType: [String]]!
     var ratingsById: [String: Rating]?
     var groups: [String]?
-    var chats: [String]?
+    var chats: [String]!
     
     init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratingsById: [String: Rating], groups: [String], chats: [String]) {
         self.uid = uid
