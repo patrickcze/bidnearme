@@ -41,3 +41,53 @@ func getUserById (userId: String, completion: @escaping (User) -> Void) {
     })
 }
 
+func getChatById(chatId: String, completion: @escaping (Chat) -> Void) {
+    let chat = Chat()
+    completion(chat)
+}
+
+func getChatMessagesById(chatId: String, completion: @escaping([Message]) -> Void) {
+}
+
+/**
+ Writes the chat to the database. Adds chat to seller's and buyer's chats
+ 
+ - parameter listingId: Dictionary with listing information.
+ - parameter sellerId: Seller's user ID.
+ - parameter buyerId: Buyer's user ID.
+ - parameter completion: Completion block to pass the new Chat to.
+ */
+func writeChat(listingId: String, sellerId: String, buyerId: String, completion: @escaping (Chat) -> Void) {
+    let ref = FIRDatabase.database().reference()
+    let chatRef = ref.child("chats").childByAutoId()
+    let chat: [String: Any] = [
+        "listingId": listingId,
+        "lastMessage": "",
+        "createdTimestamp": FIRServerValue.timestamp()
+    ]
+    
+    // Update seller chats to have a reference to the new chat.
+    writeUserChat(userId: sellerId, chatId: chatRef.key)
+    
+    // Update buyer chats to have a reference to the new chat.
+    writeUserChat(userId: buyerId, chatId: chatRef.key)
+
+    // Write chat to database.
+    chatRef.setValue(chat) { (error, newChatRef) in
+        guard let _ = error,
+            let newChatTimestamp = newChatRef.value(forKey: "createdTimestamp") as? Int else {
+            // TODO: Handle error.
+            return
+        }
+        
+        completion(Chat(uid: newChatRef.key, listingUid: listingId, lastMessage: "", createdTimestamp: newChatTimestamp))
+    }
+}
+
+func writeUserChat(userId: String, chatId: String) {
+    let userChatsRef = FIRDatabase.database().reference().child("users/\(userId)/chats")
+    
+    userChatsRef.setValue([chatId: true]) { (error, _) in
+        // TODO: Handle error.
+    }
+}
