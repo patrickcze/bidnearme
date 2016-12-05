@@ -173,13 +173,11 @@ class ListingTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let identifier = segue.identifier {
-            if (identifier == "ListingDetail") {
+            if (segue.identifier == "ListingDetail") {
                 if let indexPath = tableView.indexPathForSelectedRow {
                     let destinationController = segue.destination as! ListingDetailViewController
                     destinationController.listing = listings[indexPath.row]
                 }
             }
-        }
     }
 }
