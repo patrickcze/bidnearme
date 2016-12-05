@@ -13,6 +13,7 @@
 		3D0B76401DE2682D00368CFA /* ListingTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0B763F1DE2682D00368CFA /* ListingTimeInterval.swift */; };
 		3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */; };
 		3D546E661DCFA85200188DBD /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D546E651DCFA85200188DBD /* Login.storyboard */; };
+		3D6C01B41DF6021F00A72EEA /* ChatMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C01B31DF6021F00A72EEA /* ChatMessagesViewController.swift */; };
 		3D763BE11DE52C0C000CE3C7 /* ListingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D763BE01DE52C0C000CE3C7 /* ListingType.swift */; };
 		3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */; };
 		3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987021DB5DCD20022A2ED /* Main.storyboard */; };
@@ -75,6 +76,7 @@
 		3D0B763F1DE2682D00368CFA /* ListingTimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingTimeInterval.swift; sourceTree = "<group>"; };
 		3D1DE12F1DC83E7900B28DCD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D546E651DCFA85200188DBD /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		3D6C01B31DF6021F00A72EEA /* ChatMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessagesViewController.swift; sourceTree = "<group>"; };
 		3D763BE01DE52C0C000CE3C7 /* ListingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingType.swift; sourceTree = "<group>"; };
 		3DC986F91DB5DCD20022A2ED /* Lulu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lulu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DC986FC1DB5DCD20022A2ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -286,9 +288,9 @@
 			isa = PBXGroup;
 			children = (
 				3DF452101DF3D30400DA6D68 /* ChatListViewController.swift */,
+				3D6C01B31DF6021F00A72EEA /* ChatMessagesViewController.swift */,
 			);
-			name = Chat;
-			path = Profile;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		5B054AEC1DE0057A00099683 /* Profile */ = {
@@ -869,6 +871,7 @@
 			files = (
 				3D06BCF31DF3EB3E00A97EC8 /* ListingDetailViewController.swift in Sources */,
 				7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */,
+				3D6C01B41DF6021F00A72EEA /* ChatMessagesViewController.swift in Sources */,
 				BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */,
 				5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */,
 				7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */,
