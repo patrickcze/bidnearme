@@ -41,23 +41,65 @@ func getUserById (userId: String, completion: @escaping (User) -> Void) {
     })
 }
 
-func getChatById(chatId: String, completion: @escaping (Chat) -> Void) {
-    let chat = Chat()
-    completion(chat)
-}
+/**
+ Gets a Chat by its UID. Completion with nil if it doesn't exist in the database.
+ */
+func getChatById(_ chatId: String, completion: @escaping (Chat?) -> Void) {
+    let ref = FIRDatabase.database().reference()
+    
+    ref.child("chats/\(chatId)").observeSingleEvent(of: .value, with: { (chatSnapshot) in
+        // Ensure that chat exists.
+        guard chatSnapshot.exists() else {
+            completion(nil)
+            return
+        }
+        
+        // Convert chat data to Chat object.
+        if let chatData = chatSnapshot.value as? [String: Any] {
+            let listingId = chatData["listingId"] as! String // Required values.
+            let lastMessage = chatData["lastMessage"] as! String
+            let createdTimestamp = chatData["createdTimestamp"] as! Int
 
-func getChatMessagesById(chatId: String, completion: @escaping([Message]) -> Void) {
+            completion(Chat(uid: chatId, listingUid: listingId, lastMessage: lastMessage, createdTimestamp: createdTimestamp))
+        }
+    })
 }
 
 /**
- Writes the chat to the database. Adds chat to seller's and buyer's chats
+ Gets a chat Messages by the chat UID. Completion with an empty if there are no messages for the chat in the database.
+ */
+func getMessagesByChatId(_ chatId: String, completion: @escaping([Message]) -> Void) {
+    let ref = FIRDatabase.database().reference()
+    
+    ref.child("messages/\(chatId)").observeSingleEvent(of: .value, with: { (messagesSnapshot) in
+        guard messagesSnapshot.exists(), messagesSnapshot.hasChildren() else {
+            completion([])
+            return
+        }
+        
+        if let messagesData = messagesSnapshot.value as? [String: Any] {
+            var messages: [Message] = []
+            for messageId in messagesData.keys {
+                let messageData = messagesData[messageId] as! [String: Any]
+                let senderId = messageData["senderId"] as! String
+                let text = messageData["text"] as! String
+                let createdTimestamp = messageData["createdTimestamp"] as! Int
+                messages.append(Message(id: messageId, senderUid: senderId, text: text, createdTimestamp: createdTimestamp))
+            }
+            completion(messages)
+        }
+    })
+}
+
+/**
+ Writes the chat to the database. Adds chat to seller's and bidder's chats
  
  - parameter listingId: Dictionary with listing information.
  - parameter sellerId: Seller's user ID.
- - parameter buyerId: Buyer's user ID.
+ - parameter bidderId: Bidder's user ID.
  - parameter completion: Completion block to pass the new Chat to.
  */
-func writeChat(listingId: String, sellerId: String, buyerId: String, completion: @escaping (Chat) -> Void) {
+func writeChat(listingId: String, sellerId: String, bidderId: String, completion: @escaping (Chat) -> Void) {
     let ref = FIRDatabase.database().reference()
     let chatRef = ref.child("chats").childByAutoId()
     let chat: [String: Any] = [
@@ -70,7 +112,10 @@ func writeChat(listingId: String, sellerId: String, buyerId: String, completion:
     writeUserChat(userId: sellerId, chatId: chatRef.key)
     
     // Update buyer chats to have a reference to the new chat.
-    writeUserChat(userId: buyerId, chatId: chatRef.key)
+    writeUserChat(userId: bidderId, chatId: chatRef.key)
+    
+    // Update listing bidder chats to have a reference from buyer
+    writeListingBidderChat(listingId: listingId, bidderId: bidderId, chatId: chatRef.key)
 
     // Write chat to database.
     chatRef.setValue(chat) { (error, newChatRef) in
@@ -84,10 +129,26 @@ func writeChat(listingId: String, sellerId: String, buyerId: String, completion:
     }
 }
 
+/**
+ Writes the chat as part of the user's chats in the database
+ */
 func writeUserChat(userId: String, chatId: String) {
-    let userChatsRef = FIRDatabase.database().reference().child("users/\(userId)/chats")
-    userChatsRef.setValue([chatId: true]) { (error, _) in
-        if error != nil {
+    let userChatsRef = FIRDatabase.database().reference().child("users/\(userId)/chats/\(chatId)")
+    userChatsRef.setValue(true) { (error, _) in
+        guard let _ = error else {
+            // TODO: Handle error.
+            return
+        }
+    }
+}
+
+/**
+ Writes the chat as part of the listing's bidder chats. Maps bidder ID to the chat ID for the listing.
+ */
+func writeListingBidderChat(listingId: String, bidderId: String, chatId: String) {
+    let listingBidderChatsRef = FIRDatabase.database().reference().child("listings/\(listingId)/bidderChats/\(bidderId)")
+    listingBidderChatsRef.setValue(chatId) { (error, _) in
+        guard let _ = error else {
             // TODO: Handle error.
             return
         }
