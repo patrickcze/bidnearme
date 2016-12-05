@@ -283,7 +283,7 @@ class CameraViewController: UIViewController {
     /**
      Converts the postal code to latitude and longitude and saves the coordinate
     
-     
+     -parameter postalCode: postal code of the pickup location to be converted into coordinates
     */
     
     func forwardGeocoding(postalCode: String){
