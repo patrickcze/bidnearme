@@ -190,6 +190,13 @@ class ListingDetailViewController: UIViewController {
         let biddingListingType = ListingType.bidding.description
         ref?.child("users").child(userId).child("listings").child(biddingListingType).child(listingKey).setValue(true)
     }
+    
+    /**
+     Display chat messages in a separate view controller.
+     */
+    func displayChat(chat: Chat?) {
+        
+    }
   
     // MARK: - Actions
     
@@ -199,17 +206,20 @@ class ListingDetailViewController: UIViewController {
     }
     
     @IBAction func didTapChatButton(_ sender: UIBarButtonItem) {
-        guard let buyerId = FIRAuth.auth()?.currentUser?.uid else {
+        guard let bidderId = FIRAuth.auth()?.currentUser?.uid else {
             alertUserNotLoggedIn()
             return
         }
         guard let listing = listing else { return }
         guard let sellerId = listing.sellerId else { fatalError("SellerId must be defined for a listing.") }
         
-        // Write chat to database.
-        writeChat(listingId: listing.listingId, sellerId: sellerId, buyerId: buyerId) { (chat) in
-            // TODO: Open chat messages page.
-            let hello = chat.uid
+        // TODO: Disable button to prevent clicking twice by accident and creating chat twice before chat is displayed.
+        
+        if let listingBidderChatId = listing.bidderChatIds[bidderId] {
+            getChatById(listingBidderChatId, completion: displayChat)
+        } else {
+            // Write chat to database.
+            writeChat(listingId: listing.listingId, sellerId: sellerId, bidderId: bidderId, completion: displayChat)
         }
     }
     
