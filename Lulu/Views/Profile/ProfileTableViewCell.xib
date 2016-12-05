@@ -17,11 +17,6 @@
                 <frame key="frameInset" width="375" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-IM-w2A">
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBF-rP-NsA"/>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bidders" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iLL-bN-dDM">
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -36,19 +31,23 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OBN-IM-w2A">
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="bottom" secondItem="tiu-Qc-7A1" secondAttribute="bottomMargin" id="0hW-hL-mM2"/>
                     <constraint firstItem="28w-VV-XhF" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="topMargin" constant="4" id="5r8-MU-wwL"/>
-                    <constraint firstItem="OBN-IM-w2A" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="topMargin" constant="5" id="EML-qA-keu"/>
-                    <constraint firstItem="iLL-bN-dDM" firstAttribute="top" secondItem="OBN-IM-w2A" secondAttribute="bottom" constant="20" id="F30-Wz-YhP"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="OBN-IM-w2A" secondAttribute="trailing" constant="12" id="GQS-zn-tQf"/>
+                    <constraint firstItem="OBN-IM-w2A" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="topMargin" constant="5" id="6Ng-2V-sZ6"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="iLL-bN-dDM" secondAttribute="bottom" constant="3" id="CBV-eN-QGz"/>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="leading" secondItem="tiu-Qc-7A1" secondAttribute="leadingMargin" id="HEf-C8-M6j"/>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="top" secondItem="tiu-Qc-7A1" secondAttribute="topMargin" id="Lac-Wc-r7v"/>
                     <constraint firstItem="28w-VV-XhF" firstAttribute="leading" secondItem="PBF-rP-NsA" secondAttribute="trailing" constant="20" id="Row-RS-yRU"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="iLL-bN-dDM" secondAttribute="trailing" constant="12" id="WVs-9y-hYS"/>
                     <constraint firstItem="PBF-rP-NsA" firstAttribute="width" secondItem="tiu-Qc-7A1" secondAttribute="height" multiplier="29:37" id="avn-TQ-WXA"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="iLL-bN-dDM" secondAttribute="bottom" constant="3.5" id="lsh-dY-Uaz"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="iLL-bN-dDM" secondAttribute="trailing" constant="12" id="rwK-WZ-ANl"/>
+                    <constraint firstItem="OBN-IM-w2A" firstAttribute="trailing" secondItem="tiu-Qc-7A1" secondAttribute="trailingMargin" constant="-12" id="vKg-4Y-7du"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

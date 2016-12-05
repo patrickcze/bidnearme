@@ -134,35 +134,10 @@ class ProfileViewController: UIViewController {
             if let profileImageUrlString = user["profileImageUrl"] as? String, !profileImageUrlString.isEmpty {
                 profileImageUrl = URL(string: profileImageUrlString)
             }
-            
-            // Retrieve user listings.
-            var listingIdsByType = [ListingType: [String]]()
-            
-            // Listings: ["selling" -> ["listingId1" -> true, "listingId2" -> true], "buying" -> []]
-            if let listingTreeIds = user["listings"] as? [String: [String: Bool]] {
-                listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
-            }
-
-            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType, ratingsById: [:], groups: []))
+    
+            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: []))
 
         })
-    }
-    
-    /**
-     Get all listing IDs of every listing type. listingType.description must exactly match one of the database listing types under User.
-     */
-    func getListingIdsByType(listingTreeIds: [String: [String: Bool]]) -> [ListingType: [String]] {
-        var listingIdsByType = [ListingType: [String]]()
-        
-        // For every case in ListingType, e.g. selling, buying, etc., retrieve just the listing IDs; ignoring the booleans.
-        for listingType in ListingType.allValues {
-            listingIdsByType[listingType] = []
-            
-            if let listingIdsOfType = listingTreeIds[listingType.description], !listingIdsOfType.isEmpty {
-                listingIdsByType[listingType] = Array(listingIdsOfType.keys) // Gets listing IDs as an array.
-            }
-        }
-        return listingIdsByType
     }
     
     // MARK: - Navigation
@@ -179,7 +154,6 @@ class ProfileViewController: UIViewController {
             }
             
             let listingType = listingTypes[row]
-            listingTableViewController.listingIds = profileUser?.listingIdsByType[listingType]
             listingTableViewController.listingType = listingType
             listingTableViewController.uid = profileUser?.uid
         }
