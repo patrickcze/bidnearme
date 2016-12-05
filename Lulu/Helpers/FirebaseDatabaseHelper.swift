@@ -34,8 +34,11 @@ func getUserById (userId: String, completion: @escaping (User) -> Void) {
         let userProfileImageUrl = URL(string: userProfileImageUrlString)
         let sellerName = snap.childSnapshot(forPath: "name").value as? String
         let timestamp = snap.childSnapshot(forPath: "createdTimestamp").value as? Int
-        
         let seller = User(uid: userId, name: sellerName!, profileImageUrl: userProfileImageUrl, createdTimestamp: timestamp!)
+        
+        if let chats = snap.childSnapshot(forPath: "chats").value as? [String: Any] {
+            seller.chats = Array(chats.keys)
+        }
         
         completion(seller)
     })

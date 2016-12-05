@@ -143,7 +143,7 @@ class ProfileViewController: UIViewController {
                 listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
             }
 
-            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType, ratingsById: [:], groups: []))
+            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType, ratingsById: [:], groups: [], chats: []))
 
         })
     }

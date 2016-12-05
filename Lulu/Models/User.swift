@@ -18,8 +18,9 @@ class User {
     var listingIdsByType: [ListingType: [String]]!
     var ratingsById: [String: Rating]?
     var groups: [String]?
+    var chats: [String]?
     
-    init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratingsById: [String: Rating], groups: [String]) {
+    init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratingsById: [String: Rating], groups: [String], chats: [String]) {
         self.uid = uid
         self.name = name
         self.profileImageUrl = profileImageUrl
@@ -27,13 +28,14 @@ class User {
         self.listingIdsByType = listingIdsByType
         self.ratingsById = ratingsById
         self.groups = groups
+        self.chats = chats
     }
     
     convenience init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int) {
-        self.init(uid: uid,name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [])
+        self.init(uid: uid,name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [], chats: [])
     }
     
     convenience init() {
-        self.init(uid:"", name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:], ratingsById: [:], groups: [])
+        self.init(uid:"", name: "", profileImageUrl: nil, createdTimestamp: 0, listingIdsByType: [:], ratingsById: [:], groups: [], chats: [])
     }
 }
