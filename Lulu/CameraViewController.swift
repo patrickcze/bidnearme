@@ -23,6 +23,7 @@ class CameraViewController: UIViewController {
     @IBOutlet weak var startingPriceTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
     @IBOutlet weak var postListingButton: UIButton!
+    @IBOutlet weak var postalCodeTextField: UITextField!
     
     // MARK: - Properties
     var ref: FIRDatabaseReference!
@@ -52,6 +53,7 @@ class CameraViewController: UIViewController {
         titleTextField.delegate = self
         startingPriceTextField.delegate = self
         endDateTextField.delegate = self
+        postalCodeTextField.delegate = self
         
         //set up picker to delegate
         auctionDurationPicker.delegate = self
@@ -145,7 +147,7 @@ class CameraViewController: UIViewController {
         }
 
         //set latitude and longitude location with callback
-        //forwardGeocoding(postalCodeTextfield.text)
+        forwardGeocoding(postalCode: postalCodeTextField.text!)
         
         // assign value of selected row as picked value
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
