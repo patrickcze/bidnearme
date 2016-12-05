@@ -102,7 +102,7 @@ func getMessagesByChatId(_ chatId: String, completion: @escaping([Message]) -> V
  - parameter bidderId: Bidder's user ID.
  - parameter completion: Completion block to pass the new Chat to.
  */
-func writeChat(listingId: String, sellerId: String, bidderId: String, completion: @escaping (Chat) -> Void) {
+func writeChat(listingId: String, sellerId: String, bidderId: String, completion: @escaping (Chat?) -> Void) {
     let ref = FIRDatabase.database().reference()
     let chatRef = ref.child("chats").childByAutoId()
     let chat: [String: Any] = [
@@ -122,13 +122,12 @@ func writeChat(listingId: String, sellerId: String, bidderId: String, completion
 
     // Write chat to database.
     chatRef.setValue(chat) { (error, newChatRef) in
-        guard let _ = error,
-            let newChatTimestamp = newChatRef.value(forKey: "createdTimestamp") as? Int else {
+        if error != nil {
             // TODO: Handle error.
             return
         }
-        
-        completion(Chat(uid: newChatRef.key, listingUid: listingId, lastMessage: "", createdTimestamp: newChatTimestamp))
+
+        getChatById(chatRef.key, completion: completion)
     }
 }
 
@@ -138,7 +137,7 @@ func writeChat(listingId: String, sellerId: String, bidderId: String, completion
 func writeUserChat(userId: String, chatId: String) {
     let userChatsRef = FIRDatabase.database().reference().child("users/\(userId)/chats/\(chatId)")
     userChatsRef.setValue(true) { (error, _) in
-        guard let _ = error else {
+        if error != nil {
             // TODO: Handle error.
             return
         }
@@ -151,7 +150,7 @@ func writeUserChat(userId: String, chatId: String) {
 func writeListingBidderChat(listingId: String, bidderId: String, chatId: String) {
     let listingBidderChatsRef = FIRDatabase.database().reference().child("listings/\(listingId)/bidderChats/\(bidderId)")
     listingBidderChatsRef.setValue(chatId) { (error, _) in
-        guard let _ = error else {
+        if error != nil {
             // TODO: Handle error.
             return
         }

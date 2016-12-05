@@ -195,7 +195,7 @@ class ListingDetailViewController: UIViewController {
      Display chat messages in a separate view controller.
      */
     func displayChat(chat: Chat?) {
-        
+        print("hello")
     }
   
     // MARK: - Actions
@@ -215,11 +215,16 @@ class ListingDetailViewController: UIViewController {
         
         // TODO: Disable button to prevent clicking twice by accident and creating chat twice before chat is displayed.
         
+        // Check if listing has a chat for this bidder. If so, just retrieve it. Otherwise, create one.
         if let listingBidderChatId = listing.bidderChatIds[bidderId] {
             getChatById(listingBidderChatId, completion: displayChat)
         } else {
             // Write chat to database.
-            writeChat(listingId: listing.listingId, sellerId: sellerId, bidderId: bidderId, completion: displayChat)
+            writeChat(listingId: listing.listingId, sellerId: sellerId, bidderId: bidderId) { (chat) in
+                // Add bidder to chat ID mapping to this listing. This will get updated server-side too.
+                self.listing?.bidderChatIds[bidderId] = chat?.uid
+                self.displayChat(chat: chat)
+            }
         }
     }
     
