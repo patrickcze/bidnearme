@@ -12,14 +12,13 @@ import JSQMessagesViewController
 final class ChatMessagesViewController: JSQMessagesViewController {
     
     // MARK: - Properties
-    var messages = [Message]()
-    var jsqMessages = [JSQMessage]()
+    var messages = [JSQMessage]()
     var chat: Chat? {
         didSet {
             title = chat?.title
         }
     }
-    
+    private var chatMessagesRef: FIRDatabaseReference!
     private lazy var outgoingBubbleImageView: JSQMessagesBubbleImage = self.setupOutgoingBubble()
     private lazy var incomingBubbleImageView: JSQMessagesBubbleImage = self.setupIncomingBubble()
     
@@ -29,12 +28,11 @@ final class ChatMessagesViewController: JSQMessagesViewController {
         guard let chatId = chat?.uid else {
             return
         }
+        
+        chatMessagesRef = FIRDatabase.database().reference().child("messages").child(chatId)
 
-        // Pull messages for the chat. Watch for new messages after.
-        populateMessages(chatId: chatId) {
-            // Watch for new messages in the chat.
-            self.observeMessages(chatId: chatId)
-        }
+        // Pull existing messages and watch for new messages in the chat.
+        observeMessages(chatId: chatId)
         
         // Remove avatars from messages.
         collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
@@ -44,43 +42,24 @@ final class ChatMessagesViewController: JSQMessagesViewController {
         inputToolbar.contentView.leftBarButtonItem = nil
     }
 
-    
     /**
      Adds messages to JSQMessages.
      Message's displayName (user's name) is not being used at the moment.
      Updates chat's last message.
      */
     private func addMessage(_ message: Message) {
-        jsqMessages.append(JSQMessage(senderId: message.senderUid, displayName: "", text: message.text))
+        messages.append(JSQMessage(senderId: message.senderUid, displayName: "", text: message.text))
         
         // Update chat's new message, so when returning to previous screen, last message is properly updated.
         chat?.lastMessage = message.text
     }
-    
+
     /**
-     Pulls messages from the database for this chat and adds them to the list.
-     */
-    private func populateMessages(chatId: String, completion: @escaping () -> Void) {
-        getMessagesByChatId(chatId) { (messages) in
-            self.messages = messages
-            // Add every message to JSQMessages.
-            for message in messages {
-                self.addMessage(message)
-            }
-            
-            self.finishReceivingMessage()
-            completion()
-        }
-    }
-    
-    /**
-     Sets observer to listen for new messages and adds them to the list.
+     Populates messages and watches for new messages.
      */
     private func observeMessages(chatId: String) {
-        let chatMessagesRef = FIRDatabase.database().reference().child("messages/\(chatId)")
-        
         // Observe for new messages from reference to chat's messages.
-        chatMessagesRef.observe(.childAdded, with: { (snapshot) in
+        chatMessagesRef.queryOrdered(byChild: "createdTimestamp").observe(.childAdded, with: { (snapshot) in
             let messageUid = snapshot.key
             let messageData = snapshot.value as! [String: Any]
             
@@ -123,12 +102,12 @@ final class ChatMessagesViewController: JSQMessagesViewController {
     
     // Get JSQMessage for the index.
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData {
-        return jsqMessages[indexPath.item]
+        return messages[indexPath.item]
     }
     
     // Determine which bubble image view to use depending on who sent the message.
     override func collectionView(_ collectionView: UICollectionView, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource {
-        let message = jsqMessages[indexPath.item]
+        let message = messages[indexPath.item]
         if message.senderId == senderId {
             return outgoingBubbleImageView
         } else {
@@ -139,7 +118,7 @@ final class ChatMessagesViewController: JSQMessagesViewController {
     // Set message bubble text color based on message sender.
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
-        let message = jsqMessages[indexPath.item]
+        let message = messages[indexPath.item]
         
         if message.senderId == senderId {
             cell.textView?.textColor = UIColor.white
@@ -155,6 +134,6 @@ final class ChatMessagesViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return jsqMessages.count
+        return messages.count
     }
 }
