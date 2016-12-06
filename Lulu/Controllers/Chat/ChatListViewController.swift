@@ -16,9 +16,12 @@ final class ChatListViewController: UITableViewController {
     let cellIdentifier = "ChatCell"
     var chats = [Chat]()
     var loggedInUser: FIRUser?
+    var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = FIRDatabase.database().reference()
 
         // Get every chat from the user and display them. Observes for new chats.
         observeUserChatList()
@@ -42,7 +45,7 @@ final class ChatListViewController: UITableViewController {
             return
         }
         
-        let userChatsRef = FIRDatabase.database().reference().ref.child("users/\(loggedInUserId)/chats")
+        let userChatsRef = ref.child("users/\(loggedInUserId)/chats")
         userChatsRef.observe(.childAdded, with: { (userChatSnapshot) in
             let userChatId = userChatSnapshot.key
             getChatById(userChatId) { (chat) in
