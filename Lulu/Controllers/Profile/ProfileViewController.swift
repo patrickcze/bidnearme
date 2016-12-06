@@ -121,7 +121,7 @@ class ProfileViewController: UIViewController {
      Gets user information as a User and calls completion with the User object.
      */
     func getUser(withId id: String, completion: @escaping (User?) -> Void) {
-        ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(id).observe(.value, with: { (snapshot) in
             guard let user = snapshot.value as? [String: Any] else {
                 completion(nil)
                 return

@@ -80,11 +80,12 @@ class ListingTableViewController: UITableViewController {
     func retrieveListings() {
         let ref = FIRDatabase.database().reference()
         
-        ref.child("users").child(uid).child("listings").child(listingType.description).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(uid).child("listings").child(listingType.description).observe(.value, with: { (snapshot) in
             guard var aListingType = snapshot.value as? [String:Bool] else {
                 // user does not have this type of listing
                 return
             }
+            
             self.listings = []
             for (listingId,_) in aListingType {
                 self.getListing(withId: listingId){ (listing)  in
