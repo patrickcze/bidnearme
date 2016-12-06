@@ -101,7 +101,7 @@ func updateChatLastMessage(chatId: String, messageText: String) {
 }
 
 /**
- Writes the chat to the database. Adds chat to seller's and bidder's chats
+ Writes the chat to the database. Adds chat to seller's and bidder's chats. Retrieves the Chat once added and passes it to completion block.
  
  - parameter listingId: Dictionary with listing information.
  - parameter sellerId: Seller's user ID.
@@ -134,6 +134,7 @@ func writeChat(listingId: String, sellerId: String, bidderId: String, withTitle 
             return
         }
 
+        // Get chat and pass it back to completion.
         getChatById(chatRef.key, completion: completion)
     }
 }
