@@ -70,32 +70,6 @@ func getChatById(_ chatId: String, completion: @escaping (Chat?) -> Void) {
 }
 
 /**
- Gets a chat Messages by the chat UID. Completion with an empty if there are no messages for the chat in the database.
- */
-func getMessagesByChatId(_ chatId: String, completion: @escaping([Message]) -> Void) {
-    let ref = FIRDatabase.database().reference()
-    
-    ref.child("messages/\(chatId)").queryOrdered(byChild: "createdTimestamp").observeSingleEvent(of: .value, with: { (messagesSnapshot) in
-        guard messagesSnapshot.exists(), messagesSnapshot.hasChildren() else {
-            completion([])
-            return
-        }
-        
-        if let messagesData = messagesSnapshot.value as? [String: Any] {
-            var messages: [Message] = []
-            for messageId in messagesData.keys {
-                let messageData = messagesData[messageId] as! [String: Any]
-                let senderId = messageData["senderUid"] as! String
-                let text = messageData["text"] as! String
-                let createdTimestamp = messageData["createdTimestamp"] as! Int
-                messages.append(Message(uid: messageId, senderUid: senderId, text: text, createdTimestamp: createdTimestamp))
-            }
-            completion(messages)
-        }
-    })
-}
-
-/**
  Writes a chat message to the database.
  
  - parameter chatId: UID of the chat this message is associated with.
