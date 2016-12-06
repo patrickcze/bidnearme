@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
+import GeoFire
+import CoreLocation
+import AddressBookUI
 
 class PostTitleViewController: UIViewController {
     
@@ -15,6 +21,7 @@ class PostTitleViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var postalCodeTextField: UITextField!
     
     // MARK: - Properties
     var listingPhoto: UIImage!
@@ -77,10 +84,44 @@ class PostTitleViewController: UIViewController {
     
     // MARK: - Actions
     
+    /**
+     Converts the postal code to latitude and longitude and saves the coordinate
+     
+     -parameter postalCode: postal code of the pickup location to be converted into coordinates
+     */
+    
+    func forwardGeocoding(postalCode: String){
+        CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            //initialize reference to geoFire
+            let geofireRef = FIRDatabase.database().reference()
+            let geoFire = GeoFire(firebaseRef: geofireRef)
+            
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinate = location?.coordinate
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "firebase-hq") { (error) in
+                    if (error != nil) {
+                        print("An error occured: \(error)")
+                    } else {
+                        print("Saved location successfully!")
+                    }
+                }
+            }
+        })
+    }
+    
     // Respond to next button tap.
     @IBAction func nextButtonClicked(_ sender: UIButton) {
         segueToSignUpPassword()
     }
+    
+    
     
     // MARK: - Navigation
     

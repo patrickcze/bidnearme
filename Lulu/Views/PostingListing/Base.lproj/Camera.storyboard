@@ -223,6 +223,7 @@
                     <connections>
                         <outlet property="descriptionTextField" destination="wTH-5c-XC9" id="G18-NR-FLt"/>
                         <outlet property="nextButton" destination="rt7-wG-9Ri" id="PFW-CU-uKX"/>
+                        <outlet property="postalCodeTextField" destination="dJ2-DD-wDx" id="PIF-oG-Zep"/>
                         <outlet property="stackViewHeight" destination="zhA-Bs-W9T" id="azg-BQ-LBM"/>
                         <outlet property="titleTextField" destination="t8x-rg-70N" id="beI-Pz-dNI"/>
                         <segue destination="M0C-ji-Y3F" kind="show" identifier="WizardStepThree" id="db8-vv-ujH"/>
