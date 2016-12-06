@@ -16,6 +16,7 @@ target 'Lulu' do
   pod 'FacebookShare'
   pod 'SZTextView'
   pod 'JSQMessagesViewController'
+  pod 'M13Checkbox'
 
   pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
 
