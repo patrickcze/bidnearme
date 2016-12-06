@@ -31,8 +31,8 @@ class ListingDetailViewController: UIViewController {
     
     // MARK: - Properties
     var listing: Listing?
-    var textField: UITextField!
-    var toolbarTextField: UITextField!
+    var textField: UITextField! = UITextField()
+    var toolbarTextField: UITextField! = UITextField()
     var ref: FIRDatabaseReference?
     
     // Do any additional setup after loading the view.
@@ -270,9 +270,13 @@ class ListingDetailViewController: UIViewController {
   
     // Dismiss textfield keyboards from the view in order.
     func dismissKeyboards() {
-        view.endEditing(true)
-        toolbarTextField.resignFirstResponder()
-        textField.resignFirstResponder()
+      guard toolbarTextField.isFirstResponder else {
+        return
+      }
+      
+      view.endEditing(true)
+      toolbarTextField.resignFirstResponder()
+      textField.resignFirstResponder()
     }
   
     // MARK: - Observers

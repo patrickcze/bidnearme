@@ -37,7 +37,10 @@
 		7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AC1DF2587800E525E8 /* Rating.swift */; };
 		7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AE1DF25CF500E525E8 /* Bid.swift */; };
 		7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7B01DF2622900E525E8 /* FirebaseDatabaseHelper.swift */; };
-		7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBD434C1DD256B800E0CECE /* CameraViewController.swift */; };
+		BC00402A1DF3EC030059F2EB /* PostTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0040291DF3EC030059F2EB /* PostTitleViewController.swift */; };
+		BC00402C1DF3ED440059F2EB /* PostListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00402B1DF3ED430059F2EB /* PostListingViewController.swift */; };
+		BC00402E1DF3F7510059F2EB /* PostPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00402D1DF3F7510059F2EB /* PostPriceViewController.swift */; };
+		BC079C241DE3B0DA007F6BDA /* ListingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C231DE3B0DA007F6BDA /* ListingDetailViewController.swift */; };
 		BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C251DE3BA0C007F6BDA /* RatingControl.swift */; };
 		BC21B35A1DE66371001400C9 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21B3591DE66371001400C9 /* ColorPalette.swift */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
@@ -108,10 +111,13 @@
 		7CB0E7AC1DF2587800E525E8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		7CB0E7AE1DF25CF500E525E8 /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
 		7CB0E7B01DF2622900E525E8 /* FirebaseDatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseHelper.swift; sourceTree = "<group>"; };
-		7CBD434C1DD256B800E0CECE /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		A3CEFC8C62E5F226FE4DBDC5 /* Pods_Lulu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lulu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B23BC5FAFA25FE2B9CCAAF71 /* Pods-LuluUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B6FF26F7DD977EF76C058AD4 /* Pods-LuluUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LuluUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LuluUITests/Pods-LuluUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		BC0040291DF3EC030059F2EB /* PostTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PostTitleViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		BC00402B1DF3ED430059F2EB /* PostListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PostListingViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		BC00402D1DF3F7510059F2EB /* PostPriceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PostPriceViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
+		BC079C231DE3B0DA007F6BDA /* ListingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailViewController.swift; sourceTree = "<group>"; };
 		BC079C251DE3BA0C007F6BDA /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		BC21B3591DE66371001400C9 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		BC60E8D91DC688AB004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Groups.storyboard; sourceTree = "<group>"; };
@@ -319,7 +325,9 @@
 		7CBD43491DD2558400E0CECE /* PostListing */ = {
 			isa = PBXGroup;
 			children = (
-				7CBD434C1DD256B800E0CECE /* CameraViewController.swift */,
+				BC0040291DF3EC030059F2EB /* PostTitleViewController.swift */,
+				BC00402B1DF3ED430059F2EB /* PostListingViewController.swift */,
+				BC00402D1DF3F7510059F2EB /* PostPriceViewController.swift */,
 			);
 			path = PostListing;
 			sourceTree = "<group>";
@@ -488,6 +496,7 @@
 				TargetAttributes = {
 					3DC986F81DB5DCD20022A2ED = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = MPUVCQT72P;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -881,7 +890,9 @@
 				7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
 				BC945CAA1DE63CAF00F4F803 /* TextField.swift in Sources */,
+				BC00402C1DF3ED440059F2EB /* PostListingViewController.swift in Sources */,
 				7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */,
+				BC00402E1DF3F7510059F2EB /* PostPriceViewController.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* LoginViewController.swift in Sources */,
 				7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */,
@@ -894,7 +905,7 @@
 				3DF4520F1DF3CAD400DA6D68 /* Message.swift in Sources */,
 				3DF452111DF3D30400DA6D68 /* ChatListViewController.swift in Sources */,
 				3DF4520D1DF3C8D100DA6D68 /* Chat.swift in Sources */,
-				7CBD434D1DD256B800E0CECE /* CameraViewController.swift in Sources */,
+				BC00402A1DF3EC030059F2EB /* PostTitleViewController.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
 				3D0B76401DE2682D00368CFA /* ListingTimeInterval.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
@@ -1075,7 +1086,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MPUVCQT72P;
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
@@ -1093,7 +1104,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MPUVCQT72P;
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
