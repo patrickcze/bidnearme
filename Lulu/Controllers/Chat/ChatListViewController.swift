@@ -27,7 +27,7 @@ final class ChatListViewController: UITableViewController {
     /**
      Adds a chat to the list.
      */
-    private func addChat(chat: Chat) {
+    private func addChat(_ chat: Chat) {
         chats.append(chat)
         tableView.reloadData()
     }
@@ -47,7 +47,7 @@ final class ChatListViewController: UITableViewController {
             let userChatId = userChatSnapshot.key
             getChatById(userChatId) { (chat) in
                 if let chat = chat {
-                    self.addChat(chat: chat)
+                    self.addChat(chat)
                 }
             }
         })
