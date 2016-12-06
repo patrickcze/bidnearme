@@ -84,14 +84,33 @@ func getMessagesByChatId(_ chatId: String, completion: @escaping([Message]) -> V
             var messages: [Message] = []
             for messageId in messagesData.keys {
                 let messageData = messagesData[messageId] as! [String: Any]
-                let senderId = messageData["senderId"] as! String
+                let senderId = messageData["senderUid"] as! String
                 let text = messageData["text"] as! String
                 let createdTimestamp = messageData["createdTimestamp"] as! Int
-                messages.append(Message(id: messageId, senderUid: senderId, text: text, createdTimestamp: createdTimestamp))
+                messages.append(Message(uid: messageId, senderUid: senderId, text: text, createdTimestamp: createdTimestamp))
             }
             completion(messages)
         }
     })
+}
+
+/**
+ Writes a chat message to the database.
+ 
+ - parameter chatId: UID of the chat this message is associated with.
+ - parameter senderId: UID of the user who sent this message.
+ - parameter messageText: Text of the message.
+ */
+func writeChatMessage(chatId: String, senderId: String, messageText: String) {
+    let chatMessageRef = FIRDatabase.database().reference().child("messages/\(chatId)").childByAutoId()
+    
+    let message: [String: Any] = [
+        "senderUid": senderId,
+        "text": messageText,
+        "createdTimestamp": FIRServerValue.timestamp()
+    ]
+    
+    chatMessageRef.setValue(message)
 }
 
 /**
