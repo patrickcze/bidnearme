@@ -111,9 +111,12 @@ class ProfileViewController: UIViewController {
             profileNameLabel.text = name
         }
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        memberLabel.text = "Member since: " +  dateFormatter.string(from: user.membershipSince)
+
         // TO-DO ->
         ratingLabel.text = "4.6 stars"
-        memberLabel.text = "Member since: 2016"
         specialLabel.text = "Replies quickly"
     }
     
@@ -135,7 +138,13 @@ class ProfileViewController: UIViewController {
                 profileImageUrl = URL(string: profileImageUrlString)
             }
     
-            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: []))
+            let startDate = Date(timeIntervalSince1970: TimeInterval(createdTimestamp/1000))
+
+            let _user = User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [])
+           
+            _user.membershipSince = startDate
+        
+            completion(_user)
 
         })
     }
