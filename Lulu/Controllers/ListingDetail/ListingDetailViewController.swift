@@ -227,6 +227,8 @@ class ListingDetailViewController: UIViewController {
             
             if let chat = sender as? Chat {
                 let chatMessagesViewController = segue.destination as! ChatMessagesViewController
+                
+                // Set required fields for JSQMessagesViewController to identify the current user.
                 chatMessagesViewController.senderId = loggedInUser.uid
                 chatMessagesViewController.senderDisplayName = loggedInUser.displayName
                 chatMessagesViewController.chat = chat
