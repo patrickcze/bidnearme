@@ -77,6 +77,7 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - M13Checkbox (3.1.1)
   - SZTextView (1.2.2)
 
 DEPENDENCIES:
@@ -90,6 +91,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - GeoFire (from `https://github.com/firebase/geofire-objc.git`)
   - JSQMessagesViewController
+  - M13Checkbox
   - SZTextView
 
 EXTERNAL SOURCES:
@@ -125,8 +127,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  M13Checkbox: 64a49ded40e7047e0bef255b73c8c533b7c66bdd
   SZTextView: 3a81174dce0710a9ab069bc73a813e6df53b9c82
 
-PODFILE CHECKSUM: b8139c90b8156f1b99c32d9c2d8b97ea7f09efa9
+PODFILE CHECKSUM: 722137f82a505f02ac74342b00588a50320b758b
 
 COCOAPODS: 1.1.1
