@@ -12,7 +12,7 @@
         <!--Chat Messages View Controller-->
         <scene sceneID="S9b-WO-9On">
             <objects>
-                <viewController storyboardIdentifier="ChatMessagesViewController" id="NPs-c6-nEk" customClass="ChatMessagesViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatMessagesViewController" hidesBottomBarWhenPushed="YES" id="NPs-c6-nEk" customClass="ChatMessagesViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="93y-wN-In1"/>
                         <viewControllerLayoutGuide type="bottom" id="vRG-we-Fxn"/>
