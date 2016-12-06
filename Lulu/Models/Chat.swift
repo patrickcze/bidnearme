@@ -14,7 +14,7 @@ class Chat {
     let uid: String
     let listingUid: String
     let title: String
-    let lastMessage: String
+    var lastMessage: String
     let createdTimeStamp: Int
     
     init(uid: String, listingUid: String, title: String, lastMessage: String, createdTimestamp: Int) {

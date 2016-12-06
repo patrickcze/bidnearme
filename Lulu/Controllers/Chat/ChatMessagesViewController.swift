@@ -48,9 +48,13 @@ final class ChatMessagesViewController: JSQMessagesViewController {
     /**
      Adds messages to JSQMessages.
      Message's displayName (user's name) is not being used at the moment.
+     Updates chat's last message.
      */
     private func addMessage(_ message: Message) {
         jsqMessages.append(JSQMessage(senderId: message.senderUid, displayName: "", text: message.text))
+        
+        // Update chat's new message, so when returning to previous screen, last message is properly updated.
+        chat?.lastMessage = message.text
     }
     
     /**
