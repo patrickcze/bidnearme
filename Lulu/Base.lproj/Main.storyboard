@@ -38,7 +38,7 @@
                                         <rect key="frame" x="12" y="12" width="169.5" height="214.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="169" height="214"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="214"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9vL-O0-5jV">
@@ -311,13 +311,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="kKW-eG-tXJ">
-                        <barButtonItem key="rightBarButtonItem" title="Chat" id="n0d-jC-xEQ">
-                            <connections>
-                                <action selector="didTapChatButton:" destination="NKc-Ms-tJH" id="Yu1-kc-S6u"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="kKW-eG-tXJ"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
@@ -333,7 +327,7 @@
                         <outlet property="profileImageView" destination="WkZ-5Q-xtj" id="5PS-6y-PXc"/>
                         <outlet property="profileNameLabel" destination="llj-QR-jM1" id="HgT-og-IG3"/>
                         <outlet property="profileRating" destination="hHN-ic-SoK" id="KqF-jt-mdq"/>
-                        <segue destination="RIM-iH-TAn" kind="show" identifier="ShowChatMessages" id="IGc-G7-eO3"/>
+                        <segue destination="wjL-yE-FrU" kind="show" identifier="ShowChatMessages" id="938-Ij-aVz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nYS-8n-KLl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -341,12 +335,12 @@
             <point key="canvasLocation" x="2576.8000000000002" y="-232.08395802098951"/>
         </scene>
         <!--ChatMessagesViewController-->
-        <scene sceneID="cmO-KO-CWH">
+        <scene sceneID="ztO-6r-Zwt">
             <objects>
-                <viewControllerPlaceholder storyboardName="ChatMessages" referencedIdentifier="ChatMessagesViewController" id="RIM-iH-TAn" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kID-I9-oxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="ChatMessages" referencedIdentifier="ChatMessagesViewController" id="wjL-yE-FrU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OxG-ey-Gbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3455" y="-232"/>
+            <point key="canvasLocation" x="3375" y="-232"/>
         </scene>
         <!--Home-->
         <scene sceneID="MOk-Ul-hrt">
