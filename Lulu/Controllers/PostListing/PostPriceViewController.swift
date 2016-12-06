@@ -25,6 +25,7 @@ class PostPriceViewController: UIViewController {
     var listingPhoto: UIImage!
     var listingTitle: String!
     var listingDescription: String!
+    var listingPostalCode: String!
     var auctionDurationPicker = UIPickerView()
     
     // Do any additional setup after loading the view.

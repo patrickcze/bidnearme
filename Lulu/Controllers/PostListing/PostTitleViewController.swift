@@ -151,7 +151,7 @@ class PostTitleViewController: UIViewController {
             destinationController.listingPhoto = listingPhoto
             destinationController.listingTitle = titleTextField.text
             destinationController.listingDescription = descriptionTextField.text
-           // destinationController.listingPostalCode = postalCodeTextField.text
+            destinationController.listingPostalCode = postalCodeTextField.text
         }
     }
 }
