@@ -118,6 +118,11 @@ class PostTitleViewController: UIViewController {
     
     // Respond to next button tap.
     @IBAction func nextButtonClicked(_ sender: UIButton) {
+        
+        //convert postal code to coordinates and save
+        forwardGeocoding(postalCode: postalCodeTextField.text!)
+        
+        //Segue to next screen
         segueToSignUpPassword()
     }
     
