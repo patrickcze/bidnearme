@@ -92,6 +92,7 @@ class ListingDetailViewController: UIViewController {
                 button.isUserInteractionEnabled = false
             }
             
+            // Add chat button to navigation bar if the logged-in user is not the seller of this listing.
             if listing.sellerId != loggedInUser?.uid {
                 // Add chat bar button item.
                 let chatBarButtonItem = UIBarButtonItem(
