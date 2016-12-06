@@ -60,10 +60,11 @@ func getChatById(_ chatId: String, completion: @escaping (Chat?) -> Void) {
         // Convert chat data to Chat object.
         if let chatData = chatSnapshot.value as? [String: Any] {
             let listingId = chatData["listingId"] as! String // Required values.
+            let title = chatData["title"] as! String
             let lastMessage = chatData["lastMessage"] as! String
             let createdTimestamp = chatData["createdTimestamp"] as! Int
 
-            completion(Chat(uid: chatId, listingUid: listingId, lastMessage: lastMessage, createdTimestamp: createdTimestamp))
+            completion(Chat(uid: chatId, listingUid: listingId, title: title, lastMessage: lastMessage, createdTimestamp: createdTimestamp))
         }
     })
 }
@@ -111,6 +112,12 @@ func writeChatMessage(chatId: String, senderId: String, messageText: String) {
     ]
     
     chatMessageRef.setValue(message)
+    updateChatLastMessage(chatId: chatId, messageText: messageText)
+}
+
+func updateChatLastMessage(chatId: String, messageText: String) {
+    let chatRef = FIRDatabase.database().reference().child("chats/\(chatId)/lastMessage")
+    chatRef.setValue(messageText)
 }
 
 /**
@@ -121,11 +128,12 @@ func writeChatMessage(chatId: String, senderId: String, messageText: String) {
  - parameter bidderId: Bidder's user ID.
  - parameter completion: Completion block to pass the new Chat to.
  */
-func writeChat(listingId: String, sellerId: String, bidderId: String, completion: @escaping (Chat?) -> Void) {
+func writeChat(listingId: String, sellerId: String, bidderId: String, withTitle title: String, completion: @escaping (Chat?) -> Void) {
     let ref = FIRDatabase.database().reference()
     let chatRef = ref.child("chats").childByAutoId()
     let chat: [String: Any] = [
         "listingId": listingId,
+        "title": title,
         "lastMessage": "",
         "createdTimestamp": FIRServerValue.timestamp()
     ]

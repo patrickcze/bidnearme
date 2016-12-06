@@ -37,7 +37,6 @@ final class ChatListViewController: UITableViewController {
                 }
             }
         }
-
     }
     
     // MARK: - UITTableViewDataSource
@@ -46,11 +45,10 @@ final class ChatListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
-        
         let chat = chats[indexPath.row]
-        
-        cell.textLabel?.text = chat.listingUid
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
+        cell.textLabel?.text = chat.title
+        cell.detailTextLabel?.text = chat.lastMessage
         
         return cell
     }

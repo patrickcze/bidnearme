@@ -16,7 +16,7 @@ final class ChatMessagesViewController: JSQMessagesViewController {
     var jsqMessages = [JSQMessage]()
     var chat: Chat? {
         didSet {
-            title = chat?.listingUid
+            title = chat?.title
         }
     }
     

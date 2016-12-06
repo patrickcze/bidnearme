@@ -225,7 +225,7 @@ class ListingDetailViewController: UIViewController {
             getChatById(listingBidderChatId, completion: displayChat)
         } else {
             // Write chat to database.
-            writeChat(listingId: listing.listingId, sellerId: sellerId, bidderId: bidderId) { (chat) in
+            writeChat(listingId: listing.listingId, sellerId: sellerId, bidderId: bidderId, withTitle: listing.title) { (chat) in
                 // Add bidder to chat ID mapping to this listing. This will get updated server-side too.
                 self.listing?.bidderChatIds[bidderId] = chat?.uid
                 self.displayChat(chat: chat)
