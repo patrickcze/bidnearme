@@ -48,7 +48,7 @@
                             <outlet property="delegate" destination="wM9-SI-yrm" id="cPQ-pA-eYr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Sje-J5-4Px"/>
+                    <navigationItem key="navigationItem" title="Chat" id="Sje-J5-4Px"/>
                     <connections>
                         <segue destination="Cff-01-34p" kind="show" identifier="ShowChatMessages" id="5lG-Wc-tyo"/>
                     </connections>
