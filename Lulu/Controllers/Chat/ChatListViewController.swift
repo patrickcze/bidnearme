@@ -66,7 +66,7 @@ final class ChatListViewController: UITableViewController {
         super.prepare(for: segue, sender: sender)
         
         if segue.identifier == "ShowChatMessages" {
-            guard let loggedInUser = loggedInUser else {
+            guard let loggedInUser = FIRAuth.auth()?.currentUser else {
                 // Cannot show chats if the user has not been retrieved.
                 return
             }
@@ -74,7 +74,7 @@ final class ChatListViewController: UITableViewController {
             if let chat = sender as? Chat {
                 let chatMessagesViewController = segue.destination as! ChatMessagesViewController
                 chatMessagesViewController.senderId = loggedInUser.uid
-                chatMessagesViewController.senderDisplayName = loggedInUser.name
+                chatMessagesViewController.senderDisplayName = loggedInUser.displayName
                 chatMessagesViewController.chat = chat
             }
         }

@@ -195,7 +195,27 @@ class ListingDetailViewController: UIViewController {
      Display chat messages in a separate view controller.
      */
     func displayChat(chat: Chat?) {
-        print("hello")
+        self.performSegue(withIdentifier: "ShowChatMessages", sender: chat)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "ShowChatMessages" {
+            guard let loggedInUser = FIRAuth.auth()?.currentUser else {
+                // Cannot show chats if the user has not been retrieved.
+                alertUserNotLoggedIn()
+                return
+            }
+            
+            if let chat = sender as? Chat {
+                let chatMessagesViewController = segue.destination as! ChatMessagesViewController
+                chatMessagesViewController.senderId = loggedInUser.uid
+                chatMessagesViewController.senderDisplayName = loggedInUser.displayName
+                chatMessagesViewController.chat = chat
+            }
+        }
     }
   
     // MARK: - Actions
@@ -215,19 +235,19 @@ class ListingDetailViewController: UIViewController {
             alertUserNotLoggedIn()
             return
         }
-        guard let listing = listing else { return }
+        guard let listing = listing else { fatalError("Listing must be defined for this page") }
         guard let sellerId = listing.sellerId else { fatalError("SellerId must be defined for a listing.") }
         
         // TODO: Disable button to prevent clicking twice by accident and creating chat twice before chat is displayed.
         
         // Check if listing has a chat for this bidder. If so, just retrieve it. Otherwise, create one.
-        if let listingBidderChatId = listing.bidderChatIds[bidderId] {
+        if let listingBidderChatId = listing.bidderChats[bidderId] {
             getChatById(listingBidderChatId, completion: displayChat)
         } else {
             // Write chat to database.
             writeChat(listingId: listing.listingId, sellerId: sellerId, bidderId: bidderId, withTitle: listing.title) { (chat) in
                 // Add bidder to chat ID mapping to this listing. This will get updated server-side too.
-                self.listing?.bidderChatIds[bidderId] = chat?.uid
+                self.listing?.bidderChats[bidderId] = chat?.uid
                 self.displayChat(chat: chat)
             }
         }

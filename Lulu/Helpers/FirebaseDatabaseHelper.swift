@@ -75,7 +75,7 @@ func getChatById(_ chatId: String, completion: @escaping (Chat?) -> Void) {
 func getMessagesByChatId(_ chatId: String, completion: @escaping([Message]) -> Void) {
     let ref = FIRDatabase.database().reference()
     
-    ref.child("messages/\(chatId)").observeSingleEvent(of: .value, with: { (messagesSnapshot) in
+    ref.child("messages/\(chatId)").queryOrdered(byChild: "createdTimestamp").observeSingleEvent(of: .value, with: { (messagesSnapshot) in
         guard messagesSnapshot.exists(), messagesSnapshot.hasChildren() else {
             completion([])
             return
