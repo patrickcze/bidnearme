@@ -31,7 +31,8 @@ class PostTitleViewController: UIViewController {
         super.viewDidLoad()
         
         titleTextField.returnKeyType = .next
-        descriptionTextField.returnKeyType = .go
+        descriptionTextField.returnKeyType = .next
+        postalCodeTextField.returnKeyType = .go
         
         title = "Post Listing"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
