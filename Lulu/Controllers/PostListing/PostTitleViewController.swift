@@ -133,7 +133,7 @@ class PostTitleViewController: UIViewController {
     
     // Segue to the next step in the wizard.
     func segueToSignUpPassword() {
-        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder {
+        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder || postalCodeTextField.isFirstResponder{
             dismissKeyboard()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -151,6 +151,7 @@ class PostTitleViewController: UIViewController {
             destinationController.listingPhoto = listingPhoto
             destinationController.listingTitle = titleTextField.text
             destinationController.listingDescription = descriptionTextField.text
+           // destinationController.listingPostalCode = postalCodeTextField.text
         }
     }
 }
