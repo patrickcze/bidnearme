@@ -89,6 +89,12 @@ func writeChatMessage(chatId: String, senderId: String, messageText: String) {
     updateChatLastMessage(chatId: chatId, messageText: messageText)
 }
 
+/**
+ Updates the lastMessage of the Chat with chat ID.
+ 
+ - parameter chatId: UID of the chat to update.
+ - parameter messageText: Message text to update the Chat with.
+ */
 func updateChatLastMessage(chatId: String, messageText: String) {
     let chatRef = FIRDatabase.database().reference().child("chats/\(chatId)/lastMessage")
     chatRef.setValue(messageText)
