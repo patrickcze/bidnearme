@@ -8,35 +8,49 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 final class ChatListViewController: UITableViewController {
     
     // MARK: - Properties
     let cellIdentifier = "ChatCell"
     var chats = [Chat]()
-    var loggedInUser: User?
+    var loggedInUser: FIRUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // Get every chat from the user and display them. Observes for new chats.
+        observeUserChatList()
+    }
+    
+    /**
+     Adds a chat to the list.
+     */
+    private func addChat(chat: Chat) {
+        chats.append(chat)
+        tableView.reloadData()
+    }
+    
+    /**
+     Gets and observes the list of chats for new chats.
+     */
+    private func observeUserChatList() {
         guard let loggedInUserId = FIRAuth.auth()?.currentUser?.uid else {
             // Not logged in, so no user chats. Don't load anything.
             // TODO: Prompt log in.
             return
         }
         
-        // Get every chat from the user and display them.
-        getUserById(userId: loggedInUserId) { (user) in
-            self.loggedInUser = user
-            for chatId in user.chats {
-                getChatById(chatId) { (chat) in
-                    if let chat = chat {
-                        self.chats.append(chat)
-                    }
-                    self.tableView.reloadData()
+        let userChatsRef = FIRDatabase.database().reference().ref.child("users/\(loggedInUserId)/chats")
+        userChatsRef.observe(.childAdded, with: { (userChatSnapshot) in
+            let userChatId = userChatSnapshot.key
+            getChatById(userChatId) { (chat) in
+                if let chat = chat {
+                    self.addChat(chat: chat)
                 }
             }
-        }
+        })
     }
     
     // MARK: - UITTableViewDataSource
@@ -65,12 +79,13 @@ final class ChatListViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
+        guard let loggedInUser = FIRAuth.auth()?.currentUser else {
+            // Not logged in, so no user chats. Don't load anything.
+            // TODO: Prompt log in.
+            return
+        }
+        
         if segue.identifier == "ShowChatMessages" {
-            guard let loggedInUser = FIRAuth.auth()?.currentUser else {
-                // Cannot show chats if the user has not been retrieved.
-                return
-            }
-            
             if let chat = sender as? Chat {
                 let chatMessagesViewController = segue.destination as! ChatMessagesViewController
                 chatMessagesViewController.senderId = loggedInUser.uid
