@@ -59,7 +59,7 @@ class PostTitleViewController: UIViewController {
         
         let keyboardHeight = view.convert(rawFrame, from: nil).height
         
-        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder {
+        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder || postalCodeTextField.isFirstResponder{
             animateNextButton(keyboardHeight)
         }
     }
