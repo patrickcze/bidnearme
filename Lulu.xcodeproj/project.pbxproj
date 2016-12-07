@@ -23,6 +23,8 @@
 		3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */; };
 		3DC987141DB5DCD30022A2ED /* LuluTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC987131DB5DCD30022A2ED /* LuluTests.swift */; };
 		3DC9871F1DB5DCD30022A2ED /* LuluUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */; };
+		3DEF0CAD1DF7BC4500560E54 /* ListingDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DEF0CAC1DF7BC4500560E54 /* ListingDetail.storyboard */; };
+		3DEF0CB01DF7BC9900560E54 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DEF0CAF1DF7BC9900560E54 /* Home.storyboard */; };
 		3DF4520D1DF3C8D100DA6D68 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4520C1DF3C8D100DA6D68 /* Chat.swift */; };
 		3DF4520F1DF3CAD400DA6D68 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4520E1DF3CAD400DA6D68 /* Message.swift */; };
 		3DF452111DF3D30400DA6D68 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF452101DF3D30400DA6D68 /* ChatListViewController.swift */; };
@@ -104,6 +106,8 @@
 		3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuluUITests.swift; sourceTree = "<group>"; };
 		3DC987201DB5DCD30022A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lulu.entitlements; sourceTree = "<group>"; };
+		3DEF0CAC1DF7BC4500560E54 /* ListingDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ListingDetail.storyboard; path = ListingDetail/ListingDetail.storyboard; sourceTree = "<group>"; };
+		3DEF0CAF1DF7BC9900560E54 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Home.storyboard; path = Views/Home/Home.storyboard; sourceTree = "<group>"; };
 		3DF4520C1DF3C8D100DA6D68 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		3DF4520E1DF3CAD400DA6D68 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3DF452101DF3D30400DA6D68 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListViewController.swift; path = ../Chat/ChatListViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 				3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */,
 				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
 				3DC987021DB5DCD20022A2ED /* Main.storyboard */,
+				3DEF0CAF1DF7BC9900560E54 /* Home.storyboard */,
 			);
 			path = Lulu;
 			sourceTree = "<group>";
@@ -310,6 +315,14 @@
 				3DC9871E1DB5DCD30022A2ED /* LuluUITests.swift */,
 			);
 			path = LuluUITests;
+			sourceTree = "<group>";
+		};
+		3DEF0CAE1DF7BC4D00560E54 /* ListingDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3DEF0CAC1DF7BC4500560E54 /* ListingDetail.storyboard */,
+			);
+			name = ListingDetail;
 			sourceTree = "<group>";
 		};
 		3DF452121DF3D44800DA6D68 /* Chat */ = {
@@ -413,6 +426,7 @@
 				3D149F991DF393BF00C9F8A2 /* Chat */,
 				3D149F9A1DF393C400C9F8A2 /* Groups */,
 				BC60E8EC1DC69468004D7FB8 /* Home */,
+				3DEF0CAE1DF7BC4D00560E54 /* ListingDetail */,
 				3D149F971DF3938600C9F8A2 /* Login */,
 				3D149F981DF393AB00C9F8A2 /* PostingListing */,
 				5B054AEC1DE0057A00099683 /* Profile */,
@@ -574,7 +588,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DEF0CAD1DF7BC4500560E54 /* ListingDetail.storyboard in Resources */,
 				3D6C01B81DF6084800A72EEA /* ChatMessages.storyboard in Resources */,
+				3DEF0CB01DF7BC9900560E54 /* Home.storyboard in Resources */,
+				BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */,
 				3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */,
 				5B054AF91DE0065300099683 /* Profile.storyboard in Resources */,
 				BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */,
