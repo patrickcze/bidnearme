@@ -79,7 +79,7 @@ class GroupTableViewController: UITableViewController {
     
     func addGroupToTable(groupId: String) {
         getGroupById(groupId: groupId, completion: { (group) in
-            self.groups += [group]
+            self.groups.append(group)
             self.tableView.reloadData()
         })
     }

@@ -83,11 +83,6 @@ class GroupListingViewController: UIViewController {
         
     }
     
-    // Dispose of any resources that can be recreated.
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     // Notifies view controller that it's view laid out subviews.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -114,8 +109,13 @@ class GroupListingViewController: UIViewController {
         //Get a snapshot of listings
         let listingRef = ref.child("listings")
         
-        if !(group?.listingsById.isEmpty)! {
-            for listingId in (group?.listingsById)! {
+        guard let group = group else {
+            //TODO: Deal with this in some way
+            return
+        }
+        
+        if !group.listingsById.isEmpty {
+            for listingId in group.listingsById {
                 listingRef.child(listingId).observeSingleEvent(of: .value, with: { (listingSnapshot) in
                     // Get basic info about the listing
                     guard let listingData = listingSnapshot.value as? [String: Any]  else {
