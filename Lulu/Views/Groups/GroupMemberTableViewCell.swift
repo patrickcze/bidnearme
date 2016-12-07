@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import M13Checkbox
 
 class GroupMemberTableViewCell: UITableViewCell {
     @IBOutlet weak var memberStateCheckBox: M13Checkbox!
     @IBOutlet weak var memberName: UILabel!
+    
+    var user: User!
 
     override func awakeFromNib() {
         super.awakeFromNib()

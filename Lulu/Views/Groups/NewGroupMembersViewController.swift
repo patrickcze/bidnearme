@@ -14,6 +14,7 @@ import FirebaseAuth
 class NewGroupMembersViewController: UIViewController {
 
     // MARK: - Outlets
+    @IBOutlet weak var memberTableView: UITableView!
     @IBOutlet weak var stackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var newGroupButton: UIButton!
     
@@ -24,6 +25,8 @@ class NewGroupMembersViewController: UIViewController {
     var listingTitle: String!
     var listingDescription: String!
     var auctionDurationPicker = UIPickerView()
+    
+    var users = [User]()
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
@@ -41,6 +44,38 @@ class NewGroupMembersViewController: UIViewController {
         
         newGroupButton.layer.cornerRadius = 5.0
         newGroupButton.backgroundColor = ColorPalette.bidBlue
+        
+        // Do any additional setup after loading the view.
+        memberTableView.delegate = self
+        memberTableView.dataSource = self
+        
+        //Get list of current listings
+        ref.child("users").observeSingleEvent(of: .value, with: { (snap) in
+            let enumerator = snap.children
+            
+            //Iterate over listings
+            while let userSnapshot = enumerator.nextObject() as? FIRDataSnapshot {
+                // Get basic info about the listing
+                guard let userData = userSnapshot.value as? [String: Any]  else {
+                    //TO-DO: Handle error
+                    return
+                }
+                
+                guard
+                    let name = userData["name"] as? String,
+                    let createdTimestamp = userData["createdTimestamp"] as? Int else {
+                        //TO-DO: Handle error
+                        return
+                }
+                
+                let user = User(uid: userSnapshot.key, name: name, profileImageUrl: URL(string: ""), createdTimestamp: createdTimestamp)
+                if user.uid != FIRAuth.auth()?.currentUser?.uid{
+                    self.users.append(user)
+                    self.memberTableView.reloadData()
+                }
+            }
+        })
+    
     }
     
     // MARK: - Observers
@@ -96,11 +131,29 @@ class NewGroupMembersViewController: UIViewController {
             return
         }
         
+        var memberIds = [currentUserId]
+        
+        for cell in memberTableView.visibleCells {
+            if let cellThing = cell as? GroupMemberTableViewCell {
+                if cellThing.memberStateCheckBox.checkState == .checked {
+                    memberIds.append(cellThing.user.uid)
+                }
+            }
+        }
+        
+        print(memberIds)
+        
+        
         // Upload the image and write the listing if the image was successfully uploaded.
         uploadImage(image: image) { (imageUrl) in
-            
             guard let imageUrlString = imageUrl?.absoluteString else {
                 return
+            }
+            
+            var idsDic: [String: Bool] = [:]
+            
+            for id in memberIds {
+                idsDic[id] = true
             }
             
             let group: [String: Any] = [
@@ -108,15 +161,16 @@ class NewGroupMembersViewController: UIViewController {
                 "description": description,
                 "groupImageUrl": imageUrlString,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
-                "members": [
-                    currentUserId: true
-                ],
+                "members": idsDic,
                 "listings": []
             ]
             
             // TODO: Allow user input for auction duration.
             self.writeListing(group) { (listingRef) in
-                self.addGroupToUsersGroup(groupId: listingRef.key, userId: currentUserId)
+                for id in memberIds {
+                    self.addGroupToUsersGroup(groupId: listingRef.key, userId: id)
+                }
+                
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
             }
         }
@@ -179,33 +233,34 @@ class NewGroupMembersViewController: UIViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate protocol
-//extension PostPriceViewController: UITextFieldDelegate {
+// MARK: - UITableViewDataSource protocol
+extension NewGroupMembersViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.users.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "memberTableViewCell", for: indexPath) as! GroupMemberTableViewCell
+        
+        cell.memberName.text = self.users[indexPath.row].name
+        cell.user = self.users[indexPath.row]
+        
+        cell.memberStateCheckBox.tintColor = ColorPalette.bidBlue
+        cell.memberStateCheckBox.stateChangeAnimation = .expand(.fill)
+        
+        return cell
+    }
+}
 
-// MARK: - UITextFieldDelegate protocol
-//extension PostPriceViewController: UITextFieldDelegate {
-//    
-//    // Optional. Asks the delegate if the text field should process the pressing of the return button.
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        if let nextTextField = textField.superview?.superview?.viewWithTag(textField.tag + 1) as? UITextField {
-//            nextTextField.becomeFirstResponder()
-//        } else {
-//            dismissKeyboard()
-//        }
-//        
-//        return false
-//    }
-//    
-//    // Optional. Tells the delegate that editing stopped for the specified text field.
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        UIView.animate(
-//            withDuration: 0.3,
-//            delay: 0.0,
-//            options: .curveEaseInOut,
-//            animations: {
-//                self.stackViewHeight.constant = 12.0
-//        },
-//            completion: nil
-//        )
-//    }
-//}
+// MARK: - UITableViewDelegate protocol
+extension NewGroupMembersViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.memberTableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
