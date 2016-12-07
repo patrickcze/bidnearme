@@ -10,6 +10,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import GeoFire
+import CoreLocation
+import AddressBookUI
 
 class PostPriceViewController: UIViewController {
     
@@ -18,6 +21,7 @@ class PostPriceViewController: UIViewController {
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var postalCodeTextField: UITextField!
     
     // MARK: - Properties
     var ref: FIRDatabaseReference!
@@ -25,6 +29,7 @@ class PostPriceViewController: UIViewController {
     var listingPhoto: UIImage!
     var listingTitle: String!
     var listingDescription: String!
+    var listingPostalCode: String!
     var auctionDurationPicker = UIPickerView()
     
     // Do any additional setup after loading the view.
@@ -67,7 +72,7 @@ class PostPriceViewController: UIViewController {
         
         let keyboardHeight = view.convert(rawFrame, from: nil).height
         
-        if priceTextField.isFirstResponder || dateTextField.isFirstResponder {
+        if priceTextField.isFirstResponder || dateTextField.isFirstResponder || postalCodeTextField.isFirstResponder {
             animateNextButton(keyboardHeight)
         }
     }
@@ -96,6 +101,8 @@ class PostPriceViewController: UIViewController {
     @IBAction func postButtonClicked(_ sender: UIButton) {
         dismissKeyboard()
         
+        let coords = (forwardGeocoding(postalCode: postalCodeTextField.text!))
+        
         // Disable post button while uploading information
         self.postButton.isEnabled = false
         
@@ -106,6 +113,26 @@ class PostPriceViewController: UIViewController {
         guard let title = listingTitle, let description = listingDescription, let image = listingPhoto else {
             return
         }
+        
+        
+        
+        /*//initialize reference to geoFire
+        let geofireRef = FIRDatabase.database().reference().child("listing")
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        
+        
+        geoFire!.setLocation(CLLocation(latitude: coords!.latitude, longitude: coords!.longitude), forKey: "location") { (error) in
+            if (error != nil) {
+                print("An error occured: \(error)")
+            } else {
+                print("Saved location successfully!")
+            }
+            
+        }*/
+        
+        let longitude = coords.latitude
+        let latitude = coords.longitude
+        
         
         guard let startingPrice = Double(priceTextField.text!), startingPrice >= 0.0 else {
             return
@@ -133,6 +160,8 @@ class PostPriceViewController: UIViewController {
                 "title": title,
                 "startingPrice": startingPrice,
                 "description": description,
+                "longitude": longitude,
+                "latitude": latitude,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
                 "winningBidId": "",
@@ -147,6 +176,30 @@ class PostPriceViewController: UIViewController {
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
             }
         }
+    }
+    
+    static var coordinates: CLLocationCoordinate2D? {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "coordinatesFetched"), object: nil)
+        }
+    }
+    
+    func forwardGeocoding(postalCode: String){
+        CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinates = location?.coordinate
+                self.coordinates = coordinates
+            }
+            
+        })
+        
     }
     
     /**

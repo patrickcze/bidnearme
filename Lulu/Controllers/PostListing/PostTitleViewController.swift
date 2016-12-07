@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
+import FirebaseStorage
+//import GeoFire
+//import CoreLocation
+//import AddressBookUI
 
 class PostTitleViewController: UIViewController {
     
@@ -15,6 +21,7 @@ class PostTitleViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
+    //@IBOutlet weak var postalCodeTextField: UITextField!
     
     // MARK: - Properties
     var listingPhoto: UIImage!
@@ -25,6 +32,7 @@ class PostTitleViewController: UIViewController {
         
         titleTextField.returnKeyType = .next
         descriptionTextField.returnKeyType = .go
+        //postalCodeTextField.returnKeyType = .go
         
         title = "Post Listing"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -52,7 +60,7 @@ class PostTitleViewController: UIViewController {
         
         let keyboardHeight = view.convert(rawFrame, from: nil).height
         
-        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder {
+        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder/* || postalCodeTextField.isFirstResponder*/{
             animateNextButton(keyboardHeight)
         }
     }
@@ -77,16 +85,63 @@ class PostTitleViewController: UIViewController {
     
     // MARK: - Actions
     
+    /**
+     Converts the postal code to latitude and longitude and saves the coordinate
+     
+     -parameter postalCode: postal code of the pickup location to be converted into coordinates
+     */
+    
+    /*func forwardGeocoding(postalCode: String){
+        CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            /*String itemId = ref.child("items").push().getKey();
+            
+            ref.child("items").child(itemId).setValue(item);
+            
+            geoFire = new GeoFire(ref.child("items_location"));
+            geoFire.setLocation(itemId, new GeoLocation(lattitude, longitude));*/
+            
+            //initialize reference to geoFire
+            let geofireRef = FIRDatabase.database().reference()
+            let geoFire = GeoFire(firebaseRef: geofireRef)
+            
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinate = location?.coordinate
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "location") { (error) in
+                    if (error != nil) {
+                        print("An error occured: \(error)")
+                    } else {
+                        print("Saved location successfully!")
+                    }
+                //return coordinate
+                }
+            }
+        })
+    }*/
+    
     // Respond to next button tap.
     @IBAction func nextButtonClicked(_ sender: UIButton) {
+        
+        //convert postal code to coordinates and save
+        //forwardGeocoding(postalCode: postalCodeTextField.text!)
+        
+        //Segue to next screen
         segueToSignUpPassword()
     }
+    
+    
     
     // MARK: - Navigation
     
     // Segue to the next step in the wizard.
     func segueToSignUpPassword() {
-        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder {
+        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder /*|| postalCodeTextField.isFirstResponder*/{
             dismissKeyboard()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -104,6 +159,7 @@ class PostTitleViewController: UIViewController {
             destinationController.listingPhoto = listingPhoto
             destinationController.listingTitle = titleTextField.text
             destinationController.listingDescription = descriptionTextField.text
+            //destinationController.listingPostalCode = postalCodeTextField.text
         }
     }
 }
