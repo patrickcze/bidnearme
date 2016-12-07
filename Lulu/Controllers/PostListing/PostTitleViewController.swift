@@ -10,9 +10,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
-import GeoFire
-import CoreLocation
-import AddressBookUI
+//import GeoFire
+//import CoreLocation
+//import AddressBookUI
 
 class PostTitleViewController: UIViewController {
     
@@ -21,7 +21,7 @@ class PostTitleViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var postalCodeTextField: UITextField!
+    //@IBOutlet weak var postalCodeTextField: UITextField!
     
     // MARK: - Properties
     var listingPhoto: UIImage!
@@ -31,8 +31,8 @@ class PostTitleViewController: UIViewController {
         super.viewDidLoad()
         
         titleTextField.returnKeyType = .next
-        descriptionTextField.returnKeyType = .next
-        postalCodeTextField.returnKeyType = .go
+        descriptionTextField.returnKeyType = .go
+        //postalCodeTextField.returnKeyType = .go
         
         title = "Post Listing"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -60,7 +60,7 @@ class PostTitleViewController: UIViewController {
         
         let keyboardHeight = view.convert(rawFrame, from: nil).height
         
-        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder || postalCodeTextField.isFirstResponder{
+        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder/* || postalCodeTextField.isFirstResponder*/{
             animateNextButton(keyboardHeight)
         }
     }
@@ -91,7 +91,7 @@ class PostTitleViewController: UIViewController {
      -parameter postalCode: postal code of the pickup location to be converted into coordinates
      */
     
-    func forwardGeocoding(postalCode: String){
+    /*func forwardGeocoding(postalCode: String){
         CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
             if error != nil {
                 print(error)
@@ -119,16 +119,17 @@ class PostTitleViewController: UIViewController {
                     } else {
                         print("Saved location successfully!")
                     }
+                //return coordinate
                 }
             }
         })
-    }
+    }*/
     
     // Respond to next button tap.
     @IBAction func nextButtonClicked(_ sender: UIButton) {
         
         //convert postal code to coordinates and save
-        forwardGeocoding(postalCode: postalCodeTextField.text!)
+        //forwardGeocoding(postalCode: postalCodeTextField.text!)
         
         //Segue to next screen
         segueToSignUpPassword()
@@ -140,7 +141,7 @@ class PostTitleViewController: UIViewController {
     
     // Segue to the next step in the wizard.
     func segueToSignUpPassword() {
-        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder || postalCodeTextField.isFirstResponder{
+        if titleTextField.isFirstResponder || descriptionTextField.isFirstResponder /*|| postalCodeTextField.isFirstResponder*/{
             dismissKeyboard()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

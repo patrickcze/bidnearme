@@ -181,20 +181,6 @@
                                                     <outlet property="delegate" destination="sqT-Xt-HQ3" id="OcG-X7-7z0"/>
                                                 </connections>
                                             </textField>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ne2-Od-b4l">
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Postal Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfY-1l-74Z">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Postal Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dJ2-DD-wDx">
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
-                                                </subviews>
-                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="wTH-5c-XC9" firstAttribute="leading" secondItem="Lu4-YV-qah" secondAttribute="leading" id="2eL-wc-MKN"/>
@@ -223,7 +209,6 @@
                     <connections>
                         <outlet property="descriptionTextField" destination="wTH-5c-XC9" id="G18-NR-FLt"/>
                         <outlet property="nextButton" destination="rt7-wG-9Ri" id="PFW-CU-uKX"/>
-                        <outlet property="postalCodeTextField" destination="dJ2-DD-wDx" id="PIF-oG-Zep"/>
                         <outlet property="stackViewHeight" destination="zhA-Bs-W9T" id="azg-BQ-LBM"/>
                         <outlet property="titleTextField" destination="t8x-rg-70N" id="beI-Pz-dNI"/>
                         <segue destination="M0C-ji-Y3F" kind="show" identifier="WizardStepThree" id="db8-vv-ujH"/>
@@ -336,6 +321,24 @@
                                     <constraint firstAttribute="trailing" secondItem="fs5-KE-dQ4" secondAttribute="trailing" id="ZEG-sA-hOB"/>
                                 </constraints>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="W3A-9w-D1G">
+                                <frame key="frameInset" minX="12" minY="197" width="135" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Postal Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hq5-re-PNx">
+                                        <frame key="frameInset" width="93" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter postal code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qrR-DY-wj5">
+                                        <frame key="frameInset" minY="21" width="135" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -350,6 +353,7 @@
                     <connections>
                         <outlet property="dateTextField" destination="zOy-9n-i0f" id="yru-ys-nZ4"/>
                         <outlet property="postButton" destination="h7o-2j-ZOj" id="A08-mc-JYm"/>
+                        <outlet property="postalCodeTextField" destination="qrR-DY-wj5" id="npn-rn-hyn"/>
                         <outlet property="priceTextField" destination="TZX-7E-G6N" id="zim-SM-sf8"/>
                         <outlet property="stackViewHeight" destination="HXe-ix-4Du" id="LWc-Ox-ta4"/>
                         <segue destination="VTK-mz-yaL" kind="unwind" identifier="UnwindToRoot" unwindAction="unwindToRootWithSegue:" id="8OJ-jg-adJ"/>
@@ -358,7 +362,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lqc-bg-xnO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="VTK-mz-yaL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6487" y="1539"/>
+            <point key="canvasLocation" x="6485.6000000000004" y="1538.6806596701651"/>
         </scene>
         <!--Post-->
         <scene sceneID="F8D-do-ViL">
