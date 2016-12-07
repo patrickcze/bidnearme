@@ -35,6 +35,15 @@
 		5B054AF71DE005FC00099683 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AF61DE005FC00099683 /* ProfileViewController.swift */; };
 		5B054AF91DE0065300099683 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B054AF81DE0065300099683 /* Profile.storyboard */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
+		7C1B40FD1DF79AEC00E525E8 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */; };
+		7C1B40FE1DF79AEC00E525E8 /* NewGroupTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */; };
+		7C1B40FF1DF79AEC00E525E8 /* NewGroupListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */; };
+		7C1B41001DF79AEC00E525E8 /* NewGroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */; };
+		7C1B41041DF79B0200E525E8 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */; };
+		7C1B41051DF79B0200E525E8 /* GroupListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */; };
+		7C1B41071DF79B3300E525E8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B41061DF79B3300E525E8 /* Group.swift */; };
+		7C1B41091DF7A04600E525E8 /* GroupMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B41081DF7A04600E525E8 /* GroupMemberTableViewCell.swift */; };
+		7C1B410F1DF7BE2B00E525E8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C1B410D1DF7BE2B00E525E8 /* Groups.storyboard */; };
 		7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9CDCCA1DF3354C00E525E8 /* CurrencyCode.swift */; };
 		7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AC1DF2587800E525E8 /* Rating.swift */; };
 		7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AE1DF25CF500E525E8 /* Bid.swift */; };
@@ -44,7 +53,6 @@
 		BC00402E1DF3F7510059F2EB /* PostPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00402D1DF3F7510059F2EB /* PostPriceViewController.swift */; };
 		BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C251DE3BA0C007F6BDA /* RatingControl.swift */; };
 		BC21B35A1DE66371001400C9 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21B3591DE66371001400C9 /* ColorPalette.swift */; };
-		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
 		BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */; };
 		BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */; };
 		BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */; };
@@ -110,6 +118,15 @@
 		5B054AF61DE005FC00099683 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5B054AF81DE0065300099683 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupTitleViewController.swift; path = ../Views/Groups/NewGroupTitleViewController.swift; sourceTree = "<group>"; };
+		7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupListingViewController.swift; path = ../Views/Groups/NewGroupListingViewController.swift; sourceTree = "<group>"; };
+		7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupMembersViewController.swift; path = ../Views/Groups/NewGroupMembersViewController.swift; sourceTree = "<group>"; };
+		7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupTableViewController.swift; path = Groups/GroupTableViewController.swift; sourceTree = "<group>"; };
+		7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupListingViewController.swift; path = Groups/GroupListingViewController.swift; sourceTree = "<group>"; };
+		7C1B41061DF79B3300E525E8 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		7C1B41081DF7A04600E525E8 /* GroupMemberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberTableViewCell.swift; sourceTree = "<group>"; };
+		7C1B410E1DF7BE2B00E525E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Groups.storyboard; sourceTree = "<group>"; };
 		7C9CDCCA1DF3354C00E525E8 /* CurrencyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
 		7CB0E7AC1DF2587800E525E8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		7CB0E7AE1DF25CF500E525E8 /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
@@ -122,7 +139,6 @@
 		BC00402D1DF3F7510059F2EB /* PostPriceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PostPriceViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		BC079C251DE3BA0C007F6BDA /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		BC21B3591DE66371001400C9 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
-		BC60E8D91DC688AB004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Groups.storyboard; sourceTree = "<group>"; };
 		BC60E8DE1DC688CE004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Camera.storyboard; sourceTree = "<group>"; };
 		BC60E8E41DC68B0D004D7FB8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -231,7 +247,9 @@
 		3D149F9A1DF393C400C9F8A2 /* Groups */ = {
 			isa = PBXGroup;
 			children = (
-				BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */,
+				7C1B410D1DF7BE2B00E525E8 /* Groups.storyboard */,
+				7C1B41081DF7A04600E525E8 /* GroupMemberTableViewCell.swift */,
+				7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -332,6 +350,18 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		7C1B41011DF79AF900E525E8 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */,
+				7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */,
+				7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */,
+				7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */,
+				7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
 		7CBD43491DD2558400E0CECE /* PostListing */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +391,7 @@
 		BC60E8E81DC6942E004D7FB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7C1B41011DF79AF900E525E8 /* Group */,
 				3DF452121DF3D44800DA6D68 /* Chat */,
 				BC60E8EB1DC6945F004D7FB8 /* Home */,
 				BC079C221DE3B0C7007F6BDA /* ListingDetail */,
@@ -383,6 +414,7 @@
 				3DF4520E1DF3CAD400DA6D68 /* Message.swift */,
 				7CB0E7AC1DF2587800E525E8 /* Rating.swift */,
 				BC60E8EF1DC694AE004D7FB8 /* User.swift */,
+				7C1B41061DF79B3300E525E8 /* Group.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -508,7 +540,7 @@
 				TargetAttributes = {
 					3DC986F81DB5DCD20022A2ED = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = MPUVCQT72P;
+						DevelopmentTeam = JU7A7G4PUR;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -559,13 +591,13 @@
 				3DEF0CAD1DF7BC4500560E54 /* ListingDetail.storyboard in Resources */,
 				3D6C01B81DF6084800A72EEA /* ChatMessages.storyboard in Resources */,
 				3DEF0CB01DF7BC9900560E54 /* Home.storyboard in Resources */,
-				BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */,
 				3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */,
 				5B054AF91DE0065300099683 /* Profile.storyboard in Resources */,
 				BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */,
 				3DC987091DB5DCD20022A2ED /* LaunchScreen.storyboard in Resources */,
 				3DC987061DB5DCD20022A2ED /* Assets.xcassets in Resources */,
 				3DC987041DB5DCD20022A2ED /* Main.storyboard in Resources */,
+				7C1B410F1DF7BE2B00E525E8 /* Groups.storyboard in Resources */,
 				3D546E661DCFA85200188DBD /* Login.storyboard in Resources */,
 				5B054AF51DE005EE00099683 /* ProfileTableViewCell.xib in Resources */,
 				3D9753DD1DF610B700A8F278 /* ChatList.storyboard in Resources */,
@@ -896,20 +928,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C1B41091DF7A04600E525E8 /* GroupMemberTableViewCell.swift in Sources */,
 				3D06BCF31DF3EB3E00A97EC8 /* ListingDetailViewController.swift in Sources */,
+				7C1B41071DF79B3300E525E8 /* Group.swift in Sources */,
+				7C1B41001DF79AEC00E525E8 /* NewGroupMembersViewController.swift in Sources */,
 				7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */,
 				3D6C01B41DF6021F00A72EEA /* ChatMessagesViewController.swift in Sources */,
 				BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */,
 				5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */,
 				7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
+				7C1B40FD1DF79AEC00E525E8 /* GroupTableViewCell.swift in Sources */,
 				BC945CAA1DE63CAF00F4F803 /* TextField.swift in Sources */,
+				7C1B40FE1DF79AEC00E525E8 /* NewGroupTitleViewController.swift in Sources */,
 				BC00402C1DF3ED440059F2EB /* PostListingViewController.swift in Sources */,
 				7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */,
+				7C1B41041DF79B0200E525E8 /* GroupTableViewController.swift in Sources */,
 				BC00402E1DF3F7510059F2EB /* PostPriceViewController.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* LoginViewController.swift in Sources */,
 				7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */,
+				7C1B40FF1DF79AEC00E525E8 /* NewGroupListingViewController.swift in Sources */,
 				3D763BE11DE52C0C000CE3C7 /* ListingType.swift in Sources */,
 				5B054AF31DE005E100099683 /* ProfileTableViewCell.swift in Sources */,
 				5B054AF11DE005CC00099683 /* ListingTypeTableViewCell.swift in Sources */,
@@ -921,6 +960,7 @@
 				3DF4520D1DF3C8D100DA6D68 /* Chat.swift in Sources */,
 				BC00402A1DF3EC030059F2EB /* PostTitleViewController.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
+				7C1B41051DF79B0200E525E8 /* GroupListingViewController.swift in Sources */,
 				3D0B76401DE2682D00368CFA /* ListingTimeInterval.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
 			);
@@ -976,13 +1016,12 @@
 			path = .;
 			sourceTree = "<group>";
 		};
-		BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */ = {
+		7C1B410D1DF7BE2B00E525E8 /* Groups.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BC60E8D91DC688AB004D7FB8 /* Base */,
+				7C1B410E1DF7BE2B00E525E8 /* Base */,
 			);
 			name = Groups.storyboard;
-			path = .;
 			sourceTree = "<group>";
 		};
 		BC60E8DD1DC688CE004D7FB8 /* Camera.storyboard */ = {
@@ -1100,7 +1139,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = MPUVCQT72P;
+				DEVELOPMENT_TEAM = JU7A7G4PUR;
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
@@ -1118,7 +1157,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = MPUVCQT72P;
+				DEVELOPMENT_TEAM = JU7A7G4PUR;
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
