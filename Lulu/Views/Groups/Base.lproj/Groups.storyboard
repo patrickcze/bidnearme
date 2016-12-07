@@ -36,7 +36,7 @@
         <!--Group Table View Controller-->
         <scene sceneID="sFV-B2-VHw">
             <objects>
-                <tableViewController id="xS2-8c-UaL" customClass="GroupTableViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="GroupTableVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xS2-8c-UaL" customClass="GroupTableViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="BzB-Vp-5AO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,9 +124,7 @@
                     <navigationItem key="navigationItem" id="UQr-tE-Yof">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="jSb-Lm-2f4">
                             <connections>
-                                <segue destination="Ac4-1D-GP7" kind="show" id="Grk-YA-Y3p">
-                                    <nil key="action"/>
-                                </segue>
+                                <segue destination="Ac4-1D-GP7" kind="show" id="52Y-Ff-E7G"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -367,6 +365,9 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="3 of 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvT-qs-oA6">
                                         <rect key="frame" x="317.5" y="0.0" width="33.5" height="14.5"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                        </accessibility>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

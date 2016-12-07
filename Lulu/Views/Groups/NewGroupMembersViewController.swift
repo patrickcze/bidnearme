@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
+import M13Checkbox
 
 class NewGroupMembersViewController: UIViewController {
 
@@ -131,6 +132,11 @@ class NewGroupMembersViewController: UIViewController {
             return
         }
         
+        // Create the alert to distract user as the group is created
+        let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        displayCompletionAlert(alert: alert)
+        
+        //Determine which users are part of that group
         var memberIds = [currentUserId]
         
         for cell in memberTableView.visibleCells {
@@ -140,9 +146,6 @@ class NewGroupMembersViewController: UIViewController {
                 }
             }
         }
-        
-        print(memberIds)
-        
         
         // Upload the image and write the listing if the image was successfully uploaded.
         uploadImage(image: image) { (imageUrl) in
@@ -172,6 +175,7 @@ class NewGroupMembersViewController: UIViewController {
                 }
                 
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
+                alert.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -230,6 +234,25 @@ class NewGroupMembersViewController: UIViewController {
     
     func addGroupToUsersGroup(groupId: String, userId: String) {
         ref.child("users/\(userId)/groups/\(groupId)").setValue(true)
+    }
+    
+    func displayCompletionAlert(alert: UIAlertController){
+        let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.30)
+        let width:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.width * 0.80)
+        
+        alert.view.addConstraint(height)
+        alert.view.addConstraint(width)
+        
+        let checkbox = M13Checkbox(frame: CGRect(x: (width.constant-80.0)/2, y: (height.constant-80.0)/2, width: 80.0, height: 80.0))
+        checkbox.stateChangeAnimation = .stroke
+        checkbox.animationDuration = 0.75
+        
+        alert.view.addSubview(checkbox)
+        
+        // show the alert
+        self.present(alert, animated: true, completion: {
+            checkbox.toggleCheckState(true)
+        })
     }
 }
 
