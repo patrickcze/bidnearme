@@ -119,9 +119,9 @@
 		5B054AF81DE0065300099683 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
-		7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupTitleViewController.swift; sourceTree = "<group>"; };
-		7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupListingViewController.swift; sourceTree = "<group>"; };
-		7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupMembersViewController.swift; sourceTree = "<group>"; };
+		7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupTitleViewController.swift; path = ../Views/Groups/NewGroupTitleViewController.swift; sourceTree = "<group>"; };
+		7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupListingViewController.swift; path = ../Views/Groups/NewGroupListingViewController.swift; sourceTree = "<group>"; };
+		7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGroupMembersViewController.swift; path = ../Views/Groups/NewGroupMembersViewController.swift; sourceTree = "<group>"; };
 		7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
 		7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListingViewController.swift; sourceTree = "<group>"; };
 		7C1B41061DF79B3300E525E8 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -250,9 +250,6 @@
 				7C1B410D1DF7BE2B00E525E8 /* Groups.storyboard */,
 				7C1B41081DF7A04600E525E8 /* GroupMemberTableViewCell.swift */,
 				7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */,
-				7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */,
-				7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */,
-				7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -359,6 +356,9 @@
 			children = (
 				7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */,
 				7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */,
+				7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */,
+				7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */,
+				7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -540,7 +540,7 @@
 				TargetAttributes = {
 					3DC986F81DB5DCD20022A2ED = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = MPUVCQT72P;
+						DevelopmentTeam = JU7A7G4PUR;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -591,7 +591,6 @@
 				3DEF0CAD1DF7BC4500560E54 /* ListingDetail.storyboard in Resources */,
 				3D6C01B81DF6084800A72EEA /* ChatMessages.storyboard in Resources */,
 				3DEF0CB01DF7BC9900560E54 /* Home.storyboard in Resources */,
-				BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */,
 				3D1DE1301DC83E7900B28DCD /* GoogleService-Info.plist in Resources */,
 				5B054AF91DE0065300099683 /* Profile.storyboard in Resources */,
 				BC60E8DF1DC688CE004D7FB8 /* Camera.storyboard in Resources */,
@@ -1140,7 +1139,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = MPUVCQT72P;
+				DEVELOPMENT_TEAM = JU7A7G4PUR;
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
@@ -1158,7 +1157,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lulu/Lulu.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = MPUVCQT72P;
+				DEVELOPMENT_TEAM = JU7A7G4PUR;
 				INFOPLIST_FILE = Lulu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamlulu.Lulu;
