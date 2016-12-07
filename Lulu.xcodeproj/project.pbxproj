@@ -99,7 +99,7 @@
 		3DC987201DB5DCD30022A2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lulu.entitlements; sourceTree = "<group>"; };
 		3DEF0CAC1DF7BC4500560E54 /* ListingDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ListingDetail.storyboard; path = ListingDetail/ListingDetail.storyboard; sourceTree = "<group>"; };
-		3DEF0CAF1DF7BC9900560E54 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Home.storyboard; path = Views/Home/Home.storyboard; sourceTree = "<group>"; };
+		3DEF0CAF1DF7BC9900560E54 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		3DF4520C1DF3C8D100DA6D68 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		3DF4520E1DF3CAD400DA6D68 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3DF452101DF3D30400DA6D68 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatListViewController.swift; path = ../Chat/ChatListViewController.swift; sourceTree = "<group>"; };
@@ -273,7 +273,6 @@
 				3DC987071DB5DCD20022A2ED /* LaunchScreen.storyboard */,
 				3DE8A08F1DD035E2009C0538 /* Lulu.entitlements */,
 				3DC987021DB5DCD20022A2ED /* Main.storyboard */,
-				3DEF0CAF1DF7BC9900560E54 /* Home.storyboard */,
 			);
 			path = Lulu;
 			sourceTree = "<group>";
@@ -415,6 +414,7 @@
 		BC60E8EC1DC69468004D7FB8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				3DEF0CAF1DF7BC9900560E54 /* Home.storyboard */,
 				BC60E8E61DC68CF0004D7FB8 /* HomeCollectionViewCell.swift */,
 			);
 			path = Home;
