@@ -236,6 +236,7 @@ class NewGroupMembersViewController: UIViewController {
         ref.child("users/\(userId)/groups/\(groupId)").setValue(true)
     }
     
+    // Display a alert to pause the user while we create the group
     func displayCompletionAlert(alert: UIAlertController){
         let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.30)
         let width:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.width * 0.80)
