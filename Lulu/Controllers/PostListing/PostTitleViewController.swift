@@ -106,14 +106,14 @@ class PostTitleViewController: UIViewController {
             geoFire.setLocation(itemId, new GeoLocation(lattitude, longitude));*/
             
             //initialize reference to geoFire
-            let geofireRef = FIRDatabase.database().reference().child("location")
+            let geofireRef = FIRDatabase.database().reference()
             let geoFire = GeoFire(firebaseRef: geofireRef)
             
             if (placemarks?.count)! > 0 {
                 let placemark = placemarks?[0]
                 let location = placemark?.location
                 let coordinate = location?.coordinate
-                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "firebase-hq") { (error) in
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "location") { (error) in
                     if (error != nil) {
                         print("An error occured: \(error)")
                     } else {
@@ -158,7 +158,7 @@ class PostTitleViewController: UIViewController {
             destinationController.listingPhoto = listingPhoto
             destinationController.listingTitle = titleTextField.text
             destinationController.listingDescription = descriptionTextField.text
-            destinationController.listingPostalCode = postalCodeTextField.text
+            //destinationController.listingPostalCode = postalCodeTextField.text
         }
     }
 }

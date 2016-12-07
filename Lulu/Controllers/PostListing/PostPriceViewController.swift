@@ -25,7 +25,7 @@ class PostPriceViewController: UIViewController {
     var listingPhoto: UIImage!
     var listingTitle: String!
     var listingDescription: String!
-    var listingPostalCode: String!
+    //var listingCoordinates: geofire.CLlocation!
     var auctionDurationPicker = UIPickerView()
     
     // Do any additional setup after loading the view.
@@ -104,7 +104,7 @@ class PostPriceViewController: UIViewController {
             return
         }
         
-        guard let title = listingTitle, let description = listingDescription, let image = listingPhoto else {
+        guard let title = listingTitle, let description = listingDescription, /*let location = listingCoordinates,*/ let image = listingPhoto else {
             return
         }
         
@@ -134,6 +134,7 @@ class PostPriceViewController: UIViewController {
                 "title": title,
                 "startingPrice": startingPrice,
                 "description": description,
+                //"location": location,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
                 "winningBidId": "",
