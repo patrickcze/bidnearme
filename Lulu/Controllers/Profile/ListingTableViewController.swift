@@ -9,12 +9,6 @@
 import UIKit
 import FirebaseDatabase
 
-// TO-DO: Update current user's listing (the one that is being displayed) everytime an user 
-//        switches tabs back and forth.
-//        Some ways to approach this: Using notifications, checking users listings in 
-//        viewWillAppear() or unwind/pop this view automatically when user switches tabs (from this view).
-//
-//        Current fix: I am popping this view from navigationController.
 class ListingTableViewController: UITableViewController {
     
     // MARK: - Outlets
@@ -23,14 +17,13 @@ class ListingTableViewController: UITableViewController {
     // MARK: - Properties
     let cellIdentifier = "ProfileCell"
     var listingsRef: FIRDatabaseReference!
-    var listingIds: [String]!
     var listings: [Listing?]!
     var listingType : ListingType!
     var uid : String!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         // listingType and uid should be set before this view. Currently, it is being called in ProfileViewController before seguing here
         guard let _ = listingType, let _ = uid else{
             fatalError("listingType = nil or uid = nil -> ListingTableViewController->viewWillAppear()")
@@ -38,11 +31,6 @@ class ListingTableViewController: UITableViewController {
         
         navigationTitle.title = listingType.description.capitalized
         retrieveListings()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        //discarding the returned value. Otherwise, a warning gets displayed.
-        _ = navigationController?.popViewController(animated:  false)
     }
     
     override func viewDidLoad() {
@@ -53,11 +41,6 @@ class ListingTableViewController: UITableViewController {
         self.tableView.register(nib,forCellReuseIdentifier: cellIdentifier)
     }
     
-    // TO-DO: Fields "sellerId" and "buyoutPrice" (currently no supported in the app) are not being used.
-    //        "Listing" model should have a "sellerId" : String instead of seller : User
-    //  
-    //         Ask about why buyoutPrice is an Int and not a Double? since startPrice is a Double.
-    //
     /**
      Gets listing information
      */
@@ -72,7 +55,7 @@ class ListingTableViewController: UITableViewController {
             }
             
             let buyoutPrice = 99999.00// No supported yet
-    
+            
             guard
                 let createdTimestamp = listing["createdTimestamp"] as? Int,
                 let auctionEndTimestamp = listing["auctionEndTimestamp"] as? Int,
@@ -83,7 +66,7 @@ class ListingTableViewController: UITableViewController {
                     //TO-DO: Handle error
                     return
             }
-        
+            
             var imageUrls : [URL] = []
             if let imageUrlStrings = listing["imageUrls"] as? [String] {
                 imageUrls = imageUrlStrings.map{URL.init(string: $0)} as! [URL]
@@ -97,16 +80,31 @@ class ListingTableViewController: UITableViewController {
         })
     }
     
-     func retrieveListings() {
-        listings = []
-        for listingId in listingIds {
-            getListing(withId: listingId){ (listing)  in
-                self.listings.append(listing)
-                if (self.listings.count == self.listingIds.count) {
-                    self.tableView.reloadData()
+    func retrieveListings() {
+        let ref = FIRDatabase.database().reference()
+        
+        ref.child("users").child(uid).child("listings").child(listingType.description).observe(.value, with: { (snapshot) in
+            guard var aListingType = snapshot.value as? [String:Bool] else {
+                // user does not have this type of listing
+                return
+            }
+            
+            self.listings = []
+            for (listingId,_) in aListingType {
+                self.getListing(withId: listingId){ (listing)  in
+                    
+                    // this avoids appeding a null listing that does not exist in the DB
+                    if (listing != nil) {
+                        self.listings.append(listing)
+                    } else {
+                        aListingType[listingId] = nil
+                    }
+                    if (self.listings.count == aListingType.count) {
+                        self.tableView.reloadData()
+                    }
                 }
             }
-        }
+        })
     }
     
     // MARK: - Table view data source
@@ -115,6 +113,10 @@ class ListingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if listings == nil {
+            return 0
+        }
+        
         return listings.count
     }
     
@@ -130,6 +132,7 @@ class ListingTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ListingDetail", sender: nil)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -170,5 +173,15 @@ class ListingTableViewController: UITableViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd h:m a"
         
         cell.smallLabel.text = dateFormatter.string(from: endDate)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+            if (segue.identifier == "ListingDetail") {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    let destinationController = segue.destination as! ListingDetailViewController
+                    destinationController.listing = listings[indexPath.row]
+                }
+            }
     }
 }

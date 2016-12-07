@@ -111,9 +111,12 @@ class ProfileViewController: UIViewController {
             profileNameLabel.text = name
         }
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        memberLabel.text = "Member since: " +  dateFormatter.string(from: user.membershipSince)
+
         // TO-DO ->
         ratingLabel.text = "4.6 stars"
-        memberLabel.text = "Member since: 2016"
         specialLabel.text = "Replies quickly"
     }
     
@@ -121,7 +124,7 @@ class ProfileViewController: UIViewController {
      Gets user information as a User and calls completion with the User object.
      */
     func getUser(withId id: String, completion: @escaping (User?) -> Void) {
-        ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(id).observe(.value, with: { (snapshot) in
             guard let user = snapshot.value as? [String: Any] else {
                 completion(nil)
                 return
@@ -134,35 +137,15 @@ class ProfileViewController: UIViewController {
             if let profileImageUrlString = user["profileImageUrl"] as? String, !profileImageUrlString.isEmpty {
                 profileImageUrl = URL(string: profileImageUrlString)
             }
-            
-            // Retrieve user listings.
-            var listingIdsByType = [ListingType: [String]]()
-            
-            // Listings: ["selling" -> ["listingId1" -> true, "listingId2" -> true], "buying" -> []]
-            if let listingTreeIds = user["listings"] as? [String: [String: Bool]] {
-                listingIdsByType = self.getListingIdsByType(listingTreeIds: listingTreeIds)
-            }
-
-            completion(User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: listingIdsByType, ratingsById: [:], groups: [], chats: []))
-
-        })
-    }
     
-    /**
-     Get all listing IDs of every listing type. listingType.description must exactly match one of the database listing types under User.
-     */
-    func getListingIdsByType(listingTreeIds: [String: [String: Bool]]) -> [ListingType: [String]] {
-        var listingIdsByType = [ListingType: [String]]()
+            let startDate = Date(timeIntervalSince1970: TimeInterval(createdTimestamp/1000))
+
+            let _user = User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [], chats: [])
+           
+            _user.membershipSince = startDate
         
-        // For every case in ListingType, e.g. selling, buying, etc., retrieve just the listing IDs; ignoring the booleans.
-        for listingType in ListingType.allValues {
-            listingIdsByType[listingType] = []
-            
-            if let listingIdsOfType = listingTreeIds[listingType.description], !listingIdsOfType.isEmpty {
-                listingIdsByType[listingType] = Array(listingIdsOfType.keys) // Gets listing IDs as an array.
-            }
-        }
-        return listingIdsByType
+            completion(_user)
+        })
     }
     
     // MARK: - Navigation
@@ -179,7 +162,6 @@ class ProfileViewController: UIViewController {
             }
             
             let listingType = listingTypes[row]
-            listingTableViewController.listingIds = profileUser?.listingIdsByType[listingType]
             listingTableViewController.listingType = listingType
             listingTableViewController.uid = profileUser?.uid
         }

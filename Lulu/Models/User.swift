@@ -19,6 +19,7 @@ class User {
     var ratingsById: [String: Rating]?
     var groups: [String]?
     var chats: [String]!
+    var membershipSince : Date!
     
     init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratingsById: [String: Rating], groups: [String], chats: [String]) {
         self.uid = uid
