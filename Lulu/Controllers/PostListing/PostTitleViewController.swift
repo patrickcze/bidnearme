@@ -98,8 +98,15 @@ class PostTitleViewController: UIViewController {
                 return
             }
             
+            /*String itemId = ref.child("items").push().getKey();
+            
+            ref.child("items").child(itemId).setValue(item);
+            
+            geoFire = new GeoFire(ref.child("items_location"));
+            geoFire.setLocation(itemId, new GeoLocation(lattitude, longitude));*/
+            
             //initialize reference to geoFire
-            let geofireRef = FIRDatabase.database().reference()
+            let geofireRef = FIRDatabase.database().reference().child("location")
             let geoFire = GeoFire(firebaseRef: geofireRef)
             
             if (placemarks?.count)! > 0 {
