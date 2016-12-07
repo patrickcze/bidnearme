@@ -164,3 +164,30 @@ func writeListingBidderChat(listingId: String, bidderId: String, chatId: String)
         }
     }
 }
+
+func getGroupById (groupId: String, completion: @escaping (Group) -> Void) {
+    let ref = FIRDatabase.database().reference()
+    
+    ref.child("groups/\(groupId)").observeSingleEvent(of: .value, with: { snap in
+        let groupData = snap.value as? [String: Any]
+        
+        // get an array of string containing the uids of members
+        var groupMembers = [String]()
+        var enumerator = snap.childSnapshot(forPath: "members").children
+        while let groupMembersSnap = enumerator.nextObject() as? FIRDataSnapshot {
+            groupMembers.append(groupMembersSnap.key)
+        }
+        
+        // get an array of string containing the uids of listings
+        var groupListings = [String]()
+        enumerator = snap.childSnapshot(forPath: "listings").children
+        while let groupListingsSnap = enumerator.nextObject() as? FIRDataSnapshot {
+            groupListings.append(groupListingsSnap.key)
+        }
+        
+        let group = Group(id: groupId, name: groupData!["name"] as! String, desc: groupData!["description"] as! String, createdTimestamp: groupData!["createdTimestamp"] as! Int, members: groupMembers, listings: groupListings, imageUrl: URL(string: groupData!["groupImageUrl"] as! String)!)
+        
+        completion(group)
+    })
+}
+

@@ -33,6 +33,13 @@
 		5B054AF71DE005FC00099683 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B054AF61DE005FC00099683 /* ProfileViewController.swift */; };
 		5B054AF91DE0065300099683 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B054AF81DE0065300099683 /* Profile.storyboard */; };
 		7BEC05C880F9106A81CEAB6C /* Pods_LuluTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334D6A86BA61FA523B180117 /* Pods_LuluTests.framework */; };
+		7C1B40FD1DF79AEC00E525E8 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */; };
+		7C1B40FE1DF79AEC00E525E8 /* NewGroupTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */; };
+		7C1B40FF1DF79AEC00E525E8 /* NewGroupListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */; };
+		7C1B41001DF79AEC00E525E8 /* NewGroupMembersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */; };
+		7C1B41041DF79B0200E525E8 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */; };
+		7C1B41051DF79B0200E525E8 /* GroupListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */; };
+		7C1B41071DF79B3300E525E8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B41061DF79B3300E525E8 /* Group.swift */; };
 		7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9CDCCA1DF3354C00E525E8 /* CurrencyCode.swift */; };
 		7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AC1DF2587800E525E8 /* Rating.swift */; };
 		7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB0E7AE1DF25CF500E525E8 /* Bid.swift */; };
@@ -40,7 +47,6 @@
 		BC00402A1DF3EC030059F2EB /* PostTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0040291DF3EC030059F2EB /* PostTitleViewController.swift */; };
 		BC00402C1DF3ED440059F2EB /* PostListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00402B1DF3ED430059F2EB /* PostListingViewController.swift */; };
 		BC00402E1DF3F7510059F2EB /* PostPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC00402D1DF3F7510059F2EB /* PostPriceViewController.swift */; };
-		BC079C241DE3B0DA007F6BDA /* ListingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C231DE3B0DA007F6BDA /* ListingDetailViewController.swift */; };
 		BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC079C251DE3BA0C007F6BDA /* RatingControl.swift */; };
 		BC21B35A1DE66371001400C9 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21B3591DE66371001400C9 /* ColorPalette.swift */; };
 		BC60E8DA1DC688AB004D7FB8 /* Groups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */; };
@@ -107,6 +113,13 @@
 		5B054AF61DE005FC00099683 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5B054AF81DE0065300099683 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		776591287087069E1588D125 /* Pods_LuluUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LuluUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupTitleViewController.swift; sourceTree = "<group>"; };
+		7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupListingViewController.swift; sourceTree = "<group>"; };
+		7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupMembersViewController.swift; sourceTree = "<group>"; };
+		7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
+		7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListingViewController.swift; sourceTree = "<group>"; };
+		7C1B41061DF79B3300E525E8 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		7C9CDCCA1DF3354C00E525E8 /* CurrencyCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyCode.swift; sourceTree = "<group>"; };
 		7CB0E7AC1DF2587800E525E8 /* Rating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		7CB0E7AE1DF25CF500E525E8 /* Bid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bid.swift; sourceTree = "<group>"; };
@@ -117,7 +130,6 @@
 		BC0040291DF3EC030059F2EB /* PostTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PostTitleViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		BC00402B1DF3ED430059F2EB /* PostListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PostListingViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		BC00402D1DF3F7510059F2EB /* PostPriceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PostPriceViewController.swift; sourceTree = "<group>"; tabWidth = 4; };
-		BC079C231DE3B0DA007F6BDA /* ListingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingDetailViewController.swift; sourceTree = "<group>"; };
 		BC079C251DE3BA0C007F6BDA /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		BC21B3591DE66371001400C9 /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		BC60E8D91DC688AB004D7FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Groups.storyboard; sourceTree = "<group>"; };
@@ -230,6 +242,10 @@
 			isa = PBXGroup;
 			children = (
 				BC60E8D81DC688AB004D7FB8 /* Groups.storyboard */,
+				7C1B40F91DF79AEC00E525E8 /* GroupTableViewCell.swift */,
+				7C1B40FA1DF79AEC00E525E8 /* NewGroupTitleViewController.swift */,
+				7C1B40FB1DF79AEC00E525E8 /* NewGroupListingViewController.swift */,
+				7C1B40FC1DF79AEC00E525E8 /* NewGroupMembersViewController.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -322,6 +338,15 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		7C1B41011DF79AF900E525E8 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				7C1B41021DF79B0200E525E8 /* GroupTableViewController.swift */,
+				7C1B41031DF79B0200E525E8 /* GroupListingViewController.swift */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
 		7CBD43491DD2558400E0CECE /* PostListing */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +376,7 @@
 		BC60E8E81DC6942E004D7FB8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7C1B41011DF79AF900E525E8 /* Group */,
 				3DF452121DF3D44800DA6D68 /* Chat */,
 				BC60E8EB1DC6945F004D7FB8 /* Home */,
 				BC079C221DE3B0C7007F6BDA /* ListingDetail */,
@@ -373,6 +399,7 @@
 				3DF4520E1DF3CAD400DA6D68 /* Message.swift */,
 				7CB0E7AC1DF2587800E525E8 /* Rating.swift */,
 				BC60E8EF1DC694AE004D7FB8 /* User.swift */,
+				7C1B41061DF79B3300E525E8 /* Group.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -883,19 +910,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D06BCF31DF3EB3E00A97EC8 /* ListingDetailViewController.swift in Sources */,
+				7C1B41071DF79B3300E525E8 /* Group.swift in Sources */,
+				7C1B41001DF79AEC00E525E8 /* NewGroupMembersViewController.swift in Sources */,
 				7CB0E7AF1DF25CF500E525E8 /* Bid.swift in Sources */,
 				3D6C01B41DF6021F00A72EEA /* ChatMessagesViewController.swift in Sources */,
 				BC079C261DE3BA0C007F6BDA /* RatingControl.swift in Sources */,
 				5B054AEF1DE005C000099683 /* ListingTableViewController.swift in Sources */,
 				7C9CDCCB1DF3354C00E525E8 /* CurrencyCode.swift in Sources */,
 				3DC986FD1DB5DCD20022A2ED /* AppDelegate.swift in Sources */,
+				7C1B40FD1DF79AEC00E525E8 /* GroupTableViewCell.swift in Sources */,
 				BC945CAA1DE63CAF00F4F803 /* TextField.swift in Sources */,
+				7C1B40FE1DF79AEC00E525E8 /* NewGroupTitleViewController.swift in Sources */,
 				BC00402C1DF3ED440059F2EB /* PostListingViewController.swift in Sources */,
 				7CB0E7B11DF2622900E525E8 /* FirebaseDatabaseHelper.swift in Sources */,
+				7C1B41041DF79B0200E525E8 /* GroupTableViewController.swift in Sources */,
 				BC00402E1DF3F7510059F2EB /* PostPriceViewController.swift in Sources */,
 				BC60E8E51DC68B0D004D7FB8 /* HomeViewController.swift in Sources */,
 				3D03AA0D1DCED52D0034908C /* LoginViewController.swift in Sources */,
 				7CB0E7AD1DF2587800E525E8 /* Rating.swift in Sources */,
+				7C1B40FF1DF79AEC00E525E8 /* NewGroupListingViewController.swift in Sources */,
 				3D763BE11DE52C0C000CE3C7 /* ListingType.swift in Sources */,
 				5B054AF31DE005E100099683 /* ProfileTableViewCell.swift in Sources */,
 				5B054AF11DE005CC00099683 /* ListingTypeTableViewCell.swift in Sources */,
@@ -907,6 +940,7 @@
 				3DF4520D1DF3C8D100DA6D68 /* Chat.swift in Sources */,
 				BC00402A1DF3EC030059F2EB /* PostTitleViewController.swift in Sources */,
 				BC60E8F01DC694AE004D7FB8 /* User.swift in Sources */,
+				7C1B41051DF79B0200E525E8 /* GroupListingViewController.swift in Sources */,
 				3D0B76401DE2682D00368CFA /* ListingTimeInterval.swift in Sources */,
 				BC60E8E71DC68CF0004D7FB8 /* HomeCollectionViewCell.swift in Sources */,
 			);
