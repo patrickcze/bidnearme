@@ -10,6 +10,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import GeoFire
+import CoreLocation
+import AddressBookUI
 
 class PostPriceViewController: UIViewController {
     
@@ -101,10 +104,10 @@ class PostPriceViewController: UIViewController {
     // Respond to next button tap.
     @IBAction func postButtonClicked(_ sender: UIButton) {
         dismissKeyboard()
-        
+
         //converting coordinates
         forwardGeocoding(postalCode: postalCodeTextField.text!)
-        
+        print("past function")
         // Disable post button while uploading information
         self.postButton.isEnabled = false
         
