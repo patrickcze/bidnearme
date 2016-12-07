@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GbK-XA-uiX">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GbK-XA-uiX">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -114,7 +117,7 @@
             </objects>
             <point key="canvasLocation" x="1706.4000000000001" y="-251.42428785607197"/>
         </scene>
-        <!--Listing Detail View Controller-->
+        <!--Listing Detail-->
         <scene sceneID="30N-3Y-fQv">
             <objects>
                 <viewController storyboardIdentifier="ListingDetail" hidesBottomBarWhenPushed="YES" id="NKc-Ms-tJH" customClass="ListingDetailViewController" customModule="Lulu" customModuleProvider="target" sceneMemberID="viewController">
@@ -122,8 +125,8 @@
                         <viewControllerLayoutGuide type="top" id="MLU-kk-zfC"/>
                         <viewControllerLayoutGuide type="bottom" id="ERi-PK-FwC"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="ciE-NJ-89D">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="951"/>
+                    <view key="view" contentMode="scaleToFill" id="ciE-NJ-89D">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfc-fY-NF1">
@@ -280,6 +283,11 @@
                             <constraint firstItem="HF7-DK-H3c" firstAttribute="leading" secondItem="ciE-NJ-89D" secondAttribute="leading" id="zqr-xB-0nM"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="kKW-eG-tXJ">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="kVB-Re-3y1"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
@@ -294,11 +302,20 @@
                         <outlet property="profileImageView" destination="WkZ-5Q-xtj" id="5PS-6y-PXc"/>
                         <outlet property="profileNameLabel" destination="llj-QR-jM1" id="HgT-og-IG3"/>
                         <outlet property="profileRating" destination="hHN-ic-SoK" id="KqF-jt-mdq"/>
+                        <segue destination="wjL-yE-FrU" kind="show" identifier="ShowChatMessages" id="938-Ij-aVz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nYS-8n-KLl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2576.8000000000002" y="-232.08395802098951"/>
+        </scene>
+        <!--ChatMessagesViewController-->
+        <scene sceneID="ztO-6r-Zwt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ChatMessages" referencedIdentifier="ChatMessagesViewController" id="wjL-yE-FrU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OxG-ey-Gbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3375" y="-232"/>
         </scene>
         <!--Home-->
         <scene sceneID="MOk-Ul-hrt">
@@ -353,10 +370,10 @@
             </objects>
             <point key="canvasLocation" x="-445" y="206"/>
         </scene>
-        <!--Chat-->
+        <!--ChatList-->
         <scene sceneID="vGh-wk-mYC">
             <objects>
-                <viewControllerPlaceholder storyboardName="Chat" id="Em2-Po-8BM" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="ChatList" id="Em2-Po-8BM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="hlF-Da-mnU"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvG-Yy-8bL" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -23,11 +23,11 @@ class Listing {
     var bidsById: [String: Bid]?
     var imageUrls: [URL]!
     var buyoutPrice: Double?
-    
     var winningBid: Bid!
+    var bidderChats: [String: String]! // Maps bidder IDs to chat IDs.
     
     // Listing initialization.
-    init(listingId:String,  sellerId: String ,  imageUrls: [URL],  title: String,  description: String,  startPrice: Double,  buyoutPrice: Double,  currencyCode: CurrencyCode,  createdTimestamp: Int,  auctionEndTimestamp: Int,  winningBidId: String,  bids: [String: Bid]) {
+    init(listingId:String,  sellerId: String ,  imageUrls: [URL],  title: String,  description: String,  startPrice: Double,  buyoutPrice: Double,  currencyCode: CurrencyCode,  createdTimestamp: Int,  auctionEndTimestamp: Int,  winningBidId: String,  bids: [String: Bid], bidderChats: [String: String]) {
         self.listingId = listingId
         self.imageUrls = imageUrls
         self.title = title
@@ -40,5 +40,6 @@ class Listing {
         self.auctionEndTimestamp = auctionEndTimestamp
         self.winningBidId = winningBidId
         self.bidsById = bids
+        self.bidderChats = bidderChats
     }
 }

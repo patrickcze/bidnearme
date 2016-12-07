@@ -140,12 +140,11 @@ class ProfileViewController: UIViewController {
     
             let startDate = Date(timeIntervalSince1970: TimeInterval(createdTimestamp/1000))
 
-            let _user = User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [])
+            let _user = User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [], chats: [])
            
             _user.membershipSince = startDate
         
             completion(_user)
-
         })
     }
     

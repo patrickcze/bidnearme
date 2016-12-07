@@ -34,6 +34,7 @@ class ListingDetailViewController: UIViewController {
     var textField: UITextField! = UITextField()
     var toolbarTextField: UITextField! = UITextField()
     var ref: FIRDatabaseReference?
+    var loggedInUser: FIRUser?
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
@@ -41,6 +42,9 @@ class ListingDetailViewController: UIViewController {
       
         setTextFields()
         placeBidButton.backgroundColor = ColorPalette.bidBlue
+        
+        // Get logged in user.
+        loggedInUser = FIRAuth.auth()?.currentUser
       
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
@@ -86,6 +90,18 @@ class ListingDetailViewController: UIViewController {
             
             for button in profileRating.ratingButtons{
                 button.isUserInteractionEnabled = false
+            }
+            
+            // Add chat button to navigation bar if the logged-in user is not the seller of this listing.
+            if listing.sellerId != loggedInUser?.uid {
+                // Add chat bar button item.
+                let chatBarButtonItem = UIBarButtonItem(
+                    title: "Chat",
+                    style: .plain,
+                    target: self,
+                    action: #selector(didTapChatButton(_:))
+                )
+                navigationItem.setRightBarButtonItems([chatBarButtonItem], animated: false)
             }
         }
     }
@@ -182,13 +198,42 @@ class ListingDetailViewController: UIViewController {
     
     //Function add the listing key of the item the user is bidding on to the db in their user data
     func addBidToUserBiddingProfile(listingKey: String) {
-        guard let userId = FIRAuth.auth()?.currentUser?.uid else {
+        guard let userId = loggedInUser?.uid else {
             alertUserNotLoggedIn()
             return
         }
         
         let biddingListingType = ListingType.bidding.description
         ref?.child("users").child(userId).child("listings").child(biddingListingType).child(listingKey).setValue(true)
+    }
+    
+    /**
+     Display chat messages in a separate view controller.
+     */
+    func displayChat(chat: Chat?) {
+        self.performSegue(withIdentifier: "ShowChatMessages", sender: chat)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "ShowChatMessages" {
+            guard let loggedInUser = loggedInUser else {
+                // Cannot show chats if the user has not been retrieved.
+                alertUserNotLoggedIn()
+                return
+            }
+            
+            if let chat = sender as? Chat {
+                let chatMessagesViewController = segue.destination as! ChatMessagesViewController
+                
+                // Set required fields for JSQMessagesViewController to identify the current user.
+                chatMessagesViewController.senderId = loggedInUser.uid
+                chatMessagesViewController.senderDisplayName = loggedInUser.displayName
+                chatMessagesViewController.chat = chat
+            }
+        }
     }
   
     // MARK: - Actions
@@ -198,39 +243,66 @@ class ListingDetailViewController: UIViewController {
         textField.becomeFirstResponder()
     }
     
+    /**
+     Respond to Chat navigation bar button being pressed.
+     If there is an existing chat between the listing and the bidder, then get that chat and display it.
+     Otherwise, create a new chat and display it.
+     */
+    func didTapChatButton(_ sender: UIBarButtonItem) {
+        guard let bidderId = loggedInUser?.uid else {
+            alertUserNotLoggedIn()
+            return
+        }
+        guard let listing = listing else { fatalError("Listing must be defined for this page") }
+        guard let sellerId = listing.sellerId else { fatalError("SellerId must be defined for a listing.") }
+        
+        // TODO: Disable button to prevent clicking twice by accident and creating chat twice before chat is displayed.
+        
+        // Check if listing has a chat for this bidder. If so, just retrieve it. Otherwise, create one.
+        if let listingBidderChatId = listing.bidderChats[bidderId] {
+            getChatById(listingBidderChatId, completion: displayChat)
+        } else {
+            // Write chat to database.
+            writeChat(listingId: listing.listingId, sellerId: sellerId, bidderId: bidderId, withTitle: listing.title) { (chat) in
+                // Add bidder to chat ID mapping to this listing. This will get updated server-side too.
+                self.listing?.bidderChats[bidderId] = chat?.uid
+                self.displayChat(chat: chat)
+            }
+        }
+    }
+    
     // Respond to placeBidButton tap.
     func tappedPlaceBid() {
-        //Check if user is logged in
-        if let user = FIRAuth.auth()?.currentUser {
-            // Check if the user placed a bid value in the text field
-            if let bidAmount = Double(toolbarTextField.text!) {
-                
-                let listingId = listing?.listingId
-                let listingRef = ref?.child("listings").child(listingId!)
-                
-                //Check if bid table exists
-                listingRef?.observeSingleEvent(of: .value, with: {snapshot in
-                    if snapshot.hasChild("bids"){
-                        //Checks that the desired bid is the highest
-                        if self.isHighestBid(bidAmount: bidAmount, listingSnapshot: snapshot) {
-                            let bidObject: [String : Any] = [
-                                "amount": bidAmount,
-                                "bidderId": user.uid,
-                                "createdTimestamp" : FIRServerValue.timestamp()
-                            ]
-                            
-                            self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
-                        } else {
-                            // TODO: Let the user know they bid lower than the required amount
-                        }
-                    }
-                })
-            }
-        } else {
-            alertUserNotLoggedIn()
+        guard let loggedInUserId = self.loggedInUser?.uid else {
+            self.alertUserNotLoggedIn()
+            return
         }
-      
-      dismissKeyboards()
+        
+        // Check if the user placed a bid value in the text field
+        if let bidAmount = Double(toolbarTextField.text!) {
+                
+            let listingId = listing?.listingId
+            let listingRef = ref?.child("listings").child(listingId!)
+                
+            //Check if bid table exists
+            listingRef?.observeSingleEvent(of: .value, with: { (snapshot) in
+                if snapshot.hasChild("bids") {
+                    //Checks that the desired bid is the highest
+                    if self.isHighestBid(bidAmount: bidAmount, listingSnapshot: snapshot) {
+                        let bidObject: [String : Any] = [
+                            "amount": bidAmount,
+                            "bidderId": loggedInUserId,
+                            "createdTimestamp" : FIRServerValue.timestamp()
+                        ]
+                            
+                        self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
+                    } else {
+                        // TODO: Let the user know they bid lower than the required amount
+                    }
+                }
+            })
+        }
+        dismissKeyboards()
     }
   
     // Dismiss textfield keyboards from the view in order.
