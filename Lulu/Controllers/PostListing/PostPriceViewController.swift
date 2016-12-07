@@ -27,6 +27,11 @@ class PostPriceViewController: UIViewController {
     var listingTitle: String!
     var listingDescription: String!
     var auctionDurationPicker = UIPickerView()
+    var coordinates: CLLocationCoordinate2D? {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "coordinatesFetched"), object: nil)
+        }
+    }
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
