@@ -161,9 +161,9 @@ class NewGroupMembersViewController: UIViewController {
             ]
             
             // TODO: Allow user input for auction duration.
-            self.writeListing(group) { (listingRef) in
+            self.writeGroup(group) { (groupRef) in
                 for id in memberIds {
-                    self.addGroupToUsersGroup(groupId: listingRef.key, userId: id)
+                    self.addGroupToUsersGroup(groupId: groupRef.key, userId: id)
                 }
                 
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
@@ -212,15 +212,15 @@ class NewGroupMembersViewController: UIViewController {
      - parameter listing: Dictionary with listing information.
      - parameter completion: Completion block to pass the new listing reference to.
      */
-    func writeListing(_ listing: [String: Any], completion: @escaping (FIRDatabaseReference) -> Void) {
-        let listingRef = ref.child("groups").childByAutoId()
+    func writeGroup(_ listing: [String: Any], completion: @escaping (FIRDatabaseReference) -> Void) {
+        let groupRef = ref.child("groups").childByAutoId()
         
         // Write the listing to the database. Firebase sets the createdTimestamp for use below.
-        listingRef.setValue(listing) { (error, newListingRef) in
+        groupRef.setValue(listing) { (error, newgroupRef) in
             if error != nil {
                 // TODO: deal with this in some way
             }
-            completion(newListingRef)
+            completion(newgroupRef)
         }
     }
     
