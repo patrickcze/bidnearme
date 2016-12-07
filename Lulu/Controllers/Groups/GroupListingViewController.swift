@@ -15,7 +15,6 @@ import FirebaseAuth
 import Alamofire
 import AlamofireImage
 
-private let reuseIdentifier = "ListingCollectionCell"
 
 class GroupListingViewController: UIViewController {
     
@@ -30,6 +29,7 @@ class GroupListingViewController: UIViewController {
     var listings: [Listing] = []
     var filteredData = [Listing]()
     var group: Group?
+    let reuseIdentifier = "GroupListingCollectionCell"
     
     var refreshControl: UIRefreshControl!
     

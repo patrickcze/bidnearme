@@ -212,11 +212,11 @@ class NewGroupMembersViewController: UIViewController {
      - parameter listing: Dictionary with listing information.
      - parameter completion: Completion block to pass the new listing reference to.
      */
-    func writeGroup(_ listing: [String: Any], completion: @escaping (FIRDatabaseReference) -> Void) {
+    func writeGroup(_ group: [String: Any], completion: @escaping (FIRDatabaseReference) -> Void) {
         let groupRef = ref.child("groups").childByAutoId()
         
         // Write the listing to the database. Firebase sets the createdTimestamp for use below.
-        groupRef.setValue(listing) { (error, newgroupRef) in
+        groupRef.setValue(group) { (error, newgroupRef) in
             if error != nil {
                 // TODO: deal with this in some way
             }
