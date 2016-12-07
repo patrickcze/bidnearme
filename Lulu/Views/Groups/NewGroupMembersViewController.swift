@@ -16,8 +16,6 @@ class NewGroupMembersViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var stackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var newGroupButton: UIButton!
-    @IBOutlet weak var priceTextField: UITextField!
-    @IBOutlet weak var dateTextField: UITextField!
     
     // MARK: - Properties
     var ref: FIRDatabaseReference!
@@ -34,7 +32,6 @@ class NewGroupMembersViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         storageRef = FIRStorage.storage().reference()
         
-        priceTextField.returnKeyType = .next
         title = "New Group"
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -58,10 +55,6 @@ class NewGroupMembersViewController: UIViewController {
         }
         
         let keyboardHeight = view.convert(rawFrame, from: nil).height
-        
-        if priceTextField.isFirstResponder || dateTextField.isFirstResponder {
-            animateNextButton(keyboardHeight)
-        }
     }
     
     // Animate stack view constraints.
@@ -100,10 +93,6 @@ class NewGroupMembersViewController: UIViewController {
         
         guard let title = listingTitle, let description = listingDescription, let image = listingPhoto else {
             print("Missing Details")
-            return
-        }
-        
-        guard let startingPrice = Double(priceTextField.text!), startingPrice >= 0.0 else {
             return
         }
         
@@ -189,6 +178,9 @@ class NewGroupMembersViewController: UIViewController {
         ref.child("users/\(userId)/groups/\(groupId)").setValue(true)
     }
 }
+
+// MARK: - UITextFieldDelegate protocol
+//extension PostPriceViewController: UITextFieldDelegate {
 
 // MARK: - UITextFieldDelegate protocol
 //extension PostPriceViewController: UITextFieldDelegate {
