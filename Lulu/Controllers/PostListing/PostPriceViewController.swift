@@ -30,13 +30,7 @@ class PostPriceViewController: UIViewController {
     var listingTitle: String!
     var listingDescription: String!
     var auctionDurationPicker = UIPickerView()
-    /*var coordinates: CLLocationCoordinate2D? {
-        didSet {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "coordinatesFetched"), object: nil)
-        }
-    }*/
-    
-    // Do any additional setup after loading the view.
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -124,15 +118,6 @@ class PostPriceViewController: UIViewController {
             return
         }
         
-        /*guard let longitude = coordinates?.latitude else {
-            return
-        }
-        
-        
-        guard let latitude = coordinates?.longitude else{
-            return
-        }*/
-        
         // assign value of selected row as picked value
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
         
@@ -155,8 +140,6 @@ class PostPriceViewController: UIViewController {
                 "title": title,
                 "startingPrice": startingPrice,
                 "description": description,
-                //"longitude": longitude,
-                //"latitude": latitude,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
                 "winningBidId": "",
@@ -189,7 +172,6 @@ class PostPriceViewController: UIViewController {
                 let placemark = placemarks?[0]
                 let location = placemark?.location
                 let coordinate = location?.coordinate
-                //self.coordinates=coordinates
                 
                 geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "\(itemListing)") { (error) in
                     if (error != nil) {
