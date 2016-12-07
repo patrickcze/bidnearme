@@ -73,7 +73,7 @@ class PostPriceViewController: UIViewController {
         
         let keyboardHeight = view.convert(rawFrame, from: nil).height
         
-        if priceTextField.isFirstResponder || dateTextField.isFirstResponder {
+        if priceTextField.isFirstResponder || dateTextField.isFirstResponder || postalCodeTextField.isFirstResponder {
             animateNextButton(keyboardHeight)
         }
     }
@@ -102,6 +102,9 @@ class PostPriceViewController: UIViewController {
     @IBAction func postButtonClicked(_ sender: UIButton) {
         dismissKeyboard()
         
+        //converting coordinates
+        forwardGeocoding(postalCode: postalCodeTextField.text!)
+        
         // Disable post button while uploading information
         self.postButton.isEnabled = false
         
@@ -114,6 +117,15 @@ class PostPriceViewController: UIViewController {
         }
         
         guard let startingPrice = Double(priceTextField.text!), startingPrice >= 0.0 else {
+            return
+        }
+        
+        guard let longitude = coordinates?.latitude else {
+            return
+        }
+        
+        
+        guard let latitude = coordinates?.longitude else{
             return
         }
         
@@ -139,6 +151,8 @@ class PostPriceViewController: UIViewController {
                 "title": title,
                 "startingPrice": startingPrice,
                 "description": description,
+                "longitude": longitude,
+                "latitude": latitude,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
                 "winningBidId": "",
@@ -153,6 +167,25 @@ class PostPriceViewController: UIViewController {
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
             }
         }
+    }
+    
+    //coverts postal code to coordinates
+    func forwardGeocoding(postalCode: String){
+        CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinates = location?.coordinate
+                self.coordinates=coordinates
+            }
+            
+        })
+        
     }
     
     /**
