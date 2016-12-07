@@ -98,10 +98,6 @@ class PostPriceViewController: UIViewController {
     // Respond to next button tap.
     @IBAction func postButtonClicked(_ sender: UIButton) {
         dismissKeyboard()
-
-        //converting coordinates
-        forwardGeocoding(postalCode: postalCodeTextField.text!, itemListing: listingTitle)
-        print("past function")
         
         // Disable post button while uploading information
         self.postButton.isEnabled = false
@@ -110,7 +106,7 @@ class PostPriceViewController: UIViewController {
             return
         }
         
-        guard let title = listingTitle, let description = listingDescription, let image = listingPhoto else {
+        guard let title = listingTitle, let description = listingDescription, let image = listingPhoto, let postalCode = postalCodeTextField.text else {
             return
         }
         
@@ -125,61 +121,86 @@ class PostPriceViewController: UIViewController {
             fatalError("Selected row does not exist in ListingTimeInterval")
         }
         
-        // saving value of selected row from picker for database
-        let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
-        
-        // Upload the image and write the listing if the image was successfully uploaded.
-        uploadImage(image: image) { (imageUrl) in
-            
-            guard let imageUrlString = imageUrl?.absoluteString else {
+        //Convert user postal code into coordinate
+        forwardGeocoding(postalCode: postalCode, itemListing: listingTitle) { (coordinate) in
+            guard let latitude = coordinate.latitude as? Double else{
+                //TODO: Deal with Error
                 return
             }
             
-            let listing: [String: Any] = [
-                "sellerId": sellerId,
-                "title": title,
-                "startingPrice": startingPrice,
-                "description": description,
-                "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
-                "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
-                "winningBidId": "",
-                "bids": "",
-                "imageUrls": [imageUrlString]
-            ]
-            
-            // TODO: Allow user input for auction duration.
-            self.writeListing(listing) { (listingRef) in
-                self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
-                self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
-                self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
+            guard let longitude = coordinate.longitude as? Double else{
+                //TODO: Deal with error
+                return
             }
+            
+            // saving value of selected row from picker for database
+            let auctionDuration = ListingTimeInterval.allValues[auctionDurationPickerSelectedRow]
+            
+            // Upload the image and write the listing if the image was successfully uploaded.
+            self.uploadImage(image: image) { (imageUrl) in
+                
+                guard let imageUrlString = imageUrl?.absoluteString else {
+                    return
+                }
+                
+                let listing: [String: Any] = [
+                    "sellerId": sellerId,
+                    "title": title,
+                    "startingPrice": startingPrice,
+                    "description": description,
+                    "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
+                    "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
+                    "winningBidId": "",
+                    "bids": "",
+                    "imageUrls": [imageUrlString],
+                    "location": [
+                        "latitude": latitude,
+                        "longitude": longitude
+                    ]
+                ]
+                
+                // TODO: Allow user input for auction duration.
+                self.writeListing(listing) { (listingRef) in
+                    self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
+                    self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
+                    self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
+                }
+            }
+            
+            
+            print(coordinate)
         }
     }
     
     //coverts postal code to coordinates
-    func forwardGeocoding(postalCode: String, itemListing: String!){
+    func forwardGeocoding(postalCode: String, itemListing: String!, completion: @escaping (CLLocationCoordinate2D) -> Void){
         CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
             if error != nil {
                 print(error)
                 return
             }
             
-            //initialize reference to geoFire
-            let geofireRef = FIRDatabase.database().reference().child("location")
-            let geoFire = GeoFire(firebaseRef: geofireRef)
+//            initialize reference to geoFire
+//            let geofireRef = FIRDatabase.database().reference().child("location")
+//            let geoFire = GeoFire(firebaseRef: geofireRef)
             
             if (placemarks?.count)! > 0 {
                 let placemark = placemarks?[0]
                 let location = placemark?.location
-                let coordinate = location?.coordinate
                 
-                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "\(itemListing)") { (error) in
-                    if (error != nil) {
-                        print("An error occured: \(error)")
-                    } else {
-                        print("Saved location successfully!")
-                    }
+                guard let coordinate = location?.coordinate else {
+                    return
                 }
+    
+                completion(coordinate)
+                
+//                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "\(itemListing)") { (error) in
+//                    if (error != nil) {
+//                        print("An error occured: \(error)")
+//                    } else {
+//                        print("Saved location successfully!")
+//                    }
+//                }
             }
             
         })

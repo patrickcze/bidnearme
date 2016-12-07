@@ -55,7 +55,7 @@ class ListingDetailViewController: UIViewController {
         profileHeightConstraint.constant = view.frame.width * 0.75
         
         mapView.layer.cornerRadius = 5.0
-        setGeocoder()
+//        setGeocoder()
         
         // Checks if listing data is avaliable
         if let listing = listing {
@@ -71,6 +71,14 @@ class ListingDetailViewController: UIViewController {
                     self.profileImageView.af_setImage(withURL: profileImageUrl)
                 }
                 self.profileNameLabel.text = seller.name
+            }
+            
+            //Check if listing has location data
+            if let latitude = listing.latitude, let longitude = listing.longitude {
+                setGeocoder(lat: latitude, long: longitude)
+            }
+            else {
+                mapView.isHidden = true
             }
             
             // Keeps the price on the image current with the highest bid
@@ -123,31 +131,40 @@ class ListingDetailViewController: UIViewController {
     
     // Set a new geocoder for annotating the lister's location on the mapView.
     // TODO: Set the location string to the users actual location when geo-location is setup.
-    func setGeocoder() {
-        let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString("34 Bridlecreek Pk Sw, Calgary AB, Canada T2Y3N6", completionHandler: { placemarks, error in
-            if error != nil {
-                return
-            }
-            
-            // Get the placemarks, and always take the first mark.
-            if let placemarks = placemarks {
-                let placemark = placemarks[0]
-                
-                if let location = placemark.location {
-                    self.setLocationOverlay(location.coordinate)
-                    
-                    // Set the zoom level.
-                    let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 750, 750)
-                    self.mapView.setRegion(region, animated: false)
-                }
-            }
-        })
+    func setGeocoder(lat: Double, long: Double) {
+        //Create location coordinate
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+    
+        //Place location on map with area circle
+        self.setLocationOverlay(coordinate)
+        
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1500, 1500)
+        self.mapView.setRegion(region, animated: false)
+        
+//        let geoCoder = CLGeocoder()
+//        geoCoder.geocodeAddressString("34 Bridlecreek Pk Sw, Calgary AB, Canada T2Y3N6", completionHandler: { placemarks, error in
+//            if error != nil {
+//                return
+//            }
+//            
+//            // Get the placemarks, and always take the first mark.
+//            if let placemarks = placemarks {
+//                let placemark = placemarks[0]
+//                
+//                if let location = placemark.location {
+//                    self.setLocationOverlay(location.coordinate)
+//                    
+//                    // Set the zoom level.
+//                    let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 750, 750)
+//                    self.mapView.setRegion(region, animated: false)
+//                }
+//            }
+//        })
     }
     
     // Create a circular map overlay for seller's location.
     func setLocationOverlay(_ center: CLLocationCoordinate2D) {
-        let radius = CLLocationDistance(150)
+        let radius = CLLocationDistance(500)
         let overlay = MKCircle(center: center, radius: radius)
         
         mapView.add(overlay)
