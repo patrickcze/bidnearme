@@ -33,14 +33,7 @@ class GroupTableViewController: UITableViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAddButton))
-//        navigationItem.rightBarButtonItems = [addButton]
-        
         self.navigationController?.navigationBar.topItem?.title = "Groups"
-    }
-
-    func didTapAddButton(sender: AnyObject){
-        
     }
     
     override func didReceiveMemoryWarning() {
