@@ -188,7 +188,7 @@ func getGroupById (groupId: String, completion: @escaping (Group) -> Void) {
             groupListings.append(groupListingsSnap.key)
         }
         
-        guard let groupImageUrl = URL(string: groupData["groupImageUrl"] as! String) else{
+        guard let groupImageUrl = URL(string: groupData["imageUrl"] as! String) else{
             //TODO:
             return
         }

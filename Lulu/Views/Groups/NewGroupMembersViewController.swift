@@ -154,7 +154,7 @@ class NewGroupMembersViewController: UIViewController {
             let group: [String: Any] = [
                 "name": title,
                 "description": description,
-                "groupImageUrl": imageUrlString,
+                "imageUrl": imageUrlString,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "members": idsDic,
                 "listings": []
