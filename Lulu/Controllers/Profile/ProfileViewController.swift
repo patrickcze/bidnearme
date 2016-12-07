@@ -113,7 +113,7 @@ class ProfileViewController: UIViewController {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
-        memberLabel.text = "Member since: " +  dateFormatter.string(from: user.membershipSince)
+        memberLabel.text = "Member since: " +  dateFormatter.string(from: user.joinDate)
 
         // TO-DO ->
         ratingLabel.text = "4.6 stars"
@@ -137,12 +137,8 @@ class ProfileViewController: UIViewController {
             if let profileImageUrlString = user["profileImageUrl"] as? String, !profileImageUrlString.isEmpty {
                 profileImageUrl = URL(string: profileImageUrlString)
             }
-    
-            let startDate = Date(timeIntervalSince1970: TimeInterval(createdTimestamp/1000))
 
             let _user = User(uid: id, name: name, profileImageUrl: profileImageUrl, createdTimestamp: createdTimestamp, listingIdsByType: [:], ratingsById: [:], groups: [], chats: [])
-           
-            _user.membershipSince = startDate
         
             completion(_user)
         })

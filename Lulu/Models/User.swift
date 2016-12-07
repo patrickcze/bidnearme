@@ -14,12 +14,12 @@ class User {
     var uid: String!
     var name: String!
     var profileImageUrl: URL?
-    let createdTimestamp: Int!
+    let createdTimestamp: Int! // In Unix Epoch time (milliseconds)
     var listingIdsByType: [ListingType: [String]]!
     var ratingsById: [String: Rating]?
     var groups: [String]?
     var chats: [String]!
-    var membershipSince : Date!
+    var joinDate: Date!
     
     init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int, listingIdsByType: [ListingType: [String]], ratingsById: [String: Rating], groups: [String], chats: [String]) {
         self.uid = uid
@@ -30,6 +30,7 @@ class User {
         self.ratingsById = ratingsById
         self.groups = groups
         self.chats = chats
+        self.joinDate = Date(timeIntervalSince1970: TimeInterval(createdTimestamp / 1000))
     }
     
     convenience init(uid: String, name: String, profileImageUrl: URL?, createdTimestamp: Int) {
