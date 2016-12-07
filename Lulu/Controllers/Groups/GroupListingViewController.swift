@@ -114,8 +114,8 @@ class GroupListingViewController: UIViewController {
             return
         }
         
-        if !group.listingsById.isEmpty {
-            for listingId in group.listingsById {
+        if !group.listingIds.isEmpty {
+            for listingId in group.listingIds {
                 listingRef.child(listingId).observeSingleEvent(of: .value, with: { (listingSnapshot) in
                     // Get basic info about the listing
                     guard let listingData = listingSnapshot.value as? [String: Any]  else {

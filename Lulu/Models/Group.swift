@@ -13,8 +13,8 @@ class Group {
     var name: String
     var desc: String
     var createdTimestamp: Int
-    var membersById: [String]
-    var listingsById: [String]
+    var memberIds: [String]
+    var listingIds: [String]
     var imageUrl: URL
     
     init(id: String, name: String, desc: String, createdTimestamp: Int, members: [String], listings: [String], imageUrl: URL) {
@@ -22,8 +22,8 @@ class Group {
         self.name = name
         self.desc = desc
         self.createdTimestamp = createdTimestamp
-        self.membersById = members
-        self.listingsById = listings
+        self.memberIds = members
+        self.listingIds = listings
         self.imageUrl = imageUrl
     }
 }

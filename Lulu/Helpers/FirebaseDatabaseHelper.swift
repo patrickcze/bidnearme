@@ -169,7 +169,10 @@ func getGroupById (groupId: String, completion: @escaping (Group) -> Void) {
     let ref = FIRDatabase.database().reference()
     
     ref.child("groups/\(groupId)").observeSingleEvent(of: .value, with: { snap in
-        let groupData = snap.value as? [String: Any]
+        guard let groupData = snap.value as? [String: Any] else {
+            //TODO:
+            return
+        }
         
         // get an array of string containing the uids of members
         var groupMembers = [String]()
@@ -185,7 +188,12 @@ func getGroupById (groupId: String, completion: @escaping (Group) -> Void) {
             groupListings.append(groupListingsSnap.key)
         }
         
-        let group = Group(id: groupId, name: groupData!["name"] as! String, desc: groupData!["description"] as! String, createdTimestamp: groupData!["createdTimestamp"] as! Int, members: groupMembers, listings: groupListings, imageUrl: URL(string: groupData!["groupImageUrl"] as! String)!)
+        guard let groupImageUrl = URL(string: groupData["groupImageUrl"] as! String) else{
+            //TODO:
+            return
+        }
+        
+        let group = Group(id: groupId, name: groupData["name"] as! String, desc: groupData["description"] as! String, createdTimestamp: groupData["createdTimestamp"] as! Int, members: groupMembers, listings: groupListings, imageUrl: groupImageUrl)
         
         completion(group)
     })

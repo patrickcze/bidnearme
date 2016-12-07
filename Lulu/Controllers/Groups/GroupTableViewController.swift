@@ -54,8 +54,8 @@ class GroupTableViewController: UITableViewController {
         
         cell.groupTitle.text = group.name
         cell.groupDesc.text = group.desc
-        cell.groupItemCount.text = String(group.listingsById.count) + " items"
-        cell.groupMemberCount.text = String(group.membersById.count) + " Members"
+        cell.groupItemCount.text = String(group.listingIds.count) + " items"
+        cell.groupMemberCount.text = String(group.memberIds.count) + " Members"
         cell.groupImage.af_setImage(withURL: group.imageUrl)
         
         return cell
