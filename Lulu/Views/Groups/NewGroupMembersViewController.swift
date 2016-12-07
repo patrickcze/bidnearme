@@ -83,14 +83,6 @@ class NewGroupMembersViewController: UIViewController {
     
     // Observe NSNotification.Name.UIKeyboardWillShow
     func keyboardWillAppear(notification: NSNotification) {
-        let info = notification.userInfo!
-        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]! as AnyObject
-        
-        guard let rawFrame = value.cgRectValue else {
-            return
-        }
-        
-        let keyboardHeight = view.convert(rawFrame, from: nil).height
     }
     
     // Animate stack view constraints.
