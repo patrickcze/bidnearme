@@ -145,10 +145,10 @@ class NewGroupMembersViewController: UIViewController {
                 return
             }
             
-            var idsDic: [String: Bool] = [:]
+            var memberIdDictionary: [String: Bool] = [:]
             
             for id in memberIds {
-                idsDic[id] = true
+                memberIdDictionary[id] = true
             }
             
             let group: [String: Any] = [
@@ -156,7 +156,7 @@ class NewGroupMembersViewController: UIViewController {
                 "description": description,
                 "imageUrl": imageUrlString,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
-                "members": idsDic,
+                "members": memberIdDictionary,
                 "listings": []
             ]
             
