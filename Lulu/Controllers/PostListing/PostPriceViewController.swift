@@ -30,11 +30,11 @@ class PostPriceViewController: UIViewController {
     var listingTitle: String!
     var listingDescription: String!
     var auctionDurationPicker = UIPickerView()
-    var coordinates: CLLocationCoordinate2D? {
+    /*var coordinates: CLLocationCoordinate2D? {
         didSet {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "coordinatesFetched"), object: nil)
         }
-    }
+    }*/
     
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
@@ -106,8 +106,9 @@ class PostPriceViewController: UIViewController {
         dismissKeyboard()
 
         //converting coordinates
-        forwardGeocoding(postalCode: postalCodeTextField.text!)
+        forwardGeocoding(postalCode: postalCodeTextField.text!, itemListing: listingTitle)
         print("past function")
+        
         // Disable post button while uploading information
         self.postButton.isEnabled = false
         
@@ -123,14 +124,14 @@ class PostPriceViewController: UIViewController {
             return
         }
         
-        guard let longitude = coordinates?.latitude else {
+        /*guard let longitude = coordinates?.latitude else {
             return
         }
         
         
         guard let latitude = coordinates?.longitude else{
             return
-        }
+        }*/
         
         // assign value of selected row as picked value
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
@@ -154,8 +155,8 @@ class PostPriceViewController: UIViewController {
                 "title": title,
                 "startingPrice": startingPrice,
                 "description": description,
-                "longitude": longitude,
-                "latitude": latitude,
+                //"longitude": longitude,
+                //"latitude": latitude,
                 "createdTimestamp": FIRServerValue.timestamp(), // Firebase replaces this with its timestamp.
                 "auctionEndTimestamp": FIRServerValue.timestamp(), // Based on createdTimestamp. Updated after listing is posted.
                 "winningBidId": "",
@@ -173,18 +174,30 @@ class PostPriceViewController: UIViewController {
     }
     
     //coverts postal code to coordinates
-    func forwardGeocoding(postalCode: String){
+    func forwardGeocoding(postalCode: String, itemListing: String!){
         CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
             if error != nil {
                 print(error)
                 return
             }
             
+            //initialize reference to geoFire
+            let geofireRef = FIRDatabase.database().reference().child("location")
+            let geoFire = GeoFire(firebaseRef: geofireRef)
+            
             if (placemarks?.count)! > 0 {
                 let placemark = placemarks?[0]
                 let location = placemark?.location
-                let coordinates = location?.coordinate
-                self.coordinates=coordinates
+                let coordinate = location?.coordinate
+                //self.coordinates=coordinates
+                
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "\(itemListing)") { (error) in
+                    if (error != nil) {
+                        print("An error occured: \(error)")
+                    } else {
+                        print("Saved location successfully!")
+                    }
+                }
             }
             
         })
