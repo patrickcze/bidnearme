@@ -18,6 +18,7 @@ class PostPriceViewController: UIViewController {
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var postalCodeTextField: UITextField!
     
     // MARK: - Properties
     var ref: FIRDatabaseReference!
