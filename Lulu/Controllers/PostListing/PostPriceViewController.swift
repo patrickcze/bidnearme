@@ -31,7 +31,7 @@ class PostPriceViewController: UIViewController {
     var listingDescription: String!
     var auctionDurationPicker = UIPickerView()
     var listing: Listing?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,7 +84,7 @@ class PostPriceViewController: UIViewController {
             options: .curveEaseInOut,
             animations: {
                 self.stackViewHeight.constant = keyboardHeight - 36.0
-        },
+            },
             completion: nil
         )
     }
@@ -99,7 +99,7 @@ class PostPriceViewController: UIViewController {
     // Respond to next button tap.
     @IBAction func postButtonClicked(_ sender: UIButton) {
         dismissKeyboard()
-
+        
         self.postButton.isEnabled = false
         
         guard let sellerId = FIRAuth.auth()?.currentUser?.uid else {
@@ -296,7 +296,7 @@ extension PostPriceViewController: UITextFieldDelegate {
             options: .curveEaseInOut,
             animations: {
                 self.stackViewHeight.constant = 12.0
-        },
+            },
             completion: nil
         )
     }

@@ -18,7 +18,7 @@ import CoreLocation
 import AddressBookUI
 
 class ListingDetailViewController: UIViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var listingImageView: UIImageView!
     @IBOutlet weak var listingTitleLabel: UILabel!
@@ -42,13 +42,13 @@ class ListingDetailViewController: UIViewController {
     // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         setTextFields()
         placeBidButton.backgroundColor = ColorPalette.bidBlue
         
         // Get logged in user.
         loggedInUser = FIRAuth.auth()?.currentUser
-      
+        
         //Get a reference to the firebase db and storage
         ref = FIRDatabase.database().reference()
         
@@ -108,18 +108,18 @@ class ListingDetailViewController: UIViewController {
             }
         }
     }
-  
+    
     // Logic for textfield and toolbarTextField.
     func setTextFields() {
-      textField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-      textField.keyboardType = .numberPad
-      textField.delegate = self
-      view.addSubview(textField)
-      
-      let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboards))
-      view.addGestureRecognizer(tap)
-      
-      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        textField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        textField.keyboardType = .numberPad
+        textField.delegate = self
+        view.addSubview(textField)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboards))
+        view.addGestureRecognizer(tap)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     // Retrieve item's location from geohash and display on map
@@ -167,8 +167,8 @@ class ListingDetailViewController: UIViewController {
             }
         })
     }
-
-
+    
+    
     // Create a circular map overlay for seller's location.
     func setLocationOverlay(_ center: CLLocationCoordinate2D) {
         let radius = CLLocationDistance(150)
@@ -192,7 +192,7 @@ class ListingDetailViewController: UIViewController {
         
         return bidAmount > highestBidAmount
     }
-
+    
     // Executes the users bid and places it in the DB
     func placeBidInDB(bidObject:[String:Any], listingRef: FIRDatabaseReference) {
         let bidRef = listingRef.child("bids").childByAutoId()
@@ -204,7 +204,7 @@ class ListingDetailViewController: UIViewController {
             }
         }
     }
-
+    
     // Updates the winning bid field in the listing
     func updateListingWinningBidId(listingRef: FIRDatabaseReference, highestBidId: String) {
         listingRef.child("winningBidId").setValue(highestBidId)
@@ -259,7 +259,7 @@ class ListingDetailViewController: UIViewController {
             }
         }
     }
-  
+    
     // MARK: - Actions
     
     // Respond to tappedBidButton tap.
@@ -304,10 +304,10 @@ class ListingDetailViewController: UIViewController {
         
         // Check if the user placed a bid value in the text field
         if let bidAmount = Double(toolbarTextField.text!) {
-                
+            
             let listingId = listing?.listingId
             let listingRef = ref?.child("listings").child(listingId!)
-                
+            
             //Check if bid table exists
             listingRef?.observeSingleEvent(of: .value, with: { (snapshot) in
                 if snapshot.hasChild("bids") {
@@ -318,7 +318,7 @@ class ListingDetailViewController: UIViewController {
                             "bidderId": loggedInUserId,
                             "createdTimestamp" : FIRServerValue.timestamp()
                         ]
-                            
+                        
                         self.placeBidInDB(bidObject: bidObject, listingRef: listingRef!)
                     } else {
                         // TODO: Let the user know they bid lower than the required amount
@@ -328,27 +328,27 @@ class ListingDetailViewController: UIViewController {
         }
         dismissKeyboards()
     }
-  
+    
     // Dismiss textfield keyboards from the view in order.
     func dismissKeyboards() {
-      guard toolbarTextField.isFirstResponder else {
-        return
-      }
-      
-      view.endEditing(true)
-      toolbarTextField.resignFirstResponder()
-      textField.resignFirstResponder()
+        guard toolbarTextField.isFirstResponder else {
+            return
+        }
+        
+        view.endEditing(true)
+        toolbarTextField.resignFirstResponder()
+        textField.resignFirstResponder()
     }
-  
+    
     // MARK: - Observers
-  
+    
     // Observe NSNotification.Name.UIKeyboardWillShow
     func keyboardWillAppear(notification: NSNotification) {
-      guard toolbarTextField != nil, !toolbarTextField.isFirstResponder else {
-        return
-      }
-    
-      toolbarTextField.becomeFirstResponder()
+        guard toolbarTextField != nil, !toolbarTextField.isFirstResponder else {
+            return
+        }
+        
+        toolbarTextField.becomeFirstResponder()
     }
 }
 
@@ -376,7 +376,7 @@ extension ListingDetailViewController: UITextFieldDelegate {
         keyboardToolbar.isUserInteractionEnabled = true
         keyboardToolbar.sizeToFit()
         textField.inputAccessoryView = keyboardToolbar
-      
+        
         return true
     }
 }
