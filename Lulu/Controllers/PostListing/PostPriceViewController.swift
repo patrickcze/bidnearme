@@ -41,6 +41,8 @@ class PostPriceViewController: UIViewController {
         priceTextField.returnKeyType = .next
         title = "Post Listing"
         
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
