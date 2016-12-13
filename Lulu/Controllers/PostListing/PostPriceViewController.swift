@@ -30,6 +30,7 @@ class PostPriceViewController: UIViewController {
     var listingTitle: String!
     var listingDescription: String!
     var auctionDurationPicker = UIPickerView()
+    var listing: Listing?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,11 +100,6 @@ class PostPriceViewController: UIViewController {
     @IBAction func postButtonClicked(_ sender: UIButton) {
         dismissKeyboard()
 
-        //converting coordinates
-        forwardGeocoding(postalCode: postalCodeTextField.text!, itemListing: listingTitle)
-        print("past function")
-        
-        // Disable post button while uploading information
         self.postButton.isEnabled = false
         
         guard let sellerId = FIRAuth.auth()?.currentUser?.uid else {
@@ -147,17 +143,20 @@ class PostPriceViewController: UIViewController {
                 "imageUrls": [imageUrlString]
             ]
             
-            // TODO: Allow user input for auction duration.
             self.writeListing(listing) { (listingRef) in
                 self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
                 self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
+                self.forwardGeocoding(postalCode: self.postalCodeTextField.text!, listingId: listingRef.key)
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
             }
         }
     }
     
-    //coverts postal code to coordinates
-    func forwardGeocoding(postalCode: String, itemListing: String!){
+    //coverts postal code to coordinates and saves in geohash
+    func forwardGeocoding(postalCode: String, listingId: String){
+        
+        //guard let listingId = listing?.listingId else { fatalError("Listing must be defined for this page") }
+        
         CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
             if error != nil {
                 print(error)
@@ -173,7 +172,7 @@ class PostPriceViewController: UIViewController {
                 let location = placemark?.location
                 let coordinate = location?.coordinate
                 
-                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "\(itemListing)") { (error) in
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: listingId) { (error) in
                     if (error != nil) {
                         print("An error occured: \(error)")
                     } else {

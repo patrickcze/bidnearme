@@ -13,6 +13,9 @@ import FirebaseDatabase
 import FirebaseAuth
 import Alamofire
 import AlamofireImage
+import GeoFire
+import CoreLocation
+import AddressBookUI
 
 class ListingDetailViewController: UIViewController {
 
@@ -118,33 +121,54 @@ class ListingDetailViewController: UIViewController {
       
       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
-  
-    // MARK: - MKMapView
     
-    // Set a new geocoder for annotating the lister's location on the mapView.
-    // TODO: Set the location string to the users actual location when geo-location is setup.
+    // Retrieve item's location from geohash and display on map
     func setGeocoder() {
         let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString("34 Bridlecreek Pk Sw, Calgary AB, Canada T2Y3N6", completionHandler: { placemarks, error in
-            if error != nil {
-                return
-            }
-            
-            // Get the placemarks, and always take the first mark.
-            if let placemarks = placemarks {
-                let placemark = placemarks[0]
+        guard let listingId = listing?.listingId else { fatalError("Listing must be defined for this page") }
+        
+        //initialize reference to geoFire
+        let geofireRef = FIRDatabase.database().reference().child("location")
+        let geoFire = GeoFire(firebaseRef: geofireRef)
+        
+        geoFire!.getLocationForKey(listingId, withCallback: { (location, error) in
+            if (error != nil) {
+                print("An error occurred getting the location for \(listingId)/: \(error?.localizedDescription)")
+            } else if (location != nil) {
+                print("Location for \(listingId)/ is [\(location!.coordinate.latitude), \(location!.coordinate.longitude)]")
                 
-                if let location = placemark.location {
-                    self.setLocationOverlay(location.coordinate)
+                let long = location!.coordinate.longitude
+                let lat = location!.coordinate.latitude
+                let loc = CLLocation(latitude: lat, longitude: long)
+                
+                geoCoder.reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) -> Void in
+                    print(loc)
                     
-                    // Set the zoom level.
-                    let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 750, 750)
-                    self.mapView.setRegion(region, animated: false)
-                }
+                    if error != nil {
+                        print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                        return
+                    }
+                    
+                    // Get the placemarks, and always take the first mark.
+                    if let placemarks = placemarks {
+                        let placemark = placemarks[0]
+                        
+                        if let location = placemark.location {
+                            self.setLocationOverlay(location.coordinate)
+                            
+                            // Set the zoom level.
+                            let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 750, 750)
+                            self.mapView.setRegion(region, animated: false)
+                        }
+                    }
+                })
+            } else {
+                print("GeoFire does not contain a location for \(listingId)")
             }
         })
     }
-    
+
+
     // Create a circular map overlay for seller's location.
     func setLocationOverlay(_ center: CLLocationCoordinate2D) {
         let radius = CLLocationDistance(150)
