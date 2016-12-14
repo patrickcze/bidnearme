@@ -157,8 +157,6 @@ class PostPriceViewController: UIViewController {
     //coverts postal code to coordinates and saves in geohash
     func forwardGeocoding(postalCode: String, listingId: String){
         
-        //guard let listingId = listing?.listingId else { fatalError("Listing must be defined for this page") }
-        
         CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
             if error != nil {
                 print(error)
