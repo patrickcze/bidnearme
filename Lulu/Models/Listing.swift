@@ -45,8 +45,8 @@ class Listing {
         self.bidderChats = bidderChats
     }
     
-    // Listing initialization.
-    init(listingId:String,  sellerId: String ,  imageUrls: [URL],  title: String,  description: String,  startPrice: Double,  buyoutPrice: Double,  currencyCode: CurrencyCode,  createdTimestamp: Int,  auctionEndTimestamp: Int,  winningBidId: String,  bids: [String: Bid], bidderChats: [String: String], longitude: Double, latitude: Double) {
+   // Listing initialization.
+    init(listingId:String,  sellerId: String ,  imageUrls: [URL],  title: String,  description: String,  startPrice: Double,  buyoutPrice: Double,  currencyCode: CurrencyCode,  createdTimestamp: Int,  auctionEndTimestamp: Int,  winningBidId: String,  bids: [String: Bid], bidderChats: [String: String] , longitude: Double, latitude: Double) {
         self.listingId = listingId
         self.imageUrls = imageUrls
         self.title = title
