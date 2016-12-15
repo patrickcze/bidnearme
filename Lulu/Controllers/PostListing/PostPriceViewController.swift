@@ -158,13 +158,13 @@ class PostPriceViewController: UIViewController {
     func forwardGeocoding(postalCode: String, listingId: String){
         
         CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
-            if error != nil {
+            if let error = error {
                 print(error)
                 return
             }
             
             //initialize reference to geoFire
-            let geofireRef = FIRDatabase.database().reference().child("location")
+            let geofireRef = self.ref.child("listings").child(listingId)
             let geoFire = GeoFire(firebaseRef: geofireRef)
             
             //retrieving markers for Apple Maps
@@ -173,7 +173,7 @@ class PostPriceViewController: UIViewController {
                 let location = placemark?.location
                 let coordinate = location?.coordinate
                 
-                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: listingId) { (error) in
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: "location") { (error) in
                     if (error != nil) {
                         print("An error occured: \(error)")
                     } else {
