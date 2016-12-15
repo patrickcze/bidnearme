@@ -162,7 +162,6 @@ class ListingDetailViewController: UIViewController {
                         }
                     }
                 })
-                
             } else {
                 print("GeoFire does not contain a location for \(listingId)")
                 self.mapView.isHidden = true                
