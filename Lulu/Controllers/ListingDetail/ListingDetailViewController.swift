@@ -36,7 +36,7 @@ class ListingDetailViewController: UIViewController {
     var listing: Listing?
     var textField: UITextField! = UITextField()
     var toolbarTextField: UITextField! = UITextField()
-    var ref: FIRDatabaseReference?
+    var ref: FIRDatabaseReference!
     var loggedInUser: FIRUser?
     
     // Do any additional setup after loading the view.
@@ -128,10 +128,10 @@ class ListingDetailViewController: UIViewController {
         guard let listingId = listing?.listingId else { fatalError("Listing must be defined for this page") }
         
         //initialize reference to geoFire
-        let geofireRef = FIRDatabase.database().reference().child("location")
+        let geofireRef = ref.child("listings").child(listingId)
         let geoFire = GeoFire(firebaseRef: geofireRef)
         
-        geoFire!.getLocationForKey(listingId, withCallback: { (location, error) in
+        geoFire!.getLocationForKey("location", withCallback: { (location, error) in
             if (error != nil) {
                 print("An error occurred getting the location for \(listingId)/: \(error?.localizedDescription)")
             } else if (location != nil) {
