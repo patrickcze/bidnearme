@@ -167,6 +167,7 @@ class PostPriceViewController: UIViewController {
             let geofireRef = FIRDatabase.database().reference().child("location")
             let geoFire = GeoFire(firebaseRef: geofireRef)
             
+            //retrieving markers for Apple Maps
             if (placemarks?.count)! > 0 {
                 let placemark = placemarks?[0]
                 let location = placemark?.location
