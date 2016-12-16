@@ -155,20 +155,9 @@ class HomeViewController: UIViewController {
                     index+=1
                 }
                 
-                if let locationData = listingSnapshot.childSnapshot(forPath: "location").value as? [String: Any] {
-                    if let latitude = locationData["latitude"] as? Double, let longitude = locationData["longitude"] as? Double{
-                        // Create a listing for the data within the snapshot
-                        let listing = Listing(listingId: listingSnapshot.key, sellerId: sellerId, imageUrls: imageUrls, title: title, description: desc, startPrice: startingPrice, buyoutPrice: 0.0, currencyCode: CurrencyCode.cad, createdTimestamp: createdTimestamp, auctionEndTimestamp: auctionEndTimestamp, winningBidId: winningBidId, bids: [:], bidderChats: bidderChats, longitude: longitude, latitude: latitude)
-                        self.listings.append(listing)
-
-                    }
-                    print(locationData)
-                }
-                else {
-                    // Create a listing for the data within the snapshot
-                    let listing = Listing(listingId: listingSnapshot.key, sellerId: sellerId, imageUrls: imageUrls, title: title, description: desc, startPrice: startingPrice, buyoutPrice: 0.0, currencyCode: CurrencyCode.cad, createdTimestamp: createdTimestamp, auctionEndTimestamp: auctionEndTimestamp, winningBidId: winningBidId, bids: [:], bidderChats: bidderChats)
-                    self.listings.append(listing)
-                }
+                // Create a listing for the data within the snapshot
+                let listing = Listing(listingId: listingSnapshot.key, sellerId: sellerId, imageUrls: imageUrls, title: title, description: desc, startPrice: startingPrice, buyoutPrice: 0.0, currencyCode: CurrencyCode.cad, createdTimestamp: createdTimestamp, auctionEndTimestamp: auctionEndTimestamp, winningBidId: winningBidId, bids: [:], bidderChats: bidderChats)
+                self.listings.append(listing)
                 
                 //Refresh listing view
                 self.listingsCollectionView.reloadData()
