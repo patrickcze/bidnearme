@@ -157,7 +157,7 @@ class ListingDetailViewController: UIViewController {
                             self.setLocationOverlay(location.coordinate)
                             
                             // Set the zoom level.
-                            let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 750, 750)
+                            let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
                             self.mapView.setRegion(region, animated: false)
                         }
                     }
@@ -173,7 +173,7 @@ class ListingDetailViewController: UIViewController {
     
     // Create a circular map overlay for seller's location.
     func setLocationOverlay(_ center: CLLocationCoordinate2D) {
-        let radius = CLLocationDistance(150)
+        let radius = CLLocationDistance(750)
         let overlay = MKCircle(center: center, radius: radius)
         
         mapView.add(overlay)
