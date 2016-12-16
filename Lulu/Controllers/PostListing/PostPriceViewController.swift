@@ -13,6 +13,7 @@ import FirebaseStorage
 import GeoFire
 import CoreLocation
 import AddressBookUI
+import M13Checkbox
 
 class PostPriceViewController: UIViewController {
     
@@ -116,6 +117,10 @@ class PostPriceViewController: UIViewController {
             return
         }
         
+        // Create the alert to distract user as the group is created
+        let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        self.displayCompletionAlert(alert: alert)
+        
         // assign value of selected row as picked value
         let auctionDurationPickerSelectedRow = auctionDurationPicker.selectedRow(inComponent: 0)
         
@@ -150,6 +155,7 @@ class PostPriceViewController: UIViewController {
                 self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
                 self.forwardGeocoding(postalCode: self.postalCodeTextField.text!, listingId: listingRef.key)
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
+                alert.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -159,7 +165,7 @@ class PostPriceViewController: UIViewController {
         
         CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
             if error != nil {
-                print(error)
+                print(error as Any)
                 return
             }
             
@@ -272,6 +278,30 @@ class PostPriceViewController: UIViewController {
     func addListingToUserSelling(listingId: String, userId: String) {
         let sellingListingType = ListingType.selling.description
         ref.child("users/\(userId)/listings/\(sellingListingType)/\(listingId)").setValue(true)
+    }
+    
+    /**
+     Display alert while a new listing is being submitted to the database
+     */
+    func displayCompletionAlert(alert: UIAlertController){
+        //Set the height of the alert controller
+        let height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.30)
+        let width:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.width * 0.80)
+        
+        alert.view.addConstraint(height)
+        alert.view.addConstraint(width)
+        
+        //Add checkbox animation
+        let checkbox = M13Checkbox(frame: CGRect(x: (width.constant-80.0)/2, y: (height.constant-80.0)/2, width: 80.0, height: 80.0))
+        checkbox.stateChangeAnimation = .stroke
+        checkbox.animationDuration = 0.75
+        
+        alert.view.addSubview(checkbox)
+        
+        // show the alert
+        self.present(alert, animated: true, completion: {
+            checkbox.toggleCheckState(true)
+        })
     }
 }
 
