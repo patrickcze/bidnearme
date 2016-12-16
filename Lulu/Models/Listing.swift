@@ -63,4 +63,5 @@ class Listing {
         self.latitude = latitude
         self.longitude = longitude
     }
+    
 }
