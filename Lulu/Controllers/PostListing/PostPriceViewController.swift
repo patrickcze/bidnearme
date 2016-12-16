@@ -10,6 +10,9 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import GeoFire
+import CoreLocation
+import AddressBookUI
 
 class PostPriceViewController: UIViewController {
     
@@ -18,6 +21,7 @@ class PostPriceViewController: UIViewController {
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var postalCodeTextField: UITextField!
     
     // MARK: - Properties
     var ref: FIRDatabaseReference!
@@ -26,8 +30,8 @@ class PostPriceViewController: UIViewController {
     var listingTitle: String!
     var listingDescription: String!
     var auctionDurationPicker = UIPickerView()
+    var listing: Listing?
     
-    // Do any additional setup after loading the view.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +40,8 @@ class PostPriceViewController: UIViewController {
         
         priceTextField.returnKeyType = .next
         title = "Post Listing"
+        
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -67,7 +73,7 @@ class PostPriceViewController: UIViewController {
         
         let keyboardHeight = view.convert(rawFrame, from: nil).height
         
-        if priceTextField.isFirstResponder || dateTextField.isFirstResponder {
+        if priceTextField.isFirstResponder || dateTextField.isFirstResponder || postalCodeTextField.isFirstResponder {
             animateNextButton(keyboardHeight)
         }
     }
@@ -80,7 +86,7 @@ class PostPriceViewController: UIViewController {
             options: .curveEaseInOut,
             animations: {
                 self.stackViewHeight.constant = keyboardHeight - 36.0
-        },
+            },
             completion: nil
         )
     }
@@ -96,7 +102,6 @@ class PostPriceViewController: UIViewController {
     @IBAction func postButtonClicked(_ sender: UIButton) {
         dismissKeyboard()
         
-        // Disable post button while uploading information
         self.postButton.isEnabled = false
         
         guard let sellerId = FIRAuth.auth()?.currentUser?.uid else {
@@ -140,13 +145,45 @@ class PostPriceViewController: UIViewController {
                 "imageUrls": [imageUrlString]
             ]
             
-            // TODO: Allow user input for auction duration.
             self.writeListing(listing) { (listingRef) in
                 self.addListingToUserSelling(listingId: listingRef.key, userId: sellerId)
                 self.updateListingAuctionEnd(listingRef: listingRef, withAuctionDuration: auctionDuration)
+                self.forwardGeocoding(postalCode: self.postalCodeTextField.text!, listingId: listingRef.key)
                 self.performSegue(withIdentifier: "UnwindToRoot", sender: self)
             }
         }
+    }
+    
+    //coverts postal code to coordinates and saves in geohash
+    func forwardGeocoding(postalCode: String, listingId: String){
+        
+        CLGeocoder().geocodeAddressString(postalCode, completionHandler: {(placemarks, error) in
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            //initialize reference to geoFire
+            let geofireRef = self.ref.child("locations")
+            let geoFire = GeoFire(firebaseRef: geofireRef)
+            
+            //retrieving markers for Apple Maps
+            if (placemarks?.count)! > 0 {
+                let placemark = placemarks?[0]
+                let location = placemark?.location
+                let coordinate = location?.coordinate
+                
+                geoFire!.setLocation(CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude), forKey: listingId) { (error) in
+                    if (error != nil) {
+                        print("An error occured: \(error)")
+                    } else {
+                        print("Saved location successfully!")
+                    }
+                }
+            }
+            
+        })
+        
     }
     
     /**
@@ -260,7 +297,7 @@ extension PostPriceViewController: UITextFieldDelegate {
             options: .curveEaseInOut,
             animations: {
                 self.stackViewHeight.constant = 12.0
-        },
+            },
             completion: nil
         )
     }
