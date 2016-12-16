@@ -164,7 +164,7 @@ class PostPriceViewController: UIViewController {
             }
             
             //initialize reference to geoFire
-            let geofireRef = FIRDatabase.database().reference().child("location")
+            let geofireRef = FIRDatabase.database().reference().child("locations")
             let geoFire = GeoFire(firebaseRef: geofireRef)
             
             //retrieving markers for Apple Maps

@@ -128,7 +128,7 @@ class ListingDetailViewController: UIViewController {
         guard let listingId = listing?.listingId else { fatalError("Listing must be defined for this page") }
         
         //initialize reference to geoFire
-        let geofireRef = FIRDatabase.database().reference().child("location")
+        let geofireRef = FIRDatabase.database().reference().child("locations")
         let geoFire = GeoFire(firebaseRef: geofireRef)
         
         geoFire!.getLocationForKey(listingId, withCallback: { (location, error) in
