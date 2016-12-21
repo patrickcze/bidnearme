@@ -1,8 +1,6 @@
 # BidNearMe
 BidNearMe is an iOS application that explores a missing part of the market - local buy & sells. 
-But, with bidding.
-
-This app aims to target the vast number of Facebook buy & sell groups that are inundated
+But, with bidding. It targets the vast number of Facebook buy & sell groups that are inundated
 with people bidding on items by posting their bids as comments.
 
 It uses Firebase for the backend to enable the application's real-time features like bidding, posting, and chat.
