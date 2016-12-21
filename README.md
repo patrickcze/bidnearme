@@ -6,13 +6,20 @@ The application utilizes Googles Firebase as a backend to enable the appplicaito
 ## Features
 ### Realtime listing of Items:
 
-![Alt text](/ScreenShots/HomePage.PNG?raw=true "Optional Title")
+<img src="/ScreenShots/HomePage.PNG" alt="alt text" width="250" height="444">
+<img src="/ScreenShots/ListingPosting.PNG" alt="alt text" width="250" height="444">
 
 ### Facebook Login and Profile
 
+<img src="/ScreenShots/ProfileView.PNG" alt="alt text" width="250" height="444">
+
 ### Realtime Chat
 
+<img src="/ScreenShots/RealTimeChat.PNG" alt="alt text" width="250" height="444">
+
 ### Private Groups
+
+<img src="/ScreenShots/PrivateGroups.PNG" alt="alt text" width="250" height="444">
 
 ## Usage
 1. Download the repository
