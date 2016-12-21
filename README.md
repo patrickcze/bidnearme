@@ -3,8 +3,22 @@ This iOS application was developed for the CPSC 599, iOS Programming Course at t
 
 The application utilizes Googles Firebase as a backend to enable the appplicaitons various realtime features and Facebook Login. 
 
+## Usage
+1. Download the repository
+
+```
+$ git clone https://github.com/patrickcze/lulu-app
+$ cd lulu-app
+```
+
+2. Open the project in Xcode
+
+```
+$ open Lulu.xcworkspace
+```
+
 ## Features
-### Realtime listing of Items:
+### Realtime listing of Items
 
 <img src="/ScreenShots/HomePage.PNG" alt="alt text" width="250" height="444">
 <img src="/ScreenShots/ListingPosting.PNG" alt="alt text" width="250" height="444">
@@ -20,17 +34,3 @@ The application utilizes Googles Firebase as a backend to enable the appplicaito
 ### Private Groups
 
 <img src="/ScreenShots/PrivateGroups.PNG" alt="alt text" width="250" height="444">
-
-## Usage
-1. Download the repository
-
-```
-$ git clone https://github.com/patrickcze/lulu-app
-$ cd lulu-app
-```
-
-2. Open the project in Xcode
-
-```
-$ open Lulu.xcworkspace
-```
