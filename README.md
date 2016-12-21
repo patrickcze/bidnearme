@@ -1,43 +1,38 @@
 # BidNearMe
-This iOS application was developed for the CPSC 599, iOS Programming Course at the University of Calgary. The Application was written in Swift 3 using the iOS 10 SDK. The purpose fo the application is to act as a system for allowing users to buy and sell different items via the application. Users are permitted to bid on various items and form private groups of listings. 
+BidNearMe is an iOS application that explores a missing part of the market - local buy & sells. 
+But, with bidding. It targets the vast number of Facebook buy & sell groups that are inundated
+with people bidding on items by posting their bids as comments.
 
-The application utilizes Googles Firebase as a backend to enable the appplicaitons various realtime features and Facebook Login. 
+It uses Firebase for the backend to enable the application's real-time features like bidding, posting, and chat.
+As well, the app utilizes Facebook Login for user authentication. 
+It was developed as a final project for an iOS programming course at the University of Calgary,
+and is written with Swift 3 using the iOS 10 SDK. 
+
+## Features
+<img src="/Screenshots/HomePage.PNG" alt="alt text" width="250" height="444">
+<img src="/Screenshots/Listing.PNG" alt="alt text" width="250" height="444">
+<img src="/Screenshots/PostListing.PNG" alt="alt text" width="250" height="444">
+<img src="/Screenshots/PrivateGroups.PNG" alt="alt text" width="250" height="444">
+<img src="/Screenshots/RealTimeChat.PNG" alt="alt text" width="250" height="444">
+<img src="/Screenshots/ProfileView.PNG" alt="alt text" width="250" height="444">
 
 ## Usage
 1. Download the repository
-
 ```
-$ git clone https://github.com/patrickcze/lulu-app
-$ cd lulu-app
+$ git clone https://github.com/patrickcze/bidnearme
+$ cd bidnearme
 ```
 
 2. Open the project in Xcode
-
 ```
 $ open Lulu.xcworkspace
 ```
 
-## Developed By
-* Jan Clarin 
-* Scott Campbell
-* Shreya Chopra
-* Ronny Maichle
-* Patrick Czeczko
+## Original developers
+* [Jan Clarin](https://github.com/janclarin)
+* [Scott Campbell](https://github.com/Campbell-Scott)
+* [Shreya Chopra](https://github.com/shreyachopra)
+* [Ronny Maichle](https://github.com/ronnymaichle)
+* [Patrick Czeczko](https://github.com/patrickcze)
 
-## Features
-### Realtime listing of Items
-
-<img src="/ScreenShots/HomePage.PNG" alt="alt text" width="250" height="444">
-<img src="/ScreenShots/ListingPosting.PNG" alt="alt text" width="250" height="444">
-
-### Facebook Login and Profile
-
-<img src="/ScreenShots/ProfileView.PNG" alt="alt text" width="250" height="444">
-
-### Realtime Chat
-
-<img src="/ScreenShots/RealTimeChat.PNG" alt="alt text" width="250" height="444">
-
-### Private Groups
-
-<img src="/ScreenShots/PrivateGroups.PNG" alt="alt text" width="250" height="444">
+**BidNearMe was originally known as Lulu**
