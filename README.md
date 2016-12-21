@@ -17,13 +17,13 @@ and is written with Swift 3 using the iOS 10 SDK.
 <img src="/Screenshots/ProfileView.PNG" alt="alt text" width="250" height="444">
 
 ## Usage
-1. Download the repository
+1) Download the repository
 ```
 $ git clone https://github.com/patrickcze/bidnearme
 $ cd bidnearme
 ```
 
-2. Open the project in Xcode
+2) Open the project in Xcode
 ```
 $ open Lulu.xcworkspace
 ```
