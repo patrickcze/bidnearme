@@ -17,6 +17,13 @@ $ cd lulu-app
 $ open Lulu.xcworkspace
 ```
 
+## Developed By
+* Jan Clarin 
+* Scott Campbell
+* Shreya Chopra
+* Ronny Maichle
+* Patrick Czeczko
+
 ## Features
 ### Realtime listing of Items
 
